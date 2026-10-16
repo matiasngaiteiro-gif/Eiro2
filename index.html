@@ -120,8 +120,8 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .photo small{position:absolute; top:.8rem; left:.9rem; font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:.7rem; color:#777}
 .studio .copy{display:grid; gap:1.4rem; min-width:0}
 .studio h2{font-size:clamp(2.6rem,6vw,4.8rem)}
-.rot{position:relative; height:1.08em; padding-top:.04em; font-size:clamp(3.6rem,9vw,7rem); overflow:hidden; margin-top:-.6rem}
-.rot span{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:1; color:var(--accent); transform:translateY(110%); opacity:0; white-space:nowrap}
+.rot{display:inline-block; position:relative; vertical-align:bottom; height:1.06em; overflow:hidden; transition:width .5s var(--ease)}
+.rot span{position:absolute; left:0; bottom:0; line-height:1.06; font:inherit; color:var(--accent); white-space:nowrap; transform:translateY(110%); opacity:0}
 .rot span.on{transform:none; opacity:1; transition:transform .55s var(--ease), opacity .25s linear}
 .rot span.off{transform:translateY(-110%); opacity:0; transition:transform .55s var(--ease), opacity .35s linear}
 .studio p{margin:0; color:var(--grey); font-size:1.08rem; line-height:1.75; max-width:46ch}
@@ -281,10 +281,7 @@ footer small{font-size:1rem; color:var(--white)}
       <svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="24" r="16" fill="#9a9a9a"/><path d="M14 70q4-28 36-28t36 28z" fill="#6f6f6f"/></svg>
     </div>
     <div class="copy">
-      <h2 class="cond">La suerte acompaña a los</h2>
-      <div class="rot" id="rot" aria-hidden="true">
-        <span class="on">Audaces</span><span>Valientes</span><span>Inquietos</span><span>Rebeldes</span><span>Salvajes</span><span>Soñadores</span><span>Raros</span><span>Inconformes</span><span>Disruptivos</span>
-      </div>
+      <h2 class="cond">La suerte acompaña a los <span class="rot" id="rot"><span class="on">Audaces</span><span>Valientes</span><span>Inquietos</span><span>Rebeldes</span><span>Salvajes</span><span>Soñadores</span><span>Raros</span><span>Inconformes</span><span>Disruptivos</span></span></h2>
       <p>Soy Matías Gaiteiro, fundador y director creativo de Eiro, un estudio creativo de Buenos Aires.</p>
       <p>Hace más de diez años diseño marcas para los rebeldes, los valientes y los que rompen el molde, la gente que dobla cuando todos siguen derecho.</p>
       <p>Trabajo con artistas, eventos masivos de música, marcas de consumo y proyectos ambiciosos que no tienen miedo de destacarse y llevarse toda la atención.</p>
@@ -373,12 +370,14 @@ footer small{font-size:1rem; color:var(--white)}
   ov.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-  const words = [...document.querySelectorAll('#rot span')]; let i = 0;
+  const rot = document.getElementById('rot'), words = [...rot.querySelectorAll('span')]; let i = 0;
+  const fit = () => { rot.style.width = words[i].offsetWidth + 'px'; };
+  fit(); addEventListener('resize', fit); document.fonts && document.fonts.ready.then(fit);
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setInterval(() => {
       const cur = words[i]; i = (i + 1) % words.length; const nxt = words[i];
       cur.classList.remove('on'); cur.classList.add('off');
-      nxt.classList.remove('off'); void nxt.offsetWidth; nxt.classList.add('on');
+      nxt.classList.remove('off'); void nxt.offsetWidth; nxt.classList.add('on'); fit();
       setTimeout(() => cur.classList.remove('off'), 600);   // vuelve abajo sin transición, invisible
     }, 1600);
   }
