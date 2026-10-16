@@ -27,8 +27,6 @@
      --wdth = eje de ancho: bajalo para más angosta, subilo para más ancha. */
   --cond:"peridot-pe-variable","Roboto Condensed","Arial Narrow",sans-serif;
   --wdth:75;
-  --logo-wdth-b:100;   /* ancho de EIRO en el logo */
-  --logo-wdth-l:85;    /* ancho de STUDIO en el logo */
   --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
   /* CJ usa una mono en botones y menú; acá va Helvetica. Para probar mono: "Courier New",monospace */
   --label:"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -60,9 +58,12 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .top .wrap{display:flex; justify-content:space-between; align-items:center; padding-block:1.6rem}
 /* Logotipo: EIRO en Heavy + STUDIO en Regular, pegados, misma altura de caja alta */
 .logo{font-family:var(--cond); font-size:clamp(1.6rem,2.4vw,2.1rem); line-height:.8; text-transform:uppercase; letter-spacing:0; display:flex; align-items:flex-start; white-space:nowrap}
-.logo .b{font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--logo-wdth-b)}
-.logo .cut{font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--logo-wdth-b)}
-.logo .l{font-weight:400; font-variation-settings:"wght" 400, "wdth" var(--logo-wdth-l)}
+.logo .b, .logo .cut{font-weight:950; font-variation-settings:"wght" 950, "wdth" 82}
+.logo .l{display:inline-flex; font-weight:585; font-variation-settings:"wght" 584.5, "wdth" 82}
+.logo .l i{font-style:normal; display:inline-block; max-width:0; opacity:0; transition:max-width .28s var(--ease), opacity .2s}
+.logo .l i.in{max-width:1em; opacity:1}
+.logo sup{opacity:0; transition:opacity .3s}
+.logo.done sup{opacity:1}
 .logo .cut{display:inline-flex; overflow:hidden}
 .logo .cut i{font-style:normal; display:inline-block; max-width:1em; transition:max-width .32s var(--ease), opacity .2s}
 .logo .cut i.gone{max-width:0; opacity:0}
@@ -225,7 +226,7 @@ footer small{font-size:1rem; color:var(--white)}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" id="logo" href="#top" aria-label="Eiro Studio, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span class="b" aria-hidden="true">Eiro</span><span class="l" aria-hidden="true">Studio</span><sup aria-hidden="true">™</sup></a>
+    <a class="logo" id="logo" href="#top" aria-label="Eiro Studio, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span class="b" aria-hidden="true">Eiro</span><span class="l" aria-hidden="true"><i>S</i><i>t</i><i>u</i><i>d</i><i>i</i><i>o</i></span><sup aria-hidden="true">™</sup></a>
     <button class="star" id="star" aria-label="Abrir menú" aria-expanded="false" aria-controls="overlay">
       <span class="a" aria-hidden="true">*</span>
       <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14"/><path d="M19 5 5 19"/></g></svg>
@@ -392,14 +393,21 @@ footer small{font-size:1rem; color:var(--white)}
   }
 
   // Logo: GAITEIRO -> EIRO
-  const logo = document.getElementById('logo'), cut = [...logo.querySelectorAll('.cut i')];
+  const logo = document.getElementById('logo'), cut = [...logo.querySelectorAll('.cut i')], st = [...logo.querySelectorAll('.l i')];
+  let timers = [];
   const playLogo = () => {
-    cut.forEach(c => c.classList.remove('gone'));
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { cut.forEach(c => c.classList.add('gone')); return; }
-    cut.forEach((c, k) => setTimeout(() => c.classList.add('gone'), 1100 + k * 170));
+    timers.forEach(clearTimeout); timers = [];
+    logo.classList.remove('done'); cut.forEach(c => c.classList.remove('gone')); st.forEach(c => c.classList.remove('in'));
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { cut.forEach(c => c.classList.add('gone')); st.forEach(c => c.classList.add('in')); logo.classList.add('done'); return; }
+    // 1) se borra GAIT (de atrás hacia adelante, como un backspace)
+    [...cut].reverse().forEach((c, k) => timers.push(setTimeout(() => c.classList.add('gone'), 1000 + k * 150)));
+    // 2) recién después se escribe STUDIO
+    const t0 = 1000 + cut.length * 150 + 350;
+    st.forEach((c, k) => timers.push(setTimeout(() => c.classList.add('in'), t0 + k * 110)));
+    timers.push(setTimeout(() => logo.classList.add('done'), t0 + st.length * 110 + 100));
   };
   playLogo();
-  logo.addEventListener('mouseenter', () => { if (cut.every(c => c.classList.contains('gone'))) playLogo(); });
+  logo.addEventListener('mouseenter', () => { if (logo.classList.contains('done')) playLogo(); });
 
   // Header que se esconde al bajar + botón flotante
   const bar = document.querySelector('.top'), fab = document.getElementById('fab'), contact = document.getElementById('contacto');
