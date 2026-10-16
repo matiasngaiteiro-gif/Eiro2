@@ -59,8 +59,9 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .logo .cut i.gone{max-width:0; opacity:0}
 .logo sup{font-family:var(--sans); font-size:.75rem; font-weight:700; margin-left:2px; line-height:1}
 .star{width:48px; height:48px; display:grid; place-items:center; background:none; border:0; color:var(--white); cursor:pointer; padding:0; margin-right:-8px}
-.star svg{width:30px; height:30px; transition:transform .5s var(--ease)}
-.star:hover svg{transform:rotate(60deg)}
+.star .x{width:30px; height:30px}
+.star .a{font-family:var(--sans); font-weight:700; font-size:4rem; line-height:1; display:block; transform:translateY(.2em); transition:transform .5s var(--ease)}
+.star:hover .a{transform:translateY(.2em) rotate(60deg)}
 .star .x{display:none}
 .star[aria-expanded="true"] .a{display:none}
 .star[aria-expanded="true"] .x{display:block}
@@ -85,7 +86,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 }
 
 /* ---------- TRABAJOS ---------- */
-.work .wrap{display:grid; grid-template-columns:1fr 1fr}
+.work .wrap{display:grid; grid-template-columns:1fr 1fr; gap:clamp(10px,1.4vw,20px)}
 .proj{position:relative; display:block; aspect-ratio:1/1; overflow:hidden; max-width:100%}
 .proj .art{position:absolute; inset:0; transition:transform 1s var(--ease)}
 .proj:hover .art{transform:scale(1.035)}
@@ -110,7 +111,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .a5{background:radial-gradient(80% 80% at 50% 40%, #FFD43B, #F2B705); display:grid; place-items:center}
 .a5 svg{width:42%; height:auto}
 .a6{background:#000; display:grid; place-items:center}
-.a6 svg{width:46%; height:auto}
+.a6 .ast{font-family:var(--sans); font-weight:700; color:#fff; font-size:clamp(14rem,40vw,26rem); line-height:1; transform:translateY(.2em)}
 
 /* ---------- ESTUDIO ---------- */
 .studio .wrap{padding-block:clamp(5rem,10vw,8rem); display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,6vw,5rem); align-items:start}
@@ -119,10 +120,10 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .photo small{position:absolute; top:.8rem; left:.9rem; font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:.7rem; color:#777}
 .studio .copy{display:grid; gap:1.4rem; min-width:0}
 .studio h2{font-size:clamp(2.6rem,6vw,4.8rem)}
-.rot{position:relative; height:1em; font-size:clamp(3.6rem,9vw,7rem); overflow:hidden; margin-top:-.6rem}
-.rot span{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:1; color:var(--accent); transform:translateY(105%); transition:transform .6s var(--ease)}
-.rot span.on{transform:none}
-.rot span.off{transform:translateY(-105%)}
+.rot{position:relative; height:1.08em; padding-top:.04em; font-size:clamp(3.6rem,9vw,7rem); overflow:hidden; margin-top:-.6rem}
+.rot span{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:1; color:var(--accent); transform:translateY(110%); opacity:0; white-space:nowrap}
+.rot span.on{transform:none; opacity:1; transition:transform .55s var(--ease), opacity .25s linear}
+.rot span.off{transform:translateY(-110%); opacity:0; transition:transform .55s var(--ease), opacity .35s linear}
 .studio p{margin:0; color:var(--grey); font-size:1.08rem; line-height:1.75; max-width:46ch}
 .studio p em{color:var(--white)}
 .studio .btn{justify-self:start; margin-top:.6rem}
@@ -217,7 +218,7 @@ footer small{font-size:1rem; color:var(--white)}
   <div class="wrap">
     <a class="logo" id="logo" href="#top" aria-label="Eiro, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span aria-hidden="true">Eiro</span><sup aria-hidden="true">™</sup></a>
     <button class="star" id="star" aria-label="Abrir menú" aria-expanded="false" aria-controls="overlay">
-      <svg class="a" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M12 2.5v19"/><path d="M3.8 7.25l16.4 9.5"/><path d="M20.2 7.25 3.8 16.75"/></g></svg>
+      <span class="a" aria-hidden="true">*</span>
       <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14"/><path d="M19 5 5 19"/></g></svg>
     </button>
   </div>
@@ -269,7 +270,7 @@ footer small{font-size:1rem; color:var(--white)}
     <a class="proj" href="#contacto" aria-label="Extracto Importado"><div class="art a3"><i></i><i></i></div></a>
     <a class="proj" href="#contacto" aria-label="Noche Latina"><div class="art a4"><b>Noche<br>Latina</b></div></a>
     <a class="proj" href="#contacto" aria-label="Luli Maccarrone"><div class="art a5"><svg viewBox="0 0 100 120" aria-hidden="true"><ellipse cx="50" cy="16" rx="16" ry="9" fill="#000"/><circle cx="50" cy="46" r="20" fill="#fff" stroke="#000" stroke-width="3.5"/><circle cx="43" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="57" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="44" cy="45" r="2.4" fill="#000"/><circle cx="58" cy="45" r="2.4" fill="#000"/><path d="M44 58q6 4 12 0" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 66v24M50 90l-12 20M50 90l14 14 10-6" stroke="#000" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="50" cy="114" rx="28" ry="3" fill="rgba(0,0,0,.25)"/></svg></div></a>
-    <a class="proj" href="#contacto" aria-label="Logos"><div class="art a6"><svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M12 2.5v19"/><path d="M3.8 7.25l16.4 9.5"/><path d="M20.2 7.25 3.8 16.75"/></g></svg></div></a>
+    <a class="proj" href="#contacto" aria-label="Logos"><div class="art a6"><span class="ast" aria-hidden="true">*</span></div></a>
   </div>
 </section>
 
@@ -376,9 +377,10 @@ footer small{font-size:1rem; color:var(--white)}
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setInterval(() => {
       const cur = words[i]; i = (i + 1) % words.length; const nxt = words[i];
-      cur.classList.replace('on', 'off'); nxt.classList.add('on');
-      setTimeout(() => cur.classList.remove('off'), 650);
-    }, 1300);
+      cur.classList.remove('on'); cur.classList.add('off');
+      nxt.classList.remove('off'); void nxt.offsetWidth; nxt.classList.add('on');
+      setTimeout(() => cur.classList.remove('off'), 600);   // vuelve abajo sin transición, invisible
+    }, 1600);
   }
 
   // Logo: GAITEIRO -> EIRO
