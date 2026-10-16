@@ -36,23 +36,27 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0; background:var(--black); color:var(--white); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+body{margin:0; background:var(--black); color:var(--white); font-family:var(--sans); font-size:17px; line-height:1.6; letter-spacing:-0.5px; -webkit-font-smoothing:antialiased; overflow-x:hidden}
 a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
 :focus-visible{outline:2px solid var(--pink); outline-offset:3px}
 .wrap{max-width:var(--max); margin-inline:auto; padding-left:var(--gl); padding-right:var(--gr)}
 .cond{font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:.92; letter-spacing:-.005em; margin:0}
 
-.btn{display:inline-flex; align-items:center; justify-content:center; font-family:var(--label); font-weight:500; text-transform:uppercase; letter-spacing:.14em; font-size:.95rem; line-height:1; padding:1.15rem 2.2rem; background:var(--white); color:var(--black); border:0; border-radius:0; cursor:pointer; transition:background .25s, color .25s}
+.btn{display:inline-flex; align-items:center; justify-content:center; font-family:var(--label); font-weight:500; text-transform:uppercase; letter-spacing:0; font-size:.95rem; line-height:1; padding:1.15rem 2.2rem; background:var(--white); color:var(--black); border:0; border-radius:0; cursor:pointer; transition:background .25s, color .25s}
 .btn:hover{background:var(--pink); color:var(--black)}
 .btn.dark{background:var(--black); color:var(--white)}
 .btn.dark:hover{background:var(--pink); color:var(--black)}
 
 /* ---------- HEADER ---------- */
 body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:40; background:var(--black)}
-.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--black)}
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--black); transition:transform .4s var(--ease)}
+.top.hide{transform:translateY(-110%)}
 .top .wrap{display:flex; justify-content:space-between; align-items:center; padding-block:1.6rem}
 .logo{font-family:var(--cond); font-weight:900; font-stretch:condensed; font-size:2.6rem; line-height:.8; text-transform:uppercase; letter-spacing:-.02em; display:flex; align-items:flex-start}
+.logo .cut{display:inline-flex; overflow:hidden}
+.logo .cut i{font-style:normal; display:inline-block; max-width:1em; transition:max-width .32s var(--ease), opacity .2s}
+.logo .cut i.gone{max-width:0; opacity:0}
 .logo sup{font-family:var(--sans); font-size:.75rem; font-weight:700; margin-left:2px; line-height:1}
 .star{width:48px; height:48px; display:grid; place-items:center; background:none; border:0; color:var(--white); cursor:pointer; padding:0; margin-right:-8px}
 .star svg{width:30px; height:30px; transition:transform .5s var(--ease)}
@@ -64,7 +68,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .overlay{position:fixed; inset:0; z-index:25; background:var(--black); padding-top:calc(env(safe-area-inset-top,0px) + 7.5rem); overflow-y:auto; opacity:0; visibility:hidden; transition:opacity .35s var(--ease), visibility .35s}
 .overlay.open{opacity:1; visibility:visible}
 .overlay ul{list-style:none; margin:0; padding:0 0 3rem; display:grid; gap:clamp(3rem,9vh,6.5rem)}
-.overlay a{font-family:var(--label); text-transform:uppercase; letter-spacing:.08em; font-size:clamp(1.4rem,3vw,2rem); transition:color .2s}
+.overlay a{font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:clamp(1.4rem,3vw,2rem); transition:color .2s}
 .overlay a:hover{color:var(--pink)}
 
 /* ---------- HERO ---------- */
@@ -79,10 +83,9 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .proj{position:relative; display:block; aspect-ratio:1/1; overflow:hidden; max-width:100%}
 .proj .art{position:absolute; inset:0; transition:transform 1s var(--ease)}
 .proj:hover .art{transform:scale(1.035)}
-.proj .tag{position:absolute; left:1.1rem; bottom:1rem; font-family:var(--label); text-transform:uppercase; letter-spacing:.14em; font-size:.75rem; background:var(--black); color:var(--white); padding:.55rem .8rem; opacity:0; transform:translateY(6px); transition:opacity .3s, transform .3s var(--ease)}
-.proj:hover .tag, .proj:focus-visible .tag{opacity:1; transform:none}
-@media (max-width:760px){ .work .wrap{grid-template-columns:1fr} .proj .tag{opacity:1; transform:none} }
-@media (hover:none){ .proj .tag{opacity:1; transform:none} }
+.work .wrap:hover .proj:not(:hover) .art{filter:brightness(.55)}
+.proj .art{transition:transform 1s var(--ease), filter .4s var(--ease)}
+@media (max-width:760px){ .work .wrap{grid-template-columns:1fr} }
 
 /* piezas de muestra (reemplazar por imágenes) */
 .a1{background:var(--yellow); display:grid; place-items:center}
@@ -107,7 +110,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .studio .wrap{padding-block:clamp(5rem,10vw,8rem); display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,6vw,5rem); align-items:start}
 .photo{aspect-ratio:5/3; max-width:100%; background:linear-gradient(180deg,#ECECEC,#CFCFCF); position:relative; overflow:hidden}
 .photo svg{position:absolute; left:50%; bottom:0; width:56%; transform:translateX(-50%)}
-.photo small{position:absolute; top:.8rem; left:.9rem; font-family:var(--label); text-transform:uppercase; letter-spacing:.14em; font-size:.65rem; color:#777}
+.photo small{position:absolute; top:.8rem; left:.9rem; font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:.7rem; color:#777}
 .studio .copy{display:grid; gap:1.4rem; min-width:0}
 .studio h2{font-size:clamp(2.6rem,6vw,4.8rem)}
 .rot{position:relative; height:1em; font-size:clamp(3.6rem,9vw,7rem); overflow:hidden; margin-top:-.6rem}
@@ -149,13 +152,47 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .club h2{font-size:clamp(2.6rem,7vw,4.6rem); margin-top:1.5rem}
 .club .aside{margin:-1.2rem 0 0; font-family:var(--label); color:var(--dim); letter-spacing:.06em; font-size:1rem}
 .club p.body{margin:0; font-size:1.08rem; line-height:1.75; max-width:56ch}
-.club form{display:grid; gap:1rem; margin-top:.5rem}
-.club label{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
-.club input{width:100%; font-family:var(--label); font-size:1.05rem; letter-spacing:.05em; padding:1.35rem 1.4rem; border:0; border-radius:0; background:var(--white); color:var(--black)}
-.club input::placeholder{color:#7a7a7a}
-.club button{font-family:var(--label); text-transform:uppercase; letter-spacing:.12em; font-size:1.05rem; padding:1.35rem; border:0; border-radius:4px; background:var(--pink); color:var(--white); cursor:pointer; transition:background .2s, color .2s}
-.club button:hover{background:var(--white); color:var(--black)}
-.club .ok{min-height:1.4em; margin:0; font-family:var(--label); color:var(--pink); letter-spacing:.05em}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+.chat{margin-top:.6rem; background:#0D0D0D; border:1px solid #262626; display:grid; grid-template-rows:auto 1fr auto auto}
+.chat-head{display:flex; align-items:center; gap:.85rem; padding:1rem 1.1rem; background:#141414; border-bottom:1px solid #262626}
+.chat-head .av{width:42px; height:42px; display:grid; place-items:center; background:var(--pink); color:#000; font-family:var(--cond); font-weight:900; font-size:1.5rem; flex:none}
+.chat-head div{display:grid; line-height:1.2; min-width:0}
+.chat-head strong{font-size:1rem}
+.chat-head small{font-size:.8rem; color:#25D366}
+.chat-head .skip{margin-left:auto; font-size:.8rem; text-transform:uppercase; color:var(--grey); border-bottom:1px solid currentColor; padding-bottom:1px; white-space:nowrap}
+.chat-head .skip:hover{color:var(--white)}
+.chat-body{padding:1.3rem 1.1rem; display:flex; flex-direction:column; gap:.55rem; min-height:260px; max-height:440px; overflow-y:auto; background:#0A0A0A; background-image:radial-gradient(#1a1a1a 1px, transparent 1px); background-size:18px 18px}
+.msg{max-width:82%; padding:.7rem .9rem .5rem; font-size:1rem; line-height:1.45; animation:pop .35s var(--ease) both; overflow-wrap:anywhere}
+.msg time{display:block; text-align:right; font-size:.68rem; opacity:.6; margin-top:.15rem}
+.msg.in{align-self:flex-start; background:#1E1E1E; color:var(--white)}
+.msg.out{align-self:flex-end; background:var(--pink); color:#000}
+.msg.typing{display:flex; gap:5px; padding:.9rem 1rem}
+.msg.typing i{width:7px; height:7px; background:#888; animation:blink 1s infinite}
+.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes pop{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+.wa{display:flex; align-items:center; justify-content:center; gap:.6rem; align-self:stretch; margin-top:.4rem; padding:1.1rem; background:#25D366; color:#000; font-weight:700; text-transform:uppercase; font-size:1rem; animation:pop .35s var(--ease) both; transition:background .2s}
+.wa:hover{background:var(--white)}
+.wa svg{width:22px; height:22px}
+.chips{display:flex; flex-wrap:wrap; gap:.5rem; padding:.9rem 1.1rem; border-top:1px solid #262626}
+.chips:empty{display:none}
+.chips button{font:inherit; font-size:.95rem; padding:.7rem 1rem; background:transparent; color:var(--white); border:1px solid #3a3a3a; cursor:pointer; transition:background .2s, color .2s, border-color .2s}
+.chips button:hover{background:var(--white); color:#000; border-color:var(--white)}
+.chat-input{display:flex; border-top:1px solid #262626}
+.chat-input input{flex:1; min-width:0; font:inherit; font-size:1rem; padding:1.1rem; background:#141414; color:var(--white); border:0; border-radius:0}
+.chat-input input::placeholder{color:#666}
+.chat-input input:disabled{opacity:.6}
+.chat-input button{width:60px; flex:none; display:grid; place-items:center; background:var(--pink); color:#000; border:0; cursor:pointer}
+.chat-input button:disabled{background:#2a2a2a; color:#666; cursor:default}
+.chat-input button svg{width:22px; height:22px}
+.phone{margin:.4rem 0 0; color:var(--grey); font-size:1rem}
+.phone span{color:var(--white); user-select:all}
+
+/* Botón flotante de WhatsApp */
+.fab{position:fixed; right:calc(var(--gr) - 4px); bottom:calc(1.2rem + env(safe-area-inset-bottom,0px)); z-index:20; display:flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; background:#25D366; color:#000; font-weight:700; text-transform:uppercase; font-size:.9rem; transform:translateY(160%); transition:transform .45s var(--ease), background .2s}
+.fab.show{transform:none}
+.fab:hover{background:var(--white)}
+.fab svg{width:22px; height:22px}
 
 /* ---------- FOOTER ---------- */
 footer .wrap{padding-block:clamp(4rem,8vw,6rem) 2.5rem; display:grid; justify-items:center; gap:2.4rem; text-align:center}
@@ -172,7 +209,7 @@ footer small{font-size:1rem; color:var(--white)}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Eiro, inicio">Eiro<sup>®</sup></a>
+    <a class="logo" id="logo" href="#top" aria-label="Eiro, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span aria-hidden="true">Eiro</span><sup aria-hidden="true">™</sup></a>
     <button class="star" id="star" aria-label="Abrir menú" aria-expanded="false" aria-controls="overlay">
       <svg class="a" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M12 2.5v19"/><path d="M3.8 7.25l16.4 9.5"/><path d="M20.2 7.25 3.8 16.75"/></g></svg>
       <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14"/><path d="M19 5 5 19"/></g></svg>
@@ -221,12 +258,12 @@ footer small{font-size:1rem; color:var(--white)}
 
 <section class="work" id="trabajos" aria-label="Trabajos">
   <div class="wrap">
-    <a class="proj" href="#contacto"><div class="art a1"><b>El<br>Calentón</b></div><span class="tag">El Calentón</span></a>
-    <a class="proj" href="#contacto"><div class="art a2"><i><b>Godfather</b></i></div><span class="tag">Anthony Godfather</span></a>
-    <a class="proj" href="#contacto"><div class="art a3"><i></i><i></i></div><span class="tag">Extracto Importado</span></a>
-    <a class="proj" href="#contacto"><div class="art a4"><b>Noche<br>Latina</b></div><span class="tag">Noche Latina</span></a>
-    <a class="proj" href="#contacto"><div class="art a5"><svg viewBox="0 0 100 120" aria-hidden="true"><ellipse cx="50" cy="16" rx="16" ry="9" fill="#000"/><circle cx="50" cy="46" r="20" fill="#fff" stroke="#000" stroke-width="3.5"/><circle cx="43" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="57" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="44" cy="45" r="2.4" fill="#000"/><circle cx="58" cy="45" r="2.4" fill="#000"/><path d="M44 58q6 4 12 0" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 66v24M50 90l-12 20M50 90l14 14 10-6" stroke="#000" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="50" cy="114" rx="28" ry="3" fill="rgba(0,0,0,.25)"/></svg></div><span class="tag">Luli Maccarrone</span></a>
-    <a class="proj" href="#contacto"><div class="art a6"><svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M12 2.5v19"/><path d="M3.8 7.25l16.4 9.5"/><path d="M20.2 7.25 3.8 16.75"/></g></svg></div><span class="tag">Logos</span></a>
+    <a class="proj" href="#contacto" aria-label="El Calentón"><div class="art a1"><b>El<br>Calentón</b></div></a>
+    <a class="proj" href="#contacto" aria-label="Anthony Godfather"><div class="art a2"><i><b>Godfather</b></i></div></a>
+    <a class="proj" href="#contacto" aria-label="Extracto Importado"><div class="art a3"><i></i><i></i></div></a>
+    <a class="proj" href="#contacto" aria-label="Noche Latina"><div class="art a4"><b>Noche<br>Latina</b></div></a>
+    <a class="proj" href="#contacto" aria-label="Luli Maccarrone"><div class="art a5"><svg viewBox="0 0 100 120" aria-hidden="true"><ellipse cx="50" cy="16" rx="16" ry="9" fill="#000"/><circle cx="50" cy="46" r="20" fill="#fff" stroke="#000" stroke-width="3.5"/><circle cx="43" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="57" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="44" cy="45" r="2.4" fill="#000"/><circle cx="58" cy="45" r="2.4" fill="#000"/><path d="M44 58q6 4 12 0" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 66v24M50 90l-12 20M50 90l14 14 10-6" stroke="#000" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="50" cy="114" rx="28" ry="3" fill="rgba(0,0,0,.25)"/></svg></div></a>
+    <a class="proj" href="#contacto" aria-label="Logos"><div class="art a6"><svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M12 2.5v19"/><path d="M3.8 7.25l16.4 9.5"/><path d="M20.2 7.25 3.8 16.75"/></g></svg></div></a>
   </div>
 </section>
 
@@ -277,25 +314,44 @@ footer small{font-size:1rem; color:var(--white)}
   <div class="wrap">
     <div class="mega" aria-label="Hablemos, Eiro">
       <span class="script" aria-hidden="true">Hablemos</span>
-      <span class="word" aria-hidden="true">Eiro<sup>®</sup></span>
+      <span class="word" aria-hidden="true">Eiro<sup>™</sup></span>
     </div>
     <h2 class="cond">Contanos qué estás armando</h2>
-    <p class="aside">(Sin vueltas)</p>
-    <p class="body">Dejanos tu nombre y tu mail y te respondemos en menos de 48 horas. Si el proyecto tiene ganas de hacer ruido, ya estamos adentro.</p>
-    <form id="form" novalidate>
-      <label for="nombre">Nombre</label><input id="nombre" type="text" placeholder="Nombre" autocomplete="name">
-      <label for="email">Email</label><input id="email" type="email" placeholder="Email*" autocomplete="email">
-      <button type="submit">Enviar</button>
-      <p class="ok" id="ok" aria-live="polite"></p>
-    </form>
+    <p class="aside">(Directo por WhatsApp, sin formularios)</p>
+
+    <div class="chat" id="chat">
+      <div class="chat-head">
+        <span class="av" aria-hidden="true">E</span>
+        <div><strong>Eiro Studio</strong><small id="status">en línea</small></div>
+        <a class="skip" href="https://wa.me/5491134850669" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      </div>
+      <div class="chat-body" id="log" aria-live="polite">
+        <div class="msg in">Hola, soy Matías de Eiro.<time>ahora</time></div>
+        <div class="msg in">¿Qué estás armando?<time>ahora</time></div>
+      </div>
+      <div class="chips" id="chips">
+        <button type="button">Una marca nueva</button>
+        <button type="button">Contenido y redes</button>
+        <button type="button">Un evento</button>
+        <button type="button">Otra cosa</button>
+      </div>
+      <form class="chat-input" id="chatForm" autocomplete="off">
+        <label for="chatText" class="sr">Escribí tu respuesta</label>
+        <input id="chatText" type="text" placeholder="Elegí una opción arriba" disabled>
+        <button type="submit" aria-label="Enviar" disabled id="chatSend"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l2.6 7.2L14 12l-8.4 1.3z" fill="currentColor"/></svg></button>
+      </form>
+    </div>
+    <p class="phone">O escribime directo al <span>+54 9 11 3485-0669</span></p>
   </div>
 </section>
 
 </main>
+<a class="fab" id="fab" href="https://wa.me/5491134850669?text=Hola%20Mat%C3%ADas%2C%20vi%20la%20web%20de%20Eiro" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>WhatsApp</a>
 
 <footer>
   <div class="wrap">
     <ul class="social">
+      <li><a href="https://wa.me/5491134850669" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>WhatsApp</a></li>
       <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor"/></svg>Instagram</a></li>
       <li><a href="https://www.behance.net/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h6.2c2.2 0 3.5 1.1 3.5 2.8 0 1.2-.7 2-1.6 2.3 1.3.3 2.1 1.3 2.1 2.7 0 2-1.5 3.2-3.9 3.2H2zm2.6 4.4h3.1c.9 0 1.4-.4 1.4-1.1s-.5-1.1-1.4-1.1H4.6zm0 4.6h3.4c1 0 1.6-.5 1.6-1.3s-.6-1.3-1.6-1.3H4.6zM15 7h6v1.4h-6zm3.1 2.4c2.6 0 4 1.8 3.9 4.6h-5.6c.1 1.3.9 2 2 2 .8 0 1.4-.4 1.6-1h1.9c-.4 1.7-1.8 2.7-3.6 2.7-2.4 0-4-1.6-4-4.1 0-2.5 1.6-4.2 3.8-4.2zm-1.7 3.3h3.5c-.1-1.1-.7-1.7-1.7-1.7s-1.6.6-1.8 1.7z" fill="currentColor"/></svg>Behance</a></li>
     </ul>
@@ -319,12 +375,62 @@ footer small{font-size:1rem; color:var(--white)}
     }, 1300);
   }
 
-  const f = document.getElementById('form'), ok = document.getElementById('ok');
-  f.addEventListener('submit', e => {
+  // Logo: GAITEIRO -> EIRO
+  const logo = document.getElementById('logo'), cut = [...logo.querySelectorAll('.cut i')];
+  const playLogo = () => {
+    cut.forEach(c => c.classList.remove('gone'));
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { cut.forEach(c => c.classList.add('gone')); return; }
+    cut.forEach((c, k) => setTimeout(() => c.classList.add('gone'), 1100 + k * 170));
+  };
+  playLogo();
+  logo.addEventListener('mouseenter', () => { if (cut.every(c => c.classList.contains('gone'))) playLogo(); });
+
+  // Header que se esconde al bajar + botón flotante
+  const bar = document.querySelector('.top'), fab = document.getElementById('fab'), contact = document.getElementById('contacto');
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    bar.classList.toggle('hide', y > lastY && y > 200 && !ov.classList.contains('open'));
+    const r = contact.getBoundingClientRect();
+    fab.classList.toggle('show', y > 600 && !(r.top < innerHeight && r.bottom > 0));
+    lastY = y;
+  }, { passive: true });
+
+  // Chat simulado -> WhatsApp
+  const PHONE = '5491134850669';
+  const log = document.getElementById('log'), chips = document.getElementById('chips');
+  const form = document.getElementById('chatForm'), input = document.getElementById('chatText'), send = document.getElementById('chatSend'), status = document.getElementById('status');
+  const data = {}; let step = 'tipo';
+  const now = () => new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+  const add = (txt, who) => { const d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = txt; const t = document.createElement('time'); t.textContent = now(); d.append(t); log.append(d); log.scrollTop = log.scrollHeight; return d; };
+  const bot = (txt, delay = 900) => new Promise(res => {
+    const t = document.createElement('div'); t.className = 'msg in typing'; t.innerHTML = '<i></i><i></i><i></i>'; log.append(t); log.scrollTop = log.scrollHeight; status.textContent = 'escribiendo…';
+    setTimeout(() => { t.remove(); status.textContent = 'en línea'; add(txt, 'in'); res(); }, delay);
+  });
+  const ask = ph => { input.disabled = false; send.disabled = false; input.placeholder = ph; input.focus({ preventScroll: true }); };
+  const lock = () => { input.disabled = true; send.disabled = true; input.value = ''; };
+
+  chips.addEventListener('click', async e => {
+    const b = e.target.closest('button'); if (!b || step !== 'tipo') return;
+    data.tipo = b.textContent; add(b.textContent, 'out'); chips.innerHTML = ''; step = 'nombre';
+    await bot('Buenísimo. ¿Cómo te llamás?'); ask('Tu nombre');
+  });
+
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const m = f.email.value.trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { ok.textContent = 'Poné un email válido para que podamos responderte.'; return; }
-    ok.textContent = 'Recibido. Te escribimos pronto.'; f.reset();
+    const v = input.value.trim(); if (!v) return;
+    add(v, 'out'); lock();
+    if (step === 'nombre') {
+      data.nombre = v; step = 'detalle';
+      await bot(`Un gusto, ${v.split(' ')[0]}. Contame en una línea de qué se trata y para cuándo lo necesitás.`, 1100); ask('Ej: marca para un bar que abre en marzo');
+    } else if (step === 'detalle') {
+      data.detalle = v; step = 'fin';
+      await bot('Perfecto. Te dejo el mensaje armado para que me llegue directo a WhatsApp.', 1000);
+      const msg = `Hola Matías, soy ${data.nombre}. Te escribo desde la web de Eiro.\nQuiero: ${data.tipo}.\n${data.detalle}`;
+      const a = document.createElement('a'); a.className = 'wa'; a.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = `${document.querySelector('#fab svg').outerHTML}Enviar por WhatsApp`; log.append(a); log.scrollTop = log.scrollHeight;
+      input.placeholder = 'Listo';
+    }
   });
 </script>
 </body>
