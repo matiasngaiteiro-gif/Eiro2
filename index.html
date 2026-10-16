@@ -19,7 +19,7 @@
   --grey:#9A9A9A;      /* cuerpo sobre negro */
   --grey-ink:#6B6B6B;  /* cuerpo sobre blanco */
   --dim:#4A4A4A;       /* aclaraciones "(…)" */
-  --pink:#FF8DBE;      /* acento del bloque contacto */
+  --accent:#25D366;    /* acento único de Eiro */
   --yellow:#FFF200;
 
   /* Helvetica Neue Condensed viene instalada en iPhone/Mac; en Windows/Android cae en Roboto Condensed */
@@ -39,14 +39,14 @@ html{scroll-behavior:smooth}
 body{margin:0; background:var(--black); color:var(--white); font-family:var(--sans); font-size:17px; line-height:1.6; letter-spacing:-0.5px; -webkit-font-smoothing:antialiased; overflow-x:hidden}
 a{color:inherit; text-decoration:none}
 img{max-width:100%; display:block}
-:focus-visible{outline:2px solid var(--pink); outline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 .wrap{max-width:var(--max); margin-inline:auto; padding-left:var(--gl); padding-right:var(--gr)}
 .cond{font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:.92; letter-spacing:-.005em; margin:0}
 
 .btn{display:inline-flex; align-items:center; justify-content:center; font-family:var(--label); font-weight:500; text-transform:uppercase; letter-spacing:0; font-size:.95rem; line-height:1; padding:1.15rem 2.2rem; background:var(--white); color:var(--black); border:0; border-radius:0; cursor:pointer; transition:background .25s, color .25s}
-.btn:hover{background:var(--pink); color:var(--black)}
+.btn:hover{background:var(--accent); color:var(--black)}
 .btn.dark{background:var(--black); color:var(--white)}
-.btn.dark:hover{background:var(--pink); color:var(--black)}
+.btn.dark:hover{background:var(--accent); color:var(--black)}
 
 /* ---------- HEADER ---------- */
 body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:40; background:var(--black)}
@@ -69,7 +69,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .overlay.open{opacity:1; visibility:visible}
 .overlay ul{list-style:none; margin:0; padding:0 0 3rem; display:grid; gap:clamp(3rem,9vh,6.5rem)}
 .overlay a{font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:clamp(1.4rem,3vw,2rem); transition:color .2s}
-.overlay a:hover{color:var(--pink)}
+.overlay a:hover{color:var(--accent)}
 
 /* ---------- HERO ---------- */
 .hero .wrap{padding-block:clamp(3rem,8vw,6rem) clamp(3rem,7vw,5rem); display:grid; gap:2.2rem}
@@ -77,6 +77,12 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .hero .btn{justify-self:start}
 .hero .illus{justify-self:center; width:min(62%, 440px); margin-top:clamp(2rem,6vw,4rem)}
 .hero .illus svg{width:100%; height:auto; display:block}
+@media (min-width:900px){
+  .hero .wrap{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); grid-template-rows:auto auto; column-gap:clamp(2rem,5vw,5rem); row-gap:2rem; align-items:end; min-height:calc(100svh - 7rem); max-height:980px; padding-block:clamp(2rem,5vh,4rem)}
+  .hero h1{grid-column:1; grid-row:1; font-size:clamp(4rem, min(8.2vw, 15.5vh), 9.5rem); max-width:12ch; align-self:end}
+  .hero .btn{grid-column:1; grid-row:2; align-self:start}
+  .hero .illus{grid-column:2; grid-row:1 / span 2; align-self:center; justify-self:end; width:100%; max-width:min(440px, 55vh); margin:0}
+}
 
 /* ---------- TRABAJOS ---------- */
 .work .wrap{display:grid; grid-template-columns:1fr 1fr}
@@ -92,7 +98,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .a1 b{font-family:var(--cond); font-weight:900; font-stretch:condensed; font-size:clamp(3.4rem,10vw,7.5rem); color:#000; text-transform:uppercase; letter-spacing:-.03em; line-height:.8; text-align:center; transform:scaleY(1.3)}
 .a2{background:repeating-conic-gradient(#111 0 25%, #f2f2f2 0 50%) 0 0/25% 25%; display:grid; place-items:center}
 .a2 i{display:grid; place-items:center; width:62%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%, #555, #000 65%)}
-.a2 b{font-family:"UnifrakturCook",serif; font-weight:700; font-size:clamp(3rem,9vw,6.5rem); color:var(--pink); line-height:1}
+.a2 b{font-family:"UnifrakturCook",serif; font-weight:700; font-size:clamp(3rem,9vw,6.5rem); color:var(--accent); line-height:1}
 .a3{background:linear-gradient(180deg,#F3EEE2 0 62%, #CFC4A9 62%); display:flex; justify-content:center; align-items:center; gap:7%}
 .a3 i{display:block; width:24%; aspect-ratio:1/1.85; border-radius:14px; position:relative; box-shadow:0 26px 30px -18px rgba(0,0,0,.5)}
 .a3 i:nth-child(1){background:linear-gradient(90deg,#e8457a,#ff9ac0 40%,#e8457a)}
@@ -114,7 +120,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .studio .copy{display:grid; gap:1.4rem; min-width:0}
 .studio h2{font-size:clamp(2.6rem,6vw,4.8rem)}
 .rot{position:relative; height:1em; font-size:clamp(3.6rem,9vw,7rem); overflow:hidden; margin-top:-.6rem}
-.rot span{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:1; color:var(--pink); transform:translateY(105%); transition:transform .6s var(--ease)}
+.rot span{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; line-height:1; color:var(--accent); transform:translateY(105%); transition:transform .6s var(--ease)}
 .rot span.on{transform:none}
 .rot span.off{transform:translateY(-105%)}
 .studio p{margin:0; color:var(--grey); font-size:1.08rem; line-height:1.75; max-width:46ch}
@@ -146,7 +152,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 /* ---------- CONTACTO ---------- */
 .club .wrap{padding-block:clamp(5rem,10vw,8rem) 0; display:grid; gap:1.8rem; max-width:860px}
 .mega{position:relative; padding-top:clamp(3.5rem,13vw,8rem)}
-.mega .script{position:absolute; left:-1%; top:0; font-family:"UnifrakturCook",serif; font-weight:700; color:var(--pink); font-size:clamp(4.4rem,19vw,11.5rem); line-height:.8; z-index:2; pointer-events:none; white-space:nowrap}
+.mega .script{position:absolute; left:-1%; top:0; font-family:"UnifrakturCook",serif; font-weight:700; color:var(--accent); font-size:clamp(4.4rem,19vw,11.5rem); line-height:.8; z-index:2; pointer-events:none; white-space:nowrap}
 .mega .word{font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; font-size:clamp(6.5rem,31vw,19rem); line-height:.8; letter-spacing:-.02em; display:inline-flex; align-items:flex-start}
 .mega .word sup{font-family:var(--sans); font-weight:700; font-size:.14em; line-height:1; margin-left:.06em; margin-top:.05em}
 .club h2{font-size:clamp(2.6rem,7vw,4.6rem); margin-top:1.5rem}
@@ -155,23 +161,23 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
 .chat{margin-top:.6rem; background:#0D0D0D; border:1px solid #262626; display:grid; grid-template-rows:auto 1fr auto auto}
 .chat-head{display:flex; align-items:center; gap:.85rem; padding:1rem 1.1rem; background:#141414; border-bottom:1px solid #262626}
-.chat-head .av{width:42px; height:42px; display:grid; place-items:center; background:var(--pink); color:#000; font-family:var(--cond); font-weight:900; font-size:1.5rem; flex:none}
+.chat-head .av{width:42px; height:42px; display:grid; place-items:center; background:var(--accent); color:#000; font-family:var(--cond); font-weight:900; font-size:1.5rem; flex:none}
 .chat-head div{display:grid; line-height:1.2; min-width:0}
 .chat-head strong{font-size:1rem}
-.chat-head small{font-size:.8rem; color:#25D366}
+.chat-head small{font-size:.8rem; color:var(--accent)}
 .chat-head .skip{margin-left:auto; font-size:.8rem; text-transform:uppercase; color:var(--grey); border-bottom:1px solid currentColor; padding-bottom:1px; white-space:nowrap}
 .chat-head .skip:hover{color:var(--white)}
 .chat-body{padding:1.3rem 1.1rem; display:flex; flex-direction:column; gap:.55rem; min-height:260px; max-height:440px; overflow-y:auto; background:#0A0A0A; background-image:radial-gradient(#1a1a1a 1px, transparent 1px); background-size:18px 18px}
 .msg{max-width:82%; padding:.7rem .9rem .5rem; font-size:1rem; line-height:1.45; animation:pop .35s var(--ease) both; overflow-wrap:anywhere}
 .msg time{display:block; text-align:right; font-size:.68rem; opacity:.6; margin-top:.15rem}
 .msg.in{align-self:flex-start; background:#1E1E1E; color:var(--white)}
-.msg.out{align-self:flex-end; background:var(--pink); color:#000}
+.msg.out{align-self:flex-end; background:var(--accent); color:#000}
 .msg.typing{display:flex; gap:5px; padding:.9rem 1rem}
 .msg.typing i{width:7px; height:7px; background:#888; animation:blink 1s infinite}
 .msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
 @keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
 @keyframes pop{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
-.wa{display:flex; align-items:center; justify-content:center; gap:.6rem; align-self:stretch; margin-top:.4rem; padding:1.1rem; background:#25D366; color:#000; font-weight:700; text-transform:uppercase; font-size:1rem; animation:pop .35s var(--ease) both; transition:background .2s}
+.wa{display:flex; align-items:center; justify-content:center; gap:.6rem; align-self:stretch; margin-top:.4rem; padding:1.1rem; background:var(--accent); color:#000; font-weight:700; text-transform:uppercase; font-size:1rem; animation:pop .35s var(--ease) both; transition:background .2s}
 .wa:hover{background:var(--white)}
 .wa svg{width:22px; height:22px}
 .chips{display:flex; flex-wrap:wrap; gap:.5rem; padding:.9rem 1.1rem; border-top:1px solid #262626}
@@ -182,14 +188,14 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .chat-input input{flex:1; min-width:0; font:inherit; font-size:1rem; padding:1.1rem; background:#141414; color:var(--white); border:0; border-radius:0}
 .chat-input input::placeholder{color:#666}
 .chat-input input:disabled{opacity:.6}
-.chat-input button{width:60px; flex:none; display:grid; place-items:center; background:var(--pink); color:#000; border:0; cursor:pointer}
+.chat-input button{width:60px; flex:none; display:grid; place-items:center; background:var(--accent); color:#000; border:0; cursor:pointer}
 .chat-input button:disabled{background:#2a2a2a; color:#666; cursor:default}
 .chat-input button svg{width:22px; height:22px}
 .phone{margin:.4rem 0 0; color:var(--grey); font-size:1rem}
 .phone span{color:var(--white); user-select:all}
 
 /* Botón flotante de WhatsApp */
-.fab{position:fixed; right:calc(var(--gr) - 4px); bottom:calc(1.2rem + env(safe-area-inset-bottom,0px)); z-index:20; display:flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; background:#25D366; color:#000; font-weight:700; text-transform:uppercase; font-size:.9rem; transform:translateY(160%); transition:transform .45s var(--ease), background .2s}
+.fab{position:fixed; right:calc(var(--gr) - 4px); bottom:calc(1.2rem + env(safe-area-inset-bottom,0px)); z-index:20; display:flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; background:var(--accent); color:#000; font-weight:700; text-transform:uppercase; font-size:.9rem; transform:translateY(160%); transition:transform .45s var(--ease), background .2s}
 .fab.show{transform:none}
 .fab:hover{background:var(--white)}
 .fab svg{width:22px; height:22px}
@@ -198,7 +204,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 footer .wrap{padding-block:clamp(4rem,8vw,6rem) 2.5rem; display:grid; justify-items:center; gap:2.4rem; text-align:center}
 .social{display:flex; flex-wrap:wrap; justify-content:center; gap:2.8rem; list-style:none; margin:0; padding:0}
 .social a{display:flex; align-items:center; gap:.7rem; font-family:var(--cond); font-weight:900; font-stretch:condensed; text-transform:uppercase; font-size:1.7rem; line-height:1; transition:color .2s}
-.social a:hover{color:var(--pink)}
+.social a:hover{color:var(--accent)}
 .social svg{width:30px; height:30px}
 footer small{font-size:1rem; color:var(--white)}
 
