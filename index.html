@@ -27,6 +27,8 @@
      --wdth = eje de ancho: bajalo para más angosta, subilo para más ancha. */
   --cond:"peridot-pe-variable","Roboto Condensed","Arial Narrow",sans-serif;
   --wdth:75;
+  --logo-wdth-b:100;   /* ancho de EIRO en el logo */
+  --logo-wdth-l:85;    /* ancho de STUDIO en el logo */
   --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
   /* CJ usa una mono en botones y menú; acá va Helvetica. Para probar mono: "Courier New",monospace */
   --label:"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -56,11 +58,15 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .top{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--black); transition:transform .4s var(--ease)}
 .top.hide{transform:translateY(-110%)}
 .top .wrap{display:flex; justify-content:space-between; align-items:center; padding-block:1.6rem}
-.logo{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--wdth); font-size:2.6rem; line-height:.8; text-transform:uppercase; letter-spacing:-.02em; display:flex; align-items:flex-start}
+/* Logotipo: EIRO en Heavy + STUDIO en Regular, pegados, misma altura de caja alta */
+.logo{font-family:var(--cond); font-size:clamp(1.6rem,2.4vw,2.1rem); line-height:.8; text-transform:uppercase; letter-spacing:0; display:flex; align-items:flex-start; white-space:nowrap}
+.logo .b{font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--logo-wdth-b)}
+.logo .cut{font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--logo-wdth-b)}
+.logo .l{font-weight:400; font-variation-settings:"wght" 400, "wdth" var(--logo-wdth-l)}
 .logo .cut{display:inline-flex; overflow:hidden}
 .logo .cut i{font-style:normal; display:inline-block; max-width:1em; transition:max-width .32s var(--ease), opacity .2s}
 .logo .cut i.gone{max-width:0; opacity:0}
-.logo sup{font-family:var(--sans); font-size:.75rem; font-weight:700; margin-left:2px; line-height:1}
+.logo sup{font-family:var(--sans); font-size:.6rem; font-weight:700; margin-left:3px; line-height:1}
 .star{width:48px; height:48px; display:grid; place-items:center; background:none; border:0; color:var(--white); cursor:pointer; padding:0; margin-right:-8px}
 .star .x{width:30px; height:30px}
 .star .a{font-family:var(--sans); font-weight:700; font-size:4rem; line-height:1; display:block; transform:translateY(.2em); transition:transform .5s var(--ease)}
@@ -219,7 +225,7 @@ footer small{font-size:1rem; color:var(--white)}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" id="logo" href="#top" aria-label="Eiro, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span aria-hidden="true">Eiro</span><sup aria-hidden="true">™</sup></a>
+    <a class="logo" id="logo" href="#top" aria-label="Eiro Studio, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span class="b" aria-hidden="true">Eiro</span><span class="l" aria-hidden="true">Studio</span><sup aria-hidden="true">™</sup></a>
     <button class="star" id="star" aria-label="Abrir menú" aria-expanded="false" aria-controls="overlay">
       <span class="a" aria-hidden="true">*</span>
       <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14"/><path d="M19 5 5 19"/></g></svg>
