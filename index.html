@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Base: estructura y voz de Not Found™ (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer con lema), con la identidad de Eiro: Plus Jakarta Sans y verde */
+/* Base: estructura y voz de Not Found™ (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro: Plus Jakarta Sans y verde */
 :root{
   --green:#00EB5B;
   --ink:#0A0D0B;
@@ -115,9 +115,14 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
 
 /* 5. ticker */
-.ticker{background:var(--green);overflow:hidden;padding-block:18px;border-block:1.5px solid var(--ink)}
-.ticker-track{display:flex;width:max-content;animation:tick 28s linear infinite}
-.ticker span{font-size:clamp(22px,2.6vw,36px);font-weight:800;letter-spacing:-.03em;white-space:nowrap;padding-right:48px}
+.ticker{background:#1C211E;overflow:hidden;padding-block:clamp(14px,1.6vw,20px);box-shadow:inset 0 1px 0 #2C332E,inset 0 -1px 0 #0A0D0B}
+.ticker-track{display:flex;gap:clamp(16px,2vw,28px);width:max-content;animation:tick 40s linear infinite;padding-right:clamp(16px,2vw,28px)}
+/* cada cartel imita el aviso iluminado del cinturón en un avión */
+.sign{display:flex;align-items:center;gap:clamp(12px,1.4vw,18px);padding:clamp(10px,1.2vw,14px) clamp(16px,1.8vw,24px);border-radius:12px;background:linear-gradient(180deg,#2A302C,#202622);box-shadow:inset 0 0 0 1.5px #39413B,inset 0 2px 6px rgba(0,0,0,.5),0 0 0 3px #151916}
+.sign svg{flex:none;width:clamp(30px,3vw,40px);height:auto;filter:drop-shadow(0 0 6px rgba(255,255,255,.55))}
+.sign span{font-size:clamp(14px,1.5vw,19px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#F5F7F5;text-shadow:0 0 8px rgba(255,255,255,.55),0 0 18px rgba(255,255,255,.18)}
+.sign i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green),0 0 14px rgba(0,235,91,.6);animation:led 2.4s ease-in-out infinite}
+@keyframes led{50%{opacity:.35}}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* 6. pilares + clientes */
@@ -132,6 +137,9 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
 .story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
 .story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
+.founder{margin:20px 0 0;padding-left:20px;border-left:3px solid var(--green);max-width:46ch}
+.founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink)}
+.founder cite{display:block;margin-top:12px;font-style:normal;font-weight:700;font-size:15px}
 .quotes{background:var(--fog);border-radius:var(--radius);padding:var(--pad);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
 .quote{display:none}
 .quote.on{display:block}
@@ -201,10 +209,10 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <section class="wrap hero" aria-labelledby="titular">
     <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, rentable, auténtica e imparable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
     <div class="hero-foot">
-      <p>Somos un estudio creativo con base en Buenos Aires y clientes afuera (bueno, en Estados Unidos, por ahora). Un poco de estrategia, un poco de diseño. Hacemos marcas, contenido y eventos para que sean mucho más que eso.</p>
+      <p>Somos un estudio creativo con base en Buenos Aires. Con un poco de estrategia y un poco de diseño, hacemos marcas, contenido y eventos.</p>
       <details>
         <summary>Leer más</summary>
-        <p>No trabajamos con fórmulas. Entendemos tu negocio, tu público y tu contexto como si fueran nuestros, y recién después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
+        <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
       </details>
     </div>
   </section>
@@ -234,7 +242,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
       <div class="band-copy">
         <h2>La creatividad sin estrategia es decoración.</h2>
         <div>
-          <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso primero entendemos tu negocio y después encontramos la solución a tu medida.</p>
+          <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
           <div class="band-row"><a class="pill ink" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
@@ -248,17 +256,22 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <!-- 5. ticker -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Es obligatorio desabrocharse el cinturón antes de despegar ✦</span><span>Tranqui, lo resolvemos ✦</span>
-      <span>Es obligatorio desabrocharse el cinturón antes de despegar ✦</span><span>Tranqui, lo resolvemos ✦</span>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      
     </div>
   </div>
 
   <!-- 6. pilares + clientes -->
   <section class="wrap" style="padding-block:var(--sec)" aria-label="Qué hacemos">
     <div class="pillars">
-      <div class="pillar"><h3>Branding.</h3><p>Identidad completa y un manual para que nadie la rompa. Así te reconocen de lejos, y por mucho tiempo.</p></div>
-      <div class="pillar"><h3>Contenido.</h3><p>Las redes no son subir por subir: hay que saber qué publicar, cuándo y por qué. Si querés saber más, armamos una meet y te contamos.</p></div>
-      <div class="pillar"><h3>Eventos.</h3><p>Te ayudamos a comunicar en gráfica y en video. Planificamos el contenido y lo publicamos antes, durante y después, para que tu único trabajo sea hacer lo que te gusta.</p></div>
+      <div class="pillar"><h3>Branding.</h3><p>Una identidad que se reconoce a una cuadra y un manual para que nadie la estire, la cambie de color o le ponga Comic Sans.</p></div>
+      <div class="pillar"><h3>Contenido.</h3><p>Publicar por publicar es ruido. Definimos qué decir, cuándo y para qué, y lo producimos. Vos aprobás; nosotros nos peleamos con el algoritmo.</p></div>
+      <div class="pillar"><h3>Eventos.</h3><p>Del teaser al after. Gráfica, videos y pantallas para que se hable antes, durante y después. Tu único trabajo es que la noche esté buena.</p></div>
     </div>
     <div class="clients">
       <span class="eyebrow">Marcas que ya trabajaron con nosotros</span>
@@ -271,7 +284,8 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     <div>
       <span class="eyebrow">¿Te sumás?</span>
       <h2>Una marca es una historia.</h2>
-      <p class="lead">Y las historias bien contadas se recuerdan. La nuestra, por ejemplo: no se me ocurría ningún nombre, así que le borré una parte a Gaiteiro. Sin mi apellido, sonaba a empresa. Lo demás es simple: vos nos contás qué te pasa y nosotros lo resolvemos.</p>
+      <p class="lead">Y las historias bien contadas se recuerdan. Esta es la nuestra:</p>
+      <blockquote class="founder"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro: corto, sin mi nombre encima y con cara de empresa. Desde ese día la idea es simple: vos nos contás qué te pasa y nosotros lo resolvemos.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
     </div>
     <div class="quotes" aria-label="Citas">
       <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
@@ -282,7 +296,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
         <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
       </div>
     </div>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina (en mis sueños)</span></figure>
+    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, los días buenos</span></figure>
   </section>
 
   <!-- 8. contacto -->
@@ -306,7 +320,6 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     </div>
     <div class="foot-bottom">
       <span>Estudio creativo estratégico</span>
-      <span>Haciendo que nuestras viejas estén orgullosas desde hace más de diez años</span>
       <span>De Buenos Aires al mundo</span>
     </div>
   </div>
