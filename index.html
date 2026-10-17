@@ -66,6 +66,7 @@ p{margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 
 /* pill */
@@ -219,11 +220,35 @@ footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)
   .row .pill{grid-column:2;grid-row:1/3}
 }
 
+
+/* acceso con clave: solo Eiro y el campo */
+.gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px))}
+.gate[hidden]{display:none!important}
+.gate-box{display:flex;flex-direction:column;align-items:center;gap:28px;width:min(320px,100%)}
+.gate-word{font-size:clamp(64px,12vw,120px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--ink)}
+.gate form{display:flex;width:100%;border-bottom:1.5px solid var(--line);transition:border-color .2s}
+.gate form:focus-within{border-color:var(--ink)}
+.gate form.err{border-color:#E5483B;animation:shake .35s}
+.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:600 18px var(--sans);letter-spacing:.35em;text-align:center;padding:12px 0 12px 44px}
+.gate input::placeholder{color:var(--soft);letter-spacing:.02em;font-weight:500}
+.gate button{border:0;background:none;color:var(--ink);font:700 20px var(--sans);cursor:pointer;width:44px;min-height:44px}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+html.locked,html.locked body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
+  <div class="gate-box">
+    <div class="gate-word">Eiro</div>
+    <form id="gateForm" autocomplete="off">
+      <label for="gateKey" class="sr">Clave</label>
+      <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
+      <button type="submit" aria-label="Entrar">→</button>
+    </form>
+  </div>
+</div>
 <header id="barra">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
@@ -358,6 +383,19 @@ footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)
 </footer>
 
 <script>
+(function(){
+  // acceso con clave
+  var gate=document.getElementById('gate'), form=document.getElementById('gateForm'), key=document.getElementById('gateKey'), root=document.documentElement, ok=false;
+  try{ok=localStorage.getItem('eiro-acceso')==='1'}catch(e){}
+  function open(){gate.hidden=true;root.classList.remove('locked')}
+  if(ok){open()}else{root.classList.add('locked');setTimeout(function(){key.focus()},100)}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(key.value.trim()==='4354'){try{localStorage.setItem('eiro-acceso','1')}catch(err){} open()}
+    else{form.classList.remove('err');void form.offsetWidth;form.classList.add('err');key.value='';key.focus()}
+  });
+  key.addEventListener('input',function(){if(key.value.length===4)form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event('submit',{cancelable:true}))});
+})();
 (function(){
   var bar=document.getElementById('barra');
   function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
