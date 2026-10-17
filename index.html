@@ -56,8 +56,8 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:col
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
 .nav .logo{display:block;width:92px;text-decoration:none;color:var(--ink)}
 /* logo: imagen usada como máscara, toma el color del texto */
-.logo-img{display:block;width:100%;aspect-ratio:1600/884;background:currentColor;-webkit-mask:url("img/logo-eiro-sin-tm.png") center/contain no-repeat;mask:url("img/logo-eiro-sin-tm.png") center/contain no-repeat}
-.logo-img.tm{aspect-ratio:1600/864;-webkit-mask-image:url("img/logo-eiro.png");mask-image:url("img/logo-eiro.png")}
+.logo-img{display:block;width:100%;aspect-ratio:1600/802;background:currentColor;-webkit-mask:url("img/logo-eiro-sin-tm.png") center/contain no-repeat;mask:url("img/logo-eiro-sin-tm.png") center/contain no-repeat}
+.logo-img.tm{aspect-ratio:1600/802;-webkit-mask-image:url("img/logo-eiro.png");mask-image:url("img/logo-eiro.png")}
 .hero-logo{width:clamp(260px,56vw,820px);color:var(--ink);animation:write 1.5s cubic-bezier(.6,0,.2,1) .15s both}
 @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 .nav ul{margin-left:-14px!important;display:flex;gap:4px;list-style:none;margin:0;padding:0}
