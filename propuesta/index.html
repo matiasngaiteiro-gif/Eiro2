@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eiro | Estudio de branding en Buenos Aires</title>
+<meta name="description" content="Eiro es un estudio de branding de Buenos Aires. Hacemos identidad para pymes, locales y eventos, y la acompañamos en redes, lanzamientos y noches.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#131313">
+<link rel="icon" href="https://eirostudio.com/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Propuesta Eiro: editorial, casi negro dominante, gris como bloque, verde solo para acciones y el punto del logo */
+:root{
+  --bg:#131313;
+  --text:#ECECEC;
+  --mute:#A3A3A3;
+  --soft:#767676;
+  --line:#2A2A2A;
+  --gray:#C7C7C7;
+  --dark:#131313;
+  --green:#00EB5B;
+  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gut:max(20px,env(safe-area-inset-left,0px));
+  --sec:clamp(88px,12vw,168px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-weight:800;letter-spacing:-.04em;line-height:1.02}
+img{max-width:100%;display:block}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
+:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* logo: Eiro con la i coronada por un cuadrado verde (el gesto propio de la marca) */
+.logo{display:inline-flex;align-items:baseline;font-weight:800;letter-spacing:-.05em;text-decoration:none;line-height:1}
+.logo .i{position:relative;display:inline-block}
+.logo .i::before{content:"";position:absolute;left:50%;bottom:.69em;width:.15em;height:.15em;background:var(--green);transform:translateX(-50%)}
+
+/* etiquetas y botones */
+.tag{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 24px;background:var(--green);color:var(--dark);font-weight:700;font-size:16px;text-decoration:none;transition:background-color .2s}
+.btn::after{content:"→";transition:transform .2s}
+.link{display:inline-flex;align-items:center;gap:10px;min-height:52px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
+.link::after{content:"→";transition:transform .2s}
+@media (hover:hover){
+  .btn:hover{background:var(--text)}
+  .btn:hover::after,.link:hover::after{transform:translateX(4px)}
+  .link:hover{border-color:var(--green)}
+}
+
+/* header */
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.scrolled{border-color:var(--line)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav .logo{font-size:26px}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:32px}
+.nav ul a:not(.btn){text-decoration:none;font-size:15px;font-weight:600;color:var(--mute);transition:color .2s}
+.nav .btn{min-height:42px;padding:0 18px;font-size:15px}
+@media (hover:hover){.nav ul a:not(.btn):hover{color:var(--text)}}
+
+/* portada */
+.hero{padding-block:clamp(72px,11vw,150px) clamp(64px,8vw,112px)}
+.hero h1{font-size:clamp(42px,6.6vw,96px);max-width:14ch;margin-top:28px}
+.hero-foot{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end;margin-top:clamp(40px,5vw,64px)}
+.hero-foot p{font-size:clamp(18px,1.6vw,21px);color:var(--mute);max-width:40ch}
+.hero-foot p b{color:var(--text);font-weight:600}
+.ctas{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:flex-end}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:clamp(64px,8vw,112px)}
+.facts div{padding:24px 24px 0 0}
+.facts div+div{padding-left:24px;border-left:1px solid var(--line)}
+.facts b{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.facts span{display:block;margin-top:6px;font-size:15px;color:var(--soft)}
+
+/* encabezado de sección */
+section{padding-top:var(--sec)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 40px;align-items:end;padding-bottom:32px;border-bottom:1px solid var(--line)}
+.head h2{font-size:clamp(34px,4.4vw,60px)}
+.head p{color:var(--mute);max-width:42ch;justify-self:end}
+
+/* trabajos */
+.cases{list-style:none;margin:0;padding:0}
+.case{display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1fr) minmax(0,.8fr);gap:16px 32px;padding-block:clamp(28px,3.4vw,44px);border-bottom:1px solid var(--line);align-items:baseline}
+.case .n{font-size:15px;font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums}
+.case h3{font-size:clamp(28px,3.4vw,46px)}
+.case .what{font-weight:700}
+.case .what span{display:block;margin-top:6px;font-weight:400;color:var(--mute)}
+.case .rubro{justify-self:end;font-size:15px;color:var(--soft)}
+.note{margin-top:24px;font-size:15px;color:var(--soft)}
+
+/* servicios */
+.services{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:0;border-bottom:1px solid var(--line)}
+.service{padding:36px 32px 40px 0}
+.service+.service{padding-left:32px;border-left:1px solid var(--line)}
+.service .tag{color:var(--green)}
+.service h3{font-size:clamp(28px,3vw,40px);margin-top:16px}
+.service p{margin-top:14px;color:var(--mute);max-width:36ch}
+.service:first-child h3{font-size:clamp(34px,3.8vw,52px)}
+
+/* proceso */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.step{padding:32px 24px 40px 0}
+.step+.step{padding-left:24px;border-left:1px solid var(--line)}
+.step .n{font-size:15px;font-weight:600;color:var(--soft)}
+.step h3{font-size:clamp(24px,2.2vw,30px);margin-top:40px}
+.step p{margin-top:12px;color:var(--mute);font-size:16px}
+
+/* estudio: el único bloque de color */
+.statement{background:var(--gray);color:var(--dark);margin-top:var(--sec);padding-block:clamp(72px,9vw,128px)}
+.statement .tag{color:#4A4A4A}
+.statement h2{font-size:clamp(38px,5.4vw,80px);max-width:16ch;margin-top:24px}
+.statement h2 span{color:#6A6A6A}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,7vw,96px);margin-top:clamp(56px,7vw,96px);padding-top:40px;border-top:1px solid rgba(19,19,19,.2)}
+.story p{font-size:clamp(17px,1.5vw,19px);color:#2E2E2E}
+.story blockquote{margin:0;font-size:clamp(20px,1.9vw,25px);font-weight:600;letter-spacing:-.015em;line-height:1.45}
+.story cite{display:block;margin-top:18px;font-style:normal;font-size:15px;font-weight:700}
+.story cite span{font-weight:500;color:#4A4A4A}
+
+/* contacto */
+.contact{padding-block:var(--sec)}
+.contact h2{font-size:clamp(46px,7.4vw,112px);max-width:11ch}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;margin-top:clamp(40px,5vw,64px);align-items:start}
+.contact-grid p{font-size:clamp(18px,1.6vw,21px);color:var(--mute);max-width:40ch}
+.channels{display:flex;flex-direction:column;gap:4px;align-items:stretch}
+.channels .btn{justify-content:space-between}
+.channels .link{justify-content:space-between}
+.channels small{margin-top:16px;font-size:15px;color:var(--soft)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.foot .logo{font-size:clamp(72px,12vw,168px)}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;gap:24px;flex-wrap:wrap;font-size:15px}
+.foot ul a{text-decoration:none;color:var(--mute)}
+@media (hover:hover){.foot ul a:hover{color:var(--text)}}
+.foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:32px;font-size:14px;color:var(--soft)}
+
+/* tablet */
+@media (max-width:960px){
+  .hero-foot,.head,.contact-grid,.story{grid-template-columns:1fr}
+  .ctas{justify-content:flex-start}
+  .head p{justify-self:start}
+  .case{grid-template-columns:48px minmax(0,1fr)}
+  .case .what,.case .rubro{grid-column:2}
+  .case .n{grid-row:1/span 3;align-self:start;padding-top:2px}
+  .case .rubro{justify-self:start;order:-1}
+  .services{grid-template-columns:1fr}
+  .service,.service+.service{padding:32px 0;border-left:0}
+  .service+.service{border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(3){padding-left:0;border-left:0}
+  .step:nth-child(n+3){border-top:1px solid var(--line)}
+}
+/* celular */
+@media (max-width:640px){
+  .nav ul li.hide-m{display:none}
+  .nav ul{gap:20px}
+  .facts{grid-template-columns:1fr}
+  .facts div,.facts div+div{padding:20px 0;border-left:0}
+  .facts div+div{border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr}
+  .step,.step+.step{padding:28px 0;border-left:0}
+  .step+.step{border-top:1px solid var(--line)}
+  .step h3{margin-top:16px}
+  .case{grid-template-columns:36px minmax(0,1fr)}
+  .ctas .btn{flex:1 1 100%;justify-content:space-between}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <nav class="wrap nav" aria-label="Principal">
+    <a class="logo" href="#top" aria-label="Eiro, volver al inicio">E<span class="i">ı</span>ro</a>
+    <ul>
+      <li class="hide-m"><a href="#trabajos">Trabajos</a></li>
+      <li class="hide-m"><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#estudio">Estudio</a></li>
+      <li><a class="btn" href="#contacto">Escribinos</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="tag">Estudio de branding · Buenos Aires</p>
+    <h1>Le damos a tu negocio la marca que ya se merece.</h1>
+    <div class="hero-foot">
+      <p>Hacemos <b>identidad para pymes, locales y eventos</b>, y la acompañamos donde se juega: redes, lanzamientos y noches. Primero entendemos tu negocio; después diseñamos.</p>
+      <div class="ctas">
+        <a class="btn" href="#contacto">Contanos tu proyecto</a>
+        <a class="link" href="#trabajos">Ver trabajos</a>
+      </div>
+    </div>
+    <div class="facts">
+      <div><b>+10 años</b><span>diseñando marcas, campañas y eventos</span></div>
+      <div><b>3 frentes</b><span>identidad, contenido y eventos, en un solo equipo</span></div>
+      <div><b>1 charla</b><span>alcanza para saber si somos para vos</span></div>
+    </div>
+  </div>
+
+  <section id="trabajos" class="wrap" aria-labelledby="t-trabajos">
+    <div class="head">
+      <h2 id="t-trabajos">Trabajos</h2>
+      <p>Pocos, elegidos y hechos de punta a punta. Los casos completos están en camino; si querés verlos antes, te los mostramos en la charla.</p>
+    </div>
+    <ol class="cases">
+      <li class="case">
+        <span class="n">01</span>
+        <h3>Crisger</h3>
+        <p class="what">Branding y manual de marca<span>Una identidad completa y las reglas para que se use igual en planta, en la oficina y en la web.</span></p>
+        <span class="rubro">Industria</span>
+      </li>
+      <li class="case">
+        <span class="n">02</span>
+        <h3>El Calentón</h3>
+        <p class="what">Teasers y gráfica de evento<span>Videos y piezas para anunciar el line up y que la noche se llene antes de empezar.</span></p>
+        <span class="rubro">Eventos</span>
+      </li>
+      <li class="case">
+        <span class="n">03</span>
+        <h3>Extracto Importado</h3>
+        <p class="what">Contenido y lanzamientos<span>Videos con creadoras de contenido para presentar cada fragancia nueva en redes.</span></p>
+        <span class="rubro">Perfumería</span>
+      </li>
+    </ol>
+  </section>
+
+  <section id="servicios" class="wrap" aria-labelledby="t-servicios">
+    <div class="head">
+      <h2 id="t-servicios">Qué hacemos</h2>
+      <p>Empezamos por la marca. Lo demás sale de ahí, y por eso todo se ve de la misma familia.</p>
+    </div>
+    <div class="services">
+      <article class="service">
+        <span class="tag">Lo central</span>
+        <h3>Identidad de marca</h3>
+        <p>Nombre, logo, colores, tipografías y un manual para que nadie la estire, la cambie de color o le ponga Comic Sans.</p>
+      </article>
+      <article class="service">
+        <span class="tag">Después</span>
+        <h3>Contenido</h3>
+        <p>Qué decir, cuándo y para qué, y lo producimos. Vos aprobás; nosotros nos peleamos con el algoritmo.</p>
+      </article>
+      <article class="service">
+        <span class="tag">Y cuando hay fiesta</span>
+        <h3>Eventos</h3>
+        <p>Del teaser al after: gráfica, videos y pantallas para que se hable antes, durante y después.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="proceso" class="wrap" aria-labelledby="t-proceso">
+    <div class="head">
+      <h2 id="t-proceso">Cómo trabajamos</h2>
+      <p>Sin vueltas y por escrito, para que sepas qué vas a recibir antes de pagar nada.</p>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="n">01</span><h3>Charla</h3><p>Nos contás el negocio y a quién le vendés. Nosotros preguntamos mucho, y el café lo invitamos nosotros.</p></li>
+      <li class="step"><span class="n">02</span><h3>Propuesta</h3><p>Alcance, tiempos y precio cerrado. Si algo no entra, te lo decimos ahí y no al final.</p></li>
+      <li class="step"><span class="n">03</span><h3>Diseño</h3><p>Te mostramos un camino con fundamento, lo ajustamos con vos y lo bajamos a piezas reales.</p></li>
+      <li class="step"><span class="n">04</span><h3>Entrega</h3><p>Archivos ordenados, manual de marca y una charla para que tu equipo la use bien.</p></li>
+    </ol>
+  </section>
+
+  <section id="estudio" class="statement" aria-labelledby="t-estudio">
+    <div class="wrap">
+      <p class="tag">Estudio</p>
+      <h2 id="t-estudio">La creatividad sin estrategia es <span>decoración.</span></h2>
+      <div class="story">
+        <p>Eiro es un estudio chico a propósito: el que te atiende en la primera charla es el mismo que diseña tu marca. Venimos del diseño multimedial, las campañas y la noche, y eso se nota en cómo pensamos una marca: tiene que funcionar en un manual, en un posteo y en una pantalla a las tres de la mañana.</p>
+        <div>
+          <blockquote>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Por eso, cuando alguien nos dice ‘capaz es una boludez’, prestamos más atención.”</blockquote>
+          <cite>Matías Gaiteiro <span>· fundador</span></cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="wrap contact" aria-labelledby="t-contacto">
+    <p class="tag">Contacto</p>
+    <h2 id="t-contacto">¿Qué estás craneando?</h2>
+    <div class="contact-grid">
+      <p>Contanos en qué anda tu negocio. Si hay presupuesto, mejor; si todavía no, igual charlamos: a veces un café cambia todo.</p>
+      <div class="channels">
+        <a class="btn" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+        <a class="link" href="mailto:hola@eirostudio.com">hola@eirostudio.com</a>
+        <small>Contestamos rápido, salvo que estemos en medio de un evento.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="logo" aria-hidden="true">E<span class="i">ı</span>ro</span>
+      <ul>
+        <li><a href="#trabajos">Trabajos</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#estudio">Estudio</a></li>
+        <li><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+    <div class="foot-bottom"><span>Eiro · Estudio de branding</span><span>Buenos Aires, Argentina</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var h=document.querySelector('header');
+  function on(){h.classList.toggle('scrolled',window.scrollY>8)}
+  on(); window.addEventListener('scroll',on,{passive:true});
+})();
+</script>
+</body>
+</html>
