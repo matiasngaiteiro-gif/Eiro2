@@ -1,14 +1,37 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eiro Studio</title>
-<meta name="description" content="Eiro, estudio creativo de Buenos Aires: branding, marketing y redes, eventos y diseño para locales.">
+<title>Eiro Studio | Estudio creativo de branding en Buenos Aires</title>
+<meta name="description" content="Eiro es un estudio creativo de Buenos Aires. Hacemos branding, contenido para redes y la gráfica y el video de eventos. Primero entendemos, después diseñamos.">
+<link rel="canonical" href="https://eirostudio.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Eiro Studio">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="icon" type="image/png" href="img/favicon-e2.png">
+<meta name="format-detection" content="telephone=no">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eiro Studio">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://eirostudio.com/">
+<meta property="og:title" content="Eiro Studio | Estudio creativo de branding en Buenos Aires">
+<meta property="og:description" content="Eiro es un estudio creativo de Buenos Aires. Hacemos branding, contenido para redes y la gráfica y el video de eventos. Primero entendemos, después diseñamos.">
+<meta property="og:image" content="https://eirostudio.com/img/og-eiro.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Eiro Studio, estudio creativo de Buenos Aires">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eiro Studio | Estudio creativo de branding en Buenos Aires">
+<meta name="twitter:description" content="Eiro es un estudio creativo de Buenos Aires. Hacemos branding, contenido para redes y la gráfica y el video de eventos. Primero entendemos, después diseñamos.">
+<meta name="twitter:image" content="https://eirostudio.com/img/og-eiro.jpg">
+
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="https://use.typekit.net/abn0bee.css">
+<link rel="manifest" href="site.webmanifest">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://eirostudio.com/#estudio","name":"Eiro Studio","alternateName":"Eiro","url":"https://eirostudio.com/","logo":"https://eirostudio.com/img/icon-512.png","image":"https://eirostudio.com/img/og-eiro.jpg","description":"Eiro es un estudio creativo de Buenos Aires. Hacemos branding, contenido para redes y la gráfica y el video de eventos. Primero entendemos, después diseñamos.","telephone":"+54 9 11 3485-0669","address":{"@type":"PostalAddress","addressLocality":"Buenos Aires","addressRegion":"CABA","addressCountry":"AR"},"areaServed":[{"@type":"Country","name":"Argentina"},{"@type":"Country","name":"Estados Unidos"}],"founder":{"@type":"Person","name":"Matías Gaiteiro","jobTitle":"Fundador y director creativo"},"knowsAbout":["Branding","Identidad visual","Manual de marca","Diseño gráfico","Contenido para redes sociales","Marketing digital","Diseño para eventos","Video"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Branding e identidad visual"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Contenido y gestión de redes"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Gráfica y video para eventos"}}]},"contactPoint":{"@type":"ContactPoint","contactType":"Ventas","telephone":"+54 9 11 3485-0669","url":"https://wa.me/5491134850669","availableLanguage":["Spanish","English"]}},{"@type":"WebSite","@id":"https://eirostudio.com/#web","url":"https://eirostudio.com/","name":"Eiro Studio","inLanguage":"es-AR","publisher":{"@id":"https://eirostudio.com/#estudio"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
@@ -49,6 +72,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .pill.ink{background:var(--ink);color:var(--paper)}
 .pill.fog{background:var(--fog);color:var(--ink)}
 .pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.pill.white{background:var(--paper);color:var(--ink)}
 @media (hover:hover){.pill:hover{transform:translateY(-1px)}}
 
 /* barra: logo + Nosotros + contacto, como ellos */
@@ -98,15 +122,16 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .more{display:flex;justify-content:flex-end;margin-top:20px}
 
 /* bloque verde (de la estructura anterior) */
-.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
+.band{background:var(--ink);color:var(--paper);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
 .band-copy h2{font-size:clamp(36px,5.4vw,80px)}
-.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--forest)}
+.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--soft)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--ink)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
 .photo-card .pill{position:absolute;left:16px;bottom:16px}
-.band-copy p b{font-weight:800}
+.band-copy p b{font-weight:800;color:var(--paper)}
+.band-copy h2 em{font-style:normal;color:var(--green)}
 
 /* 4. manifiesto */
 .manifesto{background:var(--ink);color:var(--paper)}
@@ -244,10 +269,10 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <section class="wrap" style="padding-bottom:var(--sec)" aria-label="Manifiesto">
     <div class="band">
       <div class="band-copy">
-        <h2>La creatividad sin estrategia es decoración.</h2>
+        <h2>La creatividad sin estrategia es <em>decoración.</em></h2>
         <div>
           <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
-          <div class="band-row"><a class="pill ink" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
+          <div class="band-row"><a class="pill white" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
       <div class="photo-card">
