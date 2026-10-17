@@ -135,10 +135,13 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 7. narrativa + citas */
 .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
+.story h2{font-size:clamp(38px,4.6vw,68px);margin-top:12px}
 .story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
 .founder{margin:20px 0 0;padding-left:20px;border-left:3px solid var(--green);max-width:46ch}
 .founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink)}
+.founder p+p{margin-top:12px}
+.story-close{margin-top:24px;font-size:clamp(18px,1.7vw,22px);font-weight:700;max-width:40ch}
+.story-close span{text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:4px;text-underline-offset:5px}
 .founder cite{display:block;margin-top:12px;font-style:normal;font-weight:700;font-size:15px}
 .quotes{background:var(--fog);border-radius:var(--radius);padding:var(--pad);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
 .quote{display:none}
@@ -256,12 +259,12 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <!-- 5. ticker -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
-      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
+      <div class="sign"><svg viewBox="0 0 40 40" fill="none" stroke="#F5F7F5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="7" r="4" fill="#F5F7F5" stroke="none"/><path d="M13 14h9c2 0 3 1 3 3v9h6l3 9"/><path d="M13 14v12h12"/><path d="M8 12v18h10"/><path d="M10 22h5"/><path d="M27 20l6-4"/></svg><span>Es obligatorio desabrocharse el cinturón de seguridad antes de despegar</span><i></i></div>
       
     </div>
   </div>
@@ -283,9 +286,11 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <section class="wrap story" id="nosotros" style="padding-bottom:var(--sec)">
     <div>
       <span class="eyebrow">¿Te sumás?</span>
-      <h2>Una marca es una historia.</h2>
-      <p class="lead">Y las historias bien contadas se recuerdan. Esta es la nuestra:</p>
-      <blockquote class="founder"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro: corto, sin mi nombre encima y con cara de empresa. Desde ese día la idea es simple: vos nos contás qué te pasa y nosotros lo resolvemos.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
+      <h2>Hasta la idea más simple puede contar una historia.</h2>
+      <p class="lead">La nuestra arrancó con una idea que casi nos da vergüenza contar:</p>
+      <blockquote class="founder"><p>“Probé un montón de nombres y ninguno cerraba. Al final agarré mi apellido, Gaiteiro, le borré la mitad y quedó Eiro. Así de simple. Parecía poco, pero era mío, y hoy es la marca con la que trabajamos.”</p>
+        <p>“Por eso, cuando alguien nos dice ‘no sé, capaz es una boludez’, prestamos más atención. Casi siempre ahí hay algo.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
+      <p class="story-close">Así que contanos la tuya, aunque te parezca chiquita. <span>Las grandes marcas también empezaron así.</span></p>
     </div>
     <div class="quotes" aria-label="Citas">
       <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
