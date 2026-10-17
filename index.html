@@ -130,6 +130,17 @@ section{padding-block:clamp(64px,9vw,120px)}
 
 .w-d .top .pill{background:var(--ink);color:var(--paper)}
 .w-d h3{max-width:16ch}
+/* fotos de proyectos */
+.work.photo{background-color:var(--ink);background-size:cover;background-position:center;color:#fff}
+.work.photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,13,11,.15) 0%,rgba(10,13,11,0) 35%,rgba(10,13,11,.72) 100%)}
+.work.photo .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
+.work.photo h3{color:#fff}
+.w-a.photo{background-image:url("img/el-calenton.jpg");background-position:center 40%}
+.w-c.photo{background-image:url("img/crisger.jpg");background-position:center 30%}
+.w-d.photo{background-image:url("img/tu-proyecto.jpg");background-position:center 38%}
+.studio figure{grid-column:1/-1;margin:0;position:relative;border-radius:18px;overflow:hidden;height:clamp(320px,42vw,600px)}
+.studio figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block}
+.studio figure .pill{position:absolute;left:16px;bottom:16px}
 
 /* estudio: nombre en forma */
 .studio{background:var(--ink);color:var(--paper)}
@@ -239,10 +250,10 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
     <div class="wrap">
       <div class="head"><h2>Trabajos</h2><p>Música en vivo, perfumería e industria. Cada uno con su color; el nuestro es el marco.</p></div>
       <div class="works">
-        <article class="work w-a"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+        <article class="work w-a photo"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
         <article class="work w-b"><div class="top"><span class="pill sm">Redes</span></div><h3>Extracto Importado<small>Lanzamientos y videos UGC</small></h3></article>
-        <article class="work w-c"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
-        <a class="work w-d" href="#contacto"><div class="top"><span class="pill sm">Tu proyecto</span></div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="align-self:flex-start">Contanos qué estás armando</span></a>
+        <article class="work w-c photo"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
+        <a class="work w-d photo" href="#contacto"><div class="top"><span class="pill sm">Tu proyecto</span></div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="align-self:flex-start">Contanos qué estás armando</span></a>
       </div>
     </div>
   </section>
@@ -255,6 +266,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
         <p>Más de diez años diseñando para artistas, productoras y marcas. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
         <div class="sig"><div class="av"><span class="wm" style="transform-origin:center">E</span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
       </div>
+      <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">Así trabajamos</span></figure>
     </div>
   </section>
 
