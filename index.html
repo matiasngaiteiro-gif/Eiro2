@@ -14,7 +14,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 /* Criterio: marca principal tipográfica en Plus Jakarta Sans, verde racionado, el pincel solo como firma, pill como recurso, el color lo ponen los trabajos */
+/* relleno interno único para bloques de color y fotos */
 :root{
+  --pad:clamp(20px,2.4vw,32px);
   --green:#00EB5B;
   --forest:#00290F;
   --ink:#0A0D0B;
@@ -67,7 +69,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .2s}
 header.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav{height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
-.brand{display:flex;align-items:center;min-height:44px;font-size:28px;justify-self:start}
+.brand{display:flex;align-items:center;min-height:44px;justify-self:start;text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:10px}
 .links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .links a{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
 @media (hover:hover){.links a:hover{background:var(--fog)}}
@@ -85,7 +88,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* portada */
 .hero{padding-block:clamp(24px,6vw,72px) clamp(32px,5vw,56px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:clamp(20px,3vw,40px)}
 .hero h1{margin:0;min-width:0}
-.mark{display:inline-block;white-space:nowrap;font-size:min(calc((100vw - 40px) / 3.7),230px);transition:font-size .7s cubic-bezier(.6,0,.2,1)}
+.mark{display:inline-block;white-space:nowrap;margin-left:-.058em;font-size:min(calc((100vw - 40px) / 3.7),230px);transition:font-size .7s cubic-bezier(.6,0,.2,1)}
 .hero.cut .mark{font-size:min(calc((100vw - 40px) / 1.95),440px)}
 .mark .g{color:var(--soft);transition:color .3s}
 .hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:clamp(0px,1.5vw,20px)}
@@ -94,14 +97,14 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .hero-side .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 
 /* el único bloque verde */
-.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(16px,3vw,36px);padding:clamp(12px,2vw,22px)}
-.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(12px,2.4vw,30px)}
+.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
+.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
 .band-copy h2{font-size:clamp(36px,5.4vw,80px)}
 .band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--forest)}
 .band-copy .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--ink)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
-.photo-card .pill{position:absolute;left:14px;bottom:14px}
+.photo-card .pill{position:absolute;left:16px;bottom:16px}
 
 /* secciones */
 section{padding-block:var(--sec)}
@@ -120,7 +123,7 @@ section{padding-block:var(--sec)}
 
 /* trabajos: el color es del cliente */
 .works{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap)}
-.work{position:relative;border-radius:var(--radius);overflow:hidden;min-height:440px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:#fff;text-decoration:none;isolation:isolate;background:var(--ink)}
+.work{position:relative;border-radius:var(--radius);overflow:hidden;min-height:440px;padding:var(--pad);display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:#fff;text-decoration:none;isolation:isolate;background:var(--ink)}
 .work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .work.has-img::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,13,11,.12) 0%,rgba(10,13,11,0) 35%,rgba(10,13,11,.72) 100%)}
 .work .top{display:flex;gap:6px;flex-wrap:wrap}
@@ -168,7 +171,7 @@ section{padding-block:var(--sec)}
 
 footer{border-top:1px solid var(--line);padding-block:28px calc(32px + env(safe-area-inset-bottom,0px))}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
-.foot .wordmark{font-size:40px}
+.foot .wordmark{font-size:40px;margin-left:-.06em}
 .foot .sign-off{display:flex;align-items:center;gap:10px}
 .foot .logo-img{width:84px;color:var(--ink)}
 .foot nav{display:flex;gap:6px 18px;flex-wrap:wrap}
@@ -218,7 +221,7 @@ footer{border-top:1px solid var(--line);padding-block:28px calc(32px + env(safe-
 
 <header id="barra">
   <div class="wrap nav">
-    <a class="brand wordmark" href="#top" aria-label="Eiro, volver al inicio">Eiro</a>
+    <a class="brand" href="#top" aria-label="Eiro, volver al inicio"><img src="img/icon-e.png" alt="" width="40" height="40"></a>
     <ul class="links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#trabajos">Trabajos</a></li>
