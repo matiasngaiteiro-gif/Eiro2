@@ -5,241 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>EIRO Studio</title>
 <meta name="description" content="EIRO, estudio creativo de Buenos Aires: branding, marketing y redes, eventos y diseño para locales.">
-<meta name="theme-color" content="#0A0D0B">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300EB5B'/%3E%3Ctext x='32' y='49' text-anchor='middle' font-family='Futura,Jost,Arial' font-weight='800' font-size='46' fill='%230A0D0B'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://use.typekit.net/abn0bee.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: sistema Zigzag (wordmark gigante, pills, bento, cards apiladas, collage con etiquetas, cromado) con la paleta de Tripadvisor */
+/* Criterio: base blanca/negra, verde racionado (pills, CTA, un solo bloque), condensada solo en el wordmark, pill como firma, E cromada como objeto, el color lo ponen los trabajos */
 :root{
-  --green:#00EB5B;     /* color héroe (rol del rosa en Zigzag) */
-  --forest:#00290F;    /* verde profundo */
-  --black:#0A0D0B;     /* negro con sesgo verde */
-  --coal:#161A17;      /* tiles oscuros */
-  --sage:#6B7A70;      /* rol del gris de Zigzag */
-  --mint:#CFF8DD;      /* secundario claro */
-  --bone:#ECEEEB;      /* neutro de fondo de producto */
-  --white:#FFFFFF;
+  --green:#00EB5B;
+  --forest:#00290F;
+  --ink:#0A0D0B;
+  --paper:#FFFFFF;
+  --fog:#F2F4F2;
+  --mute:#5F6B63;
+  --line:#DCE2DE;
   --logo:"futura-pt-condensed","Jost","Futura",sans-serif;
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
-  color-scheme:dark;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:.95;text-wrap:balance}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:1;text-wrap:balance}
 p{margin:0}
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-/* wordmark: Futura PT Condensed ExtraBold, con respaldo comprimido */
-.wm{display:inline-block;font-family:var(--logo);font-weight:800;line-height:.8;letter-spacing:-.005em;transform:scaleX(.78);transform-origin:left center;text-transform:uppercase}
+/* voz 1: wordmark */
+.wm{display:inline-block;font-family:var(--logo);font-weight:800;line-height:.8;text-transform:uppercase;transform:scaleX(.78);transform-origin:left center}
 .has-futura .wm{transform:none}
-.wm.center{transform-origin:center}
 
-/* pills */
-.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font:700 15px var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background .15s}
+/* firma: pill */
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease}
 .pill:hover{transform:translateY(-1px)}
-.pill:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
-.p-green{background:var(--green);color:var(--black)}
-.p-dark{background:var(--coal);color:var(--white)}
-.p-white{background:var(--white);color:var(--black)}
-.p-glass{background:rgba(0,235,91,.22);color:var(--black);backdrop-filter:blur(6px)}
-.p-sm{padding:6px 13px;font-size:13px}
+.pill.sm{padding:7px 13px;font-size:13px;font-weight:600}
+.pill.green{background:var(--green);color:var(--ink)}
+.pill.ink{background:var(--ink);color:var(--paper)}
+.pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.pill.white{background:var(--paper);color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
 /* nav */
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--black)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--black) 88%,transparent);backdrop-filter:blur(12px)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
-.nav .logo{font-size:38px;color:var(--green);text-decoration:none}
-.nav nav{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
-.nav nav a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;color:var(--white)}
-.nav nav a.on{background:var(--green);color:var(--black)}
-.nav nav a:not(.on):hover{background:var(--coal)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
+.nav .logo{font-size:36px;text-decoration:none;color:var(--ink)}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
+.nav ul a:hover{background:var(--fog)}
 
-/* hero wordmark */
-.hero{padding-block:clamp(40px,8vw,90px) 28px;overflow:hidden}
-.hero .giant{color:var(--green);font-size:clamp(150px,37vw,520px);display:block;white-space:nowrap}
-.hero-row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-top:22px}
-.hero-row p{font-size:clamp(18px,2.2vw,24px);font-weight:600;max-width:30ch;letter-spacing:-.01em}
+/* hero: el corte de GAIT */
+.hero{padding-block:clamp(36px,7vw,80px) clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;overflow:hidden}
+.mark{font-size:clamp(120px,25vw,380px);white-space:nowrap;display:flex;align-items:flex-end}
+.mark .wm{transform-origin:left bottom}
+.gait{color:transparent;-webkit-text-stroke:2px var(--line);display:inline-block;overflow:hidden;max-width:2.2em;transition:max-width 1.1s cubic-bezier(.7,0,.2,1),opacity .8s}
+.cut .gait{max-width:0;opacity:0}
+.hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:1.5vw}
+.hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:24ch;text-align:right;color:var(--mute)}
+.hero-side p b{color:var(--ink);font-weight:700}
 
-/* statement tiles (Y2K / Streetwear hype) */
-.statements{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.st{border-radius:22px;padding:clamp(22px,4vw,44px);min-height:clamp(260px,32vw,420px);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
-.st h2{font-size:clamp(56px,9vw,128px)}
-.st-1{background:var(--green);color:var(--black)}
-.st-1 h2{font-family:var(--sans)}
-.st-2{background:var(--coal);color:var(--green)}
-.st-2 h2{letter-spacing:-.05em}
-.st small{font-size:15px;font-weight:600;max-width:34ch;display:block}
-.st-2 small{color:var(--white)}
-
-/* section heads */
-section{padding-block:clamp(56px,9vw,110px)}
-.kicker{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
-.kicker h2{font-size:clamp(42px,6vw,84px)}
-.kicker p{max-width:40ch;color:#B9C4BD;font-size:17px}
-
-/* stacked cards + phone */
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.panel{border-radius:22px;overflow:hidden;min-height:560px;position:relative}
-.panel.light{background:var(--bone);display:grid;place-items:center;padding:40px 20px}
-.stack{width:min(460px,100%);display:grid}
-.card{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:14px;border-radius:18px;margin-top:-34px;box-shadow:0 -6px 20px -10px rgba(0,0,0,.35);text-decoration:none;transition:transform .2s ease}
-.card:first-child{margin-top:0}
-.card:hover{transform:translateY(-6px)}
-.card .ph{aspect-ratio:1/1;border-radius:10px;background:var(--bone);display:grid;place-items:center;overflow:hidden}
-.card .meta{display:flex;flex-direction:column;justify-content:space-between;padding-block:4px}
-.card .brand{font-size:15px;font-weight:500;opacity:.75}
-.card .name{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
-.card .foot{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px}
-.c1{background:var(--sage);color:var(--white)}
-.c2{background:var(--green);color:var(--black)}
-.c3{background:var(--mint);color:var(--black)}
-.c4{background:var(--black);color:var(--white)}
-
-/* little product glyphs drawn in css */
-.g-book{width:58%;height:70%;background:var(--forest);border-radius:4px 8px 8px 4px;box-shadow:inset 6px 0 0 #0d4421;position:relative}
-.g-book::after{content:"E";position:absolute;inset:0;display:grid;place-items:center;color:var(--green);font:800 40px var(--logo)}
-.g-phone{width:42%;height:78%;border-radius:12px;background:var(--black);border:4px solid #2a302c;position:relative}
-.g-phone::after{content:"";position:absolute;inset:14% 12% 40%;border-radius:6px;background:var(--green)}
-.g-ticket{width:76%;height:44%;border-radius:8px;background:var(--black);position:relative;transform:rotate(-8deg)}
-.g-ticket::before{content:"LINE UP";position:absolute;left:10px;top:8px;color:var(--green);font:800 18px var(--logo)}
-.g-ticket::after{content:"";position:absolute;right:22%;top:0;bottom:0;border-left:2px dashed var(--green)}
-.g-flyer{width:56%;height:76%;background:var(--green);border-radius:4px;position:relative}
-.g-flyer::before{content:"SÁB";position:absolute;left:8px;top:6px;font:800 26px var(--logo);color:var(--black)}
-.g-flyer::after{content:"";position:absolute;left:8px;right:8px;bottom:8px;height:30%;background:var(--black);border-radius:3px}
-
-.panel.dark{background:#050706;overflow:hidden}
-.device{position:absolute;right:-60px;top:70px;width:420px;height:640px;border-radius:70px;background:#111513;border:10px solid #1d2320;transform:rotate(-7deg);box-shadow:0 40px 80px -20px rgba(0,0,0,.8),inset 0 0 0 2px #2b322e}
-.screen{position:absolute;inset:14px;border-radius:56px;background:#000;padding:56px 40px}
-.clock{font-size:52px;font-weight:600;letter-spacing:-.03em}
-.apps{display:grid;grid-template-columns:repeat(2,130px);gap:30px 34px;margin-top:40px}
-.app{display:grid;gap:10px;justify-items:center;font-size:22px;font-weight:500}
-.icon{width:130px;height:130px;border-radius:32px;display:grid;place-items:center}
-.icon.eiro{background:var(--green);color:var(--black);font:800 100px/1 var(--logo)}
-.icon.cal{background:#fff;color:#111;display:flex;flex-direction:column;justify-content:center;gap:0}
-.icon.cal b{color:#e53b2c;font-size:20px;letter-spacing:.04em}
-.icon.cal span{font-size:62px;font-weight:400;line-height:1}
-.icon.wa{background:linear-gradient(160deg,#5ef08b,#1fae4f)}
-.icon.ig{background:radial-gradient(circle at 30% 110%,#ffd76a,#f5446c 45%,#9b39d6 75%)}
-
-/* bento */
-.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(300px,auto);gap:14px}
-.b{border-radius:22px;padding:22px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:16px;text-decoration:none}
-.b h3{font-size:clamp(40px,4.4vw,64px)}
-.b .go{display:flex;justify-content:space-between;font-weight:600;font-size:16px}
-.b-white{background:var(--white);color:var(--black)}
-.b-dark{background:var(--coal)}
-.b-sage{background:var(--sage)}
-.b-green{background:var(--green);color:var(--black)}
-.b-chrome{background:var(--coal);align-items:center;justify-content:center}
-.b-chrome .pill{position:absolute;left:18px;bottom:18px}
-.tags{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;justify-items:start}
-.tags .pill{background:#252b27;color:#fff;font-weight:600;padding:9px 16px}
-.tags .pill.on{background:var(--white);color:var(--black)}
-.faces{display:flex;gap:10px;justify-content:center;align-items:center;flex:1}
-.face{width:90px;height:120px;border-radius:12px;background:linear-gradient(180deg,#d9dfdb,#aab5ae);position:relative;overflow:hidden}
-.face.on{outline:2px solid #4a554e;outline-offset:6px;background:linear-gradient(180deg,#cff8dd,#8fd8a8)}
-.face::before{content:"";position:absolute;left:50%;top:22%;width:46%;aspect-ratio:1;border-radius:50%;background:#56645b;transform:translateX(-50%)}
-.face::after{content:"";position:absolute;left:50%;bottom:-18%;width:90%;height:48%;border-radius:50% 50% 0 0;background:#56645b;transform:translateX(-50%)}
-.heart{position:absolute;right:16px;bottom:16px;width:22px;height:20px;color:var(--green)}
-
-/* chrome */
-.chrome{position:relative;display:inline-grid;font-family:var(--logo);font-weight:800;line-height:.8;animation:float 6s ease-in-out infinite}
+/* objeto: E cromada */
+.chrome{display:inline-grid;font-family:var(--logo);font-weight:800;line-height:.8;animation:float 7s ease-in-out infinite}
 .chrome>span{grid-area:1/1;display:block}
-.chrome .depth{color:#1a201c;text-shadow:1px 1px 0 #252c27,2px 2px 0 #2b322d,3px 3px 0 #313833,4px 4px 0 #373f39,5px 5px 0 #3d4540,6px 6px 0 #444c46,7px 7px 0 #4a534d,8px 8px 0 #515a53,9px 9px 0 #57605a,16px 26px 34px rgba(0,0,0,.65)}
-.chrome .face2{background:linear-gradient(172deg,#ffffff 0%,#dfe4e1 12%,#78817b 28%,#f6f8f7 40%,#b2bab5 50%,#353c38 62%,#cfd6d1 76%,#ffffff 85%,#86908a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:100% 200%;animation:sheen 7s ease-in-out infinite}
-.chrome.green .face2{background:linear-gradient(172deg,#eafff1 0%,#7dffb0 14%,#00a63f 30%,#d9ffe7 42%,#00eb5b 52%,#003d17 64%,#5dfc98 78%,#f2fff6 86%,#00953a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:100% 200%}
 .chrome .wm{transform-origin:center}
-@keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-2deg)}}
+.chrome .depth{color:#18201b;text-shadow:1px 1px 0 #222a25,2px 2px 0 #29312c,3px 3px 0 #2f3732,4px 4px 0 #353e38,5px 5px 0 #3c443f,6px 6px 0 #424b45,7px 7px 0 #49524c,8px 8px 0 #4f5852,16px 26px 34px rgba(0,0,0,.35)}
+.chrome .face{background:linear-gradient(172deg,#ffffff 0%,#dfe4e1 12%,#78817b 28%,#f6f8f7 40%,#b2bab5 50%,#353c38 62%,#cfd6d1 76%,#ffffff 85%,#86908a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:100% 200%;animation:sheen 8s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(-3deg)}}
 @keyframes sheen{0%,100%{background-position:0 0}50%{background-position:0 100%}}
 
-/* collage */
-.collage{position:relative;background:#7FB89A;border-radius:22px;min-height:620px;overflow:hidden;display:grid;place-items:center;padding:40px 16px}
-.collage .photo{width:min(360px,70%);aspect-ratio:3/4;border-radius:6px;background:linear-gradient(180deg,#f2f4f2,#dfe5e1);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
-.collage .photo .chrome{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(170px,22vw,260px)}
-.collage .label{position:absolute;background:var(--green);color:var(--black);font-weight:600;font-size:clamp(15px,1.8vw,22px);padding:10px 22px;border-radius:999px;transform:rotate(-4deg);box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
-.obj{position:absolute;border-radius:10px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
-.o1{left:14%;top:12%;width:160px;height:110px;background:var(--black);transform:rotate(-10deg)}
-.o1::after{content:"EIRO";position:absolute;left:14px;top:12px;color:var(--green);font:800 40px var(--logo)}
-.o2{right:14%;top:14%;width:120px;height:160px;background:var(--forest);transform:rotate(8deg)}
-.o2::after{content:"";position:absolute;inset:16px;border:3px solid var(--green);border-radius:6px}
-.o3{left:16%;bottom:12%;width:150px;height:96px;background:var(--white);transform:rotate(6deg)}
-.o3::after{content:"E";position:absolute;right:12px;bottom:6px;color:var(--black);font:800 46px var(--logo)}
-.o4{right:15%;bottom:14%;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7dffb0,#00eb5b 40%,#006d29)}
+/* el único bloque verde */
+.band{background:var(--green);border-radius:20px;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(16px,3vw,36px);padding:clamp(14px,2vw,22px);align-items:stretch}
+.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(10px,2.4vw,30px)}
+.band-copy h2{font-size:clamp(40px,5.6vw,82px);color:var(--ink)}
+.band-copy p{font-size:18px;font-weight:500;max-width:36ch;color:var(--forest)}
+.band-copy .row{display:flex;gap:10px;flex-wrap:wrap}
+.object{border-radius:14px;background:var(--ink);min-height:440px;display:grid;place-items:center;position:relative;overflow:hidden}
+.object::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 40% at 50% 45%,rgba(0,235,91,.35),transparent 70%)}
+.object::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.18;mix-blend-mode:overlay}
+.object .chrome{font-size:clamp(240px,26vw,360px);position:relative;z-index:1}
+.object .pill{position:absolute;left:14px;bottom:14px;z-index:2}
 
-/* poster */
-.poster{background:#E9EBE8;color:var(--black);border-radius:6px;padding:clamp(18px,3vw,34px);display:grid;gap:22px;box-shadow:0 0 0 14px #c9cdc9,0 40px 70px -30px rgba(0,0,0,.7)}
-.poster-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.poster-top h2{font-size:clamp(28px,3.6vw,48px)}
-.works{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.w{border-radius:14px;min-height:240px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-.w h3{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.03em;position:relative}
-.w h3 small{display:block;font-size:14px;font-weight:600;letter-spacing:0;margin-top:6px;opacity:.85}
-.w .pill{align-self:flex-start;position:relative}
-.w1{background:radial-gradient(110% 80% at 70% 20%,#00eb5b 0%,#00290f 55%,#000 100%);color:#fff}
-.w1 .bigtxt{font:800 clamp(52px,6vw,84px)/.82 var(--logo);color:var(--green);position:absolute;right:14px;top:56px;text-align:right;opacity:.95}
-.w2{background:linear-gradient(160deg,#f3f7f4,#cfe9d8);color:var(--black)}
-.w2 .bottle{position:absolute;right:26px;top:40px;width:80px;height:140px;border-radius:14px;background:linear-gradient(100deg,rgba(255,255,255,.95),rgba(255,255,255,.3) 40%,rgba(255,255,255,.85) 62%,rgba(255,255,255,.4));box-shadow:inset 0 0 0 1px rgba(0,41,15,.18),0 18px 30px -16px rgba(0,41,15,.35)}
-.w2 .bottle::before{content:"";position:absolute;left:25px;top:-34px;width:30px;height:34px;border-radius:6px;background:linear-gradient(90deg,#8d968f,#f4f6f5 45%,#5c655f)}
-.w3{background:var(--forest);color:#fff}
-.w3 .grid-ill{position:absolute;right:16px;top:16px;display:grid;grid-template-columns:repeat(3,24px);gap:5px}
-.w3 .grid-ill i{height:24px;border-radius:6px;background:var(--green)}.w3 .grid-ill i:nth-child(even){background:var(--mint)}
-.poster .wm{font-size:clamp(110px,23vw,320px);color:var(--black);display:block}
+/* secciones */
+section{padding-block:clamp(64px,9vw,120px)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.head h2{font-size:clamp(40px,5.4vw,72px)}
+.head p{max-width:40ch;color:var(--mute);font-size:17px}
 
-/* about */
-.about{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
-.typer{font-family:var(--logo);font-weight:800;font-size:clamp(80px,12vw,170px);line-height:.85;white-space:nowrap;color:var(--green);text-transform:uppercase}
-.typer .g{color:#3c4740}
-.typer .cur{display:inline-block;width:.07em;height:.76em;background:var(--white);margin-left:.04em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
+/* servicios: lista con pills, sin cards */
+.svc-list{border-top:1.5px solid var(--ink)}
+.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto;gap:24px;align-items:center;padding-block:28px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s,padding .2s}
+.svc h3{font-size:clamp(30px,3.4vw,46px)}
+.svc p{color:var(--mute);max-width:46ch}
+.svc .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.svc .tags span{background:var(--fog)}
+.svc .arrow{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--fog);font-size:20px;transition:background .2s}
+.svc:hover .arrow{background:var(--green)}
+
+/* trabajos: el color es del cliente */
+.works{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.work{position:relative;border-radius:18px;overflow:hidden;min-height:420px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;isolation:isolate}
+.work::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.28;mix-blend-mode:overlay;z-index:-1}
+.work .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.work .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
+.work h3{font-size:clamp(28px,3vw,42px)}
+.work h3 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;margin-top:8px;opacity:.9}
+.w-a{grid-column:span 4;background:radial-gradient(70% 90% at 75% 30%,#ff5a1f 0%,#c3102e 38%,#2b040c 80%)}
+.w-a .flash{position:absolute;right:8%;top:14%;width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(255,220,180,.6) 25%,transparent 60%);z-index:-1}
+.w-a .type{position:absolute;right:16px;bottom:16px;font:800 clamp(64px,9vw,140px)/.8 var(--logo);text-transform:uppercase;text-align:right;color:rgba(255,255,255,.14);z-index:-1}
+.w-b{grid-column:span 2;background:linear-gradient(165deg,#f6d79a 0%,#c88b3a 55%,#5a3410 100%);color:#1d1205}
+.w-b .top .pill{background:rgba(29,18,5,.9);color:#f6d79a}
+.w-b .bottle{position:absolute;left:50%;top:22%;transform:translateX(-50%);width:96px;height:160px;border-radius:16px;z-index:-1;background:linear-gradient(100deg,rgba(255,255,255,.9),rgba(255,255,255,.25) 40%,rgba(255,255,255,.75) 62%,rgba(255,255,255,.3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 24px 40px -18px rgba(60,30,0,.6)}
+.w-b .bottle::before{content:"";position:absolute;left:31px;top:-40px;width:34px;height:40px;border-radius:7px;background:linear-gradient(90deg,#a07a3c,#ffe9b8 45%,#6a4a18)}
+.w-c{grid-column:span 2;background:#141414}
+.w-c .stripes{position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,#f5b400 0 26px,#141414 26px 52px);opacity:.9;clip-path:polygon(0 62%,100% 38%,100% 52%,0 76%)}
+.w-d{grid-column:span 4;background:var(--fog);color:var(--ink);justify-content:space-between}
+.w-d::after{display:none}
+.w-d .top .pill{background:var(--ink);color:var(--paper)}
+.w-d h3{max-width:16ch}
+
+/* estudio: nombre en forma */
+.studio{background:var(--ink);color:var(--paper)}
+.studio .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.typer{font:800 clamp(78px,11vw,160px)/.85 var(--logo);text-transform:uppercase;white-space:nowrap;color:var(--paper)}
+.typer .g{color:transparent;-webkit-text-stroke:2px #39433c}
+.typer .cur{display:inline-block;width:.06em;height:.76em;background:var(--green);margin-left:.05em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.about p{font-size:clamp(18px,2vw,22px);font-weight:500;max-width:46ch;letter-spacing:-.01em}
-.about p+p{margin-top:14px;color:#B9C4BD;font-size:17px}
-.sig{margin-top:24px;display:flex;align-items:center;gap:14px}
-.sig .av{width:46px;height:46px;border-radius:50%;background:var(--green);color:var(--black);display:grid;place-items:center;font:800 26px var(--logo)}
-.sig b{display:block}.sig span{color:#B9C4BD;font-size:14px}
+.studio p{font-size:clamp(18px,1.9vw,22px);font-weight:500;max-width:44ch}
+.studio p+p{margin-top:16px;font-size:17px;color:#AEB9B1}
+.sig{margin-top:28px;display:flex;align-items:center;gap:14px}
+.sig .av{width:48px;height:48px;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center;font:800 28px var(--logo)}
+.sig b{display:block}.sig span{color:#AEB9B1;font-size:14px}
 
-/* CTA */
-.cta{background:var(--green);color:var(--black);border-radius:22px;padding:clamp(28px,5vw,56px);display:grid;gap:24px;position:relative;overflow:hidden}
-.cta h2{font-size:clamp(52px,8vw,120px);max-width:9ch}
-.brief{display:flex;gap:8px;align-items:center;background:var(--white);border-radius:999px;padding:6px 6px 6px 22px;max-width:680px;position:relative;z-index:1}
-.brief input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:500 16px var(--sans);color:var(--black);padding:12px 0}
-.brief input::placeholder{color:#6c7a71}
-.chips{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
-.chip{background:var(--p,rgba(0,41,15,.12));color:var(--black)}
-.chip[aria-pressed="true"]{background:var(--black);color:var(--green)}
-.num{font-weight:700;font-size:18px;user-select:all;position:relative;z-index:1}
-.cta .chrome{position:absolute;right:clamp(-40px,2vw,40px);bottom:-70px;font-size:clamp(200px,26vw,380px);pointer-events:none}
+/* contacto */
+.contact{display:grid;gap:22px;justify-items:start}
+.contact h2{font-size:clamp(48px,7.4vw,108px);max-width:11ch}
+.brief{display:flex;gap:8px;align-items:center;width:min(720px,100%);border-radius:999px;padding:6px 6px 6px 22px;box-shadow:0 0 0 1.5px var(--ink)}
+.brief input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:500 16px var(--sans);color:var(--ink);padding:12px 0}
+.brief input::placeholder{color:#7f8b83}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--fog);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--green)}
+.num{font-weight:700;user-select:all;color:var(--mute)}
 
-footer{padding-block:60px 30px;overflow:hidden}
-footer .wm{font-size:clamp(150px,36vw,500px);color:var(--green);display:block}
-.foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;color:#B9C4BD;font-size:14px}
-.foot-row nav{display:flex;gap:18px;flex-wrap:wrap}
-.foot-row a{text-decoration:none;font-weight:600;color:var(--white)}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+.foot .wm{font-size:44px;color:var(--ink)}
+.foot nav{display:flex;gap:18px;flex-wrap:wrap}
+.foot nav a{text-decoration:none;font-weight:600;color:var(--ink)}
 
 @media (max-width:900px){
-  .statements,.duo,.about{grid-template-columns:1fr}
-  .bento{grid-template-columns:1fr 1fr}
-  .b-wide{grid-column:span 2}
+  .hero{grid-template-columns:1fr}
+  .hero-side{justify-items:start}.hero-side p{text-align:left}
+  .band,.studio .grid{grid-template-columns:1fr}
+  .object{min-height:340px}
+  .svc{grid-template-columns:1fr auto}
+  .svc>div:nth-child(2){grid-column:1/-1;grid-row:2}
   .works{grid-template-columns:1fr 1fr}
-  .w1{grid-column:span 2}
-  .panel.dark{min-height:520px}
+  .w-a,.w-d{grid-column:span 2}.w-b,.w-c{grid-column:span 1}
 }
 @media (max-width:600px){
-  .nav nav a:not(.on){display:none}
-  .bento,.works{grid-template-columns:1fr}
-  .b-wide,.w1{grid-column:span 1}
-  .card{grid-template-columns:96px 1fr;margin-top:-26px}
-  .panel.light{padding:28px 14px;min-height:0}
-  .device{right:-120px;transform:rotate(-7deg) scale(.8);transform-origin:top right}
-  .o1,.o3{left:4%}.o2,.o4{right:4%}
-  .o1{width:120px;height:84px}.o1::after{font-size:30px}
-  .collage{min-height:540px}
-  .brief .pill{padding:10px 14px}
+  .nav ul{display:none}
+  .works{grid-template-columns:1fr}
+  .w-a,.w-b,.w-c,.w-d{grid-column:span 1}
+  .work{min-height:340px}
+  .brief{flex-wrap:wrap;border-radius:22px;padding:10px}
+  .brief input{flex-basis:100%;padding:8px 10px}
+  .brief .pill{width:100%;justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -250,138 +185,99 @@ footer .wm{font-size:clamp(150px,36vw,500px);color:var(--green);display:block}
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="EIRO, inicio"><span class="wm">EIRO</span></a>
-    <nav aria-label="Secciones">
-      <a class="on" href="#top">Home</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#trabajos">Trabajos</a>
-      <a href="#estudio">Estudio</a>
-    </nav>
-    <a class="pill p-green" href="#contacto">Hablemos</a>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#estudio">Estudio</a></li>
+    </ul>
+    <a class="pill green" href="#contacto">Hablemos</a>
   </div>
 </header>
 
 <main id="top">
   <div class="wrap hero">
-    <h1 aria-label="EIRO"><span class="wm giant">EIRO</span></h1>
-    <div class="hero-row">
-      <p>Estudio creativo. Marca, contenido, redes y eventos desde Buenos Aires.</p>
-      <a class="pill p-white" href="#trabajos">Ver trabajos →</a>
+    <h1 class="mark" aria-label="EIRO"><span class="wm"><span class="gait" id="gait">GAIT</span>EIRO</span></h1>
+    <div class="hero-side">
+      <p><b>Estudio creativo.</b> Marca, contenido, marketing y eventos desde Buenos Aires.</p>
+      <a class="pill ink" href="#trabajos">Ver trabajos</a>
     </div>
   </div>
 
-  <div class="wrap statements">
-    <div class="st st-1"><h2>Marcas con calle</h2><small>Identidades pensadas para verse igual de bien en un afiche, en un reel y en la pista.</small></div>
-    <div class="st st-2"><h2>Hype bien hecho</h2><small>Teasers, line ups y contenido para eventos masivos, artistas y marcas que quieren que se hable de ellas.</small></div>
+  <div class="wrap">
+    <div class="band">
+      <div class="band-copy">
+        <h2>Marcas que se ven igual en la calle, en el feed y en la pista</h2>
+        <div>
+          <p>Diseñamos el sistema completo, no solo el logo. Para artistas, eventos y marcas en Argentina y Miami.</p>
+          <div class="row" style="margin-top:22px"><a class="pill ink" href="#servicios">Ver servicios</a><a class="pill line" href="#contacto">Escribinos</a></div>
+        </div>
+      </div>
+      <div class="object" aria-hidden="true">
+        <div class="chrome"><span class="depth"><span class="wm">E</span></span><span class="face"><span class="wm">E</span></span></div>
+        <span class="pill green sm">EIRO™</span>
+      </div>
+    </div>
   </div>
 
   <section id="servicios">
     <div class="wrap">
-      <div class="kicker"><h2>Servicios</h2><p>Tomá uno o combinalos. Todo sale del mismo equipo, con la misma mirada.</p></div>
-      <div class="duo">
-        <div class="panel light">
-          <div class="stack">
-            <a class="card c1" href="#contacto"><div class="ph"><div class="g-book"></div></div><div class="meta"><div><div class="brand">Branding</div><div class="name">Identidad + manual de marca interactivo</div></div><div class="foot"><span>Esencial · Pro · Empresa</span></div></div></a>
-            <a class="card c2" href="#contacto"><div class="ph"><div class="g-phone"></div></div><div class="meta"><div><div class="brand">Marketing y redes</div><div class="name">Estrategia, community, guiones y UGC</div></div><div class="foot"><span>Mensual</span></div></div></a>
-            <a class="card c3" href="#contacto"><div class="ph"><div class="g-ticket"></div></div><div class="meta"><div><div class="brand">Eventos</div><div class="name">Gráfica y multimedia completa del evento</div></div><div class="foot"><span>Por evento</span></div></div></a>
-            <a class="card c4" href="#contacto"><div class="ph"><div class="g-flyer"></div></div><div class="meta"><div><div class="brand">Locales</div><div class="name">Diseño mensual para discotecas y locales</div></div><div class="foot"><span>Consultar</span><span>→</span></div></div></a>
-          </div>
-        </div>
-        <div class="panel dark" aria-hidden="true">
-          <div class="device"><div class="screen">
-            <div class="clock">10:40</div>
-            <div class="apps">
-              <div class="app"><div class="icon eiro"><span class="wm center">E</span></div>Eiro</div>
-              <div class="app"><div class="icon cal"><b>SÁB</b><span>17</span></div>Calendario</div>
-              <div class="app"><div class="icon wa"></div>WhatsApp</div>
-              <div class="app"><div class="icon ig"></div>Instagram</div>
-            </div>
-          </div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:0">
-    <div class="wrap bento">
-      <div class="b b-white"><div class="faces" aria-hidden="true"><div class="face"></div><div class="face on"></div><div class="face"></div></div><div class="go"><span>Artistas y DJs</span><span>→</span></div></div>
-      <div class="b b-chrome"><div class="chrome" aria-hidden="true" style="font-size:clamp(200px,22vw,300px)"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div><span class="pill p-green p-sm">Silver Metal</span></div>
-      <a class="b b-sage" href="#trabajos"><h3>Trending</h3><div class="go"><span>Lo último que hicimos</span><span>→</span></div></a>
-      <div class="b b-dark"><div class="chrome green" aria-hidden="true" style="font-size:clamp(170px,18vw,250px);align-self:center;margin-block:auto"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div><svg class="heart" viewBox="0 0 24 22" fill="currentColor" aria-hidden="true"><path d="M12 21 2.6 11.8A5.6 5.6 0 0 1 12 4.2a5.6 5.6 0 0 1 9.4 7.6Z"/></svg></div>
-      <a class="b b-green" href="#contacto"><h3>Lanzá tu marca</h3><div class="go"><span>Arrancar un proyecto</span><span>→</span></div></a>
-      <div class="b b-dark"><div class="tags">
-        <span class="pill">Branding</span><span class="pill">Teasers</span>
-        <span class="pill on">Manual de marca</span><span class="pill">Line up</span>
-        <span class="pill">Reels</span><span class="pill on">UGC</span>
-        <span class="pill">TikTok</span><span class="pill">Flyers</span>
-        <span class="pill on">Eventos</span><span class="pill">Pantallas</span>
-      </div></div>
-    </div>
-  </section>
-
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="collage">
-        <div class="obj o1" aria-hidden="true"></div><div class="obj o2" aria-hidden="true"></div><div class="obj o3" aria-hidden="true"></div><div class="obj o4" aria-hidden="true"></div>
-        <div class="photo"><div class="chrome" aria-hidden="true"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div></div>
-        <span class="label" style="left:24%;top:30%">Logo</span>
-        <span class="label" style="right:22%;top:34%;transform:rotate(3deg)">Manual de marca</span>
-        <span class="label" style="left:22%;bottom:32%;transform:rotate(2deg)">Tarjetas</span>
-        <span class="label" style="right:24%;bottom:30%">Merch</span>
+      <div class="head"><h2>Servicios</h2><p>Tomá uno o combinalos. Todo sale del mismo equipo, así la marca no cambia de voz entre un afiche y un reel.</p></div>
+      <div class="svc-list">
+        <a class="svc" href="#contacto"><h3>Branding</h3><div><p>Identidad completa y manual de marca interactivo, listo para que cualquiera la aplique bien.</p><div class="tags"><span class="pill sm">Esencial</span><span class="pill sm">Profesional</span><span class="pill sm">Empresa</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="svc" href="#contacto"><h3>Marketing y redes</h3><div><p>Dirección del área: estrategia, community management, guiones, UGC y diseño de cada pieza.</p><div class="tags"><span class="pill sm">Instagram</span><span class="pill sm">TikTok</span><span class="pill sm">UGC</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="svc" href="#contacto"><h3>Eventos</h3><div><p>Toda la parte gráfica y multimedia: line up, teasers, pantallas y redes del evento.</p><div class="tags"><span class="pill sm">Teasers</span><span class="pill sm">Visuales</span><span class="pill sm">Line up</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="svc" href="#contacto"><h3>Locales</h3><div><p>Diseño mensual para discotecas y locales: flyers, historias y la agenda de cada fin de semana.</p><div class="tags"><span class="pill sm">Mensual</span><span class="pill sm">Flyers</span><span class="pill sm">Stories</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
 
   <section id="trabajos" style="padding-top:0">
     <div class="wrap">
-      <div class="poster">
-        <div class="poster-top"><h2>Descubrí lo que hacemos</h2><a class="pill p-green p-sm" href="#contacto">Hablemos →</a></div>
-        <div class="works">
-          <article class="w w1"><span class="pill p-white p-sm">Eventos</span><div class="bigtxt">EL<br>CALEN<br>TÓN</div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
-          <article class="w w2"><span class="pill p-green p-sm">Marketing y redes</span><div class="bottle" aria-hidden="true"></div><h3>Extracto Importado<small>Lanzamientos y videos con creadoras UGC</small></h3></article>
-          <article class="w w3"><span class="pill p-green p-sm">Branding</span><div class="grid-ill" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>Crisger<small>Identidad y manual de marca interactivo</small></h3></article>
-        </div>
-        <span class="wm" aria-hidden="true">EIRO</span>
+      <div class="head"><h2>Trabajos</h2><p>Música en vivo, perfumería e industria. Cada uno con su color; el nuestro es el marco.</p></div>
+      <div class="works">
+        <article class="work w-a"><div class="flash" aria-hidden="true"></div><div class="type" aria-hidden="true">El<br>Calentón</div><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+        <article class="work w-b"><div class="bottle" aria-hidden="true"></div><div class="top"><span class="pill sm">Redes</span></div><h3>Extracto Importado<small>Lanzamientos y videos UGC</small></h3></article>
+        <article class="work w-c"><div class="stripes" aria-hidden="true"></div><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
+        <a class="work w-d" href="#contacto"><div class="top"><span class="pill sm">Tu proyecto</span></div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="align-self:flex-start">Contanos qué estás armando</span></a>
       </div>
     </div>
   </section>
 
-  <section id="estudio" style="padding-top:0">
-    <div class="wrap about">
+  <section id="estudio" class="studio">
+    <div class="wrap grid">
       <div class="typer" aria-label="GAITEIRO se convierte en EIRO"><span id="tw"><span class="g">GAIT</span>EIRO</span><span class="cur"></span></div>
       <div>
-        <p>EIRO sale de Gaiteiro. Le sacamos el apellido y nos quedamos con un estudio que hace marca, contenido, marketing y eventos.</p>
-        <p>Más de diez años diseñando para artistas, productoras y marcas en Argentina y Miami. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
-        <div class="sig"><div class="av"><span class="wm center">E</span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
+        <p>EIRO sale de Gaiteiro. Le sacamos el apellido y nos quedamos con lo que suena a empresa.</p>
+        <p>Más de diez años diseñando para artistas, productoras y marcas. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
+        <div class="sig"><div class="av"><span class="wm" style="transform-origin:center">E</span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
       </div>
     </div>
   </section>
 
-  <section id="contacto" style="padding-top:0">
-    <div class="wrap">
-      <div class="cta">
-        <h2>Contanos qué estás armando</h2>
-        <div class="chips" role="group" aria-label="Elegí servicios">
-          <button class="pill chip" type="button" id="c1" aria-pressed="false">Branding</button>
-          <button class="pill chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
-          <button class="pill chip" type="button" id="c3" aria-pressed="false">Eventos</button>
-          <button class="pill chip" type="button" id="c4" aria-pressed="false">Locales</button>
-        </div>
-        <form class="brief" id="brief">
-          <label for="q" style="position:absolute;left:-9999px">Tu proyecto</label>
-          <input id="q" name="q" autocomplete="off" placeholder="Ej: lanzo una marca de ropa en marzo">
-          <button class="pill p-dark" type="submit" style="background:var(--black);color:var(--green)">Enviar por WhatsApp</button>
-        </form>
-        <span class="num">+54 9 11 3485-0669</span>
-        <div class="chrome" aria-hidden="true"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div>
+  <section id="contacto">
+    <div class="wrap contact">
+      <h2>Contanos qué estás armando</h2>
+      <div class="chips" role="group" aria-label="Elegí servicios">
+        <button class="pill chip" type="button" id="c1" aria-pressed="false">Branding</button>
+        <button class="pill chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
+        <button class="pill chip" type="button" id="c3" aria-pressed="false">Eventos</button>
+        <button class="pill chip" type="button" id="c4" aria-pressed="false">Locales</button>
       </div>
+      <form class="brief" id="brief">
+        <label for="q" style="position:absolute;left:-9999px">Tu proyecto</label>
+        <input id="q" name="q" autocomplete="off" placeholder="Ej: lanzo una marca de ropa en marzo">
+        <button class="pill green" type="submit">Enviar por WhatsApp</button>
+      </form>
+      <span class="num">+54 9 11 3485-0669</span>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <span class="wm" aria-hidden="true">EIRO</span>
-    <div class="foot-row"><span>EIRO™ · Estudio creativo · Buenos Aires</span><nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav></div>
+  <div class="wrap foot">
+    <span class="wm">EIRO</span>
+    <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav>
+    <span>EIRO™ · Estudio creativo · Buenos Aires</span>
   </div>
 </footer>
 
@@ -390,6 +286,9 @@ footer .wm{font-size:clamp(150px,36vw,500px);color:var(--green);display:block}
   var root=document.documentElement;
   function checkFont(){try{if(document.fonts&&document.fonts.check('800 20px "futura-pt-condensed"'))root.classList.add('has-futura')}catch(e){}}
   checkFont(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(checkFont);
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce)setTimeout(function(){document.getElementById('top').classList.add('cut')},900);
 
   var picked=[];
   [].slice.call(document.querySelectorAll('.chip')).forEach(function(c){c.addEventListener('click',function(){
@@ -407,13 +306,13 @@ footer .wm{font-size:clamp(150px,36vw,500px);color:var(--green);display:block}
   });
 
   var tw=document.getElementById('tw');
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){tw.textContent='EIRO';return}
+  if(reduce){tw.textContent='EIRO';return}
   var full='GAITEIRO';
   function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
   function paint(gray,rest){tw.innerHTML='<span class="g">'+gray+'</span>'+rest}
   (async function loop(){
     while(true){
-      for(var i=1;i<=full.length;i++){var s=full.slice(0,i);paint(s.slice(0,Math.min(4,s.length)),s.slice(4));await sleep(110)}
+      for(var i=1;i<=full.length;i++){var s=full.slice(0,i);paint(s.slice(0,4),s.slice(4));await sleep(110)}
       await sleep(1300);
       for(var j=1;j<=4;j++){paint(full.slice(j,4),'EIRO');await sleep(150)}
       await sleep(2600);
