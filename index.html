@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://eirostudio.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Eiro Studio">
-<meta name="theme-color" content="#0A0D0B">
+<meta name="theme-color" content="#C7C7C7">
 <meta name="format-detection" content="telephone=no">
 
 <meta property="og:type" content="website">
@@ -39,22 +39,23 @@
 /* Base: estructura y voz de Not Found (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro Studio: Plus Jakarta Sans y verde */
 :root{
   --green:#00EB5B;
-  /* fondo negro: --paper es el fondo, --ink el texto */
-  --paper:#0A0D0B;
-  --ink:#F5F7F5;
-  --black:#0A0D0B;
-  --surface:#141815;
-  --fog:#1C211D;
+  /* paleta gris claro + negro + verde: --paper es el fondo, --ink el texto */
+  --paper:#C7C7C7;
+  --ink:#141414;
+  --black:#141414;
+  --white:#F2F2F2;
+  --surface:#BEBEBE;
+  --fog:#B7B7B7;
   --forest:#00290F;
-  --mute:#9AA59D;
-  --soft:#7E8981;
-  --line:#262C28;
+  --mute:#3F3F3F;
+  --soft:#666666;
+  --line:#A9A9A9;
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --nav-h:68px;
   --pad:clamp(20px,2.4vw,32px);
   --radius:clamp(14px,1.6vw,20px);
   --sec:clamp(64px,10vw,140px);
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -73,10 +74,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s}
 .pill.sm{min-height:30px;padding:0 13px;font-size:13px;font-weight:600}
 .pill.green{background:var(--green);color:var(--black)}
-.pill.ink{background:var(--ink);color:var(--black)}
+.pill.ink{background:var(--ink);color:var(--white)}
 .pill.fog{background:var(--fog);color:var(--ink)}
 .pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
-.pill.white{background:var(--ink);color:var(--black)}
+.pill.white{background:var(--ink);color:var(--white)}
 @media (hover:hover){.pill:hover{transform:translateY(-1px)}}
 
 /* barra: logo + Nosotros + contacto, como ellos */
@@ -94,7 +95,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* 1. portada: titular-manifiesto */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
 .hero h1{font-size:clamp(42px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
-.hero h1 em{font-style:normal;color:var(--green)}
+.hero h1 em{font-style:normal;color:var(--ink);background:var(--green);padding:0 .08em;margin-left:-.02em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .rot em{display:inline-block}
 .rot em.out{animation:rotOut .32s cubic-bezier(.6,0,.8,.4) forwards}
@@ -131,7 +132,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
 .band-copy h2{font-size:clamp(36px,5.4vw,80px)}
 .band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:rgba(10,13,11,.78)}
-.band .pill.white{background:var(--black);color:var(--ink)}
+.band .pill.white{background:var(--black);color:var(--white)}
 .band .pill.line{color:var(--black)}
 .photo-card .pill.green{background:var(--black);color:var(--green)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
@@ -139,22 +140,22 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
 .photo-card .pill{position:absolute;left:16px;bottom:16px}
 .band-copy p b{font-weight:800;color:var(--black)}
-.band-copy h2 em{font-style:normal;color:var(--ink)}
+.band-copy h2 em{font-style:normal;color:var(--white)}
 
 /* 4. manifiesto */
-.manifesto{background:var(--ink);color:var(--paper)}
+.manifesto{background:var(--ink);color:var(--white)}
 .manifesto p{font-size:clamp(30px,4.4vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.05;max-width:20ch;text-wrap:balance}
 .manifesto p b{color:var(--green)}
-.manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
+.manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:#A8A8A8;max-width:52ch}
 
 /* 5. ticker */
-.ticker{background:var(--surface);border-block:1px solid var(--line);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
+.ticker{background:var(--green);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
 .ticker-track{display:flex;gap:clamp(40px,5vw,72px);width:max-content;animation:tick 45s linear infinite;padding-right:clamp(40px,5vw,72px)}
 /* cartel de cinturón, versión mínima */
 .sign{display:flex;align-items:center;gap:18px}
-.sign .belt{flex:none;display:block;color:var(--green);width:clamp(56px,5vw,72px);line-height:0}
+.sign .belt{flex:none;display:block;color:var(--black);width:clamp(56px,5vw,72px);line-height:0}
 .belt svg{width:100%;height:auto;display:block}
-.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
+.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--black)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* 6. pilares + clientes */
