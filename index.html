@@ -38,6 +38,8 @@ p{margin:0}
 /* voz 1: wordmark */
 .wm{display:inline-block;font-family:var(--logo);font-weight:800;line-height:.8;text-transform:uppercase;transform:scaleX(.78);transform-origin:left center}
 .has-futura .wm{transform:none}
+.wm{opacity:0;transition:opacity .35s ease}
+.fonts-ready .wm{opacity:1}
 
 /* firma: pill */
 .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease}
@@ -62,7 +64,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:col
 .hero{padding-block:clamp(36px,7vw,80px) clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;overflow:hidden}
 .mark{font-size:clamp(120px,25vw,380px);white-space:nowrap;display:flex;align-items:flex-end}
 .mark .wm{transform-origin:left bottom}
-.gait{color:transparent;-webkit-text-stroke:2px var(--line);display:inline-block;overflow:hidden;max-width:2.2em;transition:max-width 1.1s cubic-bezier(.7,0,.2,1),opacity .8s}
+.gait{display:inline-block;overflow:hidden;max-width:2.2em;transition:max-width 1.1s cubic-bezier(.7,0,.2,1),opacity .8s}
 .cut .gait{max-width:0;opacity:0}
 .hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:1.5vw}
 .hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:24ch;text-align:right;color:var(--mute)}
@@ -108,30 +110,34 @@ section{padding-block:clamp(64px,9vw,120px)}
 /* trabajos: el color es del cliente */
 .works{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
 .work{position:relative;border-radius:18px;overflow:hidden;min-height:420px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;isolation:isolate}
-.work::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.28;mix-blend-mode:overlay;z-index:-1}
+
 .work .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .work .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
 .work h3{font-size:clamp(28px,3vw,42px)}
 .work h3 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;margin-top:8px;opacity:.9}
-.w-a{grid-column:span 4;background:radial-gradient(70% 90% at 75% 30%,#ff5a1f 0%,#c3102e 38%,#2b040c 80%)}
-.w-a .flash{position:absolute;right:8%;top:14%;width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0%,rgba(255,220,180,.6) 25%,transparent 60%);z-index:-1}
-.w-a .type{position:absolute;right:16px;bottom:16px;font:800 clamp(64px,9vw,140px)/.8 var(--logo);text-transform:uppercase;text-align:right;color:rgba(255,255,255,.14);z-index:-1}
-.w-b{grid-column:span 2;background:linear-gradient(165deg,#f6d79a 0%,#c88b3a 55%,#5a3410 100%);color:#1d1205}
-.w-b .top .pill{background:rgba(29,18,5,.9);color:#f6d79a}
-.w-b .bottle{position:absolute;left:50%;top:22%;transform:translateX(-50%);width:96px;height:160px;border-radius:16px;z-index:-1;background:linear-gradient(100deg,rgba(255,255,255,.9),rgba(255,255,255,.25) 40%,rgba(255,255,255,.75) 62%,rgba(255,255,255,.3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 24px 40px -18px rgba(60,30,0,.6)}
-.w-b .bottle::before{content:"";position:absolute;left:31px;top:-40px;width:34px;height:40px;border-radius:7px;background:linear-gradient(90deg,#a07a3c,#ffe9b8 45%,#6a4a18)}
-.w-c{grid-column:span 2;background:#141414}
-.w-c .stripes{position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,#f5b400 0 26px,#141414 26px 52px);opacity:.9;clip-path:polygon(0 62%,100% 38%,100% 52%,0 76%)}
+
+
+
+
+.w-a{grid-column:span 4;background:#C3102E}
+.w-b{grid-column:span 2;background:#C88B3A;color:#1d1205}
+.w-b .top .pill{background:#1d1205;color:#F3D9A8}
+.w-c{grid-column:span 2;background:#F5B400;color:var(--ink)}
+.w-c .top .pill{background:var(--ink);color:#F5B400}
+
+
+
+
 .w-d{grid-column:span 4;background:var(--fog);color:var(--ink);justify-content:space-between}
-.w-d::after{display:none}
+
 .w-d .top .pill{background:var(--ink);color:var(--paper)}
 .w-d h3{max-width:16ch}
 
 /* estudio: nombre en forma */
 .studio{background:var(--ink);color:var(--paper)}
-.studio .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
-.typer{font:800 clamp(78px,11vw,160px)/.85 var(--logo);text-transform:uppercase;white-space:nowrap;color:var(--paper)}
-.typer .g{color:transparent;-webkit-text-stroke:2px #39433c}
+.studio .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.typer{font:800 clamp(60px,8.4vw,130px)/.85 var(--logo);text-transform:uppercase;white-space:nowrap;color:var(--paper);min-width:0;overflow:hidden;height:.9em}
+.typer .g{color:inherit}
 .typer .cur{display:inline-block;width:.06em;height:.76em;background:var(--green);margin-left:.05em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .studio p{font-size:clamp(18px,1.9vw,22px);font-weight:500;max-width:44ch}
@@ -235,9 +241,9 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
     <div class="wrap">
       <div class="head"><h2>Trabajos</h2><p>Música en vivo, perfumería e industria. Cada uno con su color; el nuestro es el marco.</p></div>
       <div class="works">
-        <article class="work w-a"><div class="flash" aria-hidden="true"></div><div class="type" aria-hidden="true">El<br>Calentón</div><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
-        <article class="work w-b"><div class="bottle" aria-hidden="true"></div><div class="top"><span class="pill sm">Redes</span></div><h3>Extracto Importado<small>Lanzamientos y videos UGC</small></h3></article>
-        <article class="work w-c"><div class="stripes" aria-hidden="true"></div><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
+        <article class="work w-a"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+        <article class="work w-b"><div class="top"><span class="pill sm">Redes</span></div><h3>Extracto Importado<small>Lanzamientos y videos UGC</small></h3></article>
+        <article class="work w-c"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
         <a class="work w-d" href="#contacto"><div class="top"><span class="pill sm">Tu proyecto</span></div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="align-self:flex-start">Contanos qué estás armando</span></a>
       </div>
     </div>
@@ -284,11 +290,20 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
 <script>
 (function(){
   var root=document.documentElement;
-  function checkFont(){try{if(document.fonts&&document.fonts.check('800 20px "futura-pt-condensed"'))root.classList.add('has-futura')}catch(e){}}
-  checkFont(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(checkFont);
-
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce)setTimeout(function(){document.getElementById('top').classList.add('cut')},900);
+  var shown=false;
+  function show(){
+    if(shown)return;shown=true;
+    try{if(document.fonts&&document.fonts.check('800 20px "futura-pt-condensed"'))root.classList.add('has-futura')}catch(e){}
+    root.classList.add('fonts-ready');
+    if(!reduce)setTimeout(function(){document.getElementById('top').classList.add('cut')},1000);
+  }
+  try{
+    Promise.race([
+      Promise.all([document.fonts.load('800 1em "futura-pt-condensed"'),document.fonts.load('800 1em "Jost"')]).then(function(){return document.fonts.ready}),
+      new Promise(function(r){setTimeout(r,1800)})
+    ]).then(show,show);
+  }catch(e){show()}
 
   var picked=[];
   [].slice.call(document.querySelectorAll('.chip')).forEach(function(c){c.addEventListener('click',function(){
