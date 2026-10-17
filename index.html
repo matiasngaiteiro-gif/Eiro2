@@ -64,8 +64,14 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 1. portada: titular-manifiesto */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(50px,9.4vw,148px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
+.hero h1{font-size:clamp(42px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
 .hero h1 em{font-style:normal;color:var(--green)}
+.rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+.rot em{display:inline-block}
+.rot em.out{animation:rotOut .32s cubic-bezier(.6,0,.8,.4) forwards}
+.rot em.in{animation:rotIn .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes rotOut{to{transform:translateY(-105%);opacity:0}}
+@keyframes rotIn{from{transform:translateY(105%);opacity:0}}
 .hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;margin-top:clamp(32px,4vw,56px);align-items:start}
 .hero-foot p{font-size:clamp(17px,1.5vw,20px);font-weight:500;max-width:46ch}
 .hero-foot details p{color:var(--mute);margin-top:12px}
@@ -193,12 +199,12 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
 <main id="top">
   <!-- 1. titular-manifiesto -->
   <section class="wrap hero" aria-labelledby="titular">
-    <h1 id="titular">Solo nos importa que tu marca <em>valga más.</em></h1>
+    <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, rentable, auténtica e imparable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
     <div class="hero-foot">
-      <p>Somos un estudio creativo de Buenos Aires. Mitad estrategia, mitad diseño. Hacemos marcas, contenido y eventos para que la gente las quiera, las recuerde y las elija.</p>
+      <p>Somos un estudio creativo con base en Buenos Aires y clientes afuera (bueno, en Estados Unidos, por ahora). Un poco de estrategia, un poco de diseño. Hacemos marcas, contenido y eventos para que sean mucho más que eso.</p>
       <details>
         <summary>Leer más</summary>
-        <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y la marca se ve igual en un afiche, en el feed y en la pista.</p>
+        <p>No trabajamos con fórmulas. Entendemos tu negocio, tu público y tu contexto como si fueran nuestros, y recién después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
       </details>
     </div>
   </section>
@@ -228,7 +234,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
       <div class="band-copy">
         <h2>La creatividad sin estrategia es decoración.</h2>
         <div>
-          <p><b>LINDA, BRILLANTE, MUY PRESENTABLE.</b> Y no sirve para nada. Por eso primero entendemos tu negocio y después abrimos Illustrator.</p>
+          <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso primero entendemos tu negocio y después encontramos la solución a tu medida.</p>
           <div class="band-row"><a class="pill ink" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
@@ -242,17 +248,17 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   <!-- 5. ticker -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Mantené las manos y los pies dentro del vehículo en todo momento ✦</span><span>Tranqui, lo resolvemos ✦</span>
-      <span>Mantené las manos y los pies dentro del vehículo en todo momento ✦</span><span>Tranqui, lo resolvemos ✦</span>
+      <span>Es obligatorio desabrocharse el cinturón antes de despegar ✦</span><span>Tranqui, lo resolvemos ✦</span>
+      <span>Es obligatorio desabrocharse el cinturón antes de despegar ✦</span><span>Tranqui, lo resolvemos ✦</span>
     </div>
   </div>
 
   <!-- 6. pilares + clientes -->
   <section class="wrap" style="padding-block:var(--sec)" aria-label="Qué hacemos">
     <div class="pillars">
-      <div class="pillar"><h3>Marca.</h3><p>Identidad completa y manual para que nadie la rompa. Que te reconozcan de lejos.</p></div>
-      <div class="pillar"><h3>Contenido.</h3><p>Redes con criterio: qué publicar, cuándo y por qué. Para que no sea subir por subir.</p></div>
-      <div class="pillar"><h3>Eventos.</h3><p>Line up, videos, pantallas y todo lo que hace que se hable antes, durante y después.</p></div>
+      <div class="pillar"><h3>Branding.</h3><p>Identidad completa y un manual para que nadie la rompa. Así te reconocen de lejos, y por mucho tiempo.</p></div>
+      <div class="pillar"><h3>Contenido.</h3><p>Las redes no son subir por subir: hay que saber qué publicar, cuándo y por qué. Si querés saber más, armamos una meet y te contamos.</p></div>
+      <div class="pillar"><h3>Eventos.</h3><p>Te ayudamos a comunicar en gráfica y en video. Planificamos el contenido y lo publicamos antes, durante y después, para que tu único trabajo sea hacer lo que te gusta.</p></div>
     </div>
     <div class="clients">
       <span class="eyebrow">Marcas que ya trabajaron con nosotros</span>
@@ -265,7 +271,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     <div>
       <span class="eyebrow">¿Te sumás?</span>
       <h2>Una marca es una historia.</h2>
-      <p class="lead">Y las historias bien contadas se recuerdan. Eiro sale de Gaiteiro: le sacamos el apellido y nos quedamos con lo que suena a empresa. Lo demás es simple: vos nos contás qué te pasa y nosotros lo resolvemos.</p>
+      <p class="lead">Y las historias bien contadas se recuerdan. La nuestra, por ejemplo: no se me ocurría ningún nombre, así que le borré una parte a Gaiteiro. Sin mi apellido, sonaba a empresa. Lo demás es simple: vos nos contás qué te pasa y nosotros lo resolvemos.</p>
     </div>
     <div class="quotes" aria-label="Citas">
       <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
@@ -276,13 +282,13 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
         <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
       </div>
     </div>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, algunos días</span></figure>
+    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina (en mis sueños)</span></figure>
   </section>
 
   <!-- 8. contacto -->
   <section class="wrap contact" id="contacto" style="padding-bottom:var(--sec)">
-    <h2>¿Tenés un proyecto en mente?</h2>
-    <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café cambia todo.</p>
+    <h2>¿Qué estás craneando?</h2>
+    <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café (invitamos nosotros) cambia todo.</p>
     <div class="row-cta">
       <a class="pill green" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
       <span class="num">+54 9 11 3485-0669</span>
@@ -311,6 +317,15 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   var bar=document.getElementById('barra');
   function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // adjetivos del titular
+  var words=['inolvidable.','inconfundible.','deseada.','rentable.','auténtica.','imparable.'], wi=0, rot=document.getElementById('rot');
+  if(rot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(function(){
+      rot.classList.remove('in'); rot.classList.add('out');
+      setTimeout(function(){wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.remove('out'); void rot.offsetWidth; rot.classList.add('in')},320);
+    },2200);
+  }
 
   // citas 01 / 03
   var qs=[].slice.call(document.querySelectorAll('.quote')), i=0, count=document.getElementById('qCount');
