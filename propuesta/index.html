@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eiro | Estudio de branding en Buenos Aires</title>
-<meta name="description" content="Eiro es un estudio de branding de Buenos Aires. Hacemos identidad para pymes, locales y eventos, y la acompañamos en redes, lanzamientos y noches.">
+<title>EIROSTUDIO | Estudio de branding en Buenos Aires</title>
+<meta name="description" content="EIROSTUDIO es un estudio de branding de Buenos Aires. Hacemos identidad para pymes, locales y eventos, y la acompañamos en redes, lanzamientos y noches.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#131313">
 <link rel="icon" href="https://eirostudio.com/favicon.ico" sizes="32x32">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Propuesta Eiro: editorial, casi negro dominante, gris como bloque, verde solo para acciones y el punto del logo */
+/* Propuesta Eiro: editorial, casi negro dominante, gris como bloque, verde solo para acciones */
 :root{
   --bg:#131313;
   --text:#ECECEC;
@@ -38,10 +38,10 @@ img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--green);outline-offset:4px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* logo: Eiro con la i coronada por un cuadrado verde (el gesto propio de la marca) */
-.logo{display:inline-flex;align-items:baseline;font-weight:800;letter-spacing:-.05em;text-decoration:none;line-height:1}
-.logo .i{position:relative;display:inline-block}
-.logo .i::before{content:"";position:absolute;left:50%;bottom:.69em;width:.15em;height:.15em;background:var(--green);transform:translateX(-50%)}
+/* logo: EIROSTUDIO con TM chico */
+.logo{display:inline-flex;align-items:baseline;font-weight:800;letter-spacing:-.04em;text-decoration:none;line-height:1}
+.logo .tm{font-size:.32em;font-weight:600;letter-spacing:0;align-self:flex-start;margin-left:.1em;margin-top:.05em}
+.nav .logo .tm{font-size:.45em}
 
 /* etiquetas y botones */
 .tag{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
@@ -59,7 +59,7 @@ img{max-width:100%;display:block}
 header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 header.scrolled{border-color:var(--line)}
 .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.nav .logo{font-size:26px}
+.nav .logo{font-size:21px}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:32px}
 .nav ul a:not(.btn){text-decoration:none;font-size:15px;font-weight:600;color:var(--mute);transition:color .2s}
 .nav .btn{min-height:42px;padding:0 18px;font-size:15px}
@@ -135,7 +135,8 @@ section{padding-top:var(--sec)}
 /* footer */
 footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-area-inset-bottom,0px))}
 .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.foot .logo{font-size:clamp(72px,12vw,168px)}
+.foot{flex-direction:column;align-items:flex-start}
+.foot .logo{font-size:clamp(40px,13.4vw,176px);line-height:.9}
 .foot ul{list-style:none;margin:0;padding:0;display:flex;gap:24px;flex-wrap:wrap;font-size:15px}
 .foot ul a{text-decoration:none;color:var(--mute)}
 @media (hover:hover){.foot ul a:hover{color:var(--text)}}
@@ -171,6 +172,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-
   .case{grid-template-columns:36px minmax(0,1fr)}
   .ctas .btn{flex:1 1 100%;justify-content:space-between}
 }
+@media (max-width:400px){.nav li:nth-child(3){display:none}.nav .logo{font-size:18px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -178,7 +180,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-
 
 <header id="top">
   <nav class="wrap nav" aria-label="Principal">
-    <a class="logo" href="#top" aria-label="Eiro, volver al inicio">E<span class="i">ı</span>ro</a>
+    <a class="logo" href="#top" aria-label="EIROSTUDIO, volver al inicio">EIROSTUDIO<span class="tm">™</span></a>
     <ul>
       <li class="hide-m"><a href="#trabajos">Trabajos</a></li>
       <li class="hide-m"><a href="#proceso">Cómo trabajamos</a></li>
@@ -275,7 +277,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-
       <p class="tag">Estudio</p>
       <h2 id="t-estudio">La creatividad sin estrategia es <span>decoración.</span></h2>
       <div class="story">
-        <p>Eiro es un estudio chico a propósito: el que te atiende en la primera charla es el mismo que diseña tu marca. Venimos del diseño multimedial, las campañas y la noche, y eso se nota en cómo pensamos una marca: tiene que funcionar en un manual, en un posteo y en una pantalla a las tres de la mañana.</p>
+        <p>Somos un estudio chico a propósito: el que te atiende en la primera charla es el mismo que diseña tu marca. Venimos del diseño multimedial, las campañas y la noche, y eso se nota en cómo pensamos una marca: tiene que funcionar en un manual, en un posteo y en una pantalla a las tres de la mañana.</p>
         <div>
           <blockquote>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Por eso, cuando alguien nos dice ‘capaz es una boludez’, prestamos más atención.”</blockquote>
           <cite>Matías Gaiteiro <span>· fundador</span></cite>
@@ -301,7 +303,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-
 <footer>
   <div class="wrap">
     <div class="foot">
-      <span class="logo" aria-hidden="true">E<span class="i">ı</span>ro</span>
+      <span class="logo" aria-hidden="true">EIROSTUDIO<span class="tm">™</span></span>
       <ul>
         <li><a href="#trabajos">Trabajos</a></li>
         <li><a href="#proceso">Cómo trabajamos</a></li>
@@ -309,7 +311,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(32px + env(safe-
         <li><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a></li>
       </ul>
     </div>
-    <div class="foot-bottom"><span>Eiro · Estudio de branding</span><span>Buenos Aires, Argentina</span></div>
+    <div class="foot-bottom"><span>EIROSTUDIO™ · Estudio de branding</span><span>Buenos Aires, Argentina</span></div>
   </div>
 </footer>
 
