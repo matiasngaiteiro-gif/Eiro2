@@ -6,14 +6,14 @@
 <title>Eiro Studio</title>
 <meta name="description" content="Eiro, estudio creativo de Buenos Aires: branding, marketing y redes, eventos y diseño para locales.">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300EB5B'/%3E%3Ctext x='32' y='49' text-anchor='middle' font-family='Futura,Jost,Arial' font-weight='800' font-size='46' fill='%230A0D0B'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="img/favicon-e.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://use.typekit.net/abn0bee.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Criterio: base blanca/negra, verde racionado (pills, CTA, un solo bloque), logo caligráfico, pill como firma, el color lo ponen los trabajos */
+/* Criterio: base blanca y negra, verde racionado (pills, CTA, un solo bloque), logo de pincel como firma, pill como recurso, el color lo ponen los trabajos */
 :root{
   --green:#00EB5B;
   --forest:#00290F;
@@ -21,197 +21,223 @@
   --paper:#FFFFFF;
   --fog:#F2F4F2;
   --mute:#5F6B63;
+  --soft:#AEB9B1;
   --line:#DCE2DE;
-  --logo:"cc-spills","CC Spills","Jost",sans-serif;
-  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
-  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --nav-h:68px;
+  --gap:clamp(12px,1.6vw,16px);
+  --radius:clamp(14px,1.6vw,20px);
+  --sec:clamp(56px,9vw,120px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
+img{max-width:100%;display:block}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:1;text-wrap:balance}
 p{margin:0}
-.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:20;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:700}
+.skip:focus{top:12px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
-/* voz 1: wordmark */
-.wm{display:inline-block;font-family:var(--logo);font-weight:400;font-synthesis:none;line-height:.85}
-.wm{opacity:0;transition:opacity .35s ease}
-.fonts-ready .wm{opacity:1}
+/* marca: imágenes usadas como máscara, toman el color del texto */
+.logo-img,.e-mark{display:block;background:currentColor}
+.logo-img{width:100%;aspect-ratio:1600/802;-webkit-mask:url("img/eiro-logo-v2.png") center/contain no-repeat;mask:url("img/eiro-logo-v2.png") center/contain no-repeat}
+.e-mark{aspect-ratio:800/787;-webkit-mask:url("img/eiro-e-v2.png") center/contain no-repeat;mask:url("img/eiro-e-v2.png") center/contain no-repeat}
 
-/* firma: pill */
-.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease}
-.pill:hover{transform:translateY(-1px)}
-.pill.sm{padding:7px 13px;font-size:13px;font-weight:600}
+/* pill: el recurso que se repite */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s ease,color .15s ease}
+.pill.sm{min-height:30px;padding:0 13px;font-size:13px;font-weight:600}
 .pill.green{background:var(--green);color:var(--ink)}
 .pill.ink{background:var(--ink);color:var(--paper)}
 .pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
-.pill.white{background:var(--paper);color:var(--ink)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.pill.fog{background:var(--fog);color:var(--ink)}
+@media (hover:hover){.pill:hover{transform:translateY(-1px)}}
 
-/* nav */
+/* barra */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px}
-.nav .logo{display:block;width:92px;text-decoration:none;color:var(--ink)}
-/* logo: imagen usada como máscara, toma el color del texto */
-.logo-img{display:block;width:100%;aspect-ratio:1600/802;background:currentColor;-webkit-mask:url("img/eiro-logo-v2-sin-tm.png") center/contain no-repeat;mask:url("img/eiro-logo-v2-sin-tm.png") center/contain no-repeat}
-.logo-img.tm{aspect-ratio:1600/802;-webkit-mask-image:url("img/eiro-logo-v2.png");mask-image:url("img/eiro-logo-v2.png")}
-.hero-logo{width:clamp(260px,56vw,820px);color:var(--ink);animation:write 1.5s cubic-bezier(.6,0,.2,1) .15s both}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .2s}
+header.scrolled{box-shadow:0 1px 0 var(--line)}
+.nav{height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;width:44px;height:44px;margin-left:-4px;color:var(--ink);text-decoration:none}
+.brand .e-mark{width:36px}
+.links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.links a{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
+@media (hover:hover){.links a:hover{background:var(--fog)}}
+.nav-end{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--fog);cursor:pointer;place-items:center;padding:0}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:transform .2s,background .2s}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.sheet{border-top:1px solid var(--line);background:var(--paper);padding-block:8px 20px}
+.sheet a{display:flex;justify-content:space-between;align-items:center;min-height:56px;font-size:22px;font-weight:700;letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid var(--line)}
+
+/* portada */
+.hero{padding-block:clamp(24px,6vw,72px) clamp(32px,5vw,56px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:clamp(20px,3vw,40px)}
+.hero h1{margin:0}
+.hero .logo-img{width:min(100%,820px);color:var(--ink);animation:write 1.4s cubic-bezier(.6,0,.2,1) .1s both}
 @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.nav ul{margin-left:-14px!important;display:flex;gap:4px;list-style:none;margin:0;padding:0}
-.nav ul a{display:block;padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
-.nav ul a:hover{background:var(--fog)}
-
-/* hero: el corte de GAIT */
-.hero{padding-block:clamp(36px,7vw,80px) clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;overflow:hidden}
-.mark{margin:0;display:flex;align-items:flex-end}
-
-.hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:1.5vw}
-.hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:24ch;text-align:right;color:var(--mute)}
+.hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:clamp(0px,1.5vw,20px)}
+.hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:26ch;text-align:right;color:var(--mute)}
 .hero-side p b{color:var(--ink);font-weight:700}
-
-
+.hero-side .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 
 /* el único bloque verde */
-.band{background:var(--green);border-radius:20px;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(16px,3vw,36px);padding:clamp(14px,2vw,22px);align-items:stretch}
-.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(10px,2.4vw,30px)}
-.band-copy h2{font-size:clamp(40px,5.6vw,82px);color:var(--ink)}
-.band-copy p{font-size:18px;font-weight:500;max-width:36ch;color:var(--forest)}
-.band-copy .row{display:flex;gap:10px;flex-wrap:wrap}
-.object{border-radius:14px;background:var(--ink) url("img/el-calenton.jpg") center 45%/cover no-repeat;min-height:440px;position:relative;overflow:hidden}
-.object::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,11,0) 55%,rgba(10,13,11,.45) 100%)}
-
-.object .pill{position:absolute;left:14px;bottom:14px;z-index:2}
+.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(16px,3vw,36px);padding:clamp(12px,2vw,22px)}
+.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(12px,2.4vw,30px)}
+.band-copy h2{font-size:clamp(36px,5.4vw,80px)}
+.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--forest)}
+.band-copy .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--ink)}
+.photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.photo-card .pill{position:absolute;left:14px;bottom:14px}
 
 /* secciones */
-section{padding-block:clamp(64px,9vw,120px)}
-.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
-.head h2{font-size:clamp(40px,5.4vw,72px)}
-.head p{max-width:40ch;color:var(--mute);font-size:17px}
+section{padding-block:var(--sec)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;flex-wrap:wrap;margin-bottom:clamp(20px,3vw,32px)}
+.head h2{font-size:clamp(38px,5.4vw,72px)}
+.head p{max-width:40ch;color:var(--mute);font-size:clamp(16px,1.4vw,17px)}
 
-/* servicios: lista con pills, sin cards */
-.svc-list{border-top:1.5px solid var(--ink)}
-.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto;gap:24px;align-items:center;padding-block:28px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s,padding .2s}
-.svc h3{font-size:clamp(30px,3.4vw,46px)}
+/* servicios */
+.svc-list{border-top:1.5px solid var(--ink);margin:0;padding:0;list-style:none}
+.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) auto;gap:12px 24px;align-items:center;padding-block:clamp(20px,2.4vw,28px);border-bottom:1px solid var(--line);text-decoration:none}
+.svc h3{font-size:clamp(28px,3.4vw,46px)}
 .svc p{color:var(--mute);max-width:46ch}
 .svc .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.svc .tags span{background:var(--fog)}
-.svc .arrow{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--fog);font-size:20px;transition:background .2s}
-.svc:hover .arrow{background:var(--green)}
+.svc .arrow{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--fog);font-size:20px;transition:background .2s,transform .2s}
+@media (hover:hover){.svc:hover .arrow{background:var(--green);transform:translateX(4px)}}
 
 /* trabajos: el color es del cliente */
-.works{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-.work{position:relative;border-radius:18px;overflow:hidden;min-height:420px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;isolation:isolate}
-
-.work .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.works{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap)}
+.work{position:relative;border-radius:var(--radius);overflow:hidden;min-height:440px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:#fff;text-decoration:none;isolation:isolate;background:var(--ink)}
+.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.work.has-img::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,13,11,.12) 0%,rgba(10,13,11,0) 35%,rgba(10,13,11,.72) 100%)}
+.work .top{display:flex;gap:6px;flex-wrap:wrap}
 .work .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
-.work h3{font-size:clamp(28px,3vw,42px)}
-.work h3 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;margin-top:8px;opacity:.9}
-
-
-
-
-.w-a{grid-column:span 4;background:#C3102E}
+.work h3{font-size:clamp(26px,3vw,42px)}
+.work h3 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;margin-top:8px;opacity:.9;line-height:1.35}
+.w-a{grid-column:span 4}
+.w-a img{object-position:right 30%}
 .w-b{grid-column:span 2;background:#C88B3A;color:#1d1205}
 .w-b .top .pill{background:#1d1205;color:#F3D9A8}
-.w-c{grid-column:span 2;background:#F5B400;color:var(--ink)}
-.w-c .top .pill{background:var(--ink);color:#F5B400}
-
-
-
-
-.w-d{grid-column:span 4;background:var(--fog);color:var(--ink);justify-content:space-between}
-
-.w-d .top .pill{background:var(--ink);color:var(--paper)}
+.w-c{grid-column:span 2}
+.w-c img{object-position:center 30%}
+.w-d{grid-column:span 4}
+.w-d img{object-position:center 38%}
 .w-d h3{max-width:16ch}
-/* fotos de proyectos */
-.work.photo{background-color:var(--ink);background-size:cover;background-position:center;color:#fff}
-.work.photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,13,11,.15) 0%,rgba(10,13,11,0) 35%,rgba(10,13,11,.72) 100%)}
-.work.photo .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
-.work.photo h3{color:#fff}
-.w-a.photo{background-image:url("img/el-calenton.jpg");background-position:right 30%}
-.w-c.photo{background-image:url("img/crisger.jpg");background-position:center 30%}
-.w-d.photo{background-image:url("img/tu-proyecto.jpg");background-position:center 38%}
-.studio figure{grid-column:1/-1;margin:0;position:relative;border-radius:18px;overflow:hidden;height:clamp(320px,42vw,600px)}
-.studio figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block}
-.studio figure .pill{position:absolute;left:16px;bottom:16px}
+.w-d .pill.green{align-self:flex-start}
 
-/* estudio: nombre en forma */
+/* estudio */
 .studio{background:var(--ink);color:var(--paper)}
 .studio .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
-.typer{font:800 clamp(60px,8.4vw,130px)/.9 var(--sans);letter-spacing:-.045em;white-space:nowrap;color:var(--paper);min-width:0;overflow:hidden;height:.9em}
-.typer .g{color:inherit}
-.typer .cur{display:inline-block;width:.06em;height:.76em;background:var(--green);margin-left:.05em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
+.typer{font:800 clamp(56px,8.4vw,130px)/.95 var(--sans);letter-spacing:-.05em;white-space:nowrap;min-width:0;overflow:hidden;height:1em}
+.typer .g{color:var(--soft)}
+.typer .cur{display:inline-block;width:.06em;height:.74em;background:var(--green);margin-left:.05em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .studio p{font-size:clamp(18px,1.9vw,22px);font-weight:500;max-width:44ch}
-.studio p+p{margin-top:16px;font-size:17px;color:#AEB9B1}
+.studio p+p{margin-top:16px;font-size:clamp(16px,1.4vw,17px);color:var(--soft)}
 .sig{margin-top:28px;display:flex;align-items:center;gap:14px}
-.sig .av{width:48px;height:48px;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center}
-.sig .av .logo-img{width:36px}
-.sig b{display:block}.sig span{color:#AEB9B1;font-size:14px}
+.sig .av{width:52px;height:52px;flex:none;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center}
+.sig .av .e-mark{width:30px}
+.sig b{display:block}.sig span{color:var(--soft);font-size:14px}
+.studio figure{grid-column:1/-1;margin:0;position:relative;border-radius:var(--radius);overflow:hidden;height:clamp(300px,42vw,600px)}
+.studio figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.studio figure .pill{position:absolute;left:16px;bottom:16px}
 
 /* contacto */
 .contact{display:grid;gap:22px;justify-items:start}
-.contact h2{font-size:clamp(48px,7.4vw,108px);max-width:11ch}
+.contact h2{font-size:clamp(44px,7.4vw,108px);max-width:11ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip[aria-pressed="true"]{background:var(--green)}
 .brief{display:flex;gap:8px;align-items:center;width:min(720px,100%);border-radius:999px;padding:6px 6px 6px 22px;box-shadow:0 0 0 1.5px var(--ink)}
 .brief input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:500 16px var(--sans);color:var(--ink);padding:12px 0}
 .brief input::placeholder{color:#7f8b83}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:var(--fog);color:var(--ink)}
-.chip[aria-pressed="true"]{background:var(--green)}
-.num{font-weight:700;user-select:all;color:var(--mute)}
+.num{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-weight:600}
+.num b{color:var(--ink);user-select:all}
+.copy{min-height:36px;padding:0 14px;font-size:13px}
 
-footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+footer{border-top:1px solid var(--line);padding-block:28px calc(32px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
 .foot .logo-img{width:120px;color:var(--ink)}
-.foot nav{display:flex;gap:18px;flex-wrap:wrap}
-.foot nav a{text-decoration:none;font-weight:600;color:var(--ink)}
+.foot nav{display:flex;gap:6px 18px;flex-wrap:wrap}
+.foot nav a{text-decoration:none;font-weight:600;color:var(--ink);padding-block:6px}
 
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .hero-side{justify-items:start}.hero-side p{text-align:left}
+/* tablet */
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;align-items:start}
+  .hero-side{justify-items:start}
+  .hero-side p{text-align:left;max-width:34ch}
+  .hero-side .row{justify-content:flex-start}
   .band,.studio .grid{grid-template-columns:1fr}
-  .object{min-height:340px}
-  .svc{grid-template-columns:1fr auto}
-  .svc>div:nth-child(2){grid-column:1/-1;grid-row:2}
-  .works{grid-template-columns:1fr 1fr}
+  .photo-card{min-height:0;aspect-ratio:4/3}
+  .works{grid-template-columns:repeat(2,minmax(0,1fr))}
   .w-a,.w-d{grid-column:span 2}.w-b,.w-c{grid-column:span 1}
+  .work{min-height:380px}
 }
-@media (max-width:600px){
-  .nav ul{display:none}
+/* celular */
+@media (max-width:720px){
+  :root{--nav-h:60px}
+  .links,.nav-end .pill{display:none}
+  .menu-btn{display:grid}
+  .nav{grid-template-columns:1fr auto}
+  .hero .logo-img{width:100%}
+  .hero-side .row .pill{flex:1}
+  .svc{grid-template-columns:minmax(0,1fr) auto}
+  .svc>div{grid-column:1/-1;grid-row:2}
+  .svc .arrow{width:44px;height:44px}
   .works{grid-template-columns:1fr}
   .w-a,.w-b,.w-c,.w-d{grid-column:span 1}
-  .work{min-height:340px}
-  .brief{flex-wrap:wrap;border-radius:22px;padding:10px}
-  .brief input{flex-basis:100%;padding:8px 10px}
-  .brief .pill{width:100%;justify-content:center}
+  .work{min-height:0;aspect-ratio:4/5}
+  .w-a{aspect-ratio:4/3}
+  .w-b{aspect-ratio:auto;min-height:220px}
+  .brief{flex-direction:column;align-items:stretch;border-radius:20px;padding:10px}
+  .brief input{padding:10px 12px}
+  .brief .pill{width:100%}
+  .foot{flex-direction:column;align-items:flex-start}
 }
+@media (min-width:721px){.sheet{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
 
-<header>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header id="barra">
   <div class="wrap nav">
-    
-    <ul>
+    <a class="brand" href="#top" aria-label="Eiro, volver al inicio"><span class="e-mark" aria-hidden="true"></span></a>
+    <ul class="links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#trabajos">Trabajos</a></li>
       <li><a href="#estudio">Estudio</a></li>
     </ul>
-    <a class="pill green" href="#contacto">Hablemos</a>
+    <div class="nav-end">
+      <a class="pill green" href="#contacto">Hablemos</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet"><span></span><b class="sr">Abrir menú</b></button>
+    </div>
   </div>
+  <nav class="sheet wrap" id="sheet" aria-label="Menú" hidden>
+    <a href="#servicios">Servicios <span aria-hidden="true">→</span></a>
+    <a href="#trabajos">Trabajos <span aria-hidden="true">→</span></a>
+    <a href="#estudio">Estudio <span aria-hidden="true">→</span></a>
+    <a href="#contacto">Hablemos <span aria-hidden="true">→</span></a>
+  </nav>
 </header>
 
 <main id="top">
-  <div class="wrap hero">
-    <h1 class="mark" aria-label="Eiro"><span class="logo-img tm hero-logo"></span></h1>
+  <div class="wrap hero" id="contenido">
+    <h1><span class="logo-img" role="img" aria-label="Eiro"></span></h1>
     <div class="hero-side">
       <p><b>Estudio creativo.</b> Marca, contenido, marketing y eventos desde Buenos Aires.</p>
-      <a class="pill ink" href="#trabajos">Ver trabajos</a>
+      <div class="row"><a class="pill ink" href="#trabajos">Ver trabajos</a><a class="pill line" href="#contacto">Hablemos</a></div>
     </div>
   </div>
 
@@ -221,11 +247,11 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
         <h2>Marcas que se ven igual en la calle, en el feed y en la pista</h2>
         <div>
           <p>Diseñamos el sistema completo, no solo el logo. Para artistas, eventos y marcas en Argentina y Miami.</p>
-          <div class="row" style="margin-top:22px"><a class="pill ink" href="#servicios">Ver servicios</a><a class="pill line" href="#contacto">Escribinos</a></div>
+          <div class="row"><a class="pill ink" href="#servicios">Ver servicios</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
-      <div class="object" role="img" aria-label="Fiesta al aire libre con DJ al atardecer, El Calentón">
-        
+      <div class="photo-card">
+        <img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013">
         <span class="pill green sm">El Calentón</span>
       </div>
     </div>
@@ -234,12 +260,12 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
   <section id="servicios">
     <div class="wrap">
       <div class="head"><h2>Servicios</h2><p>Tomá uno o combinalos. Todo sale del mismo equipo, así la marca no cambia de voz entre un afiche y un reel.</p></div>
-      <div class="svc-list">
-        <a class="svc" href="#contacto"><h3>Branding</h3><div><p>Identidad completa y manual de marca interactivo, listo para que cualquiera la aplique bien.</p><div class="tags"><span class="pill sm">Esencial</span><span class="pill sm">Profesional</span><span class="pill sm">Empresa</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
-        <a class="svc" href="#contacto"><h3>Marketing y redes</h3><div><p>Dirección del área: estrategia, community management, guiones, UGC y diseño de cada pieza.</p><div class="tags"><span class="pill sm">Instagram</span><span class="pill sm">TikTok</span><span class="pill sm">UGC</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
-        <a class="svc" href="#contacto"><h3>Eventos</h3><div><p>Toda la parte gráfica y multimedia: line up, teasers, pantallas y redes del evento.</p><div class="tags"><span class="pill sm">Teasers</span><span class="pill sm">Visuales</span><span class="pill sm">Line up</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
-        <a class="svc" href="#contacto"><h3>Locales</h3><div><p>Diseño mensual para discotecas y locales: flyers, historias y la agenda de cada fin de semana.</p><div class="tags"><span class="pill sm">Mensual</span><span class="pill sm">Flyers</span><span class="pill sm">Stories</span></div></div><span class="arrow" aria-hidden="true">→</span></a>
-      </div>
+      <ul class="svc-list">
+        <li><a class="svc" href="#contacto" data-svc="Branding"><h3>Branding</h3><div><p>Identidad completa y manual de marca interactivo, listo para que cualquiera la aplique bien.</p><div class="tags"><span class="pill sm fog">Esencial</span><span class="pill sm fog">Profesional</span><span class="pill sm fog">Empresa</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Marketing y redes"><h3>Marketing y redes</h3><div><p>Dirección del área: estrategia, community management, guiones, UGC y diseño de cada pieza.</p><div class="tags"><span class="pill sm fog">Instagram</span><span class="pill sm fog">TikTok</span><span class="pill sm fog">UGC</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Eventos"><h3>Eventos</h3><div><p>Toda la parte gráfica y multimedia: line up, teasers, pantallas y redes del evento.</p><div class="tags"><span class="pill sm fog">Teasers</span><span class="pill sm fog">Visuales</span><span class="pill sm fog">Line up</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Locales"><h3>Locales</h3><div><p>Diseño mensual para discotecas y locales: flyers, historias y la agenda de cada fin de semana.</p><div class="tags"><span class="pill sm fog">Mensual</span><span class="pill sm fog">Flyers</span><span class="pill sm fog">Stories</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -247,21 +273,21 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
     <div class="wrap">
       <div class="head"><h2>Trabajos</h2><p>Música en vivo, perfumería e industria. Cada uno con su color; el nuestro es el marco.</p></div>
       <div class="works">
-        <article class="work w-a photo"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+        <article class="work w-a has-img"><img src="img/el-calenton.jpg" alt="" loading="lazy" width="1800" height="1013"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
         <article class="work w-b"><div class="top"><span class="pill sm">Redes</span></div><h3>Extracto Importado<small>Lanzamientos y videos UGC</small></h3></article>
-        <article class="work w-c photo"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
-        <a class="work w-d photo" href="#contacto"><div class="top"><span class="pill sm">Tu proyecto</span></div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="align-self:flex-start">Contanos qué estás armando</span></a>
+        <article class="work w-c has-img"><img src="img/crisger.jpg" alt="" loading="lazy" width="928" height="1152"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
+        <a class="work w-d has-img" href="#contacto"><img src="img/tu-proyecto.jpg" alt="" loading="lazy" width="928" height="1152"><div class="top"><span class="pill sm">Tu proyecto</span></div><div><h3>El próximo trabajo puede ser el tuyo</h3><span class="pill green" style="margin-top:16px">Contanos qué estás armando</span></div></a>
       </div>
     </div>
   </section>
 
   <section id="estudio" class="studio">
     <div class="wrap grid">
-      <div class="typer" aria-label="Gaiteiro se convierte en Eiro"><span id="tw"><span class="g">Gait</span>eiro</span><span class="cur"></span></div>
+      <div class="typer" aria-label="Gaiteiro se convierte en Eiro"><span id="tw" aria-hidden="true"><span class="g">Gait</span>eiro</span><span class="cur" aria-hidden="true"></span></div>
       <div>
         <p>Eiro sale de Gaiteiro. Le sacamos el apellido y nos quedamos con lo que suena a empresa.</p>
         <p>Más de diez años diseñando para artistas, productoras y marcas. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
-        <div class="sig"><div class="av"><span class="logo-img"></span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
+        <div class="sig"><div class="av"><span class="e-mark" aria-hidden="true"></span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
       </div>
       <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">Así trabajamos</span></figure>
     </div>
@@ -270,63 +296,71 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
   <section id="contacto">
     <div class="wrap contact">
       <h2>Contanos qué estás armando</h2>
-      <div class="chips" role="group" aria-label="Elegí servicios">
-        <button class="pill chip" type="button" id="c1" aria-pressed="false">Branding</button>
-        <button class="pill chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
-        <button class="pill chip" type="button" id="c3" aria-pressed="false">Eventos</button>
-        <button class="pill chip" type="button" id="c4" aria-pressed="false">Locales</button>
+      <div class="chips" role="group" aria-label="Elegí uno o más servicios">
+        <button class="pill fog chip" type="button" id="c1" aria-pressed="false">Branding</button>
+        <button class="pill fog chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
+        <button class="pill fog chip" type="button" id="c3" aria-pressed="false">Eventos</button>
+        <button class="pill fog chip" type="button" id="c4" aria-pressed="false">Locales</button>
       </div>
       <form class="brief" id="brief">
-        <label for="q" style="position:absolute;left:-9999px">Tu proyecto</label>
-        <input id="q" name="q" autocomplete="off" placeholder="Ej: lanzo una marca de ropa en marzo">
+        <label for="q" class="sr">Contanos tu proyecto</label>
+        <input id="q" name="q" type="text" autocomplete="off" enterkeyhint="send" placeholder="Ej: lanzo una marca de ropa en marzo">
         <button class="pill green" type="submit">Enviar por WhatsApp</button>
       </form>
-      <span class="num">+54 9 11 3485-0669</span>
+      <div class="num">WhatsApp <b id="tel">+54 9 11 3485-0669</b><button class="pill fog copy" type="button" id="copyBtn">Copiar</button></div>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap foot">
-    <span class="logo-img tm" role="img" aria-label="Eiro"></span>
-    <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav>
+    <span class="logo-img" role="img" aria-label="Eiro"></span>
+    <nav aria-label="Pie de página"><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav>
     <span>Eiro™ · Estudio creativo · Buenos Aires</span>
   </div>
 </footer>
 
 <script>
 (function(){
-  var root=document.documentElement;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var shown=false;
-  function show(){
-    if(shown)return;shown=true;
-    
-    root.classList.add('fonts-ready');
 
-  }
-  try{
-    Promise.race([
-      Promise.all([document.fonts.load('400 1em "cc-spills"'),document.fonts.load('400 1em "Jost"')]).then(function(){return document.fonts.ready}),
-      new Promise(function(r){setTimeout(r,1800)})
-    ]).then(show,show);
-  }catch(e){show()}
+  // barra: sombra al hacer scroll + menú en celular
+  var bar=document.getElementById('barra'), btn=document.getElementById('menuBtn'), sheet=document.getElementById('sheet');
+  function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  function setMenu(open){btn.setAttribute('aria-expanded',open);sheet.hidden=!open;btn.querySelector('.sr').textContent=open?'Cerrar menú':'Abrir menú'}
+  btn.addEventListener('click',function(){setMenu(sheet.hidden)});
+  sheet.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!sheet.hidden){setMenu(false);btn.focus()}});
+  window.addEventListener('resize',function(){if(window.innerWidth>720)setMenu(false)});
 
-  var picked=[];
-  [].slice.call(document.querySelectorAll('.chip')).forEach(function(c){c.addEventListener('click',function(){
-    var on=c.getAttribute('aria-pressed')!=='true';c.setAttribute('aria-pressed',on);
-    var t=c.textContent;picked=on?picked.concat(t):picked.filter(function(x){return x!==t});
+  // servicios: al tocar uno, queda marcado en el contacto
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  function setChip(c,on){c.setAttribute('aria-pressed',on)}
+  chips.forEach(function(c){c.addEventListener('click',function(){setChip(c,c.getAttribute('aria-pressed')!=='true')})});
+  [].slice.call(document.querySelectorAll('[data-svc]')).forEach(function(a){a.addEventListener('click',function(){
+    var name=a.getAttribute('data-svc');chips.forEach(function(c){if(c.textContent===name)setChip(c,true)});
   })});
+
+  // contacto por WhatsApp
   var q=document.getElementById('q');
   document.getElementById('brief').addEventListener('submit',function(e){
     e.preventDefault();
+    var picked=chips.filter(function(c){return c.getAttribute('aria-pressed')==='true'}).map(function(c){return c.textContent});
     var msg='Hola Eiro! ';
     if(picked.length)msg+='Me interesa: '+picked.join(', ')+'. ';
     if(q.value.trim())msg+=q.value.trim();
     var a=document.createElement('a');a.href='https://wa.me/5491134850669?text='+encodeURIComponent(msg);a.target='_blank';a.rel='noopener';
     document.body.appendChild(a);a.click();a.remove();
   });
+  var copyBtn=document.getElementById('copyBtn'), tel=document.getElementById('tel');
+  copyBtn.addEventListener('click',function(){
+    function done(){copyBtn.textContent='Copiado';setTimeout(function(){copyBtn.textContent='Copiar'},1600)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(tel);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText('+5491134850669').then(done,fallback)}catch(e){fallback()}
+  });
 
+  // Gaiteiro -> Eiro
   var tw=document.getElementById('tw');
   if(reduce){tw.textContent='Eiro';return}
   var full='Gaiteiro';
@@ -337,8 +371,8 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
       for(var i=1;i<=full.length;i++){var s=full.slice(0,i);paint(s.slice(0,4),s.slice(4));await sleep(110)}
       await sleep(1300);
       for(var j=1;j<4;j++){paint(full.slice(j,4),'eiro');await sleep(150)}
-      tw.textContent='Eiro';await sleep(150);
-      await sleep(2600);
+      tw.textContent='Eiro';
+      await sleep(2800);
       for(var k=3;k>=0;k--){tw.textContent='Eiro'.slice(0,k);await sleep(70)}
       await sleep(300);
     }
