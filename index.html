@@ -193,51 +193,11 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   .row .pill{grid-column:2;grid-row:1/3}
 }
 
-/* pantalla previa: sitio en construcción */
-.gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:calc(28px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));overflow:auto}
-.gate[hidden]{display:none!important}
-.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.gate-top{max-width:1280px;width:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:600;font-size:15px;color:var(--mute)}
-.gate-top b{color:var(--ink);font-size:24px;font-weight:800;letter-spacing:-.06em}
-.gate-top b sup{font-size:.4em;letter-spacing:0;vertical-align:top;position:relative;top:.15em;margin-left:.04em}
-.gate-main{max-width:1280px;width:100%;margin:0 auto}
-.gate h1{font-size:clamp(56px,13vw,200px);line-height:.92;letter-spacing:-.06em;margin-left:-.05em}
-.gate h1 span{color:var(--green)}
-.gate p{font-size:clamp(17px,1.6vw,21px);font-weight:500;color:var(--mute);max-width:40ch;margin-top:20px}
-.gate form{display:flex;gap:8px;align-items:center;margin-top:28px;width:min(420px,100%);border-radius:999px;padding:6px 6px 6px 22px;box-shadow:0 0 0 1.5px var(--ink)}
-.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:700 20px var(--sans);letter-spacing:.3em;color:var(--ink);padding:10px 0}
-.gate input::placeholder{letter-spacing:0;font-weight:500;font-size:16px;color:#7f8b83}
-.gate form.err{box-shadow:0 0 0 2px #D93A2B;animation:shake .35s}
-.gate .msg{min-height:22px;margin-top:10px;font-size:15px;font-weight:600;color:#B3261E}
-@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.gate .sign{color:var(--ink)}
-.gate .sign .belt{color:var(--ink)}
-.gate .sign .belt-arrows{color:var(--ink)}
-.gate .sign span{color:var(--ink);white-space:normal;font-size:clamp(14px,1.3vw,16px);font-weight:600}
-.gate-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;max-width:1280px;width:100%;margin:0 auto}
-html.locked,html.locked body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
-  <div class="gate-top"><b>Eiro<sup>™</sup></b><span>Estudio creativo · Buenos Aires</span></div>
-  <div class="gate-main">
-    <h1 id="gateTitle">Sitio en <span>construcción.</span></h1>
-    <p>Estamos terminando de ajustar los últimos detalles. Si tenés la clave, pasá.</p>
-    <form id="gateForm" autocomplete="off">
-      <label for="gateKey" class="sr">Clave de acceso</label>
-      <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
-      <button class="pill green" type="submit">Entrar</button>
-    </form>
-    <div class="msg" id="gateMsg" role="status"></div>
-  </div>
-  <div class="gate-bottom">
-    <div class="sign"><span class="belt" aria-hidden="true"><svg viewBox="0 0 168 48" fill="currentColor"><path fill-rule="evenodd" d="M4 9h42v30H6C2 30 2 18 4 9Z M48 2h22l9 9h21a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H79l-9 9H48Z M54 7v34h5V7Z M83 17v14h12V17Z M111 2h38a3 3 0 0 1 3 3v38a3 3 0 0 1-3 3h-38a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M120 14v20h20V14Z M123 17v14h14V17Z M155 8h9c2 10 2 22 0 32h-9Z"/></svg><span class="belt-arrows">←<i></i>→</span></span><span>Es obligatorio desabrocharse el cinturón de seguridad antes de comenzar</span></div>
-    <a class="pill line" href="https://wa.me/5491134850669" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
-  </div>
-</div>
 <header id="barra">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
@@ -371,18 +331,6 @@ html.locked,html.locked body{overflow:hidden}
 </footer>
 
 <script>
-(function(){
-  // pantalla previa con clave
-  var gate=document.getElementById('gate'), form=document.getElementById('gateForm'), key=document.getElementById('gateKey'), msg=document.getElementById('gateMsg'), root=document.documentElement;
-  var ok=false; try{ok=localStorage.getItem('eiro-acceso')==='1'}catch(e){}
-  function open(){gate.hidden=true;root.classList.remove('locked')}
-  if(ok){open()}else{root.classList.add('locked');setTimeout(function(){key.focus()},100)}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(key.value.trim()==='4354'){try{localStorage.setItem('eiro-acceso','1')}catch(err){} open()}
-    else{msg.textContent='Esa no es. Probá de nuevo.';form.classList.remove('err');void form.offsetWidth;form.classList.add('err');key.value='';key.focus()}
-  });
-})();
 (function(){
   var bar=document.getElementById('barra');
   function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
