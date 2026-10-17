@@ -93,7 +93,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 1. portada: titular-manifiesto */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(42px,9vw,220px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
+.hero h1{font-size:clamp(38px,5.4vw,78px);line-height:1;letter-spacing:-.045em;max-width:14ch}
 .hero h1 em{font-style:normal;color:var(--green)}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .rot em{display:inline-block}
@@ -116,20 +116,20 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .card .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 @media (hover:hover){.card:hover .img img{transform:scale(1.04)}}
 .card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.card h3{font-size:clamp(24px,2.4vw,34px);letter-spacing:-.04em}
+.card h3{font-size:clamp(20px,1.8vw,26px);letter-spacing:-.04em}
 .card h3 span{font-size:.55em;font-weight:600;color:var(--mute);letter-spacing:0;margin-left:6px}
 
 /* 3. índice de trabajos */
 .index{margin-top:clamp(40px,6vw,72px);border-top:1.5px solid var(--ink)}
 .row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line);text-decoration:none}
-.row h3{font-size:clamp(26px,3.4vw,46px);letter-spacing:-.045em}
+.row h3{font-size:clamp(22px,2.2vw,32px);letter-spacing:-.045em}
 .row .cat{color:var(--mute);font-weight:600}
 .more{display:flex;justify-content:flex-end;margin-top:20px}
 
 /* bloque verde (de la estructura anterior) */
 .band{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
-.band-copy h2{font-size:clamp(36px,5.4vw,80px)}
+.band-copy h2{font-size:clamp(30px,3.4vw,52px)}
 .band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--mute)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--surface)}
@@ -140,7 +140,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 4. manifiesto */
 .manifesto{background:var(--ink);color:var(--paper)}
-.manifesto p{font-size:clamp(30px,4.4vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.05;max-width:20ch;text-wrap:balance}
+.manifesto p{font-size:clamp(24px,2.8vw,40px);font-weight:800;letter-spacing:-.045em;line-height:1.05;max-width:20ch;text-wrap:balance}
 .manifesto p b{color:var(--green)}
 .manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
 
@@ -156,15 +156,15 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 6. pilares + clientes */
 .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);border-top:1.5px solid var(--ink);padding-top:28px}
-.pillar h3{font-size:clamp(32px,4vw,56px)}
+.pillar h3{font-size:clamp(26px,2.4vw,36px)}
 .pillar p{color:var(--mute);margin-top:12px;max-width:34ch}
 .clients{margin-top:clamp(56px,8vw,96px)}
 .clients-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.clients-list span{font-size:clamp(20px,2.6vw,34px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
+.clients-list span{font-size:clamp(18px,1.6vw,24px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
 
 /* 7. narrativa + citas */
 .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
+.story h2{font-size:clamp(34px,3.8vw,56px);margin-top:12px}
 .story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
 .founder{margin:20px 0 0;padding-left:20px;border-left:3px solid var(--green);max-width:46ch}
 .founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink)}
@@ -175,7 +175,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .quotes{background:var(--fog);border-radius:var(--radius);padding:var(--pad);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
 .quote{display:none}
 .quote.on{display:block}
-.quote blockquote{margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.15}
+.quote blockquote{margin:0;font-size:clamp(20px,1.8vw,26px);font-weight:800;letter-spacing:-.035em;line-height:1.15}
 .quote cite{display:block;margin-top:18px;font-style:normal;color:var(--mute);font-weight:600}
 .q-ctrl{display:flex;justify-content:space-between;align-items:center}
 .q-count{font-weight:700;font-variant-numeric:tabular-nums}
@@ -187,7 +187,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .story figure .pill{position:absolute;left:16px;bottom:16px}
 
 /* 8. contacto */
-.contact h2{font-size:clamp(50px,9vw,220px);line-height:.94;letter-spacing:-.055em;max-width:11ch}
+.contact h2{font-size:clamp(40px,5.6vw,84px);line-height:.94;letter-spacing:-.055em;max-width:11ch}
 .contact .aside{font-size:clamp(18px,1.6vw,22px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
 .contact .row-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:32px}
 .contact .num{font-weight:700;user-select:all}
@@ -196,7 +196,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* footer */
 footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
 .foot-top{display:grid;grid-template-columns:repeat(2,max-content);gap:40px clamp(48px,8vw,120px)}
-.foot-word{font-size:clamp(36px,14.2vw,420px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.85;margin-left:-.04em;grid-column:1/-1}
+.foot-word{font-size:clamp(36px,9vw,150px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.85;margin-left:-.04em;grid-column:1/-1}
 .foot-col{display:flex;flex-direction:column;gap:8px;font-size:15px}
 .foot-col b{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .foot-col a{text-decoration:none;padding-block:4px}
@@ -231,7 +231,7 @@ footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)
 .gate[hidden]{display:none!important}
 .gate-box{display:flex;flex-direction:column;align-items:center;gap:28px;width:min(320px,100%)}
 .gate-box .gate-word{margin-inline:-200px}
-.gate-word{font-size:clamp(38px,8vw,96px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.9;color:var(--ink)}
+.gate-word{font-size:clamp(34px,5vw,64px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.9;color:var(--ink)}
 .gate form{display:flex;width:100%;border-bottom:1.5px solid var(--line);transition:border-color .2s}
 .gate form:focus-within{border-color:var(--ink)}
 .gate form.err{border-color:#E5483B;animation:shake .35s}
