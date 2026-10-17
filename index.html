@@ -36,209 +36,170 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Base: estructura y voz de Not Found™ (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro: Plus Jakarta Sans y verde */
+/* Vibe: la pantalla de acceso. Negro, mucho aire, tipografía protagonista, líneas de 1px, links con flecha, sin cajas ni pills. El verde solo en la palabra que rota. */
 :root{
-  --green:#00EB5B;
-  /* fondo negro: --paper es el fondo, --ink el texto */
   --paper:#0A0D0B;
-  --ink:#F5F7F5;
-  --black:#0A0D0B;
-  --surface:#141815;
-  --fog:#1C211D;
-  --forest:#00290F;
+  --ink:#F2F4F2;
   --mute:#9AA59D;
-  --soft:#7E8981;
+  --soft:#6C766F;
   --line:#262C28;
+  --green:#00EB5B;
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --nav-h:68px;
-  --pad:clamp(20px,2.4vw,32px);
-  --radius:clamp(14px,1.6vw,20px);
-  --sec:clamp(64px,10vw,140px);
+  --nav-h:72px;
+  --sec:clamp(96px,14vw,200px);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
 img{max-width:100%;display:block}
-h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:1;text-wrap:balance}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.05em;line-height:.98;text-wrap:balance}
 p{margin:0}
-.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+[id]{scroll-margin-top:calc(var(--nav-h) + 16px)}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
+.label{display:block;font-size:13px;font-weight:500;color:var(--soft);letter-spacing:.02em}
 
-/* pill */
-.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s}
-.pill.sm{min-height:30px;padding:0 13px;font-size:13px;font-weight:600}
-.pill.green{background:var(--green);color:var(--black)}
-.pill.ink{background:var(--ink);color:var(--black)}
-.pill.fog{background:var(--fog);color:var(--ink)}
-.pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
-.pill.white{background:var(--ink);color:var(--black)}
-@media (hover:hover){.pill:hover{transform:translateY(-1px)}}
+/* link con flecha y línea fina: el mismo gesto que el campo de la clave */
+.arrow{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;min-height:48px;min-width:min(320px,100%);padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600;font-size:17px;color:var(--ink);transition:border-color .2s}
+.arrow::after{content:"→";transition:transform .25s}
+@media (hover:hover){.arrow:hover{border-color:var(--ink)}.arrow:hover::after{transform:translateX(4px)}}
 
-/* barra: logo + Nosotros + contacto, como ellos */
+/* barra */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .2s}
-header.scrolled{box-shadow:0 1px 0 var(--line)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
 .nav{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-size:26px;font-weight:800;letter-spacing:-.06em;text-decoration:none;display:flex;align-items:center;min-height:44px}
-.brand sup,.big-tm{font-size:.38em;letter-spacing:0;font-weight:700;vertical-align:top;position:relative;top:.15em;margin-left:.04em}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a:not(.pill){display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
-@media (hover:hover){.nav-links a:not(.pill):hover{background:var(--fog)}}
+.brand{font-size:22px;font-weight:800;letter-spacing:-.06em;text-decoration:none;min-height:44px;display:flex;align-items:center}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:15px;font-weight:500;color:var(--mute);text-decoration:none;min-height:44px;display:flex;align-items:center;transition:color .2s}
+@media (hover:hover){.nav-links a:hover{color:var(--ink)}}
 
-/* 1. portada: titular-manifiesto */
-.hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(42px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
-.hero h1 em{font-style:normal;color:var(--green)}
+/* portada: centrada, como la pantalla de acceso */
+.hero{min-height:calc(100svh - var(--nav-h));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-block:64px 96px;gap:40px}
+.hero h1{font-size:clamp(44px,8.4vw,128px);letter-spacing:-.055em;max-width:12ch}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
-.rot em{display:inline-block}
+.rot em{display:inline-block;font-style:normal;color:var(--green)}
 .rot em.out{animation:rotOut .32s cubic-bezier(.6,0,.8,.4) forwards}
 .rot em.in{animation:rotIn .5s cubic-bezier(.2,.7,.2,1)}
 @keyframes rotOut{to{transform:translateY(-105%);opacity:0}}
 @keyframes rotIn{from{transform:translateY(105%);opacity:0}}
-.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;margin-top:clamp(32px,4vw,56px);align-items:start}
-.hero-foot p{font-size:clamp(17px,1.5vw,20px);font-weight:500;max-width:46ch}
-.hero-foot details p{color:var(--mute);margin-top:12px}
-.hero-foot summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:700}
-.hero-foot summary::-webkit-details-marker{display:none}
-.hero-foot summary::after{content:"+";width:28px;height:28px;border-radius:50%;background:var(--fog);display:grid;place-items:center;font-weight:700;transition:transform .2s}
-.hero-foot details[open] summary::after{transform:rotate(45deg)}
+.hero p{max-width:40ch;color:var(--mute);font-size:clamp(16px,1.4vw,18px)}
+.hero details{max-width:44ch}
+.hero summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:600;font-size:15px;color:var(--ink)}
+.hero summary::-webkit-details-marker{display:none}
+.hero summary::after{content:"+";font-weight:500;transition:transform .2s}
+.hero details[open] summary::after{transform:rotate(45deg)}
+.hero details p{margin-top:8px}
 
-/* 2. destacados */
-.featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad)}
-.card{display:flex;flex-direction:column;gap:14px;text-decoration:none}
-.card .img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
-.card .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-@media (hover:hover){.card:hover .img img{transform:scale(1.04)}}
-.card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.card h3{font-size:clamp(24px,2.4vw,34px);letter-spacing:-.04em}
-.card h3 span{font-size:.55em;font-weight:600;color:var(--mute);letter-spacing:0;margin-left:6px}
+/* secciones */
+section{padding-block:var(--sec) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:clamp(40px,6vw,72px)}
 
-/* 3. índice de trabajos */
-.index{margin-top:clamp(40px,6vw,72px);border-top:1.5px solid var(--ink)}
-.row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line);text-decoration:none}
-.row h3{font-size:clamp(26px,3.4vw,46px);letter-spacing:-.045em}
-.row .cat{color:var(--mute);font-weight:600}
-.more{display:flex;justify-content:flex-end;margin-top:20px}
+/* manifiesto */
+.statement h2{font-size:clamp(40px,6.4vw,96px);max-width:14ch}
+.statement h2 span{color:var(--soft)}
+.statement .body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:clamp(40px,5vw,64px);align-items:end}
+.statement p{color:var(--mute);max-width:42ch;font-size:clamp(16px,1.4vw,18px)}
+.statement p b{color:var(--ink);font-weight:700}
+.statement .links{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.photo{margin:clamp(56px,8vw,96px) 0 0;position:relative}
+.photo img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.photo figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-size:13px;color:var(--soft)}
 
-/* bloque verde (de la estructura anterior) */
-.band{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
-.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
-.band-copy h2{font-size:clamp(36px,5.4vw,80px)}
-.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--mute)}
-.band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--surface)}
-.photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
-.photo-card .pill{position:absolute;left:16px;bottom:16px}
-.band-copy p b{font-weight:800;color:var(--ink)}
-.band-copy h2 em{font-style:normal;color:var(--green)}
-
-/* 4. manifiesto */
-.manifesto{background:var(--ink);color:var(--paper)}
-.manifesto p{font-size:clamp(30px,4.4vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.05;max-width:20ch;text-wrap:balance}
-.manifesto p b{color:var(--green)}
-.manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
-
-/* 5. ticker */
-.ticker{background:var(--surface);border-block:1px solid var(--line);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
-.ticker-track{display:flex;gap:clamp(40px,5vw,72px);width:max-content;animation:tick 45s linear infinite;padding-right:clamp(40px,5vw,72px)}
-/* cartel de cinturón, versión mínima */
-.sign{display:flex;align-items:center;gap:18px}
-.sign .belt{flex:none;display:block;color:var(--green);width:clamp(56px,5vw,72px);line-height:0}
-.belt svg{width:100%;height:auto;display:block}
-.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
+/* cartel del cinturón */
+.ticker{margin-top:var(--sec);overflow:hidden;border-block:1px solid var(--line);padding-block:22px}
+.ticker-track{display:flex;gap:72px;width:max-content;animation:tick 60s linear infinite;padding-right:72px}
 @keyframes tick{to{transform:translateX(-50%)}}
+.sign{display:flex;align-items:center;gap:16px}
+.sign .belt{flex:none;display:block;width:44px;line-height:0;color:var(--ink)}
+.sign .belt svg{width:100%;height:auto;display:block}
+.sign span:last-child{font-size:15px;font-weight:500;color:var(--mute);white-space:nowrap}
 
-/* 6. pilares + clientes */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);border-top:1.5px solid var(--ink);padding-top:28px}
-.pillar h3{font-size:clamp(32px,4vw,56px)}
-.pillar p{color:var(--mute);margin-top:12px;max-width:34ch}
-.clients{margin-top:clamp(56px,8vw,96px)}
-.clients-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.clients-list span{font-size:clamp(20px,2.6vw,34px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
+/* servicios */
+.services{list-style:none;margin:0;padding:0}
+.service{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px 40px;padding-block:clamp(28px,3.4vw,44px);border-bottom:1px solid var(--line);align-items:baseline}
+.service h3{font-size:clamp(32px,4.4vw,64px)}
+.service p{color:var(--mute);max-width:46ch;font-size:clamp(16px,1.3vw,17px)}
+.clients{margin-top:clamp(48px,6vw,80px);display:flex;flex-wrap:wrap;gap:12px 40px;align-items:baseline}
+.clients p{font-size:clamp(20px,2.2vw,28px);font-weight:700;letter-spacing:-.03em}
+.clients p span{color:var(--soft);font-weight:500;margin-inline:.4em}
 
-/* 7. narrativa + citas */
-.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
-.story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
-.founder{margin:20px 0 0;padding-left:20px;border-left:3px solid var(--green);max-width:46ch}
-.founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink)}
-.founder p+p{margin-top:12px}
-.story-close{margin-top:24px;font-size:clamp(18px,1.7vw,22px);font-weight:700;max-width:40ch}
-.story-close span{text-decoration:underline;text-decoration-color:var(--green);text-decoration-thickness:4px;text-underline-offset:5px}
-.founder cite{display:block;margin-top:12px;font-style:normal;font-weight:700;font-size:15px}
-.quotes{background:var(--fog);border-radius:var(--radius);padding:var(--pad);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+/* historia */
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,7vw,96px);align-items:start}
+.story h2{font-size:clamp(40px,5.6vw,84px)}
+.story .lead{color:var(--mute);margin-top:24px;max-width:40ch;font-size:clamp(16px,1.4vw,18px)}
+.founder{margin:32px 0 0;padding-left:20px;border-left:1px solid var(--ink);max-width:46ch}
+.founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;line-height:1.55}
+.founder cite{display:block;margin-top:14px;font-style:normal;font-size:13px;color:var(--soft)}
+.quotes{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-height:100%}
 .quote{display:none}
 .quote.on{display:block}
-.quote blockquote{margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.15}
-.quote cite{display:block;margin-top:18px;font-style:normal;color:var(--mute);font-weight:600}
-.q-ctrl{display:flex;justify-content:space-between;align-items:center}
-.q-count{font-weight:700;font-variant-numeric:tabular-nums}
-.q-count span{color:var(--soft)}
-.q-btns{display:flex;gap:8px}
-.q-btns button{width:44px;height:44px;border-radius:50%;border:0;background:var(--paper);color:var(--ink);font-size:18px;cursor:pointer}
-.story figure{grid-column:1/-1;margin:0;border-radius:var(--radius);overflow:hidden;height:clamp(280px,40vw,560px);position:relative}
-.story figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
-.story figure .pill{position:absolute;left:16px;bottom:16px}
+.quote blockquote{margin:0;font-size:clamp(26px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.15}
+.quote cite{display:block;margin-top:18px;font-style:normal;font-size:13px;color:var(--soft)}
+.q-ctrl{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--soft);font-variant-numeric:tabular-nums}
+.q-ctrl b{color:var(--ink);font-weight:600}
+.q-btns{display:flex;gap:4px}
+.q-btns button{width:44px;height:44px;border:0;background:none;color:var(--ink);font:500 18px var(--sans);cursor:pointer}
+.story .photo{grid-column:1/-1;margin-top:clamp(24px,4vw,48px)}
 
-/* 8. contacto */
-.contact h2{font-size:clamp(50px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:11ch}
-.contact .aside{font-size:clamp(18px,1.6vw,22px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
-.contact .row-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:32px}
-.contact .num{font-weight:700;user-select:all}
-.contact .social{margin-top:28px;color:var(--mute);max-width:46ch}
+/* contacto: centrado, como la pantalla de acceso */
+.contact{text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px;padding-bottom:var(--sec)}
+.contact h2{font-size:clamp(48px,8.4vw,128px);letter-spacing:-.055em}
+.contact p{color:var(--mute);max-width:44ch;font-size:clamp(16px,1.4vw,18px)}
+.contact .arrow{margin-top:8px}
+.contact small{font-size:13px;color:var(--soft);max-width:44ch}
+.contact .num{font-size:15px;color:var(--mute);user-select:all}
 
-/* footer */
-footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
-.foot-top{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:32px}
-.foot-word{font-size:clamp(72px,14vw,200px);font-weight:800;letter-spacing:-.06em;line-height:.85;margin-left:-.06em}
-.foot-col{display:flex;flex-direction:column;gap:8px;font-size:15px}
-.foot-col b{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.foot-col a{text-decoration:none;padding-block:4px}
-@media (hover:hover){.foot-col a:hover{color:var(--green)}}
-.foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--soft);font-size:14px}
+footer{border-top:1px solid var(--line);padding-block:32px calc(32px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px 32px;flex-wrap:wrap;font-size:13px;color:var(--soft)}
+.foot b{font-size:18px;font-weight:800;letter-spacing:-.06em;color:var(--ink)}
+.foot nav{display:flex;gap:24px}
+.foot a{text-decoration:none;color:var(--mute)}
+@media (hover:hover){.foot a:hover{color:var(--ink)}}
 
-/* tablet */
-@media (max-width:960px){
-  .hero-foot,.story,.band{grid-template-columns:1fr}
-  .photo-card{min-height:0;aspect-ratio:4/3}
-  .pillars{grid-template-columns:1fr;gap:28px}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .foot-word{grid-column:1/-1}
-}
-/* celular */
-@media (max-width:720px){
-  :root{--nav-h:60px}
-  .nav-links a.hide-m{display:none}
-  .featured{grid-template-columns:1fr}
-  .row{grid-template-columns:minmax(0,1fr) auto}
-  .row .cat{grid-column:1;grid-row:2}
-  .row .pill{grid-column:2;grid-row:1/3}
-}
+/* trabajos (oculto por ahora) */
+.works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.work img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.work h3{font-size:clamp(24px,2.4vw,34px);margin-top:16px}
+.work span{font-size:13px;color:var(--soft)}
 
-
-/* acceso con clave: solo Eiro y el campo */
+/* acceso con clave */
 .gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px))}
 .gate[hidden]{display:none!important}
 .gate-box{display:flex;flex-direction:column;align-items:center;gap:28px;width:min(320px,100%)}
-.gate-word{font-size:clamp(64px,12vw,120px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:var(--ink)}
-.gate form{display:flex;width:100%;border-bottom:1.5px solid var(--line);transition:border-color .2s}
+.gate-word{font-size:clamp(64px,12vw,120px);font-weight:800;letter-spacing:-.06em;line-height:.9}
+.gate form{display:flex;width:100%;border-bottom:1px solid var(--line);transition:border-color .2s}
 .gate form:focus-within{border-color:var(--ink)}
 .gate form.err{border-color:#E5483B;animation:shake .35s}
 .gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:600 18px var(--sans);letter-spacing:.35em;text-align:center;padding:12px 0 12px 44px}
 .gate input::placeholder{color:var(--soft);letter-spacing:.02em;font-weight:500}
-.gate button{border:0;background:none;color:var(--ink);font:700 20px var(--sans);cursor:pointer;width:44px;min-height:44px}
+.gate button{border:0;background:none;color:var(--ink);font:500 20px var(--sans);cursor:pointer;width:44px;min-height:44px}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}
+
+@media (max-width:860px){
+  .statement .body,.story,.service{grid-template-columns:1fr}
+  .statement .links{align-items:stretch}
+  .statement .links .arrow{min-width:100%}
+  .photo img{aspect-ratio:4/3}
+  .works{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  :root{--nav-h:64px}
+  .nav-links{gap:20px}
+  .hero{min-height:calc(88svh - var(--nav-h))}
+  .contact .arrow{min-width:100%}
+  .foot{flex-direction:column;align-items:flex-start}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
     <div class="gate-word">Eiro</div>
@@ -249,68 +210,52 @@ html.locked,html.locked body{overflow:hidden}
     </form>
   </div>
 </div>
+
 <header id="barra">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
+    <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro</a>
     <nav class="nav-links" aria-label="Principal">
+      <a href="#trabajos" hidden>Trabajos</a>
+      <a href="#servicios">Servicios</a>
       <a href="#nosotros">Nosotros</a>
-      <a class="hide-m" href="#trabajos" hidden>Trabajos</a>
-      <a class="pill green" href="#contacto">Hablemos</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <!-- 1. titular-manifiesto -->
-  <section class="wrap hero" aria-labelledby="titular">
+  <section class="wrap hero" aria-labelledby="titular" style="padding-top:64px">
     <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, rentable, auténtica e imparable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
-    <div class="hero-foot">
-      <p>Somos un estudio creativo con base en Buenos Aires. Con un poco de estrategia y un poco de diseño, hacemos marcas, contenido y eventos.</p>
-      <details>
-        <summary>Leer más</summary>
-        <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
-      </details>
-    </div>
+    <p>Somos un estudio creativo con base en Buenos Aires. Con un poco de estrategia y un poco de diseño, hacemos marcas, contenido y eventos.</p>
+    <details>
+      <summary>Leer más</summary>
+      <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
+    </details>
+    <a class="arrow" href="#contacto">Hablemos</a>
   </section>
 
-  <!-- 2 y 3. trabajos -->
   <!-- Trabajos: oculto temporalmente (sacar "hidden" para volver a mostrarlo) -->
-  <section class="wrap" id="trabajos" style="padding-bottom:var(--sec)" aria-label="Trabajos" hidden>
-    <div class="featured">
-      <a class="card" href="#contacto">
-        <div class="img"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013" style="object-position:72% center"></div>
-        <div class="meta"><h3>El Calentón <span>(Eventos)</span></h3><span class="pill fog sm">Ver más</span></div>
-      </a>
-      <a class="card" href="#contacto">
-        <div class="img"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" width="928" height="1152" style="object-position:center 30%"></div>
-        <div class="meta"><h3>Crisger <span>(Branding)</span></h3><span class="pill fog sm">Ver más</span></div>
-      </a>
-    </div>
-    <div class="index">
-      <div class="row"><h3>Extracto Importado</h3><span class="cat">Redes y contenido</span><span class="pill fog sm">Próximamente</span></div>
-      <a class="row" href="#contacto"><h3>Tu marca</h3><span class="cat">Branding, redes o eventos</span><span class="pill green sm">Este lugar está libre</span></a>
-    </div>
-    <div class="more"><a class="pill ink" href="#contacto">Más trabajos, a pedido</a></div>
-  </section>
-
-  <!-- 4. manifiesto en el bloque verde -->
-  <section class="wrap" style="padding-bottom:var(--sec)" aria-label="Manifiesto">
-    <div class="band">
-      <div class="band-copy">
-        <h2>La creatividad sin estrategia es <em>decoración.</em></h2>
-        <div>
-          <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
-          <div class="band-row"><a class="pill white" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
-        </div>
-      </div>
-      <div class="photo-card">
-        <img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013">
-        <span class="pill green sm">El Calentón</span>
-      </div>
+  <section class="wrap" id="trabajos" aria-label="Trabajos" hidden>
+    <div class="sec-head"><span class="label">Trabajos</span><span class="label">Selección</span></div>
+    <div class="works">
+      <article class="work"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013" style="object-position:72% center"><h3>El Calentón</h3><span>Eventos</span></article>
+      <article class="work"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" loading="lazy" width="928" height="1152" style="object-position:center 30%"><h3>Crisger</h3><span>Branding</span></article>
     </div>
   </section>
 
-  <!-- 5. ticker -->
+  <section class="wrap statement" aria-labelledby="manifiesto">
+    <div class="sec-head"><span class="label">Manifiesto</span><span class="label">Eiro™</span></div>
+    <h2 id="manifiesto">La creatividad sin estrategia es <span>decoración.</span></h2>
+    <div class="body">
+      <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
+      <div class="links"><a class="arrow" href="#nosotros">Conocenos</a><a class="arrow" href="#contacto">Escribinos</a></div>
+    </div>
+    <figure class="photo">
+      <img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013">
+      <figcaption><span>El Calentón</span><span>Eventos</span></figcaption>
+    </figure>
+  </section>
+
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <div class="sign"><span class="belt" aria-hidden="true"><svg viewBox="0 0 168 48" fill="currentColor"><path fill-rule="evenodd" d="M4 9h42v30H6C2 30 2 18 4 9Z M48 2h22l9 9h21a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H79l-9 9H48Z M54 7v34h5V7Z M83 17v14h12V17Z M111 2h38a3 3 0 0 1 3 3v38a3 3 0 0 1-3 3h-38a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M120 14v20h20V14Z M123 17v14h14V17Z M155 8h9c2 10 2 22 0 32h-9Z"/></svg></span><span>Es obligatorio desabrocharse el cinturón de seguridad antes de comenzar</span></div>
@@ -319,66 +264,59 @@ html.locked,html.locked body{overflow:hidden}
       <div class="sign"><span class="belt" aria-hidden="true"><svg viewBox="0 0 168 48" fill="currentColor"><path fill-rule="evenodd" d="M4 9h42v30H6C2 30 2 18 4 9Z M48 2h22l9 9h21a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H79l-9 9H48Z M54 7v34h5V7Z M83 17v14h12V17Z M111 2h38a3 3 0 0 1 3 3v38a3 3 0 0 1-3 3h-38a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M120 14v20h20V14Z M123 17v14h14V17Z M155 8h9c2 10 2 22 0 32h-9Z"/></svg></span><span>Es obligatorio desabrocharse el cinturón de seguridad antes de comenzar</span></div>
       <div class="sign"><span class="belt" aria-hidden="true"><svg viewBox="0 0 168 48" fill="currentColor"><path fill-rule="evenodd" d="M4 9h42v30H6C2 30 2 18 4 9Z M48 2h22l9 9h21a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H79l-9 9H48Z M54 7v34h5V7Z M83 17v14h12V17Z M111 2h38a3 3 0 0 1 3 3v38a3 3 0 0 1-3 3h-38a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M120 14v20h20V14Z M123 17v14h14V17Z M155 8h9c2 10 2 22 0 32h-9Z"/></svg></span><span>Es obligatorio desabrocharse el cinturón de seguridad antes de comenzar</span></div>
       <div class="sign"><span class="belt" aria-hidden="true"><svg viewBox="0 0 168 48" fill="currentColor"><path fill-rule="evenodd" d="M4 9h42v30H6C2 30 2 18 4 9Z M48 2h22l9 9h21a3 3 0 0 1 3 3v20a3 3 0 0 1-3 3H79l-9 9H48Z M54 7v34h5V7Z M83 17v14h12V17Z M111 2h38a3 3 0 0 1 3 3v38a3 3 0 0 1-3 3h-38a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z M120 14v20h20V14Z M123 17v14h14V17Z M155 8h9c2 10 2 22 0 32h-9Z"/></svg></span><span>Es obligatorio desabrocharse el cinturón de seguridad antes de comenzar</span></div>
-      
     </div>
   </div>
 
-  <!-- 6. pilares + clientes -->
-  <section class="wrap" style="padding-block:var(--sec)" aria-label="Qué hacemos">
-    <div class="pillars">
-      <div class="pillar"><h3>Branding.</h3><p>Una identidad que se reconoce a una cuadra y un manual para que nadie la estire, la cambie de color o le ponga Comic Sans.</p></div>
-      <div class="pillar"><h3>Contenido.</h3><p>Publicar por publicar es ruido. Definimos qué decir, cuándo y para qué, y lo producimos. Vos aprobás; nosotros nos peleamos con el algoritmo.</p></div>
-      <div class="pillar"><h3>Eventos.</h3><p>Del teaser al after. Gráfica, videos y pantallas para que se hable antes, durante y después. Tu único trabajo es que la noche esté buena.</p></div>
-    </div>
-    <div class="clients">
-      <span class="eyebrow">Marcas que ya trabajaron con nosotros</span>
-      <div class="clients-list"><span>El Calentón</span><span>Crisger</span><span>Extracto Importado</span></div>
-    </div>
+  <section class="wrap" id="servicios" aria-labelledby="servicios-t">
+    <div class="sec-head"><h2 id="servicios-t" class="label">Servicios</h2><span class="label">03</span></div>
+    <ul class="services">
+      <li class="service"><h3>Branding.</h3><p>Una identidad que se reconoce a una cuadra y un manual para que nadie la estire, la cambie de color o le ponga Comic Sans.</p></li>
+      <li class="service"><h3>Contenido.</h3><p>Publicar por publicar es ruido. Definimos qué decir, cuándo y para qué, y lo producimos. Vos aprobás; nosotros nos peleamos con el algoritmo.</p></li>
+      <li class="service"><h3>Eventos.</h3><p>Del teaser al after. Gráfica, videos y pantallas para que se hable antes, durante y después. Tu único trabajo es que la noche esté buena.</p></li>
+    </ul>
+    <div class="clients"><span class="label">Marcas que ya trabajaron con nosotros</span><p>El Calentón<span>/</span>Crisger<span>/</span>Extracto Importado</p></div>
   </section>
 
-  <!-- 7. narrativa + citas -->
-  <section class="wrap story" id="nosotros" style="padding-bottom:var(--sec)">
-    <div>
-      <span class="eyebrow">¿Te sumás?</span>
-      <h2>Una marca es una historia.</h2>
-      <p class="lead">Y hasta la idea más simple puede contar una buena. La nuestra, por ejemplo:</p>
-      <blockquote class="founder"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Simple, pero nuestro. Por eso, cuando alguien nos dice ‘capaz es una boludez’, prestamos más atención: vos nos contás tu idea y nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
-    </div>
-    <div class="quotes" aria-label="Citas">
-      <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
-      <div class="quote"><blockquote>“El diseño no es solo cómo se ve. El diseño es cómo funciona.”</blockquote><cite>Steve Jobs, 2003</cite></div>
-      <div class="quote"><blockquote>“Una marca no es lo que vos decís que es. Es lo que ellos dicen que es.”</blockquote><cite>Marty Neumeier, The Brand Gap</cite></div>
-      <div class="q-ctrl">
-        <span class="q-count" id="qCount">01 <span>/ 03</span></span>
-        <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
+  <section class="wrap" id="nosotros" aria-labelledby="historia">
+    <div class="sec-head"><span class="label">Nosotros</span><span class="label">¿Te sumás?</span></div>
+    <div class="story">
+      <div>
+        <h2 id="historia">Una marca es una historia.</h2>
+        <p class="lead">Y hasta la idea más simple puede contar una buena. La nuestra, por ejemplo:</p>
+        <blockquote class="founder"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Simple, pero nuestro. Por eso, cuando alguien nos dice ‘capaz es una boludez’, prestamos más atención: vos nos contás tu idea y nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
       </div>
+      <div class="quotes" aria-label="Citas">
+        <div>
+          <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
+          <div class="quote"><blockquote>“El diseño no es solo cómo se ve. El diseño es cómo funciona.”</blockquote><cite>Steve Jobs, 2003</cite></div>
+          <div class="quote"><blockquote>“Una marca no es lo que vos decís que es. Es lo que ellos dicen que es.”</blockquote><cite>Marty Neumeier, The Brand Gap</cite></div>
+        </div>
+        <div class="q-ctrl">
+          <span id="qCount"><b>01</b> / 03</span>
+          <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
+        </div>
+      </div>
+      <figure class="photo">
+        <img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152" style="object-position:center 62%">
+        <figcaption><span>La oficina, los días buenos</span><span>Buenos Aires</span></figcaption>
+      </figure>
     </div>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, los días buenos</span></figure>
   </section>
 
-  <!-- 8. contacto -->
-  <section class="wrap contact" id="contacto" style="padding-bottom:var(--sec)">
-    <h2>¿Qué estás craneando?</h2>
-    <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café (invitamos nosotros) cambia todo.</p>
-    <div class="row-cta">
-      <a class="pill green" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
-      <span class="num">+54 9 11 3485-0669</span>
-    </div>
-    <p class="social">Contestamos rápido, salvo que estemos en medio de un evento. Ahí tardamos un poquito más.</p>
+  <section class="wrap contact" id="contacto" aria-labelledby="contacto-t">
+    <h2 id="contacto-t">¿Qué estás craneando?</h2>
+    <p>Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café (invitamos nosotros) cambia todo.</p>
+    <a class="arrow" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    <span class="num">+54 9 11 3485-0669</span>
+    <small>Contestamos rápido, salvo que estemos en medio de un evento. Ahí tardamos un poquito más.</small>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-word">Eiro<span class="big-tm">™</span></div>
-      <div class="foot-col"><b>Contacto</b><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a><span>+54 9 11 3485-0669</span><span>Buenos Aires, Argentina</span></div>
-      <div class="foot-col"><b>Navegar</b><a href="#trabajos" hidden>Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">¿Querés trabajar con nosotros?</a></div>
-    </div>
-    <div class="foot-bottom">
-      <span>Estudio creativo estratégico</span>
-      <span>De Buenos Aires al mundo</span>
-    </div>
+  <div class="wrap foot">
+    <b>Eiro™</b>
+    <nav aria-label="Pie de página"><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a></nav>
+    <span>Estudio creativo · De Buenos Aires al mundo</span>
   </div>
 </footer>
 
@@ -407,12 +345,12 @@ html.locked,html.locked body{overflow:hidden}
     setInterval(function(){
       rot.classList.remove('in'); rot.classList.add('out');
       setTimeout(function(){wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.remove('out'); void rot.offsetWidth; rot.classList.add('in')},320);
-    },2200);
+    },2400);
   }
 
   // citas 01 / 03
   var qs=[].slice.call(document.querySelectorAll('.quote')), i=0, count=document.getElementById('qCount');
-  function show(n){i=(n+qs.length)%qs.length;qs.forEach(function(q,k){q.classList.toggle('on',k===i)});count.innerHTML='0'+(i+1)+' <span>/ 0'+qs.length+'</span>'}
+  function show(n){i=(n+qs.length)%qs.length;qs.forEach(function(q,k){q.classList.toggle('on',k===i)});count.innerHTML='<b>0'+(i+1)+'</b> / 0'+qs.length}
   document.getElementById('qPrev').addEventListener('click',function(){show(i-1)});
   document.getElementById('qNext').addEventListener('click',function(){show(i+1)});
 })();
