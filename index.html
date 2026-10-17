@@ -13,9 +13,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Base: estructura y voz de Not Found™ (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer con lema), con la identidad de Eiro: Plus Jakarta Sans y verde */
+/* Criterio: todo en Plus Jakarta Sans, verde racionado, pill como recurso, el color lo ponen los trabajos */
+/* relleno interno único para bloques de color y fotos */
 :root{
+  --pad:clamp(20px,2.4vw,32px);
   --green:#00EB5B;
+  --forest:#00290F;
   --ink:#0A0D0B;
   --paper:#FFFFFF;
   --fog:#F2F4F2;
@@ -24,9 +27,9 @@
   --line:#DCE2DE;
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --nav-h:68px;
-  --pad:clamp(20px,2.4vw,32px);
+  --gap:clamp(12px,1.6vw,16px);
   --radius:clamp(14px,1.6vw,20px);
-  --sec:clamp(64px,10vw,140px);
+  --sec:clamp(56px,9vw,120px);
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -36,188 +39,231 @@ a{color:inherit}
 img{max-width:100%;display:block}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:1;text-wrap:balance}
 p{margin:0}
-.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:20;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:700}
+.skip:focus{top:12px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
-/* pill */
-.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s}
+/* marca: imágenes usadas como máscara, toman el color del texto */
+.wordmark{font-family:var(--sans);font-weight:800;letter-spacing:-.06em;line-height:.9;text-decoration:none;color:var(--ink)}
+.wordmark sup{font-size:.16em;letter-spacing:0;font-weight:700;vertical-align:top;position:relative;top:.5em;margin-left:.04em}
+.icon-e{display:grid;place-items:center;border-radius:50%;background:var(--green);color:var(--ink);font-family:var(--sans);font-weight:800;letter-spacing:-.04em;line-height:1;text-decoration:none}
+
+/* pill: el recurso que se repite */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s ease,color .15s ease}
 .pill.sm{min-height:30px;padding:0 13px;font-size:13px;font-weight:600}
 .pill.green{background:var(--green);color:var(--ink)}
 .pill.ink{background:var(--ink);color:var(--paper)}
+.pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
 .pill.fog{background:var(--fog);color:var(--ink)}
 @media (hover:hover){.pill:hover{transform:translateY(-1px)}}
 
-/* barra: logo + Nosotros + contacto, como ellos */
+/* barra */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .2s}
 header.scrolled{box-shadow:0 1px 0 var(--line)}
-.nav{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-size:26px;font-weight:800;letter-spacing:-.06em;text-decoration:none;display:flex;align-items:center;min-height:44px}
-.brand sup,.big-tm{font-size:.38em;letter-spacing:0;font-weight:700;vertical-align:top;position:relative;top:.15em;margin-left:.04em}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a:not(.pill){display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
-@media (hover:hover){.nav-links a:not(.pill):hover{background:var(--fog)}}
+.nav{height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;min-height:44px;justify-self:start;text-decoration:none}
+.brand .icon-e{width:40px;height:40px;font-size:22px}
+.links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.links a{display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
+@media (hover:hover){.links a:hover{background:var(--fog)}}
+.nav-end{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--fog);cursor:pointer;place-items:center;padding:0}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:transform .2s,background .2s}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.sheet{border-top:1px solid var(--line);background:var(--paper);padding-block:8px 20px}
+.sheet a{display:flex;justify-content:space-between;align-items:center;min-height:56px;font-size:22px;font-weight:700;letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid var(--line)}
 
-/* 1. portada: titular-manifiesto */
-.hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(50px,9.4vw,148px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
-.hero h1 em{font-style:normal;color:var(--green)}
-.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;margin-top:clamp(32px,4vw,56px);align-items:start}
-.hero-foot p{font-size:clamp(17px,1.5vw,20px);font-weight:500;max-width:46ch}
-.hero-foot details p{color:var(--mute);margin-top:12px}
-.hero-foot summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px;font-weight:700}
-.hero-foot summary::-webkit-details-marker{display:none}
-.hero-foot summary::after{content:"+";width:28px;height:28px;border-radius:50%;background:var(--fog);display:grid;place-items:center;font-weight:700;transition:transform .2s}
-.hero-foot details[open] summary::after{transform:rotate(45deg)}
+/* portada */
+.hero{padding-block:clamp(24px,6vw,72px) clamp(32px,5vw,56px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:clamp(20px,3vw,40px)}
+.hero h1{margin:0;min-width:0}
+.mark{display:inline-block;white-space:nowrap;margin-left:-.058em;font-size:min(calc((100vw - 40px) / 3.7),230px);transition:font-size .7s cubic-bezier(.6,0,.2,1)}
+.hero.cut .mark{font-size:min(calc((100vw - 40px) / 1.95),440px)}
+.mark .g{color:var(--soft);transition:color .3s}
+.hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:clamp(0px,1.5vw,20px)}
+.hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:26ch;text-align:right;color:var(--mute)}
+.hero-side p b{color:var(--ink);font-weight:700}
+.hero-side .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 
-/* 2. destacados */
-.featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad)}
-.card{display:flex;flex-direction:column;gap:14px;text-decoration:none}
-.card .img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--ink)}
-.card .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-@media (hover:hover){.card:hover .img img{transform:scale(1.04)}}
-.card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.card h3{font-size:clamp(24px,2.4vw,34px);letter-spacing:-.04em}
-.card h3 span{font-size:.55em;font-weight:600;color:var(--mute);letter-spacing:0;margin-left:6px}
+/* el único bloque verde */
+.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
+.band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.band-copy h2{font-size:clamp(36px,5.4vw,80px)}
+.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--forest)}
+.band-copy .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--ink)}
+.photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.photo-card .pill{position:absolute;left:16px;bottom:16px}
 
-/* 3. índice de trabajos */
-.index{margin-top:clamp(40px,6vw,72px);border-top:1.5px solid var(--ink)}
-.row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:6px 24px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line);text-decoration:none}
-.row h3{font-size:clamp(26px,3.4vw,46px);letter-spacing:-.045em}
-.row .cat{color:var(--mute);font-weight:600}
-.more{display:flex;justify-content:flex-end;margin-top:20px}
+/* secciones */
+section{padding-block:var(--sec)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px 24px;flex-wrap:wrap;margin-bottom:clamp(20px,3vw,32px)}
+.head h2{font-size:clamp(38px,5.4vw,72px)}
+.head p{max-width:40ch;color:var(--mute);font-size:clamp(16px,1.4vw,17px)}
 
-/* 4. manifiesto */
-.manifesto{background:var(--ink);color:var(--paper)}
-.manifesto p{font-size:clamp(30px,4.4vw,64px);font-weight:800;letter-spacing:-.045em;line-height:1.05;max-width:20ch;text-wrap:balance}
-.manifesto p b{color:var(--green)}
-.manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
-
-/* 5. ticker */
-.ticker{background:var(--green);overflow:hidden;padding-block:18px;border-block:1.5px solid var(--ink)}
+/* ticker */
+.ticker{margin-top:var(--sec);background:var(--green);overflow:hidden;padding-block:16px;border-block:1.5px solid var(--ink)}
 .ticker-track{display:flex;width:max-content;animation:tick 28s linear infinite}
-.ticker span{font-size:clamp(22px,2.6vw,36px);font-weight:800;letter-spacing:-.03em;white-space:nowrap;padding-right:48px}
+.ticker span{font-size:clamp(20px,2.4vw,32px);font-weight:800;letter-spacing:-.03em;white-space:nowrap;padding-right:44px}
 @keyframes tick{to{transform:translateX(-50%)}}
 
-/* 6. pilares + clientes */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);border-top:1.5px solid var(--ink);padding-top:28px}
-.pillar h3{font-size:clamp(32px,4vw,56px)}
-.pillar p{color:var(--mute);margin-top:12px;max-width:34ch}
-.clients{margin-top:clamp(56px,8vw,96px)}
-.clients-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.clients-list span{font-size:clamp(20px,2.6vw,34px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
+/* servicios */
+.svc-list{border-top:1.5px solid var(--ink);margin:0;padding:0;list-style:none}
+.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) auto;gap:12px 24px;align-items:center;padding-block:clamp(20px,2.4vw,28px);border-bottom:1px solid var(--line);text-decoration:none}
+.svc h3{font-size:clamp(28px,3.4vw,46px)}
+.svc p{color:var(--mute);max-width:46ch}
+.svc .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.svc .arrow{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--fog);font-size:20px;transition:background .2s,transform .2s}
+@media (hover:hover){.svc:hover .arrow{background:var(--green);transform:translateX(4px)}}
 
-/* 7. narrativa + citas */
-.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
-.story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
-.quotes{background:var(--fog);border-radius:var(--radius);padding:var(--pad);min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
-.quote{display:none}
-.quote.on{display:block}
-.quote blockquote{margin:0;font-size:clamp(24px,2.6vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.15}
-.quote cite{display:block;margin-top:18px;font-style:normal;color:var(--mute);font-weight:600}
-.q-ctrl{display:flex;justify-content:space-between;align-items:center}
-.q-count{font-weight:700;font-variant-numeric:tabular-nums}
-.q-count span{color:var(--soft)}
-.q-btns{display:flex;gap:8px}
-.q-btns button{width:44px;height:44px;border-radius:50%;border:0;background:var(--paper);color:var(--ink);font-size:18px;cursor:pointer}
-.story figure{grid-column:1/-1;margin:0;border-radius:var(--radius);overflow:hidden;height:clamp(280px,40vw,560px);position:relative}
-.story figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
-.story figure .pill{position:absolute;left:16px;bottom:16px}
+/* trabajos: el color es del cliente */
+.works{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--gap)}
+.work{position:relative;border-radius:var(--radius);overflow:hidden;min-height:440px;padding:var(--pad);display:flex;flex-direction:column;justify-content:space-between;gap:16px;color:#fff;text-decoration:none;isolation:isolate;background:var(--ink)}
+.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.work.has-img::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,13,11,.12) 0%,rgba(10,13,11,0) 35%,rgba(10,13,11,.72) 100%)}
+.work .top{display:flex;gap:6px;flex-wrap:wrap}
+.work .top .pill{background:rgba(255,255,255,.92);color:var(--ink)}
+.work h3{font-size:clamp(26px,3vw,42px)}
+.work h3 small{display:block;font-size:15px;font-weight:500;letter-spacing:0;margin-top:8px;opacity:.9;line-height:1.35}
+.w-a{grid-column:span 4}
+.w-a img{object-position:right 30%}
+.w-b{grid-column:span 2;background:#C88B3A;color:#1d1205}
+.w-b .top .pill{background:#1d1205;color:#F3D9A8}
+.w-c{grid-column:span 2}
+.w-c img{object-position:center 30%}
+.w-d{grid-column:span 4}
+.w-d img{object-position:center 38%}
+.w-d h3{max-width:16ch}
+.w-d .pill.green{align-self:flex-start}
 
-/* 8. contacto */
-.contact h2{font-size:clamp(50px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:11ch}
-.contact .aside{font-size:clamp(18px,1.6vw,22px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
-.contact .row-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:32px}
-.contact .num{font-weight:700;user-select:all}
-.contact .social{margin-top:28px;color:var(--mute);max-width:46ch}
+/* estudio */
+.studio{background:var(--ink);color:var(--paper)}
+.studio .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.studio-title{font-size:clamp(44px,6vw,88px);color:var(--paper)}
+.studio-title span{color:var(--green)}
+.studio p{font-size:clamp(18px,1.9vw,22px);font-weight:500;max-width:44ch}
+.studio p+p{margin-top:16px;font-size:clamp(16px,1.4vw,17px);color:var(--soft)}
+.sig{margin-top:28px;display:flex;align-items:center;gap:14px}
+.sig .av{width:52px;height:52px;flex:none;border-radius:50%;background:var(--green);color:var(--ink);display:grid;place-items:center}
+.sig .av{font-size:26px}
+.sig b{display:block}.sig span{color:var(--soft);font-size:14px}
+.studio figure{grid-column:1/-1;margin:0;position:relative;border-radius:var(--radius);overflow:hidden;height:clamp(300px,42vw,600px)}
+.studio figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.studio figure .pill{position:absolute;left:16px;bottom:16px}
 
-/* footer */
-footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
-.foot-top{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:32px}
-.foot-word{font-size:clamp(72px,14vw,200px);font-weight:800;letter-spacing:-.06em;line-height:.85;margin-left:-.06em}
-.foot-col{display:flex;flex-direction:column;gap:8px;font-size:15px}
-.foot-col b{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.foot-col a{text-decoration:none;padding-block:4px}
-@media (hover:hover){.foot-col a:hover{color:var(--green)}}
-.foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #2a312c;color:var(--soft);font-size:14px}
+/* contacto */
+.contact .aside{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--mute);max-width:44ch}
+.contact .aside.small{font-size:15px}
+.contact{display:grid;gap:22px;justify-items:start}
+.contact h2{font-size:clamp(44px,7.4vw,108px);max-width:11ch}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip[aria-pressed="true"]{background:var(--green)}
+.brief{display:flex;gap:8px;align-items:center;width:min(720px,100%);border-radius:999px;padding:6px 6px 6px 22px;box-shadow:0 0 0 1.5px var(--ink)}
+.brief input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:500 16px var(--sans);color:var(--ink);padding:12px 0}
+.brief input::placeholder{color:#7f8b83}
+.num{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-weight:600}
+.num b{color:var(--ink);user-select:all}
+.copy{min-height:36px;padding:0 14px;font-size:13px}
+
+footer{border-top:1px solid var(--line);padding-block:28px calc(32px + env(safe-area-inset-bottom,0px))}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+.foot .wordmark{font-size:40px;margin-left:-.06em}
+.foot nav{display:flex;gap:6px 18px;flex-wrap:wrap}
+.foot nav a{text-decoration:none;font-weight:600;color:var(--ink);padding-block:6px}
 
 /* tablet */
 @media (max-width:960px){
-  .hero-foot,.story{grid-template-columns:1fr}
-  .pillars{grid-template-columns:1fr;gap:28px}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .foot-word{grid-column:1/-1}
+  .hero{grid-template-columns:1fr;align-items:start}
+  .hero-side{justify-items:start}
+  .hero-side p{text-align:left;max-width:34ch}
+  .hero-side .row{justify-content:flex-start}
+  .band,.studio .grid{grid-template-columns:1fr}
+  .photo-card{min-height:0;aspect-ratio:4/3}
+  .works{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .w-a,.w-d{grid-column:span 2}.w-b,.w-c{grid-column:span 1}
+  .work{min-height:380px}
 }
 /* celular */
 @media (max-width:720px){
   :root{--nav-h:60px}
-  .nav-links a.hide-m{display:none}
-  .featured{grid-template-columns:1fr}
-  .row{grid-template-columns:minmax(0,1fr) auto}
-  .row .cat{grid-column:1;grid-row:2}
-  .row .pill{grid-column:2;grid-row:1/3}
+  .links,.nav-end .pill{display:none}
+  .menu-btn{display:grid}
+  .nav{grid-template-columns:1fr auto}
+  .hero-side .row .pill{flex:1}
+  .svc{grid-template-columns:minmax(0,1fr) auto}
+  .svc>div{grid-column:1/-1;grid-row:2}
+  .svc .arrow{width:44px;height:44px}
+  .works{grid-template-columns:1fr}
+  .w-a,.w-b,.w-c,.w-d{grid-column:span 1}
+  .work{min-height:0;aspect-ratio:4/5}
+  .w-a{aspect-ratio:4/3}
+  .w-b{aspect-ratio:auto;min-height:220px}
+  .brief{flex-direction:column;align-items:stretch;border-radius:20px;padding:10px}
+  .brief input{padding:10px 12px}
+  .brief .pill{width:100%}
+  .foot{flex-direction:column;align-items:flex-start}
 }
+@media (min-width:721px){.sheet{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header id="barra">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="#nosotros">Nosotros</a>
-      <a class="hide-m" href="#trabajos">Trabajos</a>
+    <a class="brand" href="#top" aria-label="Eiro, volver al inicio"><span class="icon-e" aria-hidden="true">E</span></a>
+    <ul class="links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#estudio">Estudio</a></li>
+    </ul>
+    <div class="nav-end">
       <a class="pill green" href="#contacto">Hablemos</a>
-    </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet"><span></span><b class="sr">Abrir menú</b></button>
+    </div>
   </div>
+  <nav class="sheet wrap" id="sheet" aria-label="Menú" hidden>
+    <a href="#servicios">Servicios <span aria-hidden="true">→</span></a>
+    <a href="#trabajos">Trabajos <span aria-hidden="true">→</span></a>
+    <a href="#estudio">Estudio <span aria-hidden="true">→</span></a>
+    <a href="#contacto">Hablemos <span aria-hidden="true">→</span></a>
+  </nav>
 </header>
 
 <main id="top">
-  <!-- 1. titular-manifiesto -->
-  <section class="wrap hero" aria-labelledby="titular">
-    <h1 id="titular">Solo nos importa que tu marca <em>valga más.</em></h1>
-    <div class="hero-foot">
-      <p>Somos un estudio creativo de Buenos Aires. Mitad estrategia, mitad diseño. Hacemos marcas, contenido y eventos para que la gente las quiera, las recuerde y las elija.</p>
-      <details>
-        <summary>Leer más</summary>
-        <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y la marca se ve igual en un afiche, en el feed y en la pista.</p>
-      </details>
+  <div class="wrap hero" id="contenido">
+    <h1 aria-label="Eiro"><span class="mark wordmark" id="mk" aria-hidden="true"><span class="g">Gait</span>eiro<sup>™</sup></span></h1>
+    <div class="hero-side">
+      <p><b>Solo nos importa que tu marca valga más.</b> Mitad estrategia, mitad diseño. Un estudio creativo de Buenos Aires.</p>
+      <div class="row"><a class="pill ink" href="#trabajos">Ver trabajos</a><a class="pill line" href="#contacto">Hablemos</a></div>
     </div>
-  </section>
+  </div>
 
-  <!-- 2 y 3. trabajos -->
-  <section class="wrap" id="trabajos" style="padding-bottom:var(--sec)" aria-label="Trabajos">
-    <div class="featured">
-      <a class="card" href="#contacto">
-        <div class="img"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013"></div>
-        <div class="meta"><h3>El Calentón <span>(Eventos)</span></h3><span class="pill fog sm">Ver más</span></div>
-      </a>
-      <a class="card" href="#contacto">
-        <div class="img"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" width="928" height="1152" style="object-position:center 30%"></div>
-        <div class="meta"><h3>Crisger <span>(Branding)</span></h3><span class="pill fog sm">Ver más</span></div>
-      </a>
+  <div class="wrap">
+    <div class="band">
+      <div class="band-copy">
+        <h2>La creatividad sin estrategia es decoración.</h2>
+        <div>
+          <p><b>LINDA, BRILLANTE, MUY PRESENTABLE.</b> Y no sirve para nada. Por eso primero entendemos tu negocio y después abrimos Illustrator.</p>
+          <div class="row"><a class="pill ink" href="#servicios">Ver servicios</a><a class="pill line" href="#contacto">Escribinos</a></div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013">
+        <span class="pill green sm">El Calentón</span>
+      </div>
     </div>
-    <div class="index">
-      <div class="row"><h3>Extracto Importado</h3><span class="cat">Redes y contenido</span><span class="pill fog sm">Próximamente</span></div>
-      <a class="row" href="#contacto"><h3>Tu marca</h3><span class="cat">Branding, redes o eventos</span><span class="pill green sm">Este lugar está libre</span></a>
-    </div>
-    <div class="more"><a class="pill ink" href="#contacto">Más trabajos, a pedido</a></div>
-  </section>
+  </div>
 
-  <!-- 4. manifiesto -->
-  <section class="manifesto" aria-label="Manifiesto">
-    <div class="wrap" style="padding-block:var(--sec)">
-      <p>La creatividad sin estrategia es decoración. <b>LINDA, BRILLANTE, MUY PRESENTABLE.</b> Y no sirve para nada.</p>
-      <small>Por eso estudiamos tu contexto antes de abrir Illustrator. Diez años haciendo marcas nos enseñaron que lo que no tiene un porqué, no dura.</small>
-    </div>
-  </section>
-
-  <!-- 5. ticker -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span>Mantené las manos y los pies dentro del vehículo en todo momento ✦</span><span>Tranqui, lo resolvemos ✦</span>
@@ -225,76 +271,122 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     </div>
   </div>
 
-  <!-- 6. pilares + clientes -->
-  <section class="wrap" style="padding-block:var(--sec)" aria-label="Qué hacemos">
-    <div class="pillars">
-      <div class="pillar"><h3>Marca.</h3><p>Identidad completa y manual para que nadie la rompa. Que te reconozcan de lejos.</p></div>
-      <div class="pillar"><h3>Contenido.</h3><p>Redes con criterio: qué publicar, cuándo y por qué. Para que no sea subir por subir.</p></div>
-      <div class="pillar"><h3>Eventos.</h3><p>Line up, videos, pantallas y todo lo que hace que se hable antes, durante y después.</p></div>
-    </div>
-    <div class="clients">
-      <span class="eyebrow">Marcas que ya trabajaron con nosotros</span>
-      <div class="clients-list"><span>El Calentón</span><span>Crisger</span><span>Extracto Importado</span></div>
+  <section id="servicios">
+    <div class="wrap">
+      <div class="head"><h2>Servicios</h2><p>Mitad estrategia, mitad diseño. Elegí por dónde empezamos; del resto nos encargamos.</p></div>
+      <ul class="svc-list">
+        <li><a class="svc" href="#contacto" data-svc="Branding"><h3>Branding.</h3><div><p>Identidad completa y un manual para que nadie la rompa. Que te reconozcan de lejos.</p><div class="tags"><span class="pill sm fog">Logo</span><span class="pill sm fog">Manual</span><span class="pill sm fog">Papelería</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Marketing y redes"><h3>Marketing y redes.</h3><div><p>Redes con criterio: qué publicar, cuándo y por qué. Para que no sea subir por subir.</p><div class="tags"><span class="pill sm fog">Instagram</span><span class="pill sm fog">TikTok</span><span class="pill sm fog">Videos</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Eventos"><h3>Eventos.</h3><div><p>Line up, videos, pantallas y todo lo que hace que se hable antes, durante y después.</p><div class="tags"><span class="pill sm fog">Teasers</span><span class="pill sm fog">Visuales</span><span class="pill sm fog">Line up</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+        <li><a class="svc" href="#contacto" data-svc="Locales"><h3>Locales.</h3><div><p>Flyers e historias de todo el mes, listos a tiempo. Para que el finde no sea correr.</p><div class="tags"><span class="pill sm fog">Mensual</span><span class="pill sm fog">Flyers</span><span class="pill sm fog">Historias</span></div></div><span class="arrow" aria-hidden="true">→</span></a></li>
+      </ul>
     </div>
   </section>
 
-  <!-- 7. narrativa + citas -->
-  <section class="wrap story" id="nosotros" style="padding-bottom:var(--sec)">
-    <div>
-      <span class="eyebrow">¿Te sumás?</span>
-      <h2>Una marca es una historia.</h2>
-      <p class="lead">Y las historias bien contadas se recuerdan. Eiro sale de Gaiteiro: le sacamos el apellido y nos quedamos con lo que suena a empresa. Lo demás es simple: vos nos contás qué te pasa y nosotros lo resolvemos.</p>
-    </div>
-    <div class="quotes" aria-label="Citas">
-      <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
-      <div class="quote"><blockquote>“El diseño no es solo cómo se ve. El diseño es cómo funciona.”</blockquote><cite>Steve Jobs, 2003</cite></div>
-      <div class="quote"><blockquote>“Una marca no es lo que vos decís que es. Es lo que ellos dicen que es.”</blockquote><cite>Marty Neumeier, The Brand Gap</cite></div>
-      <div class="q-ctrl">
-        <span class="q-count" id="qCount">01 <span>/ 03</span></span>
-        <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
+  <section id="trabajos" style="padding-top:0">
+    <div class="wrap">
+      <div class="head"><h2>Trabajos</h2><p>Algunas marcas que ya trabajaron con nosotros. Cada una con su color; el nuestro es el marco.</p></div>
+      <div class="works">
+        <article class="work w-a has-img"><img src="img/el-calenton.jpg" alt="" loading="lazy" width="1800" height="1013"><div class="top"><span class="pill sm">Eventos</span><span class="pill sm">Video</span></div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+        <article class="work w-b"><div class="top"><span class="pill sm">Redes</span><span class="pill sm">Próximamente</span></div><h3>Extracto Importado<small>Lanzamientos y videos con creadoras</small></h3></article>
+        <article class="work w-c has-img"><img src="img/crisger.jpg" alt="" loading="lazy" width="928" height="1152"><div class="top"><span class="pill sm">Branding</span></div><h3>Crisger<small>Identidad y manual de marca</small></h3></article>
+        <a class="work w-d has-img" href="#contacto"><img src="img/tu-proyecto.jpg" alt="" loading="lazy" width="928" height="1152"><div class="top"><span class="pill sm">Tu proyecto</span></div><div><h3>Este lugar está libre.</h3><span class="pill green" style="margin-top:16px">Contanos qué estás armando</span></div></a>
       </div>
     </div>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, algunos días</span></figure>
   </section>
 
-  <!-- 8. contacto -->
-  <section class="wrap contact" id="contacto" style="padding-bottom:var(--sec)">
-    <h2>¿Tenés un proyecto en mente?</h2>
-    <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café cambia todo.</p>
-    <div class="row-cta">
-      <a class="pill green" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
-      <span class="num">+54 9 11 3485-0669</span>
+  <section id="estudio" class="studio">
+    <div class="wrap grid">
+      <h2 class="studio-title">Una marca es <span>una historia</span>.</h2>
+      <div>
+        <p>Y las historias bien contadas se recuerdan. Eiro sale de Gaiteiro: le sacamos el apellido y nos quedamos con lo que suena a empresa.</p>
+        <p>Más de diez años diseñando para artistas, productoras y marcas. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
+        <div class="sig"><div class="av icon-e" aria-hidden="true">E</div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
+      </div>
+      <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, algunos días</span></figure>
     </div>
-    <p class="social">Contestamos rápido, salvo que estemos en medio de un evento. Ahí tardamos un poquito más.</p>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap contact">
+      <h2>¿Tenés un proyecto en mente?</h2>
+      <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café cambia todo.</p>
+      <div class="chips" role="group" aria-label="Elegí uno o más servicios">
+        <button class="pill fog chip" type="button" id="c1" aria-pressed="false">Branding</button>
+        <button class="pill fog chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
+        <button class="pill fog chip" type="button" id="c3" aria-pressed="false">Eventos</button>
+        <button class="pill fog chip" type="button" id="c4" aria-pressed="false">Locales</button>
+      </div>
+      <form class="brief" id="brief">
+        <label for="q" class="sr">Contanos tu proyecto</label>
+        <input id="q" name="q" type="text" autocomplete="off" enterkeyhint="send" placeholder="Ej: lanzo una marca de ropa en marzo">
+        <button class="pill green" type="submit">Enviar por WhatsApp</button>
+      </form>
+      <div class="num">WhatsApp <b id="tel">+54 9 11 3485-0669</b><button class="pill fog copy" type="button" id="copyBtn">Copiar</button></div>
+      <p class="aside small">Contestamos rápido, salvo que estemos en medio de un evento. Ahí tardamos un poquito más.</p>
+    </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-word">Eiro<span class="big-tm">™</span></div>
-      <div class="foot-col"><b>Contacto</b><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a><span>+54 9 11 3485-0669</span><span>Buenos Aires, Argentina</span></div>
-      <div class="foot-col"><b>Navegar</b><a href="#trabajos">Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">¿Querés trabajar con nosotros?</a></div>
-    </div>
-    <div class="foot-bottom">
-      <span>Estudio creativo estratégico</span>
-      <span>Haciendo que nuestras viejas estén orgullosas desde hace más de diez años</span>
-      <span>De Buenos Aires al mundo</span>
-    </div>
+  <div class="wrap foot">
+    <span class="wordmark">Eiro<sup>™</sup></span>
+    <nav aria-label="Pie de página"><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav>
+    <span>Haciendo que nuestras viejas estén orgullosas desde hace más de diez años · De Buenos Aires al mundo</span>
   </div>
 </footer>
 
 <script>
 (function(){
-  var bar=document.getElementById('barra');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // barra: sombra al hacer scroll + menú en celular
+  var bar=document.getElementById('barra'), btn=document.getElementById('menuBtn'), sheet=document.getElementById('sheet');
   function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
   window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  function setMenu(open){btn.setAttribute('aria-expanded',open);sheet.hidden=!open;btn.querySelector('.sr').textContent=open?'Cerrar menú':'Abrir menú'}
+  btn.addEventListener('click',function(){setMenu(sheet.hidden)});
+  sheet.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!sheet.hidden){setMenu(false);btn.focus()}});
+  window.addEventListener('resize',function(){if(window.innerWidth>720)setMenu(false)});
 
-  // citas 01 / 03
-  var qs=[].slice.call(document.querySelectorAll('.quote')), i=0, count=document.getElementById('qCount');
-  function show(n){i=(n+qs.length)%qs.length;qs.forEach(function(q,k){q.classList.toggle('on',k===i)});count.innerHTML='0'+(i+1)+' <span>/ 0'+qs.length+'</span>'}
-  document.getElementById('qPrev').addEventListener('click',function(){show(i-1)});
-  document.getElementById('qNext').addEventListener('click',function(){show(i+1)});
+  // servicios: al tocar uno, queda marcado en el contacto
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  function setChip(c,on){c.setAttribute('aria-pressed',on)}
+  chips.forEach(function(c){c.addEventListener('click',function(){setChip(c,c.getAttribute('aria-pressed')!=='true')})});
+  [].slice.call(document.querySelectorAll('[data-svc]')).forEach(function(a){a.addEventListener('click',function(){
+    var name=a.getAttribute('data-svc');chips.forEach(function(c){if(c.textContent===name)setChip(c,true)});
+  })});
+
+  // contacto por WhatsApp
+  var q=document.getElementById('q');
+  document.getElementById('brief').addEventListener('submit',function(e){
+    e.preventDefault();
+    var picked=chips.filter(function(c){return c.getAttribute('aria-pressed')==='true'}).map(function(c){return c.textContent});
+    var msg='Hola Eiro! ';
+    if(picked.length)msg+='Me interesa: '+picked.join(', ')+'. ';
+    if(q.value.trim())msg+=q.value.trim();
+    var a=document.createElement('a');a.href='https://wa.me/5491134850669?text='+encodeURIComponent(msg);a.target='_blank';a.rel='noopener';
+    document.body.appendChild(a);a.click();a.remove();
+  });
+  var copyBtn=document.getElementById('copyBtn'), tel=document.getElementById('tel');
+  copyBtn.addEventListener('click',function(){
+    function done(){copyBtn.textContent='Copiado';setTimeout(function(){copyBtn.textContent='Copiar'},1600)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(tel);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}
+    try{navigator.clipboard.writeText('+5491134850669').then(done,fallback)}catch(e){fallback()}
+  });
+
+  // portada: Gaiteiro -> Eiro (una sola vez)
+  var mk=document.getElementById('mk'), hero=document.getElementById('contenido');
+  var TM='<sup>™</sup>';
+  if(reduce){mk.innerHTML='Eiro'+TM;hero.classList.add('cut');return}
+  setTimeout(function(){
+    var j=0;var t=setInterval(function(){
+      j++;
+      if(j<4){mk.innerHTML='<span class="g">'+'Gait'.slice(j)+'</span>eiro'+TM}
+      else{mk.innerHTML='Eiro'+TM;clearInterval(t);requestAnimationFrame(function(){hero.classList.add('cut')})}
+    },150);
+  },1100);
 })();
 </script>
 
