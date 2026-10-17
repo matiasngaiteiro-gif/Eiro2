@@ -64,9 +64,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:col
 .hero{padding-block:clamp(36px,7vw,80px) clamp(28px,5vw,56px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;overflow:hidden}
 .mark{font-size:clamp(120px,25vw,380px);white-space:nowrap;display:flex;align-items:flex-end}
 .mark .wm{transform-origin:left bottom}
-.gait{display:inline-block;overflow:hidden;max-width:2.2em;transition:max-width 1.1s cubic-bezier(.7,0,.2,1),opacity .8s}
-.cut .gait{max-width:0;opacity:0}
-.hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:1.5vw}
+.cut .hero-side{display:grid;gap:18px;justify-items:end;padding-bottom:1.5vw}
 .hero-side p{font-size:clamp(17px,1.6vw,20px);font-weight:500;max-width:24ch;text-align:right;color:var(--mute)}
 .hero-side p b{color:var(--ink);font-weight:700}
 
@@ -202,7 +200,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
 
 <main id="top">
   <div class="wrap hero">
-    <h1 class="mark" aria-label="EIRO"><span class="wm"><span class="gait" id="gait">GAIT</span>EIRO</span></h1>
+    <h1 class="mark" aria-label="EIRO"><span class="wm" id="mk">GAITEIRO</span></h1>
     <div class="hero-side">
       <p><b>Estudio creativo.</b> Marca, contenido, marketing y eventos desde Buenos Aires.</p>
       <a class="pill ink" href="#trabajos">Ver trabajos</a>
@@ -296,7 +294,9 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;overflow:hidden}
     if(shown)return;shown=true;
     try{if(document.fonts&&document.fonts.check('800 20px "futura-pt-condensed"'))root.classList.add('has-futura')}catch(e){}
     root.classList.add('fonts-ready');
-    if(!reduce)setTimeout(function(){document.getElementById('top').classList.add('cut')},1000);
+    var mk=document.getElementById('mk');
+    if(reduce){mk.textContent='EIRO';return}
+    setTimeout(function(){var j=0;var t=setInterval(function(){j++;mk.textContent='GAIT'.slice(j)+'EIRO';if(j>=4)clearInterval(t)},140)},1100);
   }
   try{
     Promise.race([
