@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://eirostudio.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Eiro Studio">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#0A0D0B">
 <meta name="format-detection" content="telephone=no">
 
 <meta property="og:type" content="website">
@@ -36,22 +36,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Base: estructura y voz de Not Found™ (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro: Plus Jakarta Sans y verde */
+/* Base: estructura y voz de Not Found (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro Studio: Plus Jakarta Sans y verde */
 :root{
   --green:#00EB5B;
-  --ink:#0A0D0B;
-  --paper:#FFFFFF;
-  --fog:#F2F4F2;
+  /* fondo negro: --paper es el fondo, --ink el texto */
+  --paper:#0A0D0B;
+  --ink:#F5F7F5;
+  --black:#0A0D0B;
+  --surface:#141815;
+  --fog:#1C211D;
   --forest:#00290F;
-  --mute:#5F6B63;
-  --soft:#AEB9B1;
-  --line:#DCE2DE;
+  --mute:#9AA59D;
+  --soft:#7E8981;
+  --line:#262C28;
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --nav-h:68px;
   --pad:clamp(20px,2.4vw,32px);
   --radius:clamp(14px,1.6vw,20px);
   --sec:clamp(64px,10vw,140px);
-  color-scheme:light;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -63,15 +66,17 @@ p{margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 
 /* pill */
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:999px;padding:0 22px;font:700 15px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s}
 .pill.sm{min-height:30px;padding:0 13px;font-size:13px;font-weight:600}
-.pill.green{background:var(--green);color:var(--ink)}
-.pill.ink{background:var(--ink);color:var(--paper)}
+.pill.green{background:var(--green);color:var(--black)}
+.pill.ink{background:var(--ink);color:var(--black)}
 .pill.fog{background:var(--fog);color:var(--ink)}
 .pill.line{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.pill.white{background:var(--ink);color:var(--black)}
 @media (hover:hover){.pill:hover{transform:translateY(-1px)}}
 
 /* barra: logo + Nosotros + contacto, como ellos */
@@ -79,7 +84,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .2s}
 header.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{font-size:26px;font-weight:800;letter-spacing:-.06em;text-decoration:none;display:flex;align-items:center;min-height:44px}
+.brand{font-size:20px;font-weight:800;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;min-height:44px}
 .brand sup,.big-tm{font-size:.38em;letter-spacing:0;font-weight:700;vertical-align:top;position:relative;top:.15em;margin-left:.04em}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links a:not(.pill){display:flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
@@ -106,7 +111,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* 2. destacados */
 .featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad)}
 .card{display:flex;flex-direction:column;gap:14px;text-decoration:none}
-.card .img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--ink)}
+.card .img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--surface)}
 .card .img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 @media (hover:hover){.card:hover .img img{transform:scale(1.04)}}
 .card .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -121,15 +126,16 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .more{display:flex;justify-content:flex-end;margin-top:20px}
 
 /* bloque verde (de la estructura anterior) */
-.band{background:var(--green);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
+.band{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
 .band-copy h2{font-size:clamp(36px,5.4vw,80px)}
-.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--forest)}
+.band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:var(--mute)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--ink)}
+.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--surface)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
 .photo-card .pill{position:absolute;left:16px;bottom:16px}
-.band-copy p b{font-weight:800}
+.band-copy p b{font-weight:800;color:var(--ink)}
+.band-copy h2 em{font-style:normal;color:var(--green)}
 
 /* 4. manifiesto */
 .manifesto{background:var(--ink);color:var(--paper)}
@@ -138,13 +144,13 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:var(--soft);max-width:52ch}
 
 /* 5. ticker */
-.ticker{background:var(--ink);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
+.ticker{background:var(--surface);border-block:1px solid var(--line);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
 .ticker-track{display:flex;gap:clamp(40px,5vw,72px);width:max-content;animation:tick 45s linear infinite;padding-right:clamp(40px,5vw,72px)}
 /* cartel de cinturón, versión mínima */
 .sign{display:flex;align-items:center;gap:18px}
 .sign .belt{flex:none;display:block;color:var(--green);width:clamp(56px,5vw,72px);line-height:0}
 .belt svg{width:100%;height:auto;display:block}
-.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--paper)}
+.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* 6. pilares + clientes */
@@ -187,14 +193,14 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .contact .social{margin-top:28px;color:var(--mute);max-width:46ch}
 
 /* footer */
-footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
-.foot-top{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:32px}
-.foot-word{font-size:clamp(72px,14vw,200px);font-weight:800;letter-spacing:-.06em;line-height:.85;margin-left:-.06em}
+footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
+.foot-top{display:grid;grid-template-columns:repeat(2,max-content);gap:40px clamp(48px,8vw,120px)}
+.foot-word{font-size:clamp(40px,14.6vw,212px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.85;margin-left:-.04em;grid-column:1/-1}
 .foot-col{display:flex;flex-direction:column;gap:8px;font-size:15px}
 .foot-col b{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .foot-col a{text-decoration:none;padding-block:4px}
 @media (hover:hover){.foot-col a:hover{color:var(--green)}}
-.foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid #2a312c;color:var(--soft);font-size:14px}
+.foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--soft);font-size:14px}
 
 /* tablet */
 @media (max-width:960px){
@@ -208,34 +214,40 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
 @media (max-width:720px){
   :root{--nav-h:60px}
   .nav-links a.hide-m{display:none}
+  .brand{font-size:17px}
+  .nav{gap:8px}
+  .nav-links a:not(.pill){padding:0 10px}
+  .nav-links .pill{padding:0 16px}
   .featured{grid-template-columns:1fr}
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .cat{grid-column:1;grid-row:2}
   .row .pill{grid-column:2;grid-row:1/3}
 }
 
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-/* acceso con clave */
-.gate{position:fixed;inset:0;z-index:100;background:#FFFFFF;display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px))}
+
+/* acceso con clave: solo Eiro y el campo */
+.gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px))}
 .gate[hidden]{display:none!important}
 .gate-box{display:flex;flex-direction:column;align-items:center;gap:28px;width:min(320px,100%)}
-.gate-word{font-size:clamp(64px,12vw,120px);font-weight:800;letter-spacing:-.06em;line-height:.9;color:#0A0D0B}
-.gate form{display:flex;width:100%;border-bottom:1.5px solid #DCE2DE;transition:border-color .2s}
-.gate form:focus-within{border-color:#0A0D0B}
+.gate-box .gate-word{margin-inline:-200px}
+.gate-word{font-size:clamp(38px,8vw,96px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.9;color:var(--ink)}
+.gate form{display:flex;width:100%;border-bottom:1.5px solid var(--line);transition:border-color .2s}
+.gate form:focus-within{border-color:var(--ink)}
 .gate form.err{border-color:#E5483B;animation:shake .35s}
-.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:#0A0D0B;font:600 18px var(--sans);letter-spacing:.35em;text-align:center;padding:12px 0 12px 44px}
-.gate input::placeholder{color:#8A958D;letter-spacing:.02em;font-weight:500}
-.gate button{border:0;background:none;color:#0A0D0B;font:700 20px var(--sans);cursor:pointer;width:44px;min-height:44px}
+.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:600 18px var(--sans);letter-spacing:.35em;text-align:center;padding:12px 0 12px 44px}
+.gate input::placeholder{color:var(--soft);letter-spacing:.02em;font-weight:500}
+.gate button{border:0;background:none;color:var(--ink);font:700 20px var(--sans);cursor:pointer;width:44px;min-height:44px}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}
+@media (max-width:350px){.brand{font-size:15px}.nav-links a:not(.pill){padding:0 6px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
-    <div class="gate-word">Eiro</div>
+    <div class="gate-word">EIROSTUDIO</div>
     <form id="gateForm" autocomplete="off">
       <label for="gateKey" class="sr">Clave</label>
       <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
@@ -245,7 +257,7 @@ html.locked,html.locked body{overflow:hidden}
 </div>
 <header id="barra">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
+    <a class="brand" href="#top" aria-label="Eiro Studio, volver al inicio">EIROSTUDIO</a>
     <nav class="nav-links" aria-label="Principal">
       <a href="#nosotros">Nosotros</a>
       <a class="hide-m" href="#trabajos" hidden>Trabajos</a>
@@ -291,10 +303,10 @@ html.locked,html.locked body{overflow:hidden}
   <section class="wrap" style="padding-bottom:var(--sec)" aria-label="Manifiesto">
     <div class="band">
       <div class="band-copy">
-        <h2>La creatividad sin estrategia es decoración.</h2>
+        <h2>La creatividad sin estrategia es <em>decoración.</em></h2>
         <div>
           <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
-          <div class="band-row"><a class="pill ink" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
+          <div class="band-row"><a class="pill white" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
       <div class="photo-card">
@@ -365,7 +377,7 @@ html.locked,html.locked body{overflow:hidden}
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <div class="foot-word">Eiro<span class="big-tm">™</span></div>
+      <div class="foot-word">EIROSTUDIO</div>
       <div class="foot-col"><b>Contacto</b><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a><span>+54 9 11 3485-0669</span><span>Buenos Aires, Argentina</span></div>
       <div class="foot-col"><b>Navegar</b><a href="#trabajos" hidden>Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">¿Querés trabajar con nosotros?</a></div>
     </div>
@@ -375,29 +387,6 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </div>
 </footer>
-
-<script>
-(function(){
-  var bar=document.getElementById('barra');
-  function onScroll(){bar.classList.toggle('scrolled',window.scrollY>8)}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-  // adjetivos del titular
-  var words=['inolvidable.','inconfundible.','deseada.','rentable.','auténtica.','imparable.'], wi=0, rot=document.getElementById('rot');
-  if(rot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(function(){
-      rot.classList.remove('in'); rot.classList.add('out');
-      setTimeout(function(){wi=(wi+1)%words.length; rot.textContent=words[wi]; rot.classList.remove('out'); void rot.offsetWidth; rot.classList.add('in')},320);
-    },2200);
-  }
-
-  // citas 01 / 03
-  var qs=[].slice.call(document.querySelectorAll('.quote')), i=0, count=document.getElementById('qCount');
-  function show(n){i=(n+qs.length)%qs.length;qs.forEach(function(q,k){q.classList.toggle('on',k===i)});count.innerHTML='0'+(i+1)+' <span>/ 0'+qs.length+'</span>'}
-  document.getElementById('qPrev').addEventListener('click',function(){show(i-1)});
-  document.getElementById('qNext').addEventListener('click',function(){show(i+1)});
-})();
-</script>
 
 <script>
 (function(){
