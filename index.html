@@ -3,471 +3,426 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Eiro Studio</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23FFF200'/><path fill='%23000' d='M17 12h31v9H28v7h17v8H28v7h20v9H17z'/></svg>">
+<title>EIRO Studio</title>
+<meta name="description" content="EIRO, estudio creativo de Buenos Aires: branding, marketing y redes, eventos y diseño para locales.">
+<meta name="theme-color" content="#0A0D0B">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300EB5B'/%3E%3Ctext x='32' y='49' text-anchor='middle' font-family='Futura,Jost,Arial' font-weight='800' font-size='46' fill='%230A0D0B'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="https://use.typekit.net/abn0bee.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Roboto+Condensed:wght@700;800;900&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout (calcado de cjcawley.com): sitio negro de una columna con margen lateral ~5%.
-   Header: logo izq + asterisco der → menú negro a pantalla completa.
-   Hero: titular condensado alineado a la izquierda + botón rectangular blanco + ilustración.
-   Trabajos: piezas apiladas sin separación dentro del margen (2 col en desktop).
-   Estudio: foto, "La suerte acompaña a los" + palabra rotativa, texto gris.
-   Banda blanca: tarjetas imagen + título condensado + texto gris + botón negro.
-   Contacto: wordmark gigante con palabra rosa encima, inputs blancos, botón rosa. Footer centrado. */
+/* Layout: sistema Zigzag (wordmark gigante, pills, bento, cards apiladas, collage con etiquetas, cromado) con la paleta de Tripadvisor */
 :root{
-  --black:#000000;
+  --green:#00EB5B;     /* color héroe (rol del rosa en Zigzag) */
+  --forest:#00290F;    /* verde profundo */
+  --black:#0A0D0B;     /* negro con sesgo verde */
+  --coal:#161A17;      /* tiles oscuros */
+  --sage:#6B7A70;      /* rol del gris de Zigzag */
+  --mint:#CFF8DD;      /* secundario claro */
+  --bone:#ECEEEB;      /* neutro de fondo de producto */
   --white:#FFFFFF;
-  --grey:#9A9A9A;      /* cuerpo sobre negro */
-  --grey-ink:#6B6B6B;  /* cuerpo sobre blanco */
-  --dim:#4A4A4A;       /* aclaraciones "(…)" */
-  --accent:#FFF200;    /* acento único de Eiro */
-  --yellow:#FFF200;
-
-  /* Sistema tipográfico: una sola familia, Peridot PE (variable, kit Adobe abn0bee).
-     Tres roles que cambian peso y ancho:
-     - Display  → titulares: Peridot 900, ancho 75 (el logo tiene sus propias medidas)
-     - Texto    → cuerpo: Peridot Regular 400, ancho 100
-     - Etiqueta → botones, menú, chips: IBM Plex Mono
-     Si Peridot no carga, cae en Roboto Condensed / Helvetica. */
-  --peridot:"peridot-pe-variable";
-  --cond:var(--peridot),"Roboto Condensed","Arial Narrow",sans-serif;
-  --sans:var(--peridot),"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --label:"IBM Plex Mono","Roboto Mono",ui-monospace,Menlo,monospace;
-  --w-display:75;
-  --w-text:100;
-
-  --max:1240px;
-  --gl:max(20px, 5vw, env(safe-area-inset-left, 0px));
-  --gr:max(20px, 5vw, env(safe-area-inset-right, 0px));
-  --ease:cubic-bezier(.16,1,.3,1);
+  --logo:"futura-pt-condensed","Jost","Futura",sans-serif;
+  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0; background:var(--black); color:var(--white); font-family:var(--sans); font-size:17px; line-height:1.6; letter-spacing:-0.5px; font-variation-settings:"wdth" var(--w-text); -webkit-font-smoothing:antialiased; overflow-x:hidden}
-a{color:inherit; text-decoration:none}
-img{max-width:100%; display:block}
-:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
-.wrap{max-width:var(--max); margin-inline:auto; padding-left:var(--gl); padding-right:var(--gr)}
-.cond{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); text-transform:uppercase; line-height:.92; letter-spacing:-.005em; margin:0}
+body{background:var(--black);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:.95;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-.btn{display:inline-flex; align-items:center; justify-content:center; font-family:var(--label); font-weight:500; text-transform:uppercase; letter-spacing:0; font-size:.95rem; line-height:1; padding:1.15rem 2.2rem; background:var(--white); color:var(--black); border:0; border-radius:0; cursor:pointer; transition:background .25s, color .25s}
-.btn:hover{background:var(--accent); color:var(--black)}
-.btn.dark{background:var(--black); color:var(--white)}
-.btn.dark:hover{background:var(--accent); color:var(--black)}
+/* wordmark: Futura PT Condensed ExtraBold, con respaldo comprimido */
+.wm{display:inline-block;font-family:var(--logo);font-weight:800;line-height:.8;letter-spacing:-.005em;transform:scaleX(.78);transform-origin:left center;text-transform:uppercase}
+.has-futura .wm{transform:none}
+.wm.center{transform-origin:center}
 
-/* ---------- HEADER ---------- */
-body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:40; background:var(--black)}
-.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--black); transition:transform .4s var(--ease)}
-.top.hide{transform:translateY(-110%)}
-.top .wrap{display:flex; justify-content:space-between; align-items:center; padding-block:1.6rem}
-/* Logotipo: EIRO en Heavy + STUDIO en Regular, pegados, misma altura de caja alta */
-.logo{font-family:var(--cond); font-size:clamp(1.6rem,2.4vw,2.1rem); line-height:.8; text-transform:uppercase; letter-spacing:0; display:flex; align-items:flex-start; white-space:nowrap}
-.logo .b, .logo .cut{font-weight:950; font-variation-settings:"wght" 950, "wdth" 82}
-.logo .l{display:inline-flex; font-weight:585; font-variation-settings:"wght" 584.5, "wdth" 82}
-.logo .l i{font-style:normal; display:inline-block; max-width:0; opacity:0; transition:max-width .28s var(--ease), opacity .2s}
-.logo .l i.in{max-width:1em; opacity:1}
-.logo sup{opacity:0; transition:opacity .3s}
-.logo.done sup{opacity:1}
-.logo .cut{display:inline-flex; overflow:hidden}
-.logo .cut i{font-style:normal; display:inline-block; max-width:1em; transition:max-width .32s var(--ease), opacity .2s}
-.logo .cut i.gone{max-width:0; opacity:0}
-.logo sup{font-family:var(--sans); font-size:.6rem; font-weight:700; margin-left:3px; line-height:1}
-.star{width:48px; height:48px; display:grid; place-items:center; background:none; border:0; color:var(--white); cursor:pointer; padding:0; margin-right:-8px}
-.star .x{width:30px; height:30px}
-.star .a{font-family:var(--sans); font-weight:700; font-size:4rem; line-height:1; display:block; transform:translateY(.2em); transition:transform .5s var(--ease)}
-.star:hover .a{transform:translateY(.2em) rotate(60deg)}
-.star .x{display:none}
-.star[aria-expanded="true"] .a{display:none}
-.star[aria-expanded="true"] .x{display:block}
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 18px;font:700 15px var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background .15s}
+.pill:hover{transform:translateY(-1px)}
+.pill:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.p-green{background:var(--green);color:var(--black)}
+.p-dark{background:var(--coal);color:var(--white)}
+.p-white{background:var(--white);color:var(--black)}
+.p-glass{background:rgba(0,235,91,.22);color:var(--black);backdrop-filter:blur(6px)}
+.p-sm{padding:6px 13px;font-size:13px}
 
-.overlay{position:fixed; inset:0; z-index:25; background:var(--black); padding-top:calc(env(safe-area-inset-top,0px) + 7.5rem); overflow-y:auto; opacity:0; visibility:hidden; transition:opacity .35s var(--ease), visibility .35s}
-.overlay.open{opacity:1; visibility:visible}
-.overlay ul{list-style:none; margin:0; padding:0 0 3rem; display:grid; gap:clamp(3rem,9vh,6.5rem)}
-.overlay a{font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:clamp(1.4rem,3vw,2rem); transition:color .2s}
-.overlay a:hover{color:var(--accent)}
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--black)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--black) 88%,transparent);backdrop-filter:blur(12px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.nav .logo{font-size:38px;color:var(--green);text-decoration:none}
+.nav nav{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.nav nav a{padding:8px 14px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px;color:var(--white)}
+.nav nav a.on{background:var(--green);color:var(--black)}
+.nav nav a:not(.on):hover{background:var(--coal)}
 
-/* ---------- HERO ---------- */
-.hero .wrap{padding-block:clamp(3rem,8vw,6rem) clamp(3rem,7vw,5rem); display:grid; gap:2.2rem}
-.hero h1{font-size:clamp(3.3rem,11vw,10.5rem); max-width:11ch}
-.hero .btn{justify-self:start; background:var(--accent); color:var(--black)}
-.hero .btn:hover{background:var(--white); color:var(--black)}
-.hero .illus{justify-self:center; width:min(62%, 440px); margin-top:clamp(2rem,6vw,4rem)}
-.hero .illus svg{width:100%; height:auto; display:block}
-@media (min-width:900px){
-  .hero .wrap{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); grid-template-rows:auto auto; column-gap:clamp(2rem,5vw,5rem); row-gap:2rem; align-items:end; min-height:calc(100svh - 7rem); max-height:980px; padding-block:clamp(2rem,5vh,4rem)}
-  .hero h1{grid-column:1; grid-row:1; font-size:clamp(4rem, min(8.2vw, 15.5vh), 9.5rem); max-width:12ch; align-self:end}
-  .hero .btn{grid-column:1; grid-row:2; align-self:start}
-  .hero .illus{grid-column:2; grid-row:1 / span 2; align-self:center; justify-self:end; width:100%; max-width:min(440px, 55vh); margin:0}
+/* hero wordmark */
+.hero{padding-block:clamp(40px,8vw,90px) 28px;overflow:hidden}
+.hero .giant{color:var(--green);font-size:clamp(150px,37vw,520px);display:block;white-space:nowrap}
+.hero-row{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-top:22px}
+.hero-row p{font-size:clamp(18px,2.2vw,24px);font-weight:600;max-width:30ch;letter-spacing:-.01em}
+
+/* statement tiles (Y2K / Streetwear hype) */
+.statements{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.st{border-radius:22px;padding:clamp(22px,4vw,44px);min-height:clamp(260px,32vw,420px);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.st h2{font-size:clamp(56px,9vw,128px)}
+.st-1{background:var(--green);color:var(--black)}
+.st-1 h2{font-family:var(--sans)}
+.st-2{background:var(--coal);color:var(--green)}
+.st-2 h2{letter-spacing:-.05em}
+.st small{font-size:15px;font-weight:600;max-width:34ch;display:block}
+.st-2 small{color:var(--white)}
+
+/* section heads */
+section{padding-block:clamp(56px,9vw,110px)}
+.kicker{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.kicker h2{font-size:clamp(42px,6vw,84px)}
+.kicker p{max-width:40ch;color:#B9C4BD;font-size:17px}
+
+/* stacked cards + phone */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{border-radius:22px;overflow:hidden;min-height:560px;position:relative}
+.panel.light{background:var(--bone);display:grid;place-items:center;padding:40px 20px}
+.stack{width:min(460px,100%);display:grid}
+.card{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:14px;border-radius:18px;margin-top:-34px;box-shadow:0 -6px 20px -10px rgba(0,0,0,.35);text-decoration:none;transition:transform .2s ease}
+.card:first-child{margin-top:0}
+.card:hover{transform:translateY(-6px)}
+.card .ph{aspect-ratio:1/1;border-radius:10px;background:var(--bone);display:grid;place-items:center;overflow:hidden}
+.card .meta{display:flex;flex-direction:column;justify-content:space-between;padding-block:4px}
+.card .brand{font-size:15px;font-weight:500;opacity:.75}
+.card .name{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.card .foot{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px}
+.c1{background:var(--sage);color:var(--white)}
+.c2{background:var(--green);color:var(--black)}
+.c3{background:var(--mint);color:var(--black)}
+.c4{background:var(--black);color:var(--white)}
+
+/* little product glyphs drawn in css */
+.g-book{width:58%;height:70%;background:var(--forest);border-radius:4px 8px 8px 4px;box-shadow:inset 6px 0 0 #0d4421;position:relative}
+.g-book::after{content:"E";position:absolute;inset:0;display:grid;place-items:center;color:var(--green);font:800 40px var(--logo)}
+.g-phone{width:42%;height:78%;border-radius:12px;background:var(--black);border:4px solid #2a302c;position:relative}
+.g-phone::after{content:"";position:absolute;inset:14% 12% 40%;border-radius:6px;background:var(--green)}
+.g-ticket{width:76%;height:44%;border-radius:8px;background:var(--black);position:relative;transform:rotate(-8deg)}
+.g-ticket::before{content:"LINE UP";position:absolute;left:10px;top:8px;color:var(--green);font:800 18px var(--logo)}
+.g-ticket::after{content:"";position:absolute;right:22%;top:0;bottom:0;border-left:2px dashed var(--green)}
+.g-flyer{width:56%;height:76%;background:var(--green);border-radius:4px;position:relative}
+.g-flyer::before{content:"SÁB";position:absolute;left:8px;top:6px;font:800 26px var(--logo);color:var(--black)}
+.g-flyer::after{content:"";position:absolute;left:8px;right:8px;bottom:8px;height:30%;background:var(--black);border-radius:3px}
+
+.panel.dark{background:#050706;overflow:hidden}
+.device{position:absolute;right:-60px;top:70px;width:420px;height:640px;border-radius:70px;background:#111513;border:10px solid #1d2320;transform:rotate(-7deg);box-shadow:0 40px 80px -20px rgba(0,0,0,.8),inset 0 0 0 2px #2b322e}
+.screen{position:absolute;inset:14px;border-radius:56px;background:#000;padding:56px 40px}
+.clock{font-size:52px;font-weight:600;letter-spacing:-.03em}
+.apps{display:grid;grid-template-columns:repeat(2,130px);gap:30px 34px;margin-top:40px}
+.app{display:grid;gap:10px;justify-items:center;font-size:22px;font-weight:500}
+.icon{width:130px;height:130px;border-radius:32px;display:grid;place-items:center}
+.icon.eiro{background:var(--green);color:var(--black);font:800 100px/1 var(--logo)}
+.icon.cal{background:#fff;color:#111;display:flex;flex-direction:column;justify-content:center;gap:0}
+.icon.cal b{color:#e53b2c;font-size:20px;letter-spacing:.04em}
+.icon.cal span{font-size:62px;font-weight:400;line-height:1}
+.icon.wa{background:linear-gradient(160deg,#5ef08b,#1fae4f)}
+.icon.ig{background:radial-gradient(circle at 30% 110%,#ffd76a,#f5446c 45%,#9b39d6 75%)}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(300px,auto);gap:14px}
+.b{border-radius:22px;padding:22px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:16px;text-decoration:none}
+.b h3{font-size:clamp(40px,4.4vw,64px)}
+.b .go{display:flex;justify-content:space-between;font-weight:600;font-size:16px}
+.b-white{background:var(--white);color:var(--black)}
+.b-dark{background:var(--coal)}
+.b-sage{background:var(--sage)}
+.b-green{background:var(--green);color:var(--black)}
+.b-chrome{background:var(--coal);align-items:center;justify-content:center}
+.b-chrome .pill{position:absolute;left:18px;bottom:18px}
+.tags{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;justify-items:start}
+.tags .pill{background:#252b27;color:#fff;font-weight:600;padding:9px 16px}
+.tags .pill.on{background:var(--white);color:var(--black)}
+.faces{display:flex;gap:10px;justify-content:center;align-items:center;flex:1}
+.face{width:90px;height:120px;border-radius:12px;background:linear-gradient(180deg,#d9dfdb,#aab5ae);position:relative;overflow:hidden}
+.face.on{outline:2px solid #4a554e;outline-offset:6px;background:linear-gradient(180deg,#cff8dd,#8fd8a8)}
+.face::before{content:"";position:absolute;left:50%;top:22%;width:46%;aspect-ratio:1;border-radius:50%;background:#56645b;transform:translateX(-50%)}
+.face::after{content:"";position:absolute;left:50%;bottom:-18%;width:90%;height:48%;border-radius:50% 50% 0 0;background:#56645b;transform:translateX(-50%)}
+.heart{position:absolute;right:16px;bottom:16px;width:22px;height:20px;color:var(--green)}
+
+/* chrome */
+.chrome{position:relative;display:inline-grid;font-family:var(--logo);font-weight:800;line-height:.8;animation:float 6s ease-in-out infinite}
+.chrome>span{grid-area:1/1;display:block}
+.chrome .depth{color:#1a201c;text-shadow:1px 1px 0 #252c27,2px 2px 0 #2b322d,3px 3px 0 #313833,4px 4px 0 #373f39,5px 5px 0 #3d4540,6px 6px 0 #444c46,7px 7px 0 #4a534d,8px 8px 0 #515a53,9px 9px 0 #57605a,16px 26px 34px rgba(0,0,0,.65)}
+.chrome .face2{background:linear-gradient(172deg,#ffffff 0%,#dfe4e1 12%,#78817b 28%,#f6f8f7 40%,#b2bab5 50%,#353c38 62%,#cfd6d1 76%,#ffffff 85%,#86908a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:100% 200%;animation:sheen 7s ease-in-out infinite}
+.chrome.green .face2{background:linear-gradient(172deg,#eafff1 0%,#7dffb0 14%,#00a63f 30%,#d9ffe7 42%,#00eb5b 52%,#003d17 64%,#5dfc98 78%,#f2fff6 86%,#00953a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:100% 200%}
+.chrome .wm{transform-origin:center}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-2deg)}}
+@keyframes sheen{0%,100%{background-position:0 0}50%{background-position:0 100%}}
+
+/* collage */
+.collage{position:relative;background:#7FB89A;border-radius:22px;min-height:620px;overflow:hidden;display:grid;place-items:center;padding:40px 16px}
+.collage .photo{width:min(360px,70%);aspect-ratio:3/4;border-radius:6px;background:linear-gradient(180deg,#f2f4f2,#dfe5e1);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.collage .photo .chrome{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(170px,22vw,260px)}
+.collage .label{position:absolute;background:var(--green);color:var(--black);font-weight:600;font-size:clamp(15px,1.8vw,22px);padding:10px 22px;border-radius:999px;transform:rotate(-4deg);box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
+.obj{position:absolute;border-radius:10px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.o1{left:14%;top:12%;width:160px;height:110px;background:var(--black);transform:rotate(-10deg)}
+.o1::after{content:"EIRO";position:absolute;left:14px;top:12px;color:var(--green);font:800 40px var(--logo)}
+.o2{right:14%;top:14%;width:120px;height:160px;background:var(--forest);transform:rotate(8deg)}
+.o2::after{content:"";position:absolute;inset:16px;border:3px solid var(--green);border-radius:6px}
+.o3{left:16%;bottom:12%;width:150px;height:96px;background:var(--white);transform:rotate(6deg)}
+.o3::after{content:"E";position:absolute;right:12px;bottom:6px;color:var(--black);font:800 46px var(--logo)}
+.o4{right:15%;bottom:14%;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7dffb0,#00eb5b 40%,#006d29)}
+
+/* poster */
+.poster{background:#E9EBE8;color:var(--black);border-radius:6px;padding:clamp(18px,3vw,34px);display:grid;gap:22px;box-shadow:0 0 0 14px #c9cdc9,0 40px 70px -30px rgba(0,0,0,.7)}
+.poster-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.poster-top h2{font-size:clamp(28px,3.6vw,48px)}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.w{border-radius:14px;min-height:240px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.w h3{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.03em;position:relative}
+.w h3 small{display:block;font-size:14px;font-weight:600;letter-spacing:0;margin-top:6px;opacity:.85}
+.w .pill{align-self:flex-start;position:relative}
+.w1{background:radial-gradient(110% 80% at 70% 20%,#00eb5b 0%,#00290f 55%,#000 100%);color:#fff}
+.w1 .bigtxt{font:800 clamp(52px,6vw,84px)/.82 var(--logo);color:var(--green);position:absolute;right:14px;top:56px;text-align:right;opacity:.95}
+.w2{background:linear-gradient(160deg,#f3f7f4,#cfe9d8);color:var(--black)}
+.w2 .bottle{position:absolute;right:26px;top:40px;width:80px;height:140px;border-radius:14px;background:linear-gradient(100deg,rgba(255,255,255,.95),rgba(255,255,255,.3) 40%,rgba(255,255,255,.85) 62%,rgba(255,255,255,.4));box-shadow:inset 0 0 0 1px rgba(0,41,15,.18),0 18px 30px -16px rgba(0,41,15,.35)}
+.w2 .bottle::before{content:"";position:absolute;left:25px;top:-34px;width:30px;height:34px;border-radius:6px;background:linear-gradient(90deg,#8d968f,#f4f6f5 45%,#5c655f)}
+.w3{background:var(--forest);color:#fff}
+.w3 .grid-ill{position:absolute;right:16px;top:16px;display:grid;grid-template-columns:repeat(3,24px);gap:5px}
+.w3 .grid-ill i{height:24px;border-radius:6px;background:var(--green)}.w3 .grid-ill i:nth-child(even){background:var(--mint)}
+.poster .wm{font-size:clamp(110px,23vw,320px);color:var(--black);display:block}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.typer{font-family:var(--logo);font-weight:800;font-size:clamp(80px,12vw,170px);line-height:.85;white-space:nowrap;color:var(--green);text-transform:uppercase}
+.typer .g{color:#3c4740}
+.typer .cur{display:inline-block;width:.07em;height:.76em;background:var(--white);margin-left:.04em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.about p{font-size:clamp(18px,2vw,22px);font-weight:500;max-width:46ch;letter-spacing:-.01em}
+.about p+p{margin-top:14px;color:#B9C4BD;font-size:17px}
+.sig{margin-top:24px;display:flex;align-items:center;gap:14px}
+.sig .av{width:46px;height:46px;border-radius:50%;background:var(--green);color:var(--black);display:grid;place-items:center;font:800 26px var(--logo)}
+.sig b{display:block}.sig span{color:#B9C4BD;font-size:14px}
+
+/* CTA */
+.cta{background:var(--green);color:var(--black);border-radius:22px;padding:clamp(28px,5vw,56px);display:grid;gap:24px;position:relative;overflow:hidden}
+.cta h2{font-size:clamp(52px,8vw,120px);max-width:9ch}
+.brief{display:flex;gap:8px;align-items:center;background:var(--white);border-radius:999px;padding:6px 6px 6px 22px;max-width:680px;position:relative;z-index:1}
+.brief input{flex:1;min-width:0;border:0;outline:none;background:transparent;font:500 16px var(--sans);color:var(--black);padding:12px 0}
+.brief input::placeholder{color:#6c7a71}
+.chips{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.chip{background:var(--p,rgba(0,41,15,.12));color:var(--black)}
+.chip[aria-pressed="true"]{background:var(--black);color:var(--green)}
+.num{font-weight:700;font-size:18px;user-select:all;position:relative;z-index:1}
+.cta .chrome{position:absolute;right:clamp(-40px,2vw,40px);bottom:-70px;font-size:clamp(200px,26vw,380px);pointer-events:none}
+
+footer{padding-block:60px 30px;overflow:hidden}
+footer .wm{font-size:clamp(150px,36vw,500px);color:var(--green);display:block}
+.foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;color:#B9C4BD;font-size:14px}
+.foot-row nav{display:flex;gap:18px;flex-wrap:wrap}
+.foot-row a{text-decoration:none;font-weight:600;color:var(--white)}
+
+@media (max-width:900px){
+  .statements,.duo,.about{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .b-wide{grid-column:span 2}
+  .works{grid-template-columns:1fr 1fr}
+  .w1{grid-column:span 2}
+  .panel.dark{min-height:520px}
 }
-
-/* ---------- TRABAJOS ---------- */
-.work .wrap{display:grid; grid-template-columns:1fr 1fr; gap:clamp(10px,1.4vw,20px)}
-.proj{position:relative; display:block; aspect-ratio:1/1; overflow:hidden; max-width:100%}
-.proj .art{position:absolute; inset:0; transition:transform 1s var(--ease)}
-.proj:hover .art{transform:scale(1.035)}
-.work .wrap:hover .proj:not(:hover) .art{filter:brightness(.55)}
-.proj .art{transition:transform 1s var(--ease), filter .4s var(--ease)}
-@media (max-width:760px){ .work .wrap{grid-template-columns:1fr} }
-
-/* piezas de muestra (reemplazar por imágenes) */
-.a1{background:var(--yellow); display:grid; place-items:center}
-.a1 b{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:clamp(3.4rem,10vw,7.5rem); color:#000; text-transform:uppercase; letter-spacing:-.03em; line-height:.8; text-align:center; transform:scaleY(1.3)}
-.a2{background:repeating-conic-gradient(#111 0 25%, #f2f2f2 0 50%) 0 0/25% 25%; display:grid; place-items:center}
-.a2 i{display:grid; place-items:center; width:62%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 35% 30%, #555, #000 65%)}
-.a2 b{font-family:var(--cond); font-style:italic; font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:clamp(3rem,9vw,6.5rem); color:var(--accent); line-height:1}
-.a3{background:linear-gradient(180deg,#F3EEE2 0 62%, #CFC4A9 62%); display:flex; justify-content:center; align-items:center; gap:7%}
-.a3 i{display:block; width:24%; aspect-ratio:1/1.85; border-radius:14px; position:relative; box-shadow:0 26px 30px -18px rgba(0,0,0,.5)}
-.a3 i:nth-child(1){background:linear-gradient(90deg,#e8457a,#ff9ac0 40%,#e8457a)}
-.a3 i:nth-child(2){background:linear-gradient(90deg,#6aa84f,#c6f08d 40%,#6aa84f)}
-.a3 i::before{content:"EXTRACTO"; position:absolute; inset:16% 0 auto; text-align:center; font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:clamp(.8rem,2.2vw,1.35rem); color:#fff; text-shadow:0 1px 0 rgba(0,0,0,.25)}
-.a3 i::after{content:"IMPORTADO"; position:absolute; inset:30% 0 auto; text-align:center; font-family:var(--sans); font-weight:700; font-size:clamp(.4rem,.9vw,.6rem); letter-spacing:.2em; color:#fff}
-.a4{background:radial-gradient(90% 70% at 50% 25%, #8a2a12 0%, #2a0a04 60%, #120402 100%); display:grid; align-content:center; padding:8%}
-.a4 b{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:clamp(3rem,10vw,7rem); color:#FF3B1F; line-height:.82; text-transform:uppercase; letter-spacing:-.02em}
-.a5{background:radial-gradient(80% 80% at 50% 40%, #FFD43B, #F2B705); display:grid; place-items:center}
-.a5 svg{width:42%; height:auto}
-.a6{background:#000; display:grid; place-items:center}
-.a6 .ast{font-family:var(--sans); font-weight:700; color:#fff; font-size:clamp(14rem,40vw,26rem); line-height:1; transform:translateY(.2em)}
-
-/* ---------- ESTUDIO ---------- */
-.studio .wrap{padding-block:clamp(5rem,10vw,8rem); display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,6vw,5rem); align-items:start}
-.photo{aspect-ratio:5/3; max-width:100%; background:linear-gradient(180deg,#ECECEC,#CFCFCF); position:relative; overflow:hidden}
-.photo svg{position:absolute; left:50%; bottom:0; width:56%; transform:translateX(-50%)}
-.photo small{position:absolute; top:.8rem; left:.9rem; font-family:var(--label); text-transform:uppercase; letter-spacing:0; font-size:.7rem; color:#777}
-.studio .copy{display:grid; gap:1.4rem; min-width:0}
-.studio h2{font-size:clamp(2.6rem,6vw,4.8rem)}
-.rot{display:inline-block; position:relative; vertical-align:bottom; height:1.06em; overflow:hidden; transition:width .5s var(--ease)}
-.rot span{position:absolute; left:0; bottom:0; line-height:1.06; font:inherit; color:var(--accent); white-space:nowrap; transform:translateY(110%); opacity:0}
-.rot span.on{transform:none; opacity:1; transition:transform .55s var(--ease), opacity .25s linear}
-.rot span.off{transform:translateY(-110%); opacity:0; transition:transform .55s var(--ease), opacity .35s linear}
-.studio p{margin:0; color:var(--grey); font-size:1.08rem; line-height:1.75; max-width:46ch}
-.studio p em{color:var(--white)}
-.studio .btn{justify-self:start; margin-top:.6rem}
-@media (max-width:860px){ .studio .wrap{grid-template-columns:1fr} }
-
-/* ---------- BANDA BLANCA ---------- */
-.light{background:var(--white); color:var(--black)}
-.light .wrap{padding-block:clamp(4rem,8vw,7rem); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(3.5rem,5vw,3rem) clamp(1.5rem,3vw,2.5rem)}
-.card{display:grid; gap:1.6rem; align-content:start; min-width:0}
-.card .pic{aspect-ratio:1/1; max-width:100%; overflow:hidden; display:grid; place-items:center; position:relative}
-.card h3{font-size:clamp(2.6rem,4.4vw,3.6rem)}
-.card p{margin:0; color:var(--grey-ink); font-size:1.08rem; line-height:1.75}
-.card .btn{justify-self:start}
-@media (max-width:960px){ .light .wrap{grid-template-columns:1fr} }
-.p1{background:#000; padding:8%}
-.p1 .stack{width:100%; display:grid}
-.p1 .stack span{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); text-transform:uppercase; font-size:clamp(1.6rem,5.6vw,2.8rem); line-height:1; padding:.15em .25em; overflow:hidden; white-space:nowrap}
-.p1 .s1{background:#1d1d1d; color:#FF4E1A; width:86%; margin-left:6%}
-.p1 .s2{background:#fff; color:#000; width:90%; margin-left:3%}
-.p1 .s3{background:#FF4E1A; color:#000; width:94%}
-.p2{background:#1a1a1a}
-.p2 .grid{position:absolute; inset:9%; display:grid; grid-template-columns:repeat(3,1fr); gap:6px}
-.p2 .grid i{display:block}
-.p3{background:var(--yellow)}
-.p3 b{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:clamp(3.4rem,9vw,5.6rem); text-transform:uppercase; line-height:.85; text-align:center; color:#000}
-
-/* ---------- CONTACTO ---------- */
-.club .wrap{padding-block:clamp(5rem,10vw,8rem) 0; display:grid; gap:1.8rem; max-width:860px}
-.mega{position:relative; padding-top:clamp(3.5rem,13vw,8rem)}
-.mega .script{position:absolute; left:0; top:0; font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); text-transform:uppercase; letter-spacing:-.01em; color:var(--accent); font-size:clamp(3rem,13vw,8rem); line-height:.8; z-index:2; pointer-events:none; white-space:nowrap}
-.mega .word{font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); text-transform:uppercase; font-size:clamp(6.5rem,31vw,19rem); line-height:.8; letter-spacing:-.02em; display:inline-flex; align-items:flex-start}
-.mega .word sup{font-family:var(--sans); font-weight:700; font-size:.14em; line-height:1; margin-left:.06em; margin-top:.05em}
-.club h2{font-size:clamp(2.6rem,7vw,4.6rem); margin-top:1.5rem}
-.club .aside{margin:-1.2rem 0 0; font-family:var(--label); color:var(--dim); letter-spacing:.06em; font-size:1rem}
-.club p.body{margin:0; font-size:1.08rem; line-height:1.75; max-width:56ch}
-.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
-.chat{margin-top:.6rem; background:#0D0D0D; border:1px solid #262626; display:grid; grid-template-rows:auto 1fr auto auto}
-.chat-head{display:flex; align-items:center; gap:.85rem; padding:1rem 1.1rem; background:#141414; border-bottom:1px solid #262626}
-.chat-head .av{width:42px; height:42px; display:grid; place-items:center; background:var(--accent); color:#000; font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); font-size:1.5rem; flex:none}
-.chat-head div{display:grid; line-height:1.2; min-width:0}
-.chat-head strong{font-size:1rem}
-.chat-head small{font-size:.8rem; color:var(--accent)}
-.chat-head .skip{margin-left:auto; font-size:.8rem; text-transform:uppercase; color:var(--grey); border-bottom:1px solid currentColor; padding-bottom:1px; white-space:nowrap}
-.chat-head .skip:hover{color:var(--white)}
-.chat-body{padding:1.3rem 1.1rem; display:flex; flex-direction:column; gap:.55rem; min-height:260px; max-height:440px; overflow-y:auto; background:#0A0A0A; background-image:radial-gradient(#1a1a1a 1px, transparent 1px); background-size:18px 18px}
-.msg{max-width:82%; padding:.7rem .9rem .5rem; font-size:1rem; line-height:1.45; animation:pop .35s var(--ease) both; overflow-wrap:anywhere}
-.msg time{display:block; text-align:right; font-size:.68rem; opacity:.6; margin-top:.15rem}
-.msg.in{align-self:flex-start; background:#1E1E1E; color:var(--white)}
-.msg.out{align-self:flex-end; background:var(--accent); color:#000}
-.msg.typing{display:flex; gap:5px; padding:.9rem 1rem}
-.msg.typing i{width:7px; height:7px; background:#888; animation:blink 1s infinite}
-.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
-@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
-@keyframes pop{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
-.wa{display:flex; align-items:center; justify-content:center; gap:.6rem; align-self:stretch; margin-top:.4rem; padding:1.1rem; background:var(--accent); color:#000; font-weight:700; text-transform:uppercase; font-size:1rem; animation:pop .35s var(--ease) both; transition:background .2s}
-.wa:hover{background:var(--white)}
-.wa svg{width:22px; height:22px}
-.chips{display:flex; flex-wrap:wrap; gap:.5rem; padding:.9rem 1.1rem; border-top:1px solid #262626}
-.chips:empty{display:none}
-.chips button{font:inherit; font-size:.95rem; padding:.7rem 1rem; background:transparent; color:var(--white); border:1px solid #3a3a3a; cursor:pointer; transition:background .2s, color .2s, border-color .2s}
-.chips button:hover{background:var(--white); color:#000; border-color:var(--white)}
-.chat-input{display:flex; border-top:1px solid #262626}
-.chat-input input{flex:1; min-width:0; font:inherit; font-size:1rem; padding:1.1rem; background:#141414; color:var(--white); border:0; border-radius:0}
-.chat-input input::placeholder{color:#666}
-.chat-input input:disabled{opacity:.6}
-.chat-input button{width:60px; flex:none; display:grid; place-items:center; background:var(--accent); color:#000; border:0; cursor:pointer}
-.chat-input button:disabled{background:#2a2a2a; color:#666; cursor:default}
-.chat-input button svg{width:22px; height:22px}
-.phone{margin:.4rem 0 0; color:var(--grey); font-size:1rem}
-.phone span{color:var(--white); user-select:all}
-
-/* Botón flotante de WhatsApp */
-.fab{position:fixed; right:calc(var(--gr) - 4px); bottom:calc(1.2rem + env(safe-area-inset-bottom,0px)); z-index:20; display:flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; background:var(--accent); color:#000; font-weight:700; text-transform:uppercase; font-size:.9rem; transform:translateY(160%); transition:transform .45s var(--ease), background .2s}
-.fab.show{transform:none}
-.fab:hover{background:var(--white)}
-.fab svg{width:22px; height:22px}
-
-/* ---------- FOOTER ---------- */
-footer .wrap{padding-block:clamp(4rem,8vw,6rem) 2.5rem; display:grid; justify-items:center; gap:2.4rem; text-align:center}
-.social{display:flex; flex-wrap:wrap; justify-content:center; gap:2.8rem; list-style:none; margin:0; padding:0}
-.social a{display:flex; align-items:center; gap:.7rem; font-family:var(--cond); font-weight:900; font-variation-settings:"wght" 900, "wdth" var(--w-display); text-transform:uppercase; font-size:1.7rem; line-height:1; transition:color .2s}
-.social a:hover{color:var(--accent)}
-.social svg{width:30px; height:30px}
-footer small{font-size:1rem; color:var(--white)}
-
-/* Rol etiqueta: IBM Plex Mono */
-.btn, .overlay a, .photo small, .club .aside, .chips button, .wa, .fab, .chat-head .skip, .chat-input input, .phone{font-family:var(--label)}
-.btn, .overlay a, .photo small, .club .aside, .chips button, .wa, .fab, .chat-head .skip{font-weight:500; font-variation-settings:normal; letter-spacing:0}
-
-@media (prefers-reduced-motion:reduce){ *{transition-duration:0s !important} }
+@media (max-width:600px){
+  .nav nav a:not(.on){display:none}
+  .bento,.works{grid-template-columns:1fr}
+  .b-wide,.w1{grid-column:span 1}
+  .card{grid-template-columns:96px 1fr;margin-top:-26px}
+  .panel.light{padding:28px 14px;min-height:0}
+  .device{right:-120px;transform:rotate(-7deg) scale(.8);transform-origin:top right}
+  .o1,.o3{left:4%}.o2,.o4{right:4%}
+  .o1{width:120px;height:84px}.o1::after{font-size:30px}
+  .collage{min-height:540px}
+  .brief .pill{padding:10px 14px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap">
-    <a class="logo" id="logo" href="#top" aria-label="Eiro Studio, inicio"><span class="cut" aria-hidden="true"><i>G</i><i>a</i><i>i</i><i>t</i></span><span class="b" aria-hidden="true">Eiro</span><span class="l" aria-hidden="true"><i>S</i><i>t</i><i>u</i><i>d</i><i>i</i><i>o</i></span><sup aria-hidden="true">™</sup></a>
-    <button class="star" id="star" aria-label="Abrir menú" aria-expanded="false" aria-controls="overlay">
-      <span class="a" aria-hidden="true">*</span>
-      <svg class="x" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l14 14"/><path d="M19 5 5 19"/></g></svg>
-    </button>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="EIRO, inicio"><span class="wm">EIRO</span></a>
+    <nav aria-label="Secciones">
+      <a class="on" href="#top">Home</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#estudio">Estudio</a>
+    </nav>
+    <a class="pill p-green" href="#contacto">Hablemos</a>
   </div>
 </header>
 
-<nav class="overlay" id="overlay" aria-label="Menú principal">
-  <div class="wrap">
-    <ul>
-      <li><a href="#trabajos">Trabajos</a></li>
-      <li><a href="#trabajos">Logos</a></li>
-      <li><a href="#estudio">Estudio</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
-  </div>
-</nav>
-
 <main id="top">
-
-<section class="hero">
-  <div class="wrap">
-    <h1 class="cond">Marcas con calle para los que se animan</h1>
-    <a class="btn" href="#contacto">Trabajemos juntos</a>
-    <div class="illus" aria-label="Ilustración de marca (reemplazar)">
-      <svg viewBox="0 0 300 260" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <!-- personaje de muestra: mano con lápiz sobre patineta -->
-        <path d="M70 196c40 14 120 14 170-4"/>
-        <circle cx="105" cy="214" r="10"/><circle cx="105" cy="214" r="3" fill="#fff"/>
-        <circle cx="205" cy="210" r="10"/><circle cx="205" cy="210" r="3" fill="#fff"/>
-        <path d="M118 182c-8-26-6-58 6-80 10-18 30-24 46-16 14 7 18 22 16 36"/>
-        <path d="M186 122c10-4 22 0 26 10s-2 22-12 26"/>
-        <path d="M200 158c-6 14-24 24-46 26-14 1-28-1-36-2"/>
-        <path d="M150 92c-4-22 2-46 14-60"/><path d="M164 32l8-6 4 10"/>
-        <path d="M132 100c-6-18-4-36 4-50"/>
-        <path d="M40 120l170-60"/><path d="M210 60l22-6-14 18z" fill="#fff"/><path d="M40 120l-10 4"/>
-        <path d="M46 112l6 16M58 108l6 16"/>
-        <path d="M150 140c6 4 14 4 20 0"/><circle cx="146" cy="124" r="3" fill="#fff"/><circle cx="172" cy="122" r="3" fill="#fff"/>
-        <path d="M228 96c10-14 30-20 44-16M232 108c14-8 30-8 40-2M234 120c10-2 22 0 30 6"/>
-      </svg>
+  <div class="wrap hero">
+    <h1 aria-label="EIRO"><span class="wm giant">EIRO</span></h1>
+    <div class="hero-row">
+      <p>Estudio creativo. Marca, contenido, redes y eventos desde Buenos Aires.</p>
+      <a class="pill p-white" href="#trabajos">Ver trabajos →</a>
     </div>
   </div>
-</section>
 
-<section class="work" id="trabajos" aria-label="Trabajos">
-  <div class="wrap">
-    <a class="proj" href="#contacto" aria-label="El Calentón"><div class="art a1"><b>El<br>Calentón</b></div></a>
-    <a class="proj" href="#contacto" aria-label="Anthony Godfather"><div class="art a2"><i><b>Godfather</b></i></div></a>
-    <a class="proj" href="#contacto" aria-label="Extracto Importado"><div class="art a3"><i></i><i></i></div></a>
-    <a class="proj" href="#contacto" aria-label="Noche Latina"><div class="art a4"><b>Noche<br>Latina</b></div></a>
-    <a class="proj" href="#contacto" aria-label="Luli Maccarrone"><div class="art a5"><svg viewBox="0 0 100 120" aria-hidden="true"><ellipse cx="50" cy="16" rx="16" ry="9" fill="#000"/><circle cx="50" cy="46" r="20" fill="#fff" stroke="#000" stroke-width="3.5"/><circle cx="43" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="57" cy="44" r="7" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="44" cy="45" r="2.4" fill="#000"/><circle cx="58" cy="45" r="2.4" fill="#000"/><path d="M44 58q6 4 12 0" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 66v24M50 90l-12 20M50 90l14 14 10-6" stroke="#000" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="50" cy="114" rx="28" ry="3" fill="rgba(0,0,0,.25)"/></svg></div></a>
-    <a class="proj" href="#contacto" aria-label="Logos"><div class="art a6"><span class="ast" aria-hidden="true">*</span></div></a>
+  <div class="wrap statements">
+    <div class="st st-1"><h2>Marcas con calle</h2><small>Identidades pensadas para verse igual de bien en un afiche, en un reel y en la pista.</small></div>
+    <div class="st st-2"><h2>Hype bien hecho</h2><small>Teasers, line ups y contenido para eventos masivos, artistas y marcas que quieren que se hable de ellas.</small></div>
   </div>
-</section>
 
-<section class="studio" id="estudio">
-  <div class="wrap">
-    <div class="photo" aria-label="Foto de Matías (reemplazar)">
-      <small>Foto · reemplazar</small>
-      <svg viewBox="0 0 100 70" aria-hidden="true"><circle cx="50" cy="24" r="16" fill="#9a9a9a"/><path d="M14 70q4-28 36-28t36 28z" fill="#6f6f6f"/></svg>
-    </div>
-    <div class="copy">
-      <h2 class="cond">La suerte acompaña a los <span class="rot" id="rot"><span class="on">Audaces</span><span>Valientes</span><span>Inquietos</span><span>Rebeldes</span><span>Salvajes</span><span>Soñadores</span><span>Raros</span><span>Inconformes</span><span>Disruptivos</span></span></h2>
-      <p>Soy Matías Gaiteiro, fundador y director creativo de Eiro, un estudio creativo de Buenos Aires.</p>
-      <p>Hace más de diez años diseño marcas para los rebeldes, los valientes y los que rompen el molde, la gente que dobla cuando todos siguen derecho.</p>
-      <p>Trabajo con artistas, eventos masivos de música, marcas de consumo y proyectos ambiciosos que no tienen miedo de destacarse y llevarse toda la atención.</p>
-      <p>Si estás por lanzar algo nuevo o querés repensar lo que ya tenés, uso estrategia y storytelling para que la gente <em>mire dos veces</em> y no se olvide de vos.</p>
-      <a class="btn" href="#contacto">Más sobre mí</a>
-    </div>
-  </div>
-</section>
-
-<section class="light" id="servicios">
-  <div class="wrap">
-    <article class="card">
-      <a class="pic p1" href="#contacto"><div class="stack"><span class="s1">Naming</span><span class="s2">Manual de marca</span><span class="s3">Identidad</span></div></a>
-      <h3 class="cond">Branding</h3>
-      <p>Naming, identidad visual y manual de marca. Un sistema completo para que tu proyecto se vea igual de bien en un logo, una etiqueta o una pantalla de diez metros.</p>
-      <a class="btn dark" href="#contacto">Ver más</a>
-    </article>
-    <article class="card">
-      <a class="pic p2" href="#contacto"><div class="grid"><i style="background:#FF8DBE"></i><i style="background:#fff"></i><i style="background:#FFF200"></i><i style="background:#fff"></i><i style="background:#FF4E1A"></i><i style="background:#fff"></i><i style="background:#FFF200"></i><i style="background:#fff"></i><i style="background:#FF8DBE"></i></div></a>
-      <h3 class="cond">Contenido y redes</h3>
-      <p>Gestión de marketing, dirección de contenido, UGC y piezas para Instagram y TikTok. Estrategia, producción y calendario con un equipo que crece junto a tu marca.</p>
-      <a class="btn dark" href="#contacto">Ver más</a>
-    </article>
-    <article class="card">
-      <a class="pic p3" href="#contacto"><b>Line<br>up<br>11.10</b></a>
-      <h3 class="cond">Eventos</h3>
-      <p>Identidad y comunicación para fiestas, festivales y lanzamientos: line ups, teasers, pantallas y todo lo que se ve antes, durante y después de la noche.</p>
-      <a class="btn dark" href="#contacto">Ver más</a>
-    </article>
-  </div>
-</section>
-
-<section class="club" id="contacto">
-  <div class="wrap">
-    <div class="mega" aria-label="Hablemos, Eiro">
-      <span class="script" aria-hidden="true">Hablemos</span>
-      <span class="word" aria-hidden="true">Eiro<sup>™</sup></span>
-    </div>
-    <h2 class="cond">Contanos qué estás armando</h2>
-    <p class="aside">(Directo por WhatsApp, sin formularios)</p>
-
-    <div class="chat" id="chat">
-      <div class="chat-head">
-        <span class="av" aria-hidden="true">E</span>
-        <div><strong>Eiro Studio</strong><small id="status">en línea</small></div>
-        <a class="skip" href="https://wa.me/5491134850669" target="_blank" rel="noopener">Abrir WhatsApp</a>
+  <section id="servicios">
+    <div class="wrap">
+      <div class="kicker"><h2>Servicios</h2><p>Tomá uno o combinalos. Todo sale del mismo equipo, con la misma mirada.</p></div>
+      <div class="duo">
+        <div class="panel light">
+          <div class="stack">
+            <a class="card c1" href="#contacto"><div class="ph"><div class="g-book"></div></div><div class="meta"><div><div class="brand">Branding</div><div class="name">Identidad + manual de marca interactivo</div></div><div class="foot"><span>Esencial · Pro · Empresa</span></div></div></a>
+            <a class="card c2" href="#contacto"><div class="ph"><div class="g-phone"></div></div><div class="meta"><div><div class="brand">Marketing y redes</div><div class="name">Estrategia, community, guiones y UGC</div></div><div class="foot"><span>Mensual</span></div></div></a>
+            <a class="card c3" href="#contacto"><div class="ph"><div class="g-ticket"></div></div><div class="meta"><div><div class="brand">Eventos</div><div class="name">Gráfica y multimedia completa del evento</div></div><div class="foot"><span>Por evento</span></div></div></a>
+            <a class="card c4" href="#contacto"><div class="ph"><div class="g-flyer"></div></div><div class="meta"><div><div class="brand">Locales</div><div class="name">Diseño mensual para discotecas y locales</div></div><div class="foot"><span>Consultar</span><span>→</span></div></div></a>
+          </div>
+        </div>
+        <div class="panel dark" aria-hidden="true">
+          <div class="device"><div class="screen">
+            <div class="clock">10:40</div>
+            <div class="apps">
+              <div class="app"><div class="icon eiro"><span class="wm center">E</span></div>Eiro</div>
+              <div class="app"><div class="icon cal"><b>SÁB</b><span>17</span></div>Calendario</div>
+              <div class="app"><div class="icon wa"></div>WhatsApp</div>
+              <div class="app"><div class="icon ig"></div>Instagram</div>
+            </div>
+          </div></div>
+        </div>
       </div>
-      <div class="chat-body" id="log" aria-live="polite">
-        <div class="msg in">Hola, soy Matías de Eiro.<time>ahora</time></div>
-        <div class="msg in">¿Qué estás armando?<time>ahora</time></div>
-      </div>
-      <div class="chips" id="chips">
-        <button type="button">Una marca nueva</button>
-        <button type="button">Contenido y redes</button>
-        <button type="button">Un evento</button>
-        <button type="button">Otra cosa</button>
-      </div>
-      <form class="chat-input" id="chatForm" autocomplete="off">
-        <label for="chatText" class="sr">Escribí tu respuesta</label>
-        <input id="chatText" type="text" placeholder="Elegí una opción arriba" disabled>
-        <button type="submit" aria-label="Enviar" disabled id="chatSend"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l2.6 7.2L14 12l-8.4 1.3z" fill="currentColor"/></svg></button>
-      </form>
     </div>
-    <p class="phone">O escribime directo al <span>+54 9 11 3485-0669</span></p>
-  </div>
-</section>
+  </section>
 
+  <section style="padding-top:0">
+    <div class="wrap bento">
+      <div class="b b-white"><div class="faces" aria-hidden="true"><div class="face"></div><div class="face on"></div><div class="face"></div></div><div class="go"><span>Artistas y DJs</span><span>→</span></div></div>
+      <div class="b b-chrome"><div class="chrome" aria-hidden="true" style="font-size:clamp(200px,22vw,300px)"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div><span class="pill p-green p-sm">Silver Metal</span></div>
+      <a class="b b-sage" href="#trabajos"><h3>Trending</h3><div class="go"><span>Lo último que hicimos</span><span>→</span></div></a>
+      <div class="b b-dark"><div class="chrome green" aria-hidden="true" style="font-size:clamp(170px,18vw,250px);align-self:center;margin-block:auto"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div><svg class="heart" viewBox="0 0 24 22" fill="currentColor" aria-hidden="true"><path d="M12 21 2.6 11.8A5.6 5.6 0 0 1 12 4.2a5.6 5.6 0 0 1 9.4 7.6Z"/></svg></div>
+      <a class="b b-green" href="#contacto"><h3>Lanzá tu marca</h3><div class="go"><span>Arrancar un proyecto</span><span>→</span></div></a>
+      <div class="b b-dark"><div class="tags">
+        <span class="pill">Branding</span><span class="pill">Teasers</span>
+        <span class="pill on">Manual de marca</span><span class="pill">Line up</span>
+        <span class="pill">Reels</span><span class="pill on">UGC</span>
+        <span class="pill">TikTok</span><span class="pill">Flyers</span>
+        <span class="pill on">Eventos</span><span class="pill">Pantallas</span>
+      </div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="collage">
+        <div class="obj o1" aria-hidden="true"></div><div class="obj o2" aria-hidden="true"></div><div class="obj o3" aria-hidden="true"></div><div class="obj o4" aria-hidden="true"></div>
+        <div class="photo"><div class="chrome" aria-hidden="true"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div></div>
+        <span class="label" style="left:24%;top:30%">Logo</span>
+        <span class="label" style="right:22%;top:34%;transform:rotate(3deg)">Manual de marca</span>
+        <span class="label" style="left:22%;bottom:32%;transform:rotate(2deg)">Tarjetas</span>
+        <span class="label" style="right:24%;bottom:30%">Merch</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabajos" style="padding-top:0">
+    <div class="wrap">
+      <div class="poster">
+        <div class="poster-top"><h2>Descubrí lo que hacemos</h2><a class="pill p-green p-sm" href="#contacto">eiro.studio</a></div>
+        <div class="works">
+          <article class="w w1"><span class="pill p-white p-sm">Eventos</span><div class="bigtxt">EL<br>CALEN<br>TÓN</div><h3>El Calentón<small>Teasers de line up y piezas para redes</small></h3></article>
+          <article class="w w2"><span class="pill p-green p-sm">Marketing y redes</span><div class="bottle" aria-hidden="true"></div><h3>Extracto Importado<small>Lanzamientos y videos con creadoras UGC</small></h3></article>
+          <article class="w w3"><span class="pill p-green p-sm">Branding</span><div class="grid-ill" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>Crisger<small>Identidad y manual de marca interactivo</small></h3></article>
+        </div>
+        <span class="wm" aria-hidden="true">EIRO</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="estudio" style="padding-top:0">
+    <div class="wrap about">
+      <div class="typer" aria-label="GAITEIRO se convierte en EIRO"><span id="tw"><span class="g">GAIT</span>EIRO</span><span class="cur"></span></div>
+      <div>
+        <p>EIRO sale de Gaiteiro. Le sacamos el apellido y nos quedamos con un estudio que hace marca, contenido, marketing y eventos.</p>
+        <p>Más de diez años diseñando para artistas, productoras y marcas en Argentina y Miami. Casi todos nuestros clientes llegaron por vínculos de años, y eso es lo que más cuidamos.</p>
+        <div class="sig"><div class="av"><span class="wm center">E</span></div><div><b>Matías Gaiteiro</b><span>Fundador y director creativo</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta">
+        <h2>Contanos qué estás armando</h2>
+        <div class="chips" role="group" aria-label="Elegí servicios">
+          <button class="pill chip" type="button" id="c1" aria-pressed="false">Branding</button>
+          <button class="pill chip" type="button" id="c2" aria-pressed="false">Marketing y redes</button>
+          <button class="pill chip" type="button" id="c3" aria-pressed="false">Eventos</button>
+          <button class="pill chip" type="button" id="c4" aria-pressed="false">Locales</button>
+        </div>
+        <form class="brief" id="brief">
+          <label for="q" style="position:absolute;left:-9999px">Tu proyecto</label>
+          <input id="q" name="q" autocomplete="off" placeholder="Ej: lanzo una marca de ropa en marzo">
+          <button class="pill p-dark" type="submit" style="background:var(--black);color:var(--green)">Enviar por WhatsApp</button>
+        </form>
+        <span class="num">+54 9 11 3485-0669</span>
+        <div class="chrome" aria-hidden="true"><span class="depth"><span class="wm">E</span></span><span class="face2"><span class="wm">E</span></span></div>
+      </div>
+    </div>
+  </section>
 </main>
-<a class="fab" id="fab" href="https://wa.me/5491134850669?text=Hola%20Mat%C3%ADas%2C%20vi%20la%20web%20de%20Eiro" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>WhatsApp</a>
 
 <footer>
   <div class="wrap">
-    <ul class="social">
-      <li><a href="https://wa.me/5491134850669" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>WhatsApp</a></li>
-      <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.6" cy="6.4" r="1.3" fill="currentColor"/></svg>Instagram</a></li>
-      <li><a href="https://www.behance.net/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h6.2c2.2 0 3.5 1.1 3.5 2.8 0 1.2-.7 2-1.6 2.3 1.3.3 2.1 1.3 2.1 2.7 0 2-1.5 3.2-3.9 3.2H2zm2.6 4.4h3.1c.9 0 1.4-.4 1.4-1.1s-.5-1.1-1.4-1.1H4.6zm0 4.6h3.4c1 0 1.6-.5 1.6-1.3s-.6-1.3-1.6-1.3H4.6zM15 7h6v1.4h-6zm3.1 2.4c2.6 0 4 1.8 3.9 4.6h-5.6c.1 1.3.9 2 2 2 .8 0 1.4-.4 1.6-1h1.9c-.4 1.7-1.8 2.7-3.6 2.7-2.4 0-4-1.6-4-4.1 0-2.5 1.6-4.2 3.8-4.2zm-1.7 3.3h3.5c-.1-1.1-.7-1.7-1.7-1.7s-1.6.6-1.8 1.7z" fill="currentColor"/></svg>Behance</a></li>
-    </ul>
-    <small>© 2026 Eiro Studio. Todos los derechos reservados</small>
+    <span class="wm" aria-hidden="true">EIRO</span>
+    <div class="foot-row"><span>EIRO™ · Estudio creativo · Buenos Aires</span><nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#estudio">Estudio</a><a href="#contacto">Contacto</a></nav></div>
   </div>
 </footer>
 
 <script>
-  const star = document.getElementById('star'), ov = document.getElementById('overlay');
-  const setMenu = o => { ov.classList.toggle('open', o); star.setAttribute('aria-expanded', o); star.setAttribute('aria-label', o ? 'Cerrar menú' : 'Abrir menú'); document.documentElement.style.overflow = o ? 'hidden' : ''; };
-  star.addEventListener('click', () => setMenu(!ov.classList.contains('open')));
-  ov.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+(function(){
+  var root=document.documentElement;
+  function checkFont(){try{if(document.fonts&&document.fonts.check('800 20px "futura-pt-condensed"'))root.classList.add('has-futura')}catch(e){}}
+  checkFont(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(checkFont);
 
-  const rot = document.getElementById('rot'), words = [...rot.querySelectorAll('span')]; let i = 0;
-  const fit = () => { rot.style.width = words[i].offsetWidth + 'px'; };
-  fit(); addEventListener('resize', fit); document.fonts && document.fonts.ready.then(fit);
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setInterval(() => {
-      const cur = words[i]; i = (i + 1) % words.length; const nxt = words[i];
-      cur.classList.remove('on'); cur.classList.add('off');
-      nxt.classList.remove('off'); void nxt.offsetWidth; nxt.classList.add('on'); fit();
-      setTimeout(() => cur.classList.remove('off'), 600);   // vuelve abajo sin transición, invisible
-    }, 1600);
-  }
-
-  // Logo: GAITEIRO -> EIRO
-  const logo = document.getElementById('logo'), cut = [...logo.querySelectorAll('.cut i')], st = [...logo.querySelectorAll('.l i')];
-  let timers = [];
-  const playLogo = () => {
-    timers.forEach(clearTimeout); timers = [];
-    logo.classList.remove('done'); cut.forEach(c => c.classList.remove('gone')); st.forEach(c => c.classList.remove('in'));
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { cut.forEach(c => c.classList.add('gone')); st.forEach(c => c.classList.add('in')); logo.classList.add('done'); return; }
-    // 1) se borra GAIT (de atrás hacia adelante, como un backspace)
-    [...cut].reverse().forEach((c, k) => timers.push(setTimeout(() => c.classList.add('gone'), 1000 + k * 150)));
-    // 2) recién después se escribe STUDIO
-    const t0 = 1000 + cut.length * 150 + 350;
-    st.forEach((c, k) => timers.push(setTimeout(() => c.classList.add('in'), t0 + k * 110)));
-    timers.push(setTimeout(() => logo.classList.add('done'), t0 + st.length * 110 + 100));
-  };
-  playLogo();
-  logo.addEventListener('mouseenter', () => { if (logo.classList.contains('done')) playLogo(); });
-
-  // Header que se esconde al bajar + botón flotante
-  const bar = document.querySelector('.top'), fab = document.getElementById('fab'), contact = document.getElementById('contacto');
-  let lastY = scrollY;
-  addEventListener('scroll', () => {
-    const y = scrollY;
-    bar.classList.toggle('hide', y > lastY && y > 200 && !ov.classList.contains('open'));
-    const r = contact.getBoundingClientRect();
-    fab.classList.toggle('show', y > 600 && !(r.top < innerHeight && r.bottom > 0));
-    lastY = y;
-  }, { passive: true });
-
-  // Chat simulado -> WhatsApp
-  const PHONE = '5491134850669';
-  const log = document.getElementById('log'), chips = document.getElementById('chips');
-  const form = document.getElementById('chatForm'), input = document.getElementById('chatText'), send = document.getElementById('chatSend'), status = document.getElementById('status');
-  const data = {}; let step = 'tipo';
-  const now = () => new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-  const add = (txt, who) => { const d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = txt; const t = document.createElement('time'); t.textContent = now(); d.append(t); log.append(d); log.scrollTop = log.scrollHeight; return d; };
-  const bot = (txt, delay = 900) => new Promise(res => {
-    const t = document.createElement('div'); t.className = 'msg in typing'; t.innerHTML = '<i></i><i></i><i></i>'; log.append(t); log.scrollTop = log.scrollHeight; status.textContent = 'escribiendo…';
-    setTimeout(() => { t.remove(); status.textContent = 'en línea'; add(txt, 'in'); res(); }, delay);
-  });
-  const ask = ph => { input.disabled = false; send.disabled = false; input.placeholder = ph; input.focus({ preventScroll: true }); };
-  const lock = () => { input.disabled = true; send.disabled = true; input.value = ''; };
-
-  chips.addEventListener('click', async e => {
-    const b = e.target.closest('button'); if (!b || step !== 'tipo') return;
-    data.tipo = b.textContent; add(b.textContent, 'out'); chips.innerHTML = ''; step = 'nombre';
-    await bot('Buenísimo. ¿Cómo te llamás?'); ask('Tu nombre');
-  });
-
-  form.addEventListener('submit', async e => {
+  var picked=[];
+  [].slice.call(document.querySelectorAll('.chip')).forEach(function(c){c.addEventListener('click',function(){
+    var on=c.getAttribute('aria-pressed')!=='true';c.setAttribute('aria-pressed',on);
+    var t=c.textContent;picked=on?picked.concat(t):picked.filter(function(x){return x!==t});
+  })});
+  var q=document.getElementById('q');
+  document.getElementById('brief').addEventListener('submit',function(e){
     e.preventDefault();
-    const v = input.value.trim(); if (!v) return;
-    add(v, 'out'); lock();
-    if (step === 'nombre') {
-      data.nombre = v; step = 'detalle';
-      await bot(`Un gusto, ${v.split(' ')[0]}. Contame en una línea de qué se trata y para cuándo lo necesitás.`, 1100); ask('Ej: marca para un bar que abre en marzo');
-    } else if (step === 'detalle') {
-      data.detalle = v; step = 'fin';
-      await bot('Perfecto. Te dejo el mensaje armado para que me llegue directo a WhatsApp.', 1000);
-      const msg = `Hola Matías, soy ${data.nombre}. Te escribo desde la web de Eiro.\nQuiero: ${data.tipo}.\n${data.detalle}`;
-      const a = document.createElement('a'); a.className = 'wa'; a.href = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = `${document.querySelector('#fab svg').outerHTML}Enviar por WhatsApp`; log.append(a); log.scrollTop = log.scrollHeight;
-      input.placeholder = 'Listo';
-    }
+    var msg='Hola EIRO! ';
+    if(picked.length)msg+='Me interesa: '+picked.join(', ')+'. ';
+    if(q.value.trim())msg+=q.value.trim();
+    var a=document.createElement('a');a.href='https://wa.me/5491134850669?text='+encodeURIComponent(msg);a.target='_blank';a.rel='noopener';
+    document.body.appendChild(a);a.click();a.remove();
   });
+
+  var tw=document.getElementById('tw');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){tw.textContent='EIRO';return}
+  var full='GAITEIRO';
+  function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  function paint(gray,rest){tw.innerHTML='<span class="g">'+gray+'</span>'+rest}
+  (async function loop(){
+    while(true){
+      for(var i=1;i<=full.length;i++){var s=full.slice(0,i);paint(s.slice(0,Math.min(4,s.length)),s.slice(4));await sleep(110)}
+      await sleep(1300);
+      for(var j=1;j<=4;j++){paint(full.slice(j,4),'EIRO');await sleep(150)}
+      await sleep(2600);
+      for(var k=3;k>=0;k--){tw.textContent='EIRO'.slice(0,k);await sleep(70)}
+      await sleep(300);
+    }
+  })();
+})();
 </script>
+
 </body>
 </html>
