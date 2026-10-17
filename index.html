@@ -203,7 +203,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     <a class="brand" href="#top" aria-label="Eiro, volver al inicio">Eiro<sup>™</sup></a>
     <nav class="nav-links" aria-label="Principal">
       <a href="#nosotros">Nosotros</a>
-      <a class="hide-m" href="#trabajos">Trabajos</a>
+      <a class="hide-m" href="#trabajos" hidden>Trabajos</a>
       <a class="pill green" href="#contacto">Hablemos</a>
     </nav>
   </div>
@@ -223,7 +223,8 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
   </section>
 
   <!-- 2 y 3. trabajos -->
-  <section class="wrap" id="trabajos" style="padding-bottom:var(--sec)" aria-label="Trabajos">
+  <!-- Trabajos: oculto temporalmente (sacar "hidden" para volver a mostrarlo) -->
+  <section class="wrap" id="trabajos" style="padding-bottom:var(--sec)" aria-label="Trabajos" hidden>
     <div class="featured">
       <a class="card" href="#contacto">
         <div class="img"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013" style="object-position:72% center"></div>
@@ -321,7 +322,7 @@ footer{background:var(--ink);color:var(--paper);padding-block:clamp(48px,7vw,88p
     <div class="foot-top">
       <div class="foot-word">Eiro<span class="big-tm">™</span></div>
       <div class="foot-col"><b>Contacto</b><a href="https://wa.me/5491134850669" target="_blank" rel="noopener">WhatsApp</a><span>+54 9 11 3485-0669</span><span>Buenos Aires, Argentina</span></div>
-      <div class="foot-col"><b>Navegar</b><a href="#trabajos">Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">¿Querés trabajar con nosotros?</a></div>
+      <div class="foot-col"><b>Navegar</b><a href="#trabajos" hidden>Trabajos</a><a href="#nosotros">Nosotros</a><a href="#contacto">¿Querés trabajar con nosotros?</a></div>
     </div>
     <div class="foot-bottom">
       <span>Estudio creativo estratégico</span>
