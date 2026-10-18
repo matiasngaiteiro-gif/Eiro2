@@ -54,7 +54,7 @@
   --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --nav-h:68px;
   --pad:clamp(20px,2.4vw,32px);
-  --radius:clamp(14px,1.6vw,20px);
+  --radius:0px; /* contenedores e imágenes rectos; la cápsula (.pill) se reserva para botones */
   --sec:clamp(64px,10vw,140px);
   color-scheme:dark;
 }
@@ -72,6 +72,7 @@ p{margin:0}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sec-head{display:block;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:clamp(28px,4vw,48px)}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 /* etiquetas que son títulos (h2): mismo aspecto y alto de línea que la etiqueta en línea */
 h2.eyebrow{line-height:1.55rem;text-wrap:wrap}
@@ -108,8 +109,8 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .rot em.in{animation:rotIn .5s cubic-bezier(.2,.7,.2,1)}
 @keyframes rotOut{to{transform:translateY(-105%);opacity:0}}
 @keyframes rotIn{from{transform:translateY(105%);opacity:0}}
-.hero-foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 48px;margin-top:clamp(32px,4vw,56px);align-items:start}
-.hero-foot p{font-size:clamp(17px,1.5vw,20px);font-weight:500;max-width:46ch}
+.hero-foot{margin-top:clamp(32px,4vw,56px)}
+.hero-foot p{font-size:clamp(17px,1.5vw,20px);font-weight:500;max-width:32ch;text-wrap:balance}
 
 /* trabajos (sección oculta por ahora): destacados */
 .featured{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad)}
@@ -131,16 +132,17 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* manifiesto: bloque claro con foto */
 .band{background:var(--white);color:var(--black);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
-.band-copy h2{font-size:clamp(30px,3.6vw,52px);margin-top:14px}
-.band .eyebrow{color:#5C5C5C}
+.band-copy h2{font-size:clamp(30px,3.6vw,52px)}
+.band .eyebrow{color:#5C5C5C;border-color:rgba(19,19,19,.15)}
 .band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:rgba(19,19,19,.78)}
 .band .pill.white{background:var(--black);color:var(--white)}
 .band .pill.line{color:var(--black)}
-.photo-card .pill.primary{background:var(--black);color:var(--white)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--surface)}
+.photo-card{margin:0;display:flex;flex-direction:column;gap:12px}
+.photo-card .ph{position:relative;flex:1;min-height:440px;overflow:hidden;background:var(--surface)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
-.photo-card .pill{position:absolute;left:16px;bottom:16px}
+.cap{font-size:13px;font-weight:500;color:var(--soft)}
+.band .cap{color:#5C5C5C}
 .band-copy p b{font-weight:800;color:var(--black)}
 .band-copy h2 em{font-style:normal;text-decoration:underline;text-decoration-thickness:.07em;text-underline-offset:.12em}
 
@@ -155,27 +157,28 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* qué hacemos + clientes */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);border-top:1.5px solid var(--ink);padding-top:28px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad)}
 .pillar h3{font-size:clamp(24px,2.4vw,34px)}
-.pillars-head{margin-bottom:20px}
 .pillar p{color:var(--mute);margin-top:12px;max-width:34ch}
 .clients{margin-top:clamp(56px,8vw,96px)}
-.clients-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.clients-list span{font-size:clamp(17px,1.6vw,22px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
+.clients-list{display:flex;flex-wrap:wrap;row-gap:6px;margin-top:14px}
+.clients-list span{font-size:clamp(20px,2vw,28px);font-weight:800;letter-spacing:-.04em;line-height:1.2}
+.clients-list span:not(:last-child)::after{content:"/";margin:0 .45em;font-weight:500;color:var(--soft)}
 
 /* nosotros */
-.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(30px,3.6vw,52px);margin-top:14px}
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,48px) clamp(32px,6vw,80px);align-items:start}
+.story-head{grid-column:1/-1;margin-bottom:0}
+.story h2{font-size:clamp(30px,3.6vw,52px)}
 .founder{margin:0;align-self:end;padding-left:20px;border-left:3px solid var(--accent);max-width:46ch}
 .founder p{font-size:clamp(20px,1.9vw,26px);font-weight:600;line-height:1.4;letter-spacing:-.015em;color:var(--ink)}
 .founder cite{display:block;margin-top:12px;font-style:normal;font-weight:700;font-size:15px}
-.story figure{grid-column:1/-1;margin:0;border-radius:var(--radius);overflow:hidden;height:clamp(280px,40vw,560px);position:relative}
-.story figure img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
-.story figure .pill{position:absolute;left:16px;bottom:16px}
+.story figure{grid-column:1/-1;margin:0}
+.story figure img{width:100%;height:clamp(280px,40vw,560px);object-fit:cover;object-position:center 30%}
+.story figure .cap{margin-top:12px}
 
 /* contacto */
-.contact h2{font-size:clamp(36px,5vw,76px);line-height:.98;letter-spacing:-.05em;max-width:11ch;margin-top:14px}
-.contact .aside{font-size:clamp(18px,1.6vw,22px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
+.contact h2{font-size:clamp(36px,5vw,76px);line-height:.98;letter-spacing:-.05em;max-width:11ch}
+.contact .aside{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
 .contact .row-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:32px}
 .contact .num{font-weight:700;user-select:all}
 
@@ -192,7 +195,7 @@ footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)
 /* tablet */
 @media (max-width:960px){
   .hero-foot,.story,.band{grid-template-columns:1fr}
-  .photo-card{min-height:0;aspect-ratio:4/3}
+  .photo-card .ph{min-height:0;aspect-ratio:4/3}
   .pillars{grid-template-columns:1fr;gap:28px}
   .foot-top{grid-template-columns:1fr 1fr}
 }
@@ -283,17 +286,17 @@ html.locked,html.locked body{overflow:hidden}
   <section class="wrap sec-end" aria-label="Manifiesto">
     <div class="band">
       <div class="band-copy">
-        <div><span class="eyebrow">Manifiesto</span>
+        <div><span class="eyebrow sec-head">Manifiesto</span>
         <h2>La creatividad sin estrategia es <em>decoración.</em></h2></div>
         <div>
           <p>Primero entendemos. <b>Después diseñamos.</b></p>
           <div class="band-row"><a class="pill white" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
-      <div class="photo-card">
-        <img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013">
-        <span class="pill primary sm">El Calentón</span>
-      </div>
+      <figure class="photo-card">
+        <div class="ph"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013"></div>
+        <figcaption class="cap">El Calentón</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -311,7 +314,7 @@ html.locked,html.locked body{overflow:hidden}
 
   <!-- qué hacemos + clientes -->
   <section class="wrap sec" aria-labelledby="t-servicios">
-    <h2 class="eyebrow pillars-head" id="t-servicios">Qué hacemos</h2>
+    <h2 class="eyebrow sec-head pillars-head" id="t-servicios">Qué hacemos</h2>
     <div class="pillars">
       <div class="pillar"><h3>Branding.</h3><p>Identidad y manual. Sin Comic Sans.</p></div>
       <div class="pillar"><h3>Contenido.</h3><p>Qué decir, cuándo y para qué.</p></div>
@@ -325,17 +328,15 @@ html.locked,html.locked body{overflow:hidden}
 
   <!-- nosotros -->
   <section class="wrap story sec-end" id="nosotros">
-    <div>
-      <span class="eyebrow">Nosotros</span>
-      <h2>Una marca es una historia.</h2>
-    </div>
+    <span class="eyebrow sec-head story-head">Nosotros</span>
+    <h2>Una marca es una historia.</h2>
     <blockquote class="founder"><p>“Le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Vos nos contás tu idea; nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill primary sm">La oficina, los días buenos</span></figure>
+    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><figcaption class="cap">La oficina, los días buenos</figcaption></figure>
   </section>
 
   <!-- contacto -->
   <section class="wrap contact sec-end" id="contacto">
-    <span class="eyebrow">Contacto</span>
+    <span class="eyebrow sec-head">Contacto</span>
     <h2>¿Qué estás craneando?</h2>
     <p class="aside">Contanos y lo charlamos. El café lo invitamos nosotros.</p>
     <div class="row-cta">
