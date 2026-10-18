@@ -96,7 +96,8 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
-img{max-width:100%;display:block;filter:grayscale(1) contrast(1.05)}
+img{max-width:100%;display:block;filter:grayscale(1) contrast(1.05)} /* las WebP ya vienen en gris; el filtro cubre el JPG de respaldo */
+picture{display:block}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:var(--tr-head);line-height:var(--lh-head);text-wrap:balance}
 p{margin:0}
 [hidden]{display:none!important}
@@ -104,6 +105,7 @@ p{margin:0}
 .sec-end{padding-bottom:var(--sec)}
 .wrap{max-width:var(--container);margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
+main:focus{outline:none}
 .band a:focus-visible{outline-color:var(--on-light)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .skip{position:absolute;left:var(--s-3);top:-60px;z-index:20;background:var(--ink);color:var(--black);padding:10px var(--s-4);border-radius:var(--radius-pill);font-weight:700;text-decoration:none}
@@ -128,7 +130,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 
 /* barra superior */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow var(--dur-2) var(--ease-out)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(19,19,19,.92);background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow var(--dur-2) var(--ease-out)}
 header.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:var(--s-4)}
 .brand{font-size:20px;font-weight:800;letter-spacing:var(--tr-head);text-decoration:none;display:flex;align-items:center;min-height:44px}
@@ -304,7 +306,7 @@ html.locked,html.locked body{overflow:hidden}
   </div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
   <!-- portada -->
   <section class="wrap hero" aria-labelledby="titular">
     <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, rentable, auténtica e imparable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
@@ -321,11 +323,11 @@ html.locked,html.locked body{overflow:hidden}
   <section class="wrap sec-end" id="trabajos" aria-label="Trabajos" hidden>
     <div class="featured">
       <a class="card" href="#contacto">
-        <div class="img"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013" loading="lazy" style="object-position:72% center"></div>
+        <div class="img"><picture><source type="image/webp" srcset="img/el-calenton-800.webp 800w, img/el-calenton-1400.webp 1400w" sizes="(max-width:720px) 100vw, 620px"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013" loading="lazy" decoding="async" style="object-position:72% center"></picture></div>
         <div class="meta"><h3>El Calentón <span>(Eventos)</span></h3><span class="pill fog sm">Ver más</span></div>
       </a>
       <a class="card" href="#contacto">
-        <div class="img"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" width="928" height="1152" loading="lazy" style="object-position:center 30%"></div>
+        <div class="img"><picture><source type="image/webp" srcset="img/crisger-600.webp 600w, img/crisger-928.webp 928w" sizes="(max-width:720px) 100vw, 620px"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" width="928" height="1152" loading="lazy" decoding="async" style="object-position:center 30%"></picture></div>
         <div class="meta"><h3>Crisger <span>(Branding)</span></h3><span class="pill fog sm">Ver más</span></div>
       </a>
     </div>
@@ -348,7 +350,7 @@ html.locked,html.locked body{overflow:hidden}
         </div>
       </div>
       <figure class="photo-card">
-        <div class="ph"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" width="1800" height="1013"></div>
+        <div class="ph"><picture><source type="image/webp" srcset="img/el-calenton-800.webp 800w, img/el-calenton-1400.webp 1400w" sizes="(max-width:960px) calc(100vw - 80px), 600px"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" loading="lazy" decoding="async" width="1800" height="1013"></picture></div>
         <figcaption class="cap">El Calentón</figcaption>
       </figure>
     </div>
@@ -385,7 +387,7 @@ html.locked,html.locked body{overflow:hidden}
     <span class="eyebrow sec-head story-head">Nosotros</span>
     <h2>Una marca es una historia.</h2>
     <blockquote class="founder"><p>“Le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Vos nos contás tu idea; nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
-    <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><figcaption class="cap">La oficina, los días buenos</figcaption></figure>
+    <figure><picture><source type="image/webp" srcset="img/estudio-600.webp 600w, img/estudio-928.webp 928w" sizes="(max-width:1280px) calc(100vw - 40px), 1240px"><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" decoding="async" width="928" height="1152"></picture><figcaption class="cap">La oficina, los días buenos</figcaption></figure>
   </section>
 
   <!-- contacto -->
