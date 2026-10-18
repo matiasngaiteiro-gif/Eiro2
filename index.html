@@ -238,9 +238,13 @@ footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line)
 /* tablet */
 @media (max-width:960px){
   .hero-foot,.story,.band{grid-template-columns:1fr}
-  .photo-card .ph{min-height:0;aspect-ratio:4/3}
-  .pillars{grid-template-columns:1fr;gap:var(--s-6)}
+  .photo-card .ph{min-height:0;aspect-ratio:16/9;max-height:70svh} /* a una columna: apaisada y nunca más alta que la pantalla (celular acostado) */
   .foot-top{grid-template-columns:1fr 1fr}
+}
+/* servicios: tres columnas mientras los textos entran en una línea corta */
+@media (max-width:640px){
+  .pillars{grid-template-columns:1fr;gap:var(--s-6)}
+  .photo-card .ph{aspect-ratio:4/3}
 }
 /* celular */
 @media (max-width:720px){
