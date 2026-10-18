@@ -38,16 +38,15 @@
 <style>
 /* Base: estructura y voz de Not Found (titular-manifiesto, destacados + índice de proyectos, manifiesto, ticker, pilares + clientes, narrativa con citas, contacto con chiste, footer), con la identidad de Eiro Studio: Plus Jakarta Sans y verde */
 :root{
-  --green:#00EB5B;
-  /* paleta casi negro (dominante) + gris + verde: --paper es el fondo, --ink el texto */
+  /* solo blanco y negro: --paper es el fondo, --ink el texto. --green queda como alias del blanco para no romper clases */
+  --green:#F2F2F2;
   --paper:#131313;
   --ink:#ECECEC;
   --black:#131313;
   --white:#F2F2F2;
   --gray:#C7C7C7;
-  --surface:#1B1B1B;
+  --surface:#1A1A1A;
   --fog:#222222;
-  --forest:#00290F;
   --mute:#A3A3A3;
   --soft:#767676;
   --line:#2B2B2B;
@@ -62,7 +61,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;filter:grayscale(1) contrast(1.05)}
 h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.045em;line-height:1;text-wrap:balance}
 p{margin:0}
 .wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -95,8 +94,8 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 
 /* 1. portada: titular-manifiesto */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
-.hero h1{font-size:clamp(42px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:12ch}
-.hero h1 em{font-style:normal;color:var(--green)}
+.hero h1{font-size:clamp(40px,7.4vw,112px);line-height:.96;letter-spacing:-.05em;max-width:12ch}
+.hero h1 em{font-style:normal;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .rot em{display:inline-block}
 .rot em.out{animation:rotOut .32s cubic-bezier(.6,0,.8,.4) forwards}
@@ -129,19 +128,20 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .more{display:flex;justify-content:flex-end;margin-top:20px}
 
 /* bloque verde (de la estructura anterior) */
-.band{background:var(--green);color:var(--black);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
+.band{background:var(--white);color:var(--black);border-radius:var(--radius);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--pad);padding:var(--pad)}
 .band-copy{display:flex;flex-direction:column;justify-content:space-between;gap:28px}
-.band-copy h2{font-size:clamp(36px,5.4vw,80px)}
+.band-copy h2{font-size:clamp(30px,3.6vw,52px);margin-top:14px}
+.band .eyebrow{color:#5C5C5C}
 .band-copy p{font-size:clamp(16px,1.4vw,18px);font-weight:500;max-width:36ch;color:rgba(10,13,11,.78)}
 .band .pill.white{background:var(--black);color:var(--white)}
 .band .pill.line{color:var(--black)}
-.photo-card .pill.green{background:var(--black);color:var(--green)}
+.photo-card .pill.green{background:var(--black);color:var(--white)}
 .band-copy .band-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .photo-card{position:relative;border-radius:calc(var(--radius) - 6px);overflow:hidden;min-height:440px;background:var(--surface)}
 .photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
 .photo-card .pill{position:absolute;left:16px;bottom:16px}
 .band-copy p b{font-weight:800;color:var(--black)}
-.band-copy h2 em{font-style:normal;color:var(--white)}
+.band-copy h2 em{font-style:normal;text-decoration:underline;text-decoration-thickness:.07em;text-underline-offset:.12em}
 
 /* 4. manifiesto */
 .manifesto{background:var(--gray);color:var(--black)}
@@ -150,28 +150,31 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .manifesto small{display:block;margin-top:28px;font-size:clamp(16px,1.4vw,18px);font-weight:500;color:#3F3F3F;max-width:52ch}
 
 /* 5. ticker */
-.ticker{background:var(--green);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
+.ticker{background:var(--paper);border-block:1px solid var(--line);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
 .ticker-track{display:flex;gap:clamp(40px,5vw,72px);width:max-content;animation:tick 45s linear infinite;padding-right:clamp(40px,5vw,72px)}
 /* cartel de cinturón, versión mínima */
 .sign{display:flex;align-items:center;gap:18px}
-.sign .belt{flex:none;display:block;color:var(--black);width:clamp(56px,5vw,72px);line-height:0}
+.sign .belt{flex:none;display:block;color:var(--ink);width:clamp(56px,5vw,72px);line-height:0}
 .belt svg{width:100%;height:auto;display:block}
-.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--black)}
+.sign span{font-size:clamp(16px,1.6vw,21px);font-weight:600;letter-spacing:-.01em;white-space:nowrap;color:var(--mute)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* 6. pilares + clientes */
 .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--pad);border-top:1.5px solid var(--ink);padding-top:28px}
-.pillar h3{font-size:clamp(32px,4vw,56px)}
+.pillar h3{font-size:clamp(24px,2.4vw,34px)}
+.pillars-head{margin-bottom:20px}
 .pillar p{color:var(--mute);margin-top:12px;max-width:34ch}
 .clients{margin-top:clamp(56px,8vw,96px)}
 .clients-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.clients-list span{font-size:clamp(20px,2.6vw,34px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
+.clients-list span{font-size:clamp(17px,1.6vw,22px);font-weight:800;letter-spacing:-.04em;padding:10px 22px;border-radius:999px;background:var(--fog)}
 
 /* 7. narrativa + citas */
 .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:start}
-.story h2{font-size:clamp(44px,6vw,88px);margin-top:12px}
+.story h2{font-size:clamp(30px,3.6vw,52px);margin-top:14px}
 .story .lead{font-size:clamp(18px,1.7vw,22px);font-weight:500;max-width:44ch;margin-top:20px}
 .founder{margin:20px 0 0;padding-left:20px;border-left:3px solid var(--green);max-width:46ch}
+.story>.founder{margin:0;align-self:end}
+.story>.founder p{font-size:clamp(20px,1.9vw,26px);font-weight:600;line-height:1.4;letter-spacing:-.015em}
 .founder p{font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink)}
 .founder p+p{margin-top:12px}
 .story-close{margin-top:24px;font-size:clamp(18px,1.7vw,22px);font-weight:700;max-width:40ch}
@@ -192,7 +195,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .story figure .pill{position:absolute;left:16px;bottom:16px}
 
 /* 8. contacto */
-.contact h2{font-size:clamp(50px,9vw,140px);line-height:.94;letter-spacing:-.055em;max-width:11ch}
+.contact h2{font-size:clamp(36px,5vw,76px);line-height:.98;letter-spacing:-.05em;max-width:11ch;margin-top:14px}
 .contact .aside{font-size:clamp(18px,1.6vw,22px);font-weight:500;color:var(--mute);margin-top:20px;max-width:40ch}
 .contact .row-cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:32px}
 .contact .num{font-weight:700;user-select:all}
@@ -201,11 +204,11 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* footer */
 footer{background:var(--paper);color:var(--ink);border-top:1px solid var(--line);padding-block:clamp(48px,7vw,88px) calc(32px + env(safe-area-inset-bottom,0px))}
 .foot-top{display:grid;grid-template-columns:repeat(2,max-content);gap:40px clamp(48px,8vw,120px)}
-.foot-word{font-size:clamp(40px,14vw,204px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.85;margin-left:-.04em;grid-column:1/-1}
+.foot-word{font-size:clamp(36px,9vw,140px);font-weight:800;letter-spacing:-.05em;white-space:nowrap;line-height:.85;margin-left:-.04em;grid-column:1/-1}
 .foot-col{display:flex;flex-direction:column;gap:8px;font-size:15px}
 .foot-col b{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 .foot-col a{text-decoration:none;padding-block:4px}
-@media (hover:hover){.foot-col a:hover{color:var(--green)}}
+@media (hover:hover){.foot-col a:hover{color:var(--white)}}
 .foot-bottom{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--soft);font-size:14px}
 
 /* tablet */
@@ -277,11 +280,7 @@ html.locked,html.locked body{overflow:hidden}
   <section class="wrap hero" aria-labelledby="titular">
     <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, rentable, auténtica e imparable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
     <div class="hero-foot">
-      <p>Somos un estudio creativo con base en Buenos Aires. Con un poco de estrategia y un poco de diseño, hacemos marcas, contenido y eventos.</p>
-      <details>
-        <summary>Leer más</summary>
-        <p>No trabajamos con fórmulas. Primero entendemos tu negocio, tu público y tu contexto; después diseñamos. Así cada pieza tiene un motivo para existir y tu marca se ve igual en todos lados.</p>
-      </details>
+      <p>Estudio creativo en Buenos Aires. Marcas, contenido y eventos.</p>
     </div>
   </section>
 
@@ -309,9 +308,10 @@ html.locked,html.locked body{overflow:hidden}
   <section class="wrap" style="padding-bottom:var(--sec)" aria-label="Manifiesto">
     <div class="band">
       <div class="band-copy">
-        <h2>La creatividad sin estrategia es <em>decoración.</em></h2>
+        <div><span class="eyebrow">Manifiesto</span>
+        <h2>La creatividad sin estrategia es <em>decoración.</em></h2></div>
         <div>
-          <p>Puede ser <b>linda, brillante o mega presentable</b> y aun así no servir para nada. Por eso, en Eiro, primero entendemos y después diseñamos.</p>
+          <p>Primero entendemos. <b>Después diseñamos.</b></p>
           <div class="band-row"><a class="pill white" href="#nosotros">Conocenos</a><a class="pill line" href="#contacto">Escribinos</a></div>
         </div>
       </div>
@@ -337,10 +337,11 @@ html.locked,html.locked body{overflow:hidden}
 
   <!-- 6. pilares + clientes -->
   <section class="wrap" style="padding-block:var(--sec)" aria-label="Qué hacemos">
+    <span class="eyebrow pillars-head" style="display:block">Qué hacemos</span>
     <div class="pillars">
-      <div class="pillar"><h3>Branding.</h3><p>Una identidad que se reconoce a una cuadra y un manual para que nadie la estire, la cambie de color o le ponga Comic Sans.</p></div>
-      <div class="pillar"><h3>Contenido.</h3><p>Publicar por publicar es ruido. Definimos qué decir, cuándo y para qué, y lo producimos. Vos aprobás; nosotros nos peleamos con el algoritmo.</p></div>
-      <div class="pillar"><h3>Eventos.</h3><p>Del teaser al after. Gráfica, videos y pantallas para que se hable antes, durante y después. Tu único trabajo es que la noche esté buena.</p></div>
+      <div class="pillar"><h3>Branding.</h3><p>Identidad y manual. Sin Comic Sans.</p></div>
+      <div class="pillar"><h3>Contenido.</h3><p>Qué decir, cuándo y para qué.</p></div>
+      <div class="pillar"><h3>Eventos.</h3><p>Del teaser al after.</p></div>
     </div>
     <div class="clients">
       <span class="eyebrow">Marcas que ya trabajaron con nosotros</span>
@@ -351,32 +352,22 @@ html.locked,html.locked body{overflow:hidden}
   <!-- 7. narrativa + citas -->
   <section class="wrap story" id="nosotros" style="padding-bottom:var(--sec)">
     <div>
-      <span class="eyebrow">¿Te sumás?</span>
+      <span class="eyebrow">Nosotros</span>
       <h2>Una marca es una historia.</h2>
-      <p class="lead">Y hasta la idea más simple puede contar una buena. La nuestra, por ejemplo:</p>
-      <blockquote class="founder"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Simple, pero nuestro. Por eso, cuando alguien nos dice ‘capaz es una boludez’, prestamos más atención: vos nos contás tu idea y nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
     </div>
-    <div class="quotes" aria-label="Citas">
-      <div class="quote on"><blockquote>“El diseño es el embajador silencioso de tu marca.”</blockquote><cite>Paul Rand</cite></div>
-      <div class="quote"><blockquote>“El diseño no es solo cómo se ve. El diseño es cómo funciona.”</blockquote><cite>Steve Jobs, 2003</cite></div>
-      <div class="quote"><blockquote>“Una marca no es lo que vos decís que es. Es lo que ellos dicen que es.”</blockquote><cite>Marty Neumeier, The Brand Gap</cite></div>
-      <div class="q-ctrl">
-        <span class="q-count" id="qCount">01 <span>/ 03</span></span>
-        <div class="q-btns"><button type="button" id="qPrev" aria-label="Cita anterior">←</button><button type="button" id="qNext" aria-label="Cita siguiente">→</button></div>
-      </div>
-    </div>
+    <blockquote class="founder"><p>“Le borré una parte a mi apellido, Gaiteiro, y quedó Eiro. Vos nos contás tu idea; nosotros la hacemos marca.”</p><cite>Matías Gaiteiro, fundador</cite></blockquote>
     <figure><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" width="928" height="1152"><span class="pill green sm">La oficina, los días buenos</span></figure>
   </section>
 
   <!-- 8. contacto -->
   <section class="wrap contact" id="contacto" style="padding-bottom:var(--sec)">
+    <span class="eyebrow">Contacto</span>
     <h2>¿Qué estás craneando?</h2>
-    <p class="aside">Contanos. Si hay presupuesto, mejor. Si todavía no, igual charlamos: a veces un café (invitamos nosotros) cambia todo.</p>
+    <p class="aside">Contanos y lo charlamos. El café lo invitamos nosotros.</p>
     <div class="row-cta">
       <a class="pill green" href="https://wa.me/5491134850669?text=Hola%20Eiro!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
       <span class="num">+54 9 11 3485-0669</span>
     </div>
-    <p class="social">Contestamos rápido, salvo que estemos en medio de un evento. Ahí tardamos un poquito más.</p>
   </section>
 </main>
 
@@ -422,11 +413,6 @@ html.locked,html.locked body{overflow:hidden}
     },2200);
   }
 
-  // citas 01 / 03
-  var qs=[].slice.call(document.querySelectorAll('.quote')), i=0, count=document.getElementById('qCount');
-  function show(n){i=(n+qs.length)%qs.length;qs.forEach(function(q,k){q.classList.toggle('on',k===i)});count.innerHTML='0'+(i+1)+' <span>/ 0'+qs.length+'</span>'}
-  document.getElementById('qPrev').addEventListener('click',function(){show(i-1)});
-  document.getElementById('qNext').addEventListener('click',function(){show(i+1)});
 })();
 </script>
 
