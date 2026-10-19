@@ -4,8 +4,8 @@
   "description": "Estudio creativo de Buenos Aires: branding, contenido y eventos.",
   "start_url": "/",
   "display": "standalone",
-  "background_color":"#131313",
-  "theme_color": "#131313",
+  "background_color":"#000000",
+  "theme_color": "#000000",
   "lang": "es-AR",
   "icons": [
     {"src": "/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
