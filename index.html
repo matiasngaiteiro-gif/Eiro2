@@ -274,7 +274,7 @@ footer{padding-block:var(--s-block) calc(var(--s-6) + env(safe-area-inset-bottom
 }
 /* celular */
 @media (max-width:720px){
-  :root{--nav-h:64px}
+  :root{--nav-h:64px;--fs-display:11.5vw} /* la palabra más larga ("inconfundibles.") entra en una línea desde 320 px */
   .nav-links a[href="#servicios"],.nav-links a[href="#nosotros"]{display:none} /* en celular la barra queda en Trabajos + Hablemos */
   .nav{gap:var(--s-2)}
   .nav-links a:not(.pill){padding:0 12px}
@@ -330,12 +330,12 @@ html.locked,html.locked body{overflow:hidden}
 <main id="top" tabindex="-1">
   <!-- portada -->
   <section class="wrap hero" aria-labelledby="titular">
-    <h1 id="titular" aria-label="Solo nos importa que tu marca sea inolvidable, inconfundible, deseada, auténtica y rentable.">Solo nos importa que tu marca sea <span class="rot" aria-hidden="true"><em id="rot">inolvidable.</em></span></h1>
+    <h1 id="titular" aria-label="Hacemos marcas inolvidables, inconfundibles, deseadas, auténticas y rentables.">Hacemos marcas <span class="rot" aria-hidden="true"><em id="rot">inolvidables.</em></span></h1>
     <div class="hero-foot">
-      <p class="lead">Estudio creativo en Buenos Aires. Marcas, contenido y eventos.</p>
+      <p class="lead">Somos Eiro, un estudio creativo de Buenos Aires. Marcas, contenido y eventos.</p>
       <div class="actions">
-        <a class="pill primary" href="#contacto">Contanos tu proyecto</a>
-        <a class="go" href="#trabajos">Ver trabajos</a>
+        <a class="pill primary" href="#contacto">Trabajemos juntos</a>
+        <a class="go" href="#trabajos">Ver proyectos</a>
       </div>
     </div>
   </section>
@@ -344,9 +344,9 @@ html.locked,html.locked body{overflow:hidden}
   <section class="manifesto" aria-labelledby="t-manifiesto">
     <div class="wrap">
       <span class="eyebrow sec-head">Manifiesto</span>
-      <h2 id="t-manifiesto">La creatividad sin estrategia es decoración.</h2>
+      <h2 id="t-manifiesto">Primero entendemos. Después diseñamos.</h2>
       <div class="manifesto-foot">
-        <p class="lead">Puede ser linda, brillante y mega presentable, y no servir para nada. Por eso primero entendemos y después diseñamos.</p>
+        <p class="lead">Una idea linda no alcanza: tiene que funcionar. Buscamos lo que tu marca tiene de fuerte y lo llevamos a cada lugar donde aparece. En pantalla. En papel. En vivo.</p>
       </div>
     </div>
   </section>
@@ -373,8 +373,8 @@ html.locked,html.locked body{overflow:hidden}
         <figure class="work-media" data-reveal><picture><source type="image/webp" srcset="img/el-calenton-800.webp 800w, img/el-calenton-1400.webp 1400w" sizes="(max-width:720px) calc(100vw - 40px), 50vw"><img src="img/el-calenton.jpg" alt="Fiesta al aire libre con DJ al atardecer en El Calentón" width="1800" height="1013" loading="lazy" decoding="async"></picture></figure>
         <div class="work-info">
           <h3>El Calentón</h3>
-          <span class="work-meta">Evento · Identidad y teasers</span>
-          <p>Fiesta de música latina. Hacemos su identidad y los teasers de video que anuncian cada line up.</p>
+          <span class="work-meta">Cada line up, un estreno.</span>
+          <p>Evento de música latina. Identidad y teasers de video.</p>
         </div>
       </article>
 
@@ -382,8 +382,8 @@ html.locked,html.locked body{overflow:hidden}
         <figure class="work-media" data-reveal><picture><source type="image/webp" srcset="img/crisger-600.webp 600w, img/crisger-928.webp 928w" sizes="(max-width:720px) calc(100vw - 40px), 50vw"><img src="img/crisger.jpg" alt="Operario con casco y chaleco en una planta industrial" width="928" height="1152" loading="lazy" decoding="async" style="object-position:center 30%"></picture></figure>
         <div class="work-info">
           <h3>Crisger</h3>
-          <span class="work-meta">Seguridad industrial · Manual de marca</span>
-          <p>Un manual de marca interactivo para que la identidad se use igual en la planta, en la oficina y en la web.</p>
+          <span class="work-meta">Una marca, igual en todos lados.</span>
+          <p>Seguridad industrial. Manual de marca interactivo para la planta, la oficina y la web.</p>
         </div>
       </article>
 
@@ -391,8 +391,8 @@ html.locked,html.locked body{overflow:hidden}
         <div class="work-media work-type" aria-hidden="true"><span>Extracto Importado</span></div>
         <div class="work-info">
           <h3>Extracto Importado</h3>
-          <span class="work-meta">Perfumería · Contenido</span>
-          <p>Videos con creadoras de contenido para cada lanzamiento de fragancia.</p>
+          <span class="work-meta">Cada fragancia, su historia.</span>
+          <p>Perfumería. Videos con creadoras de contenido para cada lanzamiento.</p>
         </div>
       </article>
 
@@ -404,7 +404,7 @@ html.locked,html.locked body{overflow:hidden}
         </div>
       </a>
     </div>
-    <p class="cap work-more">Más trabajos, a pedido.</p>
+    <p class="cap work-more">Hay más. Te los mostramos cuando hablemos.</p>
   </section>
 
   <!-- qué hacemos -->
@@ -417,12 +417,12 @@ html.locked,html.locked body{overflow:hidden}
       <div class="services">
         <article class="service">
           <h3>Branding</h3>
-          <p>Que se reconozca a una cuadra. Y que nadie le ponga Comic Sans.</p>
+          <p>Identidades claras y con sistema, para que tu marca se reconozca a una cuadra.</p>
           <ul><li>Identidad visual</li><li>Manual de marca</li></ul>
         </article>
         <article class="service">
           <h3>Contenido</h3>
-          <p>Publicar por publicar es ruido. Decidimos qué decir y cuándo, y lo producimos.</p>
+          <p>Qué decir, cuándo y cómo. Lo pensamos, lo producimos y lo publicamos.</p>
           <ul><li>Estrategia</li><li>Producción</li><li>Gestión de redes</li></ul>
         </article>
         <article class="service">
@@ -447,7 +447,7 @@ html.locked,html.locked body{overflow:hidden}
         <blockquote><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido y quedó Eiro.”</p></blockquote>
         <figcaption>Matías Gaiteiro, fundador y director creativo</figcaption>
       </figure>
-      <p class="lead">Por eso, cuando alguien nos dice “capaz es una boludez”, prestamos más atención. Vos nos contás tu idea; nosotros la hacemos marca.</p>
+      <p class="lead">Trabajamos con vos, no para vos. Tu idea, nuestro oficio, un solo equipo. Y si algo te parece menor, contalo igual: muchas veces ahí está lo mejor.</p>
     </div>
   </section>
 
@@ -456,14 +456,14 @@ html.locked,html.locked body{overflow:hidden}
     <div class="wrap">
       <span class="eyebrow sec-head">Contacto</span>
       <div class="contact-grid">
-        <h2 id="t-contacto">¿Qué estás craneando?</h2>
+        <h2 id="t-contacto">Hagamos algo bueno juntos.</h2>
         <div class="contact-aside">
-          <p class="lead">Contanos y lo charlamos. El café lo invitamos nosotros.</p>
+          <p class="lead">Contanos qué tenés en mente y lo charlamos. El café va por nuestra cuenta.</p>
           <div class="actions">
             <a class="pill primary" href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp<span class="sr"> (se abre WhatsApp)</span></a>
             <a class="num" href="tel:+5491134850669">+54 9 11 3485-0669</a>
           </div>
-          <p class="cap">Contestamos rápido, salvo que estemos en medio de un evento.</p>
+          <p class="cap">Contestamos rápido. Salvo que estemos en pleno evento.</p>
         </div>
       </div>
     </div>
@@ -510,7 +510,7 @@ html.locked,html.locked body{overflow:hidden}
   var OUT_MS=(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dur-2'))||.3)*1000;
   var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // recorre los adjetivos una sola vez y se queda en el último: de lo emocional a lo comercial
-  var words=['inolvidable.','inconfundible.','deseada.','auténtica.','rentable.'], wi=0, rot=document.getElementById('rot');
+  var words=['inolvidables.','inconfundibles.','deseadas.','auténticas.','rentables.'], wi=0, rot=document.getElementById('rot');
   if(rot && !RM){
     var timer=setInterval(function(){
       if(document.hidden) return;
