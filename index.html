@@ -167,7 +167,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .hero-frame picture::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0) 55%,rgba(10,10,10,.55) 100%)}
 .hero-kicker{position:absolute;z-index:1;left:var(--frame-pad);top:calc(44px + var(--frame-pad) + 24px);max-width:30ch;color:var(--mute)}
-.origin{position:absolute;z-index:1;left:var(--frame-pad);bottom:calc(var(--frame-pad) + 28px);font:700 var(--fs-origin)/1 var(--script);letter-spacing:0;white-space:nowrap;color:#fff}
+.origin{position:absolute;z-index:1;left:var(--frame-pad);bottom:calc(var(--frame-pad) + 28px);font:700 var(--fs-origin)/1 var(--script);letter-spacing:-.05em;white-space:nowrap;color:#fff}
 .origin .cut span{display:inline-block;transition:opacity var(--dur-1) linear,max-width .5s var(--ease-out) 1.6s;max-width:1.2em;vertical-align:baseline}
 .origin .cut span:nth-child(4){transition-delay:.5s,1.6s}
 .origin .cut span:nth-child(3){transition-delay:.75s,1.6s}
@@ -569,7 +569,7 @@ html.locked,html.locked body{overflow:hidden}
     // GAITEIRO ocupa el ancho del marco: se mide la palabra completa con la fuente ya cargada
     function fitOrigin(){
       var probe=document.createElement('span'); probe.textContent='GAITEIRO';
-      probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
+      probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;letter-spacing:-.05em;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
       document.body.appendChild(probe); var ratio=probe.getBoundingClientRect().width/100; probe.remove();
       var avail=origin.parentNode.clientWidth-2*parseFloat(getComputedStyle(origin).left);
       if(ratio>0) origin.style.fontSize=Math.min(380,Math.floor(avail/ratio))+'px';
