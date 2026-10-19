@@ -53,8 +53,8 @@
   --accent:#00EB5B;    /* verde Eiro: el logo, la palabra que rota, el foco y un bloque por página */
   --on-accent:#0A0A0A;
 
-  /* tipografía (kit Adobe Fonts oqj6tze) · interletrado y pesos según Koto: grande y liviano, -1%; etiquetas mono sin interletrado */
-  --display:"neue-haas-grotesk-display","Helvetica Neue",Helvetica,Arial,sans-serif; /* 400 light · 500 · 600 */
+  /* tipografía (kit Adobe Fonts oqj6tze) · interletrado y pesos según Koto: grande en peso regular, -1%; etiquetas mono sin interletrado */
+  --display:"neue-haas-grotesk-display","Helvetica Neue",Helvetica,Arial,sans-serif; /* 500 regular para textos grandes · 600 medium */
   --sans:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;       /* 400 · 500 */
   --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
   --mono:"roboto-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;      /* Roboto Mono Medium (500), en la línea de Moderat Mono */
@@ -106,9 +106,9 @@ main:focus{outline:none}
 .gray{color:var(--mute)}
 .pad{padding-inline:max(var(--gutter),env(safe-area-inset-left,0px))}
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
-.h2{font:400 var(--fs-h2)/1.06 var(--display);letter-spacing:var(--tr-display)}
+.h2{font:500 var(--fs-h2)/1.06 var(--display);letter-spacing:var(--tr-display)}
 .h2>span{display:block}
-.statement{font:400 var(--fs-statement)/1.02 var(--display);letter-spacing:var(--tr-display)}
+.statement{font:500 var(--fs-statement)/1.02 var(--display);letter-spacing:var(--tr-display)}
 .bracket{display:inline-flex;align-items:center;min-height:44px;gap:.6em;font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
 .bracket::before{content:"["}
 .bracket::after{content:"]"}
@@ -149,7 +149,7 @@ main:focus{outline:none}
 .menu-top{display:flex;justify-content:space-between;align-items:center}
 .menu-top .logo{width:46px;color:var(--accent)}
 .menu nav{align-self:center}
-.menu nav a{display:flex;align-items:baseline;gap:16px;padding:6px 0;font:400 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display);color:var(--mute);transition:color var(--dur-1) var(--ease-out),transform var(--dur-2) var(--ease-out)}
+.menu nav a{display:flex;align-items:baseline;gap:16px;padding:6px 0;font:500 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display);color:var(--mute);transition:color var(--dur-1) var(--ease-out),transform var(--dur-2) var(--ease-out)}
 .menu nav a .mono{color:var(--soft);min-width:2.4em}
 .menu nav a[aria-current="true"],.menu nav a:hover{color:var(--ink)}
 .menu.open nav a{animation:menuIn var(--dur-3) var(--ease-out) both}
@@ -205,7 +205,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .p-media{grid-column:5/13}
 .p-media .media{aspect-ratio:16/10}
 .p-type{display:grid;place-items:center;padding:var(--frame-pad);background:var(--accent);color:var(--on-accent)}
-.p-type span{font:400 clamp(44px,7vw,128px)/1 var(--display);letter-spacing:var(--tr-display);text-align:center}
+.p-type span{font:500 clamp(44px,7vw,128px)/1 var(--display);letter-spacing:var(--tr-display);text-align:center}
 .p-type .mono{position:absolute;left:var(--frame-pad);bottom:var(--frame-pad);font-size:var(--fs-mono)}
 .p-more{grid-column:5/13;display:flex;align-items:flex-end;justify-content:flex-end;min-height:clamp(120px,12vw,180px);padding:var(--frame-pad);background:var(--bg-2);border-radius:var(--radius);transition:background-color var(--dur-2) var(--ease-out)}
 @media (hover:hover){.p-more:hover{background:var(--bg-3)}.p-more:hover .bracket{color:var(--ink)}}
@@ -226,7 +226,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 @media (hover:hover){.row-body a:hover{color:var(--ink)}}
 
 /* valores */
-.values-statement{grid-column:1/-1;font:400 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display)}
+.values-statement{grid-column:1/-1;font:500 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display)}
 .values-statement span{display:block}
 .values{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--col-gap);margin-top:clamp(56px,7vw,112px)}
 .value{padding-top:16px;border-top:1px solid var(--line)}
@@ -237,12 +237,12 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--col-gap);margin-top:48px}
 .step{display:flex;flex-direction:column;gap:56px;min-height:260px;padding:18px;background:var(--bg-2);border-radius:var(--radius)}
 .step .mono{color:var(--accent)}
-.step h3{margin-top:auto;font:400 clamp(26px,2.3vw,38px)/1 var(--display);letter-spacing:var(--tr-display)}
+.step h3{margin-top:auto;font:500 clamp(26px,2.3vw,38px)/1 var(--display);letter-spacing:var(--tr-display)}
 .step p{margin-top:-40px;color:var(--mute);font-size:var(--fs-small)}
 
 /* estudio */
 .founder{grid-column:7/13}
-.founder blockquote p{font:400 clamp(24px,2.3vw,38px)/1.18 var(--display);letter-spacing:var(--tr-display)}
+.founder blockquote p{font:500 clamp(24px,2.3vw,38px)/1.18 var(--display);letter-spacing:var(--tr-display)}
 .founder figcaption{display:flex;align-items:center;gap:12px;margin-top:24px}
 .founder figcaption i{width:40px;height:40px;border-radius:50%;background:var(--bg-3) center 25%/cover no-repeat}
 .founder figcaption b{display:block;font-weight:500;font-size:var(--fs-small)}
