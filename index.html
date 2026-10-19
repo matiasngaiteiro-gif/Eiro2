@@ -56,7 +56,7 @@
   /* tipografía (kit Adobe Fonts xqw2vog) · interletrado y pesos según Koto: grande y liviano, -1%; etiquetas mono a -2% */
   --display:"neue-haas-grotesk-display","Helvetica Neue",Helvetica,Arial,sans-serif; /* 400 light · 500 · 600 */
   --sans:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;       /* 400 · 500 */
-  --script:"neulis-cursive","Brush Script MT",cursive; /* solo Gaiteiro → eiro, peso 700 */
+  --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
   --mono:"ibm-plex-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;     /* 400 · 600 */
   --fs-statement:clamp(30px,3.5vw,60px);
   --fs-h2:clamp(30px,2.9vw,50px);
@@ -377,7 +377,7 @@ html.locked,html.locked body{overflow:hidden}
     <div class="hero-frame">
       <picture><source type="image/webp" srcset="img/estudio-600.webp 600w, img/estudio-928.webp 928w" sizes="(max-width:600px) 100vw, 50vw"><img src="img/estudio.jpg" alt="Matías Gaiteiro trabajando en un escritorio con dos monitores, en medio de un campo al atardecer" width="928" height="1152" fetchpriority="high" decoding="async"></picture>
       <p class="hero-kicker mono" aria-hidden="true">Estudio creativo<br>Marcas · Contenido · Eventos</p>
-      <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>a</span><span>i</span><span>t</span></span>eiro</p>
+      <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
       <div class="hero-meta mono" aria-hidden="true"><span>Eiro Studio™ — Estudio creativo</span><span>34°36′S 58°22′O</span></div>
     </div>
   </section>
@@ -566,9 +566,9 @@ html.locked,html.locked body{overflow:hidden}
     if(started) return; started=true;
     // GAITEIRO: se borra GAIT y queda EIRO
     var origin=document.getElementById('origin');
-    // Gaiteiro ocupa el ancho del marco: se mide la palabra completa con la fuente ya cargada
+    // GAITEIRO ocupa el ancho del marco: se mide la palabra completa con la fuente ya cargada
     function fitOrigin(){
-      var probe=document.createElement('span'); probe.textContent='Gaiteiro';
+      var probe=document.createElement('span'); probe.textContent='GAITEIRO';
       probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
       document.body.appendChild(probe); var ratio=probe.getBoundingClientRect().width/100; probe.remove();
       var avail=origin.parentNode.clientWidth-2*parseFloat(getComputedStyle(origin).left);
