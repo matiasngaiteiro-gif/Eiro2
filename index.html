@@ -39,10 +39,10 @@
 <style>
 /* EIROSTUDIO · una sola hoja de estilos. Orden: tokens, base, componentes (pill, barra), secciones en orden de aparición, responsive, acceso con clave. */
 :root{
-  /* color · negro, blanco y verde (el verde del favicon y del perfil de Instagram) */
-  --accent:#00EB5B;     /* botón principal, foco, palabras destacadas, tachados */
+  /* color · blanco y negro; el verde de marca (favicon, Instagram) solo en micro detalles */
+  --accent:#F2F2F2;     /* botón principal */
   --on-accent:#131313;
-  --hl:#00EB5B;         /* texto destacado sobre negro (11:1) */
+  --hl:#00EB5B;         /* micro detalles: tachados, hebilla, foco, hover, sección activa */
   --paper:#131313;
   --ink:#ECECEC;
   --black:#131313;
@@ -93,7 +93,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;filter:grayscale(1)}
 picture{display:block}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:var(--tr-head);line-height:var(--lh-head);text-wrap:balance}
 p{margin:0;text-wrap:pretty}
@@ -103,7 +103,7 @@ p{margin:0;text-wrap:pretty}
 .wrap{max-width:var(--container);margin:0 auto;padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
 [id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 main:focus{outline:none}
-a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--hl);outline-offset:3px}
 .skip{position:absolute;left:var(--s-3);top:-60px;z-index:20;background:var(--ink);color:var(--black);padding:10px var(--s-4);border-radius:var(--radius-pill);font-weight:600;text-decoration:none}
 .skip:focus{top:var(--s-3)}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -119,11 +119,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 /* pill */
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);min-height:44px;border-radius:var(--radius-pill);padding:0 22px;font:600 var(--fs-ui)/1 var(--sans);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform var(--dur-1) var(--ease-out),background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
 .pill.primary{background:var(--accent);color:var(--on-accent)}
-@media (hover:hover){.pill:hover{transform:translateY(-1px)}}
+@media (hover:hover){.pill:hover{transform:translateY(-1px)}.pill.primary:hover{background:var(--hl);color:#131313}}
 .pill:active{transform:translateY(0) scale(.97)}
 
 /* barra superior */
-body::after{content:"";position:fixed;inset:0;z-index:300;pointer-events:none;background:url(img/grain.png);opacity:.06} /* grano de película sobre toda la web */
+body::after{content:"";position:fixed;inset:-50%;z-index:300;pointer-events:none;background:url(img/grain.png);opacity:.06;animation:grain .9s steps(6) infinite;will-change:transform} /* grano de película, en movimiento como en un proyector */
+@keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-7%,4%)}33%{transform:translate(5%,-6%)}50%{transform:translate(-3%,8%)}67%{transform:translate(8%,2%)}83%{transform:translate(-6%,-5%)}100%{transform:translate(2%,6%)}}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(19,19,19,.92);background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow var(--dur-2) var(--ease-out)}
 header.scrolled{box-shadow:0 1px 0 var(--line)}
@@ -134,12 +135,12 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links a:not(.pill){display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:var(--radius-pill);text-decoration:none;font-weight:600;font-size:var(--fs-ui);transition:background-color var(--dur-1) var(--ease-out)}
 @media (hover:hover){.nav-links a:not(.pill):hover{background:var(--fog)}}
-.nav-links a[aria-current="true"]:not(.pill){background:var(--fog)}
+.nav-links a[aria-current="true"]:not(.pill){color:var(--hl)}
 
 /* portada */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
 .hero h1{font-size:var(--fs-display);line-height:var(--lh-tight);letter-spacing:var(--tr-display);max-width:12ch}
-.hero h1 em{font-style:normal;color:var(--hl)}
+.hero h1 em{font-style:normal}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .rot em{display:inline-block}
 .rot em.out{animation:rotOut var(--dur-2) var(--ease-in) forwards}
@@ -153,12 +154,10 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .hero-foot .lead{max-width:32ch;text-wrap:balance}
 
 /* tonos de sección: invierten los tokens y los componentes se adaptan solos */
-.tone-green{--paper:#00EB5B;--ink:#131313;--mute:#123B22;--soft:#1E4F31;--line:rgba(19,19,19,.22);--hl:var(--ink);--accent:#131313;--on-accent:#00EB5B;background:var(--paper);color:var(--ink);color-scheme:light}
-.tone-light{--paper:#F2F2F2;--ink:#131313;--mute:#4A4A4A;--soft:#5C5C5C;--line:rgba(19,19,19,.16);--fog:#E2E2E2;--surface:#E6E6E6;--accent:#131313;--on-accent:#F2F2F2;background:var(--paper);color:var(--ink);color-scheme:light}
+.tone-light{--hl:#0A7A3A;--paper:#F2F2F2;--ink:#131313;--mute:#4A4A4A;--soft:#5C5C5C;--line:rgba(19,19,19,.16);--fog:#E2E2E2;--surface:#E6E6E6;--accent:#131313;--on-accent:#F2F2F2;background:var(--paper);color:var(--ink);color-scheme:light}
 
 /* marcas: destacamos lo que importa (verde), tachamos lo que sobra (línea verde que se dibuja) */
-.hl{color:var(--hl)}
-.mark-s{color:var(--soft);background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-position:0 .74em;background-size:100% .06em;transition:background-size var(--dur-draw) var(--ease-out) .2s}
+.mark-s{color:var(--soft);background-image:linear-gradient(var(--hl),var(--hl));background-repeat:no-repeat;background-position:0 .74em;background-size:100% .06em;transition:background-size var(--dur-draw) var(--ease-out) .2s}
 .js [data-reveal]:not(.is-in) .mark-s{background-size:0 .06em}
 
 /* fotos: el telón sube al entrar en pantalla */
@@ -175,7 +174,7 @@ figure[data-reveal] img{transition:clip-path var(--dur-draw) var(--ease-out),tra
 .ticker{background:var(--paper);border-block:1px solid var(--line);overflow:hidden;padding-block:clamp(16px,1.8vw,22px)}
 .ticker-track{display:flex;gap:clamp(40px,5vw,72px);width:max-content;animation:tick 45s linear infinite;padding-right:clamp(40px,5vw,72px);will-change:transform}
 .sign{display:flex;align-items:center;gap:var(--s-4)}
-.sign .belt{flex:none;display:block;color:var(--accent);width:clamp(56px,5vw,72px);line-height:0}
+.sign .belt{flex:none;display:block;color:var(--hl);width:clamp(56px,5vw,72px);line-height:0}
 .belt svg{width:100%;height:auto;display:block}
 .sign span{font-size:var(--fs-lead);font-weight:600;letter-spacing:var(--tr-snug);white-space:nowrap;color:var(--mute)}
 @media (hover:hover){.ticker:hover .ticker-track{animation-play-state:paused}} /* en táctil no: un toque lo dejaría congelado */
@@ -296,7 +295,7 @@ footer{background:var(--paper);color:var(--ink);padding-block:var(--s-block) cal
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}
 @media (max-width:350px){.brand{font-size:15px}.nav-links a:not(.pill){padding:0 6px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -337,11 +336,11 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </section>
 
-  <!-- manifiesto: la tesis, en verde -->
-  <section class="tone-green manifesto" aria-labelledby="t-manifiesto">
+  <!-- manifiesto: la tesis, en claro -->
+  <section class="tone-light manifesto" aria-labelledby="t-manifiesto">
     <div class="wrap">
       <span class="eyebrow sec-head" data-reveal>Manifiesto</span>
-      <h2 id="t-manifiesto" data-reveal>La creatividad sin estrategia es <span class="hl">decoración.</span></h2>
+      <h2 id="t-manifiesto" data-reveal>La creatividad sin estrategia es decoración.</h2>
       <div class="manifesto-foot">
         <p class="lead">Puede ser linda, brillante y mega presentable, y no servir para nada. Por eso primero entendemos y después diseñamos.</p>
       </div>
@@ -401,7 +400,7 @@ html.locked,html.locked body{overflow:hidden}
   <!-- qué hacemos -->
   <section class="wrap sec-end" id="servicios" aria-labelledby="t-servicios">
     <span class="eyebrow sec-head" data-reveal>Qué hacemos</span>
-    <h2 class="services-title" id="t-servicios" data-reveal><span>Destacamos <span class="hl">lo que importa</span>.</span> <span>Tachamos <span class="mark-s">lo que sobra</span>.</span></h2>
+    <h2 class="services-title" id="t-servicios" data-reveal><span>Destacamos lo que importa.</span> <span>Tachamos <span class="mark-s">lo que sobra</span>.</span></h2>
     <div class="services">
       <article class="service">
         <span class="work-n">01</span>
