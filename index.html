@@ -39,10 +39,10 @@
 <style>
 /* EIROSTUDIO · una sola hoja de estilos. Orden: tokens, base, componentes (pill, barra), secciones en orden de aparición, responsive, acceso con clave. */
 :root{
-  /* color · blanco y negro; el verde de marca (favicon, Instagram) solo en micro detalles */
+  /* color · blanco y negro con detalles en el verde de marca (favicon, Instagram); fotos a color */
   --accent:#F2F2F2;     /* botón principal */
   --on-accent:#131313;
-  --hl:#00EB5B;         /* micro detalles: tachados, hebilla, foco, hover, sección activa */
+  --hl:#00EB5B;         /* detalles: palabra del titular, destacados, números, flechas, tachado, hebilla, foco, hover */
   --paper:#131313;
   --ink:#ECECEC;
   --black:#131313;
@@ -93,7 +93,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
 a{color:inherit}
-img{max-width:100%;display:block;filter:grayscale(1)}
+img{max-width:100%;display:block}
 picture{display:block}
 h1,h2,h3{margin:0;font-weight:600;letter-spacing:var(--tr-head);line-height:var(--lh-head);text-wrap:balance}
 p{margin:0;text-wrap:pretty}
@@ -140,7 +140,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 /* portada */
 .hero{padding-block:clamp(40px,8vw,110px) clamp(40px,6vw,80px)}
 .hero h1{font-size:var(--fs-display);line-height:var(--lh-tight);letter-spacing:var(--tr-display);max-width:12ch}
-.hero h1 em{font-style:normal}
+.hero h1 em{font-style:normal;color:var(--hl)}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
 .rot em{display:inline-block}
 .rot em.out{animation:rotOut var(--dur-2) var(--ease-in) forwards}
@@ -149,7 +149,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 @keyframes rotIn{from{transform:translateY(105%);opacity:0}}
 .hero-foot{margin-top:var(--s-head);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s-5) var(--s-7)}
 .text-link{display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;font-weight:600;font-size:var(--fs-ui);text-decoration:none;transition:color var(--dur-1) var(--ease-out)}
-.text-link::after{content:"→";transition:transform var(--dur-2) var(--ease-out)}
+.text-link::after{content:"→";color:var(--hl);transition:transform var(--dur-2) var(--ease-out)}
 @media (hover:hover){.text-link:hover{color:var(--hl)}.text-link:hover::after{transform:translateX(4px)}}
 .hero-foot .lead{max-width:32ch;text-wrap:balance}
 
@@ -157,6 +157,7 @@ header.scrolled{box-shadow:0 1px 0 var(--line)}
 .tone-light{--hl:#0A7A3A;--paper:#F2F2F2;--ink:#131313;--mute:#4A4A4A;--soft:#5C5C5C;--line:rgba(19,19,19,.16);--fog:#E2E2E2;--surface:#E6E6E6;--accent:#131313;--on-accent:#F2F2F2;background:var(--paper);color:var(--ink);color-scheme:light}
 
 /* marcas: destacamos lo que importa (verde), tachamos lo que sobra (línea verde que se dibuja) */
+.hl{color:var(--hl)}
 .mark-s{color:var(--soft);background-image:linear-gradient(var(--hl),var(--hl));background-repeat:no-repeat;background-position:0 .74em;background-size:100% .06em;transition:background-size var(--dur-draw) var(--ease-out) .2s}
 .js [data-reveal]:not(.is-in) .mark-s{background-size:0 .06em}
 
@@ -187,7 +188,7 @@ figure[data-reveal] img{transition:clip-path var(--dur-draw) var(--ease-out),tra
 .work-media picture,.work-media img{width:100%;height:100%}
 .work-media img{object-fit:cover}
 .work-info{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-3)}
-.work-n{font-size:var(--fs-small);font-weight:600;letter-spacing:var(--tr-caps);color:var(--soft);font-variant-numeric:tabular-nums}
+.work-n{font-size:var(--fs-small);font-weight:600;letter-spacing:var(--tr-caps);color:var(--hl);font-variant-numeric:tabular-nums}
 .work h3{font-size:var(--fs-h2)}
 .work-meta{font-size:var(--fs-small);font-weight:600;color:var(--mute)}
 .work-info p{color:var(--mute);max-width:34ch}
@@ -201,7 +202,7 @@ figure[data-reveal] img{transition:clip-path var(--dur-draw) var(--ease-out),tra
 .work-open{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--s-3) var(--s-5);margin-top:var(--s-block);padding-top:var(--s-5);border-top:1px solid var(--line);text-decoration:none}
 .work-open strong{font-size:var(--fs-h2);font-weight:600;letter-spacing:var(--tr-head);line-height:var(--lh-head);color:var(--soft);transition:color var(--dur-2) var(--ease-out)}
 .work-open span{display:inline-flex;align-items:center;gap:var(--s-2);min-height:44px;font-weight:600;font-size:var(--fs-ui)}
-.work-open span::after{content:"→";transition:transform var(--dur-2) var(--ease-out)}
+.work-open span::after{content:"→";color:var(--hl);transition:transform var(--dur-2) var(--ease-out)}
 @media (hover:hover){.work-open:hover strong{color:var(--ink)}.work-open:hover span::after{transform:translateX(4px)}}
 .work-more{margin-top:var(--s-4)}
 
@@ -215,14 +216,16 @@ figure[data-reveal] img{transition:clip-path var(--dur-draw) var(--ease-out),tra
 .service ul{list-style:none;margin:var(--s-5) 0 0;padding:0;font-size:var(--fs-ui);font-weight:600}
 .service li{padding-block:var(--s-2);border-bottom:1px solid var(--line)}
 
-/* nosotros: GAITEIRO se tacha y queda EIRO, sobre la foto */
+/* nosotros: GAITEIRO; GAIT se borra letra por letra y queda EIRO sobre la foto */
 .about{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--pad)}
 .about>.sec-head{grid-column:1/-1}
 .origin{grid-column:1/-1;grid-row:2;position:relative;z-index:2;font-size:var(--fs-origin);line-height:.8;letter-spacing:var(--tr-display);white-space:nowrap;margin-left:-.04em;color:#fff;mix-blend-mode:difference;pointer-events:none}
-.origin .cut{position:relative;color:#4D4D4D;transition:color var(--dur-3) var(--ease-out) calc(var(--dur-draw) + .3s)}
-.origin .cut::after{content:"";position:absolute;left:-.03em;right:-.03em;top:.625em;height:.07em;background:#13FE6E;transform-origin:left center;transition:transform var(--dur-draw) var(--ease-out) .3s}
-.js .origin[data-reveal]:not(.is-in) .cut{color:#fff}
-.js .origin[data-reveal]:not(.is-in) .cut::after{transform:scaleX(0)}
+.origin .cut span{opacity:0;transition:opacity var(--dur-1) linear}
+.origin .cut span:nth-child(4){transition-delay:.5s}   /* T */
+.origin .cut span:nth-child(3){transition-delay:.75s}  /* I */
+.origin .cut span:nth-child(2){transition-delay:1s}    /* A */
+.origin .cut span:nth-child(1){transition-delay:1.25s} /* G */
+.js .origin[data-reveal]:not(.is-in) .cut span{opacity:1}
 .about-photo{grid-column:8/13;grid-row:2/4;margin:calc(var(--fs-origin) * .47) 0 0;position:relative;z-index:1}
 .about-photo .ph{aspect-ratio:4/5;overflow:hidden;background:var(--surface)}
 .about-photo picture,.about-photo img{width:100%;height:100%}
@@ -400,7 +403,7 @@ html.locked,html.locked body{overflow:hidden}
   <!-- qué hacemos -->
   <section class="wrap sec-end" id="servicios" aria-labelledby="t-servicios">
     <span class="eyebrow sec-head" data-reveal>Qué hacemos</span>
-    <h2 class="services-title" id="t-servicios" data-reveal><span>Destacamos lo que importa.</span> <span>Tachamos <span class="mark-s">lo que sobra</span>.</span></h2>
+    <h2 class="services-title" id="t-servicios" data-reveal><span>Destacamos <span class="hl">lo que importa</span>.</span> <span>Tachamos <span class="mark-s">lo que sobra</span>.</span></h2>
     <div class="services">
       <article class="service">
         <span class="work-n">01</span>
@@ -423,10 +426,10 @@ html.locked,html.locked body{overflow:hidden}
     </div>
   </section>
 
-  <!-- nosotros: GAITEIRO se tacha y queda EIRO -->
+  <!-- nosotros: GAITEIRO, se borra GAIT y queda EIRO -->
   <section class="wrap sec-end about" id="nosotros" aria-labelledby="t-origen">
     <span class="eyebrow sec-head" data-reveal>Nosotros</span>
-    <h2 class="origin" id="t-origen" data-reveal aria-label="Eiro viene de Gaiteiro"><span class="cut" aria-hidden="true">GAIT</span><span aria-hidden="true">EIRO</span></h2>
+    <h2 class="origin" id="t-origen" data-reveal aria-label="Eiro viene de Gaiteiro"><span class="cut" aria-hidden="true"><span>G</span><span>A</span><span>I</span><span>T</span></span><span aria-hidden="true">EIRO</span></h2>
     <figure class="about-photo" data-reveal>
       <div class="ph"><picture><source type="image/webp" srcset="img/estudio-600.webp 600w, img/estudio-928.webp 928w" sizes="(max-width:640px) calc(100vw - 40px), (max-width:960px) 66vw, 500px"><img src="img/estudio.jpg" alt="Escritorio de trabajo con dos monitores armado en medio de un campo al atardecer" loading="lazy" decoding="async" width="928" height="1152"></picture></div>
       <figcaption class="cap">La oficina, los días buenos.</figcaption>
