@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://eirostudio.com/</loc>
-    <lastmod>2026-10-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://eirostudio.com/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/trabajos/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/servicios/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/estudio/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/contacto/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/trabajos/el-calenton/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/trabajos/crisger/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://eirostudio.com/trabajos/extracto-importado/</loc><lastmod>2026-10-19</lastmod></url>
 </urlset>
