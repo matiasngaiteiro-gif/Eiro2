@@ -35,7 +35,7 @@
 <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}catch(e){}</script>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
-<link rel="stylesheet" href="https://use.typekit.net/xqw2vog.css">
+<link rel="stylesheet" href="https://use.typekit.net/iqg5vfw.css">
 <style>
 /* EIRO · una sola hoja de estilos.
    Sistema: casi negro, texto grande y liviano en dos tonos (blanco y gris), etiquetas en monoespaciada,
@@ -53,11 +53,11 @@
   --accent:#00EB5B;    /* verde Eiro: el logo, la palabra que rota, el foco y un bloque por página */
   --on-accent:#0A0A0A;
 
-  /* tipografía (kit Adobe Fonts xqw2vog) · interletrado y pesos según Koto: grande y liviano, -1%; etiquetas mono a -2% */
+  /* tipografía (kit Adobe Fonts iqg5vfw) · interletrado y pesos según Koto: grande y liviano, -1%; etiquetas mono a -2% */
   --display:"neue-haas-grotesk-display","Helvetica Neue",Helvetica,Arial,sans-serif; /* 400 light · 500 · 600 */
   --sans:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;       /* 400 · 500 */
   --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
-  --mono:"ibm-plex-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;     /* 400 · 600 */
+  --mono:"ocr-b-std",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;        /* OCR-B, un solo peso (400) */
   --fs-statement:clamp(30px,3.5vw,60px);
   --fs-h2:clamp(30px,2.9vw,50px);
   --fs-h3:clamp(20px,1.5vw,24px);
@@ -97,7 +97,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 main:focus{outline:none}
 [id]{scroll-margin-top:84px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;left:12px;top:-60px;z-index:400;background:var(--ink);color:var(--bg);padding:10px 16px;font:600 var(--fs-mono)/1 var(--mono);text-transform:uppercase}
+.skip{position:absolute;left:12px;top:-60px;z-index:400;background:var(--ink);color:var(--bg);padding:10px 16px;font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase}
 .skip:focus{top:12px}
 .logo{display:block;fill:currentColor;height:auto}
 
@@ -109,11 +109,11 @@ main:focus{outline:none}
 .h2{font:400 var(--fs-h2)/1.06 var(--display);letter-spacing:var(--tr-display)}
 .h2>span{display:block}
 .statement{font:400 var(--fs-statement)/1.02 var(--display);letter-spacing:var(--tr-display)}
-.bracket{display:inline-flex;align-items:center;min-height:44px;gap:.6em;font:600 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
+.bracket{display:inline-flex;align-items:center;min-height:44px;gap:.6em;font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
 .bracket::before{content:"["}
 .bracket::after{content:"]"}
 @media (hover:hover){.bracket:hover{color:var(--ink)}}
-.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:600 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
 .btn.accent{background:var(--accent);color:var(--on-accent)}
 @media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}}
 .media{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--bg-2)}
@@ -253,8 +253,8 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hello{grid-column:1/6;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
 .hello-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:min(320px,100%);aspect-ratio:16/10;padding:12px;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);transition:transform var(--dur-2) var(--ease-out)}
 .hello-card .logo{width:56px}
-.hello-card .mono{font-weight:600}
-.hello-card .arrow{position:absolute;right:12px;bottom:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--on-accent);color:var(--accent);font:600 13px/1 var(--mono);transition:transform var(--dur-2) var(--ease-out)}
+.hello-card .mono{color:var(--on-accent)}
+.hello-card .arrow{position:absolute;right:12px;bottom:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--on-accent);color:var(--accent);font:400 13px/1 var(--mono);transition:transform var(--dur-2) var(--ease-out)}
 @media (hover:hover){.hello-card:hover{transform:translateY(-3px)}.hello-card:hover .arrow{transform:rotate(-45deg)}}
 
 /* pie */
@@ -314,9 +314,9 @@ footer{padding:var(--sec) max(var(--gutter),env(safe-area-inset-right,0px)) calc
 .gate form{display:flex;align-items:center;width:min(300px,100%);background:var(--bg-2);border-radius:4px;padding:4px;transition:box-shadow var(--dur-2) var(--ease-out)}
 .gate form:focus-within{box-shadow:0 0 0 1px var(--mute)}
 .gate form.err{box-shadow:0 0 0 1px #E5483B;animation:shake var(--dur-2) var(--ease-out)}
-.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:600 16px var(--mono);letter-spacing:.4em;text-align:center;padding:10px 0 10px 44px}
+.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:400 16px var(--mono);letter-spacing:.4em;text-align:center;padding:10px 0 10px 44px}
 .gate input::placeholder{color:var(--soft);letter-spacing:.06em;font-weight:400;text-transform:uppercase;font-size:12px}
-.gate button{width:40px;height:40px;border:0;border-radius:3px;background:var(--bg-3);color:var(--ink);font:600 16px var(--mono);cursor:pointer}
+.gate button{width:40px;height:40px;border:0;border-radius:3px;background:var(--bg-3);color:var(--ink);font:400 16px var(--mono);cursor:pointer}
 .gate-note{color:var(--soft)}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}
