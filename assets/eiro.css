@@ -364,6 +364,10 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 .case-meta div{display:grid;gap:4px;padding-top:12px;border-top:1px solid var(--line)}
 .case-meta dt{color:var(--soft)}
 .case-meta dd{margin:0;font-size:var(--fs-small)}
+/* manifiesto del estudio */
+.manifesto{padding-block:clamp(40px,5vw,80px) var(--sec)}
+.manifesto .statement{max-width:22ch}
+
 /* preguntas frecuentes */
 .faq{grid-column:7/13}
 .faq details{border-top:1px solid var(--line)}

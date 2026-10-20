@@ -110,14 +110,15 @@ PROJECTS = [
 
 PUB = [pr for pr in PROJECTS if pr.get("publicado")]  # casos visibles en la web
 
-SERVICES = [
+SERVICES = [  # los cuatro primeros crean la marca; los dos últimos la cuidan todos los meses
     ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Posicionamiento", "Naming", "Tono de voz"]),
     ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Manual de marca", "Packaging"]),
     ("digital", "Digital", "Tu marca, donde está tu público.", ["Diseño web", "E-commerce", "Motion"]),
-    ("contenido", "Producción de contenido", "Planificación, producción y publicación.", ["Planificación editorial", "Gestión de redes", "Foto, video y UGC"]),
     ("eventos", "Branding de eventos", "Identidad y campaña para cada edición.", ["Sistema gráfico por edición", "Campaña y teasers de lanzamiento", "Contenido para pantallas LED"]),
+    ("contenido", "Producción de contenido", "Planificación, producción y publicación.", ["Planificación editorial", "Gestión de redes", "Foto, video y UGC"]),
     ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual", "Gestión de marketing"]),
 ]
+CREAMOS = 4
 
 # TESTIMONIOS DE EJEMPLO: son simulados para ver el diseño. Reemplazar por testimonios reales
 # (texto, nombre, rol) y poner TESTIMONIOS_REALES = True para que se quite la marca "Ejemplo".
@@ -239,7 +240,7 @@ def footer(p):
     return f'''
 <footer>
   <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
+    <div><span class="mono">Eiro Studio™</span><p>Creamos y cuidamos marcas. Desde Buenos Aires.</p></div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
@@ -284,9 +285,11 @@ def free_line(p):
     return f'<a class="next-line" href="{p}contacto/" data-reveal><span>¿Tu marca es la próxima?</span><span class="mono">Hablemos →</span></a>'
 
 
-def rows_services(with_ids=True):
+def rows_services(with_ids=True, part=None):
     out = []
     for i, (sid, name, line, items) in enumerate(SERVICES):
+        if part == "creamos" and i >= CREAMOS or part == "cuidamos" and i < CREAMOS:
+            continue
         lis = "".join(f"<li>{x}</li>" for x in items)
         idattr = f' id="{sid}"' if with_ids else ""
         out.append(f'<article class="row"{idattr} data-reveal><h3><span class="num mono">0{i+1}</span>{name}</h3><div class="row-body"><p>{line}</p><ul>{lis}</ul></div></article>')
@@ -383,7 +386,7 @@ def home():
 
   <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
-      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">De la idea a la calle.</span></h2>
+      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">Creamos y cuidamos marcas.</span></h2>
       <a class="bracket" href="servicios/">Ver servicios</a>
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
@@ -595,11 +598,18 @@ def servicios():
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
     html = head(p, "Servicios | Eiro Studio", "Estrategia, identidad, digital, contenido, eventos y acompañamiento. Por proyecto o todo el año.", "servicios/") + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'De la idea a la calle.', 'Por proyecto o todo el año.')}
+{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'Creamos y cuidamos marcas.', 'Por proyecto o todo el año.')}
   <section class="sec pad grid table-sec" aria-label="Áreas de trabajo">
-    <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
+    <div class="table-head" data-reveal><h2 class="h2"><span>Creamos</span><span class="gray">Proyectos con principio y fin.</span></h2></div>
     <div class="rows">
-      {rows_services()}
+      {rows_services(part="creamos")}
+    </div>
+  </section>
+
+  <section class="sec pad grid table-sec" aria-label="Acompañamiento mensual">
+    <div class="table-head" data-reveal><h2 class="h2"><span>Cuidamos</span><span class="gray">Todos los meses.</span></h2></div>
+    <div class="rows">
+      {rows_services(part="cuidamos")}
     </div>
   </section>
 
@@ -624,6 +634,9 @@ def estudio():
     html = head(p, "Estudio | Eiro Studio", "Eiro viene de Gaiteiro. Un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Estudio</span>', 'Estudio', 'Eiro viene de Gaiteiro.')}
+  <section class="pad manifesto" aria-label="Manifiesto">
+    <p class="statement" data-reveal>Detrás de cada marca hay gente con una historia por contar. <span class="gray">Nosotros la creamos y la cuidamos.</span></p>
+  </section>
   <section class="pad" aria-label="El nombre">
     <div class="name-frame" data-reveal>
       <p class="origin" id="origin" data-wait aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
