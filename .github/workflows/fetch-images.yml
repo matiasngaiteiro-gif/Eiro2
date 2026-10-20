@@ -1,10 +1,10 @@
-# Descarga imágenes listadas en tools/fetch-images.txt ("nombre url" por línea),
-# las pasa a JPG de 1800 px y las sube a img/gen/. Se usa para traer imágenes generadas
-# desde servicios a los que el entorno de edición no tiene acceso. Después borra la lista.
+# Baja las imágenes listadas en tools/fetch-images.txt ("nombre url" por línea) a img/gen/
+# (JPG + WebP). Sirve para traer imágenes generadas desde servicios a los que el entorno de
+# edición no llega. Al terminar borra la lista.
 name: Traer imágenes
 on:
   push:
-    paths: ["tools/fetch-images.txt"]
+    paths: ["tools/fetch-images.txt", ".github/workflows/fetch-images.yml"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -13,19 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Descargar y convertir
-        run: |
-          mkdir -p img/gen
-          while read -r name url; do
-            [ -z "$name" ] && continue
-            curl -fsSL "$url" -o "/tmp/$name.png"
-            convert "/tmp/$name.png" -resize '1800x1800>' -strip -quality 88 "img/gen/$name.jpg"
-          done < tools/fetch-images.txt
-          git rm -q tools/fetch-images.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q pillow
+      - run: python tools/fetch_images.py
       - name: Guardar en el repositorio
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git rm -q --cached tools/fetch-images.txt && rm tools/fetch-images.txt
           git add img/gen
           git commit -m "Imagenes generadas para los casos (img/gen)" || exit 0
           git push
