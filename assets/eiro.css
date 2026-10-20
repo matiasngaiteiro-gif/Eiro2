@@ -14,13 +14,13 @@
   --accent:#FFFFFF;    /* blanco, negro y gris: el "acento" es blanco pleno sobre negro (botones y un bloque por página) */
   --on-accent:#0A0A0A;
 
-  /* tipografía · Basic Sans (kit Adobe Fonts upu2ggn) con pesos y jerarquías a la manera de Chittco:
+  /* tipografía · Basic Sans (kit Adobe Fonts lbz8xpp) con pesos y jerarquías a la manera de Chittco:
      Light 300 para títulos y lectura, Regular 400 solo para énfasis y nombres; cuanto más grande, más cerrado el interletrado.
-     Roboto Mono y Neulis Cursive siguen en el kit oqj6tze. */
+     Azeret Mono va en el mismo kit (lbz8xpp); Neulis Cursive sigue en oqj6tze. */
   --display:"basic-sans","Helvetica Neue",Helvetica,Arial,sans-serif; /* 300 */
   --sans:"basic-sans","Helvetica Neue",Helvetica,Arial,sans-serif;    /* 300 lectura · 400 énfasis */
   --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
-  --mono:"roboto-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;      /* Roboto Mono Medium (500), en la línea de Moderat Mono */
+  --mono:"azeret-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;      /* Azeret Mono, como Chittco: Light 300 en etiquetas, Regular 400 en botones */
   --fs-statement:clamp(30px,3.6vw,67px);
   --fs-h2:clamp(30px,2.9vw,50px);
   --fs-h3:clamp(20px,1.5vw,21.33px);
@@ -62,23 +62,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 main:focus{outline:none}
 [id]{scroll-margin-top:84px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;left:12px;top:-60px;z-index:400;background:var(--ink);color:var(--bg);padding:10px 16px;font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase}
+.skip{position:absolute;left:12px;top:-60px;z-index:400;background:var(--ink);color:var(--bg);padding:10px 16px;font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase}
 .skip:focus{top:12px}
 .logo{display:block;fill:currentColor;height:auto}
 
 /* componentes */
-.mono{font:500 var(--fs-mono)/1.35 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.mono{font:300 var(--fs-mono)/1.35 var(--mono);text-transform:uppercase;letter-spacing:.08em}
 .gray{color:var(--mute)}
 .pad{padding-inline:max(var(--gutter),env(safe-area-inset-left,0px))}
 .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
 .h2{font:300 var(--fs-h2)/1.06 var(--display);letter-spacing:var(--tr-display)}
 .h2>span{display:block}
 .statement{font:300 var(--fs-statement)/1.02 var(--display);letter-spacing:var(--tr-display)}
-.bracket{display:inline-flex;align-items:center;min-height:44px;gap:.6em;font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
+.bracket{display:inline-flex;align-items:center;min-height:44px;gap:.6em;font:300 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
 .bracket::before{content:"["}
 .bracket::after{content:"]"}
 @media (hover:hover){.bracket:hover{color:var(--ink)}}
-.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
 .btn.accent{background:var(--accent);color:var(--on-accent)}
 @media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}.btn.accent:hover{background:#C8C8C8}}
 .media{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--bg-2)}
@@ -250,7 +250,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hello-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:min(320px,100%);aspect-ratio:16/10;padding:12px;border-radius:var(--radius);background:var(--accent);color:var(--on-accent);transition:transform var(--dur-2) var(--ease-out)}
 .hello-card .logo{width:56px}
 .hello-card .mono{color:var(--on-accent)}
-.hello-card .arrow{position:absolute;right:12px;bottom:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--on-accent);color:var(--accent);font:500 13px/1 var(--mono);transition:transform var(--dur-2) var(--ease-out)}
+.hello-card .arrow{position:absolute;right:12px;bottom:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--on-accent);color:var(--accent);font:300 13px/1 var(--mono);transition:transform var(--dur-2) var(--ease-out)}
 @media (hover:hover){.hello-card:hover{transform:translateY(-3px)}.hello-card:hover .arrow{transform:rotate(-45deg)}}
 
 /* pie */
@@ -373,7 +373,7 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 .faq details{border-top:1px solid var(--line)}
 .faq summary{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:56px;padding:12px 0;cursor:pointer;list-style:none;font-weight:400}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font:500 18px/1 var(--mono);color:var(--mute);transition:transform var(--dur-2) var(--ease-out)}
+.faq summary::after{content:"+";font:300 18px/1 var(--mono);color:var(--mute);transition:transform var(--dur-2) var(--ease-out)}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{padding:0 0 24px;color:var(--mute);max-width:56ch}
 
@@ -477,12 +477,12 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 /* ---------- piezas de marca en movimiento (flyers y aplicaciones animadas) ---------- */
 .reels-wrap{padding-top:clamp(48px,6vw,96px)}
 .reels-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px;color:var(--soft)}
-.reels-head button{min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:none;color:var(--mute);font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;cursor:pointer}
+.reels-head button{min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:none;color:var(--mute);font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase;cursor:pointer}
 @media (hover:hover){.reels-head button:hover{color:var(--ink);border-color:var(--mute)}}
 .reels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--col-gap)}
 .reel{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:4/5;background:var(--c-bg,#141414);color:var(--c-ink,#fff);isolation:isolate;contain:paint}
 .reel.wide{grid-column:1/-1;aspect-ratio:16/9}
-.reel figcaption{position:absolute;z-index:5;left:14px;bottom:12px;font:500 11px/1 var(--mono);text-transform:uppercase;color:var(--c-cap,rgba(255,255,255,.7))}
+.reel figcaption{position:absolute;z-index:5;left:14px;bottom:12px;font:300 11px/1 var(--mono);text-transform:uppercase;color:var(--c-cap,rgba(255,255,255,.7))}
 .reel:not(.play) *,.reels.paused .reel *{animation-play-state:paused!important}
 .rt{font-family:var(--c-font,var(--display));font-weight:var(--c-w,600);letter-spacing:var(--c-tr,-.03em);line-height:.88}
 
@@ -509,7 +509,7 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 @keyframes kPulse{0%,100%{transform:translate(-50%,-50%) scale(.92)}50%{transform:translate(-50%,-50%) scale(1.04)}}
 .k-sun .band{position:absolute;left:0;right:0;white-space:nowrap;font-size:clamp(28px,5vw,64px);animation:kRow 7s linear infinite}
 .k-sun .band.b1{top:8%}.k-sun .band.b2{bottom:18%;animation-direction:reverse;animation-duration:9s}
-.k-sun .band.b3{bottom:6%;font:var(--c-lab,500 12px/1 var(--mono));text-transform:uppercase;letter-spacing:.06em;animation-duration:14s}
+.k-sun .band.b3{bottom:6%;font:var(--c-lab,500 12px/1 var(--mono));text-transform:uppercase;letter-spacing:.08em;animation-duration:14s}
 
 /* D · construcción de logo: la grilla se dibuja y aparece la palabra */
 .k-build svg{position:absolute;inset:0;width:100%;height:100%}
@@ -670,7 +670,7 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 /* botón fijo de WhatsApp: solo en el celular, al alcance del pulgar */
 .wa-fab{display:none}
 @media (max-width:820px){
-  .wa-fab{position:fixed;z-index:90;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(20,20,20,.92);border:1px solid var(--line);color:var(--ink);font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity var(--dur-2) var(--ease-out),transform var(--dur-2) var(--ease-out)}
+  .wa-fab{position:fixed;z-index:90;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(20,20,20,.92);border:1px solid var(--line);color:var(--ink);font:300 var(--fs-mono)/1 var(--mono);text-transform:uppercase;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity var(--dur-2) var(--ease-out),transform var(--dur-2) var(--ease-out)}
   html.past-hero .wa-fab{opacity:1;transform:none;pointer-events:auto}
   .wa-fab span{color:#25D366;font-size:10px}
   html.locked .wa-fab,html.menu-open .wa-fab{display:none}
@@ -685,9 +685,9 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 .gate form{display:flex;align-items:center;width:min(300px,100%);background:var(--bg-2);border-radius:4px;padding:4px;transition:box-shadow var(--dur-2) var(--ease-out)}
 .gate form:focus-within{box-shadow:0 0 0 1px var(--mute)}
 .gate form.err{box-shadow:0 0 0 1px #E5483B;animation:shake var(--dur-2) var(--ease-out)}
-.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:500 16px var(--mono);letter-spacing:.4em;text-align:center;padding:10px 0 10px 44px}
-.gate input::placeholder{color:var(--soft);letter-spacing:.06em;font-weight:400;text-transform:uppercase;font-size:12px}
-.gate button{width:40px;height:40px;border:0;border-radius:3px;background:var(--bg-3);color:var(--ink);font:500 16px var(--mono);cursor:pointer}
+.gate input{flex:1;min-width:0;border:0;outline:none;background:transparent;color:var(--ink);font:400 16px var(--mono);letter-spacing:.4em;text-align:center;padding:10px 0 10px 44px}
+.gate input::placeholder{color:var(--soft);letter-spacing:.08em;font-weight:400;text-transform:uppercase;font-size:12px}
+.gate button{width:40px;height:40px;border:0;border-radius:3px;background:var(--bg-3);color:var(--ink);font:400 16px var(--mono);cursor:pointer}
 .gate-note{color:var(--soft)}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}

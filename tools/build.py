@@ -10,8 +10,8 @@ from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://eirostudio.com/"
-KIT = "oqj6tze"  # kit de Adobe Fonts: Roboto Mono, Neulis Cursive (y Neue Haas, que queda solo para la marca Crisger)
-KIT_SANS = "upu2ggn"  # Basic Sans Light, Regular y SemiBold: la tipografía de todos los textos
+KIT = "oqj6tze"  # kit de Adobe Fonts: Neulis Cursive (y Neue Haas, solo para la marca Crisger)
+KIT_SANS = "lbz8xpp"  # Basic Sans (300, 400, 600) y Azeret Mono (300, 400): la tipografía de todos los textos
 KIT_CASOS = "hfs0xvx"  # tipografías de los clientes, solo en las páginas de casos: New Spirit (+ Condensed), Gotham, Shuttleblock Narrow
 
 # tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
