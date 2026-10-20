@@ -2,7 +2,7 @@
    Clave de acceso, hora de Buenos Aires, menú, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
 (function(){
   var root=document.documentElement, RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches, started=false;
-  var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer'));
+  var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer, body > .intro'));
 
   // acceso con clave · cortina de "en construcción", no seguridad: la clave se ve en el código
   var gate=document.getElementById('gate'), form=document.getElementById('gateForm'), key=document.getElementById('gateKey');
@@ -66,6 +66,16 @@
         pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausar';pb.setAttribute('aria-pressed',paused?'true':'false')})}
       if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(reel);
       setInterval(function(){if(!paused&&vis&&!document.hidden)show(k+1)},750);
+    }
+
+    // testimonios: uno por vez, con flechas y avance solo cada 7 s (se frena con movimiento reducido o al tocar las flechas)
+    var qb=document.querySelector('[data-quotes]');
+    if(qb){
+      var qs=[].slice.call(qb.querySelectorAll('.q-slide')),qd=[].slice.call(qb.querySelectorAll('.q-dash i')),qn=qb.querySelector('[data-q-now]'),qi=0,qauto=!RM;
+      var qshow=function(n){qs[qi].hidden=true;qs[qi].classList.remove('on');qd[qi].classList.remove('on');qi=(n+qs.length)%qs.length;qs[qi].hidden=false;qs[qi].classList.add('on');qd[qi].classList.add('on');qn.textContent=qi+1};
+      qb.querySelector('[data-q-prev]').addEventListener('click',function(){qauto=false;qshow(qi-1)});
+      qb.querySelector('[data-q-next]').addEventListener('click',function(){qauto=false;qshow(qi+1)});
+      setInterval(function(){if(qauto&&!document.hidden)qshow(qi+1)},7000);
     }
 
     // la palabra que rota: recorre los adjetivos una vez y se queda en el último
@@ -133,7 +143,7 @@
   }
 
   // el botón fijo de WhatsApp (celular) aparece recién después de la portada, para no competir con ella
-  var heroEl=document.querySelector('.hero');
+  var heroEl=document.querySelector('.hero,.intro');
   function past(){root.classList.toggle('past-hero',scrollY>(heroEl?heroEl.offsetHeight*.8:400))}
   addEventListener('scroll',past,{passive:true});past();
 

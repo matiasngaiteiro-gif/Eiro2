@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://use.typekit.net/oqj6tze.css">
-<link rel="stylesheet" href="../assets/eiro.css?v=4559a743">
+<link rel="stylesheet" href="../assets/eiro.css?v=0508e2fb">
 </head>
 <body>
 <a class="skip" href="#top">Saltar al contenido</a>
@@ -47,17 +47,11 @@
   </div>
 </div>
 
-<header class="bar" id="barra">
-  <div class="pod">
-    <a class="brand" href="../" aria-label="Eiro Studio, ir al inicio"><svg class="logo" viewBox="0 0 3850 1351" aria-hidden="true" focusable="false"><use href="../img/sprite.svg#i-logo"/></svg></a>
-    <span class="where mono" id="where" aria-hidden="true">Servicios</span>
-    <span class="dot" aria-hidden="true"></span>
-  </div>
-  <div class="bar-right">
-    <a class="btn accent" href="../contacto/">Hablemos</a>
-    <span class="clock mono" id="clock" aria-hidden="true">--:-- BUE</span>
-    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
-  </div>
+<header class="nav" id="barra">
+  <a class="brand" href="../" aria-label="Eiro Studio, ir al inicio"><svg class="logo" viewBox="0 0 3850 1351" aria-hidden="true" focusable="false"><use href="../img/sprite.svg#i-logo"/></svg></a>
+  <nav class="nav-links" aria-label="Secciones"><a href="../trabajos/">Trabajos</a><a href="../servicios/" aria-current="page">Servicios</a><a href="../estudio/">Estudio</a></nav>
+  <a class="btn accent nav-cta" href="../contacto/">Empezar un proyecto</a>
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
 </header>
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
@@ -101,25 +95,24 @@
     <div class="table-head" data-reveal><h2 class="h2" id="t-faq"><span>Preguntas</span><span class="gray">Las que nos hacen siempre.</span></h2></div>
     <div class="faq" data-reveal><details><summary>¿Cuánto tarda un proyecto?</summary><p>Depende del alcance. Antes de arrancar te pasamos un calendario.</p></details><details><summary>¿Cómo se cobra?</summary><p>Por proyecto, con presupuesto cerrado, o con un fee mensual si te acompañamos todo el año.</p></details><details><summary>¿Puedo pedir una sola pieza?</summary><p>Sí. Podés sumar una sola pieza o armar el equipo completo.</p></details></div>
   </section>
-
-  <section class="pad sec cta-sec" aria-label="Contacto">
-    <div class="cta-band" data-reveal><h2>¿Tenés un proyecto? Hablemos.</h2><div class="ctas"><a class="btn" href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">WhatsApp<span class="sr"> (se abre WhatsApp)</span></a><a class="btn line" href="https://www.instagram.com/matiasgaiteiro/" target="_blank" rel="noopener">Instagram<span class="sr"> (se abre Instagram)</span></a></div></div>
-  </section>
 </main>
 <footer>
-  <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Creamos y cuidamos marcas. Desde Buenos Aires.</p></div>
-    <div><span class="mono">Páginas</span><a href="../">Inicio</a><a href="../trabajos/">Trabajos</a><a href="../servicios/">Servicios</a><a href="../estudio/">Estudio</a><a href="../contacto/">Contacto</a></div>
-    <div><span class="mono">Hablemos</span><a href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">WhatsApp<span class="sr"> (se abre WhatsApp)</span></a><a href="https://www.instagram.com/matiasgaiteiro/" target="_blank" rel="noopener">Instagram<span class="sr"> (se abre Instagram)</span></a><a href="tel:+5491134850669">+54 9 11 3485-0669</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
+  <div class="close">
+    <h2 class="close-title">Tu marca está lista cuando vos lo estés.</h2>
+    <a class="close-cta" href="../contacto/">Empezar un proyecto <span aria-hidden="true">→</span></a>
   </div>
-  <div class="foot-logo" aria-hidden="true"><svg class="logo" viewBox="0 0 3850 1351" aria-hidden="true" focusable="false"><use href="../img/sprite.svg#i-logo"/></svg></div>
+  <div class="foot-grid">
+    <div class="foot-talk"><span class="mono">Hablemos</span><a href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">WhatsApp<span class="sr"> (se abre WhatsApp)</span></a><a href="https://www.instagram.com/matiasgaiteiro/" target="_blank" rel="noopener">Instagram<span class="sr"> (se abre Instagram)</span></a><a href="tel:+5491134850669">+54 9 11 3485-0669</a></div>
+    <nav class="foot-links" aria-label="Pie"><a href="../">Inicio</a><a href="../trabajos/">Trabajos</a><a href="../servicios/">Servicios</a><a href="../estudio/">Estudio</a><a href="../contacto/">Contacto</a></nav>
+    <p class="foot-social mono"><a href="https://www.instagram.com/matiasgaiteiro/" target="_blank" rel="noopener">Instagram<span class="sr"> (se abre Instagram)</span></a> · <a href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener">WhatsApp<span class="sr"> (se abre WhatsApp)</span></a></p>
+  </div>
   <div class="foot-bottom mono">
+    <a class="foot-mark" href="../" aria-label="Eiro Studio, ir al inicio"><svg class="logo" viewBox="0 0 3850 1351" aria-hidden="true" focusable="false"><use href="../img/sprite.svg#i-logo"/></svg></a>
+    <span>Creamos y cuidamos marcas. Buenos Aires.</span>
     <span>© 2026 Eiro Studio™</span>
-    <span>Hecho en Buenos Aires</span>
-    <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
 <a class="wa-fab" href="https://wa.me/5491134850669?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20" target="_blank" rel="noopener"><span aria-hidden="true">●</span> WhatsApp<span class="sr"> (se abre WhatsApp)</span></a>
-<script src="../assets/eiro.js?v=4559a743" defer></script>
+<script src="../assets/eiro.js?v=0508e2fb" defer></script>
 </body>
 </html>

@@ -192,7 +192,8 @@ def head(p, title, desc, path, casos=False):
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
 
 
-def chrome(p, page, where):
+def chrome(p, page, where, pre=""):
+    links = "".join(f'<a href="{p}{slug}/"{" aria-current=\"page\"" if slug == page else ""}>{name}</a>' for slug, name in NAV if slug != "contacto")
     items = "".join(
         f'<li><a href="{p}{slug}/"{" aria-current=\"true\"" if slug == page else ""}><span class="mono">0{i+1}</span>{name}</a></li>'
         for i, (slug, name) in enumerate(NAV))
@@ -211,17 +212,11 @@ def chrome(p, page, where):
   </div>
 </div>
 
-<header class="bar" id="barra">
-  <div class="pod">
-    <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
-    <span class="where mono" id="where" aria-hidden="true">{where}</span>
-    <span class="dot" aria-hidden="true"></span>
-  </div>
-  <div class="bar-right">
-    <a class="btn accent" href="{p}contacto/">Hablemos</a>
-    <span class="clock mono" id="clock" aria-hidden="true">--:-- BUE</span>
-    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
-  </div>
+{pre}<header class="nav" id="barra">
+  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
+  <nav class="nav-links" aria-label="Secciones">{links}</nav>
+  <a class="btn accent nav-cta" href="{p}contacto/">Empezar un proyecto</a>
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
 </header>
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
@@ -242,16 +237,19 @@ def footer(p):
     pages = "".join(f'<a href="{p}{s}/">{n}</a>' for s, n in NAV)
     return f'''
 <footer>
-  <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Creamos y cuidamos marcas. Desde Buenos Aires.</p></div>
-    <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
-    <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
+  <div class="close">
+    <h2 class="close-title">Tu marca está lista cuando vos lo estés.</h2>
+    <a class="close-cta" href="{p}contacto/">Empezar un proyecto <span aria-hidden="true">→</span></a>
   </div>
-  <div class="foot-logo" aria-hidden="true">{logo(p)}</div>
+  <div class="foot-grid">
+    <div class="foot-talk"><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a></div>
+    <nav class="foot-links" aria-label="Pie"><a href="{p or './'}">Inicio</a>{pages}</nav>
+    <p class="foot-social mono"><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a> · <a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a></p>
+  </div>
   <div class="foot-bottom mono">
+    <a class="foot-mark" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
+    <span>Creamos y cuidamos marcas. Buenos Aires.</span>
     <span>© {date.today().year} Eiro Studio™</span>
-    <span>Hecho en Buenos Aires</span>
-    <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
 <a class="wa-fab" href="{WA_PROJ}" target="_blank" rel="noopener"><span aria-hidden="true">●</span> WhatsApp{SR_WA}</a>
@@ -321,12 +319,17 @@ def cta_band(p, title="¿Tenés un proyecto? Hablemos."):
 
 def testimonials_html():
     tag = "" if TESTIMONIOS_REALES else '<span class="t-tag mono">Ejemplo</span>'
-    note = "" if TESTIMONIOS_REALES else '<p class="t-note mono">Testimonios de ejemplo. Se reemplazan por los reales.</p>'
-    cards = "".join(f'<figure class="tcard-q">{tag}<blockquote><p>“{q}”</p></blockquote><figcaption><b>{n}</b><span class="mono">{r}</span></figcaption></figure>' for q, n, r in TESTIMONIALS)
+    n = len(TESTIMONIALS)
+    slides = "".join(f'<figure class="q-slide{" on" if i == 0 else ""}" data-i="{i}"{"" if i == 0 else " hidden"}><blockquote><p>“{q}”</p></blockquote><figcaption class="mono">{nm} · {r}</figcaption></figure>' for i, (q, nm, r) in enumerate(TESTIMONIALS))
+    dashes = "".join(f'<i{" class=\"on\"" if i == 0 else ""}></i>' for i in range(n))
     return f'''
-  <section class="sec pad" data-label="Clientes" aria-labelledby="t-clientes">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span><span class="gray">Lo que dicen de trabajar con nosotros.</span></h2>{note}</div>
-    <div class="tq-row" tabindex="0" role="region" aria-label="Testimonios, se desplazan de costado">{cards}</div>
+  <section class="quote pad" aria-roledescription="carrusel" aria-label="Testimonios">
+    <div class="q-box" data-quotes>
+      {tag}
+      <div class="q-slides" aria-live="polite">{slides}</div>
+      <div class="q-ctl"><span class="mono q-count"><span data-q-now>1</span>/{n}</span><span class="q-dash" aria-hidden="true">{dashes}</span>
+        <button type="button" class="q-btn" data-q-prev aria-label="Testimonio anterior">←</button><button type="button" class="q-btn" data-q-next aria-label="Testimonio siguiente">→</button></div>
+    </div>
   </section>'''
 
 
@@ -358,46 +361,63 @@ def hero_reel(p):
 # ---------- páginas ----------
 def home():
     p = ""
-    cards = "\n      ".join(work_card(p, pr) for pr in PUB)
-    svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
     ld = head(p, "Eiro Studio | Estudio creativo de branding en Buenos Aires",
               "Eiro es un estudio creativo de Buenos Aires. Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer.", "")
     org = open(os.path.join(ROOT, "tools", "org-ld.json"), encoding="utf-8").read().strip()  # datos del estudio para buscadores
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
+    # 1 · portada verde: pila de mockups en el centro (pasan como GIF) y una línea mono abajo
+    peeks = "".join(f'<span class="peek k{i}" style="background-image:url(img/mockups/{MOCKUPS[i][0]}-600.webp)"></span>' for i in (3, 2, 1))
+    intro = f'''
+<section class="intro" aria-label="Portada">
+  <div class="stack">{peeks}{hero_reel(p)}</div>
+  <p class="intro-tag mono">Estudio de branding<br>y contenido</p>
+  <p class="intro-meta mono"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></p>
+</section>
+'''
+    big, small = (PUB + PUB)[0], (PUB + PUB)[1]
+    def feat(pr, cls, sizes):
+        zn, zalt = pr["zoom"]
+        return (f'<a class="feat {cls}" href="{p}trabajos/{pr["slug"]}/" data-reveal>{gen_pic(p, zn, zalt, sizes)}'
+                f'<span class="feat-name">{pr["name"]}</span><span class="feat-tags mono">{pr["tags"]}</span></a>')
+    soon = ('<div class="feat c" data-reveal><figure class="media"><img src="img/mockups/06-web-1200.webp" srcset="img/mockups/06-web-600.webp 600w, img/mockups/06-web-1200.webp 1200w" sizes="(max-width:820px) 100vw, 50vw" alt="Sitio web de Crisger" loading="lazy" decoding="async" width="1200" height="900"></figure>'
+            '<span class="feat-name gray">Crisger (Próximamente)</span><span class="feat-tags mono">Branding · Manual de marca · Web</span></div>')
+    steps = "".join(f'<li class="proc-row" data-reveal><div class="proc-name"><span class="mono">Paso 0{i+1}</span><h3>{t}</h3></div><p>{d}</p></li>' for i, (t, d) in enumerate(STEPS))
+    clients = '<span>El Calentón</span><span>Crisger</span><span>Extracto Importado</span><span>CER Entrenamientos</span>'
     body = f'''
 <main id="top" tabindex="-1">
-  <section class="hero" data-label="Inicio" aria-label="Portada">
-    <div class="hero-frame">
-      {hero_reel(p)}
-      <div class="hero-copy">
-        <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
-        <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
-      </div>
-      <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
+  <!-- 2 · titular escalonado en las columnas, con una imagen chica entre las palabras -->
+  <section class="lead pad" aria-labelledby="t-lead">
+    <h1 class="lead-title" id="t-lead"><span class="l1">Creamos y</span><span class="l2">cuidamos</span><span class="l-img" aria-hidden="true"><img src="img/mockups/04-bolsas-600.webp" alt="" width="600" height="450"></span><span class="l3">marcas</span></h1>
+    <p class="lead-sub">Estudio de branding y contenido<br>para marcas y eventos.</p>
+    <div class="trusted"><span class="mono">Confían en nosotros</span><div class="trusted-row">{clients}</div></div>
+  </section>
+
+  <!-- 3 · trabajos en grilla escalonada -->
+  <section class="feats pad" aria-label="Trabajos destacados">
+    {feat(big, "a", "(max-width:820px) 100vw, 75vw")}
+    {feat(small, "b", "(max-width:820px) 100vw, 25vw")}
+    {soon}
+    <a class="see-all" href="trabajos/">Ver todos los trabajos</a>
+  </section>
+
+  <!-- 4 · filosofía -->
+  <section class="philo pad" aria-labelledby="t-philo">
+    <h2 class="philo-title" id="t-philo">Las marcas son historias</h2>
+    <div class="philo-text">
+      <p>Detrás de cada marca hay gente con una historia por contar. Nadie elige una marca por lógica: elige la que lo hace sentir algo.</p>
+      <p>Nosotros encontramos esa historia, la contamos bien y la cuidamos todos los meses.</p>
+      <a class="btn accent" href="contacto/">Empezar un proyecto</a>
     </div>
   </section>
 
-  <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-trabajos"><span>Trabajos</span><span class="gray">Lo último que hicimos.</span></h2><a class="bracket" href="trabajos/">Ver todos</a></div>
-    <div class="wgrid">
-      {cards}
-    </div>
-    {free_line(p)}
+  <!-- 5 · proceso en filas -->
+  <section class="proc pad" aria-labelledby="t-proc">
+    <h2 class="proc-label" id="t-proc">Proceso</h2>
+    <ol class="proc-list">{steps}</ol>
   </section>
 {testimonials_html()}
-
-  <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
-    <div class="svc-side" data-reveal>
-      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">Creamos y cuidamos marcas.</span></h2>
-      <a class="bracket" href="servicios/">Ver servicios</a>
-    </div>
-    <nav class="svc-list" aria-label="Servicios">{svc}</nav>
-  </section>
-
-{cta_band(p)}
 </main>'''
-    write("index.html", ld + chrome(p, "", "Inicio") + body + footer(p))
+    write("index.html", ld + chrome(p, "", "Inicio", pre=intro) + body + footer(p))
 
 
 def trabajos():
@@ -620,7 +640,6 @@ def servicios():
     <div class="table-head" data-reveal><h2 class="h2" id="t-faq"><span>Preguntas</span><span class="gray">Las que nos hacen siempre.</span></h2></div>
     <div class="faq" data-reveal>{faq}</div>
   </section>
-{cta_band(p)}
 </main>''' + footer(p)
     write("servicios/index.html", html)
 
@@ -675,7 +694,6 @@ def estudio():
       {steps_html()}
     </ol>
   </section>
-{cta_band(p, "Contanos tu idea.")}
 </main>''' + footer(p)
     write("estudio/index.html", html)
 
