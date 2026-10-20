@@ -11,7 +11,7 @@
   --mute:#989898;      /* segundo tono de los textos (6,9:1) */
   --soft:#8A8A8A;      /* etiquetas mono (5,6:1) */
   --line:#262626;
-  --accent:#00EB5B;    /* verde Eiro: el logo, la palabra que rota, el foco y un bloque por página */
+  --accent:#FFFFFF;    /* blanco, negro y gris: el "acento" es blanco pleno sobre negro (botones y un bloque por página) */
   --on-accent:#0A0A0A;
 
   /* tipografía (kit Adobe Fonts oqj6tze) · interletrado y pesos según Koto: grande en peso medium, -1%; etiquetas mono sin interletrado */
@@ -76,7 +76,7 @@ main:focus{outline:none}
 @media (hover:hover){.bracket:hover{color:var(--ink)}}
 .btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:500 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:-.01em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
 .btn.accent{background:var(--accent);color:var(--on-accent)}
-@media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}}
+@media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}.btn.accent:hover{background:#C8C8C8}}
 .media{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--bg-2)}
 .media picture,.media img{width:100%;height:100%}
 .media img{object-fit:cover}
@@ -88,6 +88,10 @@ main:focus{outline:none}
 .js .media[data-reveal]:not(.is-in){opacity:1;transform:none;clip-path:inset(100% 0 0 0 round var(--radius))}
 .js .media[data-reveal] img{transition:transform 1.4s var(--ease-out)}
 .js .media[data-reveal]:not(.is-in) img{transform:scale(1.08)}
+
+/* inicio: una sola frase, gris con la palabra que rota en blanco */
+.intro .statement.short{font:600 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display);color:var(--mute);max-width:14ch;grid-column:1/-1}
+.intro-sub{grid-column:1/-1;margin-top:20px;color:var(--soft)}
 
 /* barra: cápsula flotante a la izquierda, hora y menú a la derecha */
 .bar{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + var(--gutter));left:max(var(--gutter),env(safe-area-inset-left,0px));right:max(var(--gutter),env(safe-area-inset-right,0px));display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
@@ -141,7 +145,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .intro{padding-block:clamp(56px,7vw,120px) var(--sec)}
 .intro .statement{grid-column:1/9;max-width:30ch}
 .rot{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
-.rot em{display:inline-block;font-style:normal;color:var(--accent)}
+.rot em{display:inline-block;font-style:normal;color:var(--ink)}
 .rot em.out{animation:rotOut var(--dur-2) var(--ease-in) forwards}
 .rot em.in{animation:rotIn var(--dur-3) var(--ease-out)}
 @keyframes rotOut{to{transform:translateY(-105%);opacity:0}}
@@ -197,7 +201,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 /* proceso */
 .steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--col-gap);margin-top:48px}
 .step{display:flex;flex-direction:column;gap:56px;min-height:260px;padding:18px;background:var(--bg-2);border-radius:var(--radius)}
-.step .mono{color:var(--accent)}
+.step .mono{color:var(--soft)}
 .step h3{margin-top:auto;font:600 clamp(26px,2.3vw,38px)/1 var(--display);letter-spacing:var(--tr-display)}
 .step p{margin-top:-40px;color:var(--mute);font-size:var(--fs-small)}
 
@@ -286,7 +290,7 @@ footer{padding:var(--sec) max(var(--gutter),env(safe-area-inset-right,0px)) calc
 .wcard{display:flex;flex-direction:column;gap:16px}
 .wcard .media{aspect-ratio:4/3}
 .wcard .media img{transition:transform var(--dur-3) var(--ease-out)}
-@media (hover:hover){.wcard:hover .media img{transform:scale(1.03)}.wcard:hover .wcard-name{color:var(--accent)}}
+@media (hover:hover){.wcard:hover .media img{transform:scale(1.03)}.wcard:hover .wcard-name{color:var(--mute)}}
 .wcard-name{font:500 var(--fs-h3)/1.2 var(--sans);transition:color var(--dur-1) var(--ease-out)}
 .wcard-sub{font:400 var(--fs-h3)/1.2 var(--sans);color:var(--mute)}
 .wcard .mono{color:var(--soft);margin-top:6px}
@@ -348,7 +352,7 @@ footer{padding:var(--sec) max(var(--gutter),env(safe-area-inset-right,0px)) calc
 /* banda de cierre */
 .cta-band{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;padding:clamp(24px,3vw,40px);border-radius:var(--radius);background:var(--accent);color:var(--on-accent)}
 .cta-band h2{font:600 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-display);max-width:12ch}
-.cta-band .btn{background:var(--on-accent);color:var(--accent)}
+.cta-band .btn{background:var(--on-accent);color:var(--ink)}
 @media (hover:hover){.cta-band .btn:hover{background:var(--ink);color:var(--bg)}}
 
 /* estudio: el nombre */

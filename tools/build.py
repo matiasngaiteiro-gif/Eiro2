@@ -40,35 +40,35 @@ PROJECTS = [
          img=("el-calenton", "Fiesta al aire libre con DJ al atardecer en El Calentón", 1800, 1013, ""),
          meta=[("Cliente", "El Calentón"), ("Rubro", "Eventos · Música latina"), ("Servicios", "Identidad, video y gráfica")],
          lead='Una fiesta que se anuncia como un estreno. <span class="gray">Identidad y teasers de video para cada edición de El Calentón, una fiesta de música latina.</span>',
-         challenge='Cada fin de semana hay decenas de fiestas peleando por la misma atención. <span class="gray">El Calentón necesitaba que cada anuncio se reconociera al instante y diera ganas de estar.</span>',
-         did='Armamos una identidad con calor propio: color, tipografía y ritmo. <span class="gray">Y un formato de teaser para presentar cada line up, distinto en cada edición pero siempre reconocible.</span>',
+         challenge='Cada fin de semana hay decenas de fiestas peleando por la misma atención.',
+         did='Armamos una identidad con calor propio: color, tipografía y ritmo.',
          deliver=["Identidad visual", "Teasers de line up", "Piezas para redes", "Gráfica del evento"],
          gallery=["Teaser de line up (video)", "Flyer de la edición", "Piezas para historias", "Fotos del evento"]),
     dict(slug="crisger", name="Crisger", sub="Una marca, igual en todos lados.", tags="Industria · Manual de marca",
          img=("crisger", "Operario con casco y chaleco en una planta industrial", 928, 1152, "object-position:center 28%"),
          meta=[("Cliente", "Crisger"), ("Rubro", "Seguridad industrial"), ("Servicios", "Branding y manual de marca")],
          lead='Una marca que se ve igual en todos lados. <span class="gray">Manual de marca interactivo para Crisger, empresa de seguridad industrial.</span>',
-         challenge='La marca se usaba distinto en la planta, en la oficina y en la web. <span class="gray">Cada área hacía su versión y la identidad se iba desdibujando.</span>',
-         did='Ordenamos el sistema y lo llevamos a un manual interactivo. <span class="gray">Reglas claras, ejemplos reales y archivos listos para usar, siempre a mano desde el celular o la compu.</span>',
+         challenge='La marca se usaba distinto en la planta, en la oficina y en la web.',
+         did='Ordenamos el sistema y lo llevamos a un manual interactivo.',
          deliver=["Manual de marca interactivo", "Sistema de color y tipografía", "Aplicaciones en planta y oficina", "Plantillas"],
          gallery=["Portada del manual", "Sistema de color y tipografía", "Aplicaciones en planta", "Versión web del manual"]),
     dict(slug="extracto-importado", name="Extracto Importado", sub="Cada fragancia, su historia.", tags="Perfumería · Contenido",
          img=None,
          meta=[("Cliente", "Extracto Importado"), ("Rubro", "Perfumería"), ("Servicios", "Contenido con creadoras")],
          lead='Cada fragancia, su propia historia. <span class="gray">Contenido con creadoras para cada lanzamiento de Extracto Importado, marca de perfumes.</span>',
-         challenge='En perfumería no se puede oler a través de la pantalla. <span class="gray">Había que contar cada fragancia de una forma que se sintiera.</span>',
-         did='Escribimos guiones y produjimos videos con creadoras para cada lanzamiento. <span class="gray">Historias cortas, naturales y pensadas para que se compartan.</span>',
+         challenge='En perfumería no se puede oler a través de la pantalla.',
+         did='Escribimos guiones y produjimos videos con creadoras para cada lanzamiento.',
          deliver=["Videos con creadoras", "Guiones", "Piezas para redes", "Calendario de lanzamientos"],
          gallery=["Video con creadora", "Guion y storyboard", "Piezas para historias", "Detalle de producto"]),
 ]
 
 SERVICES = [
-    ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Investigación y diagnóstico", "Posicionamiento", "Arquitectura de marca", "Naming", "Plataforma y tono de voz"]),
-    ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Sistemas de diseño", "Manual de marca", "Tipografía y lettering a medida", "Packaging", "Señalética y espacios"]),
-    ("digital", "Digital", "Tu marca, en la pantalla donde esté tu público.", ["Diseño y desarrollo web", "Producto digital y UX/UI", "E-commerce", "Motion y animación de marca"]),
-    ("contenido", "Contenido", "Qué decir, cuándo y cómo.", ["Estrategia de contenido", "Gestión de redes", "Producción de foto y video", "Creadores y UGC", "Campañas y publicidad"]),
-    ("eventos", "Eventos", "Para que se hable antes, durante y después.", ["Identidad de eventos y festivales", "Teasers y anuncios de line up", "Visuales para pantallas y LED", "Gráfica, merch y señalética", "Activaciones de marca"]),
-    ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual para locales y marcas", "Gestión de marketing", "Talleres de marca para equipos"]),
+    ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Posicionamiento", "Naming", "Tono de voz"]),
+    ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Manual de marca", "Packaging"]),
+    ("digital", "Digital", "Tu marca, donde está tu público.", ["Diseño web", "E-commerce", "Motion"]),
+    ("contenido", "Contenido", "Qué decir, cuándo y cómo.", ["Estrategia de contenido", "Gestión de redes", "Foto y video"]),
+    ("eventos", "Eventos", "Para que se hable antes, durante y después.", ["Identidad de eventos", "Teasers de line up", "Visuales para pantallas"]),
+    ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual", "Gestión de marketing"]),
 ]
 
 STEPS = [("Escuchamos", "Arrancamos con un café. Tu negocio, tu gente y lo que te quita el sueño."),
@@ -76,14 +76,12 @@ STEPS = [("Escuchamos", "Arrancamos con un café. Tu negocio, tu gente y lo que 
          ("Hacemos", "Diseñamos, producimos y probamos, con avances seguidos y decisiones compartidas."),
          ("Acompañamos", "Lanzamos con vos y seguimos cerca para que la marca crezca bien.")]
 
-VALUES = [("Optimismo", "El optimismo es práctico. En cada brief buscamos lo que ya funciona y lo que puede llegar a ser. Creemos en tu marca antes de que el mundo la conozca."),
-          ("Equipo", "Nos adaptamos a vos: tu ritmo, tus prioridades, nuestro proceso. Las mejores ideas salen de una mesa compartida, no de una presentación a puertas cerradas."),
-          ("Oficio", "Cuidamos el detalle donde nadie mira, porque ahí se nota. En pantalla. En papel. En vivo.")]
+VALUES = [("Optimismo", "Creemos en tu marca antes de que el mundo la conozca."),
+          ("Equipo", "Tu ritmo, tus prioridades, nuestro proceso."),
+          ("Oficio", "Cuidamos el detalle donde nadie mira.")]
 
-FAQ = [("¿Cuánto tarda un proyecto?", "Una identidad completa suele llevar entre cuatro y ocho semanas. Una campaña o una pieza puntual, bastante menos. Antes de arrancar te pasamos un calendario."),
-       ("¿Cómo se cobra?", "Por proyecto, con un presupuesto cerrado, o con un fee mensual si te acompañamos todo el año."),
-       ("¿Trabajan con marcas de afuera?", "Sí. Trabajamos en español y en inglés, y coordinamos a distancia sin problema."),
-       ("¿Qué necesito para arrancar?", "Ganas y un rato para charlar. Si tenés material previo, mejor; si no, lo armamos juntos."),
+FAQ = [("¿Cuánto tarda un proyecto?", "Depende del alcance. Antes de arrancar te pasamos un calendario."),
+       ("¿Cómo se cobra?", "Por proyecto, con presupuesto cerrado, o con un fee mensual si te acompañamos todo el año."),
        ("¿Puedo pedir una sola pieza?", "Sí. Podés sumar una sola pieza o armar el equipo completo.")]
 
 
@@ -177,7 +175,7 @@ def footer(p):
     return f'''
 <footer>
   <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires. Marcas, contenido y eventos.</p></div>
+    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
@@ -275,16 +273,12 @@ def home():
   </section>
 
   <section class="intro grid pad" data-label="Estudio">
-    <h1 class="statement" data-reveal aria-label="Hacemos marcas inolvidables, inconfundibles, deseadas, auténticas y rentables. Un estudio creativo en Buenos Aires, movido por el optimismo, el trabajo en equipo y el oficio. Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer."><span aria-hidden="true">Hacemos marcas <span class="rot"><em id="rot">inolvidables.</em></span> Un estudio creativo en Buenos Aires, movido por el optimismo, el trabajo en equipo y el oficio. <span class="gray">Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer.</span></span></h1>
+    <h1 class="statement short" data-reveal aria-label="Hacemos marcas inolvidables, inconfundibles, deseadas, auténticas y rentables."><span aria-hidden="true">Hacemos marcas <span class="rot"><em id="rot">inolvidables.</em></span></span></h1>
+    <p class="intro-sub mono" data-reveal>Estudio creativo en Buenos Aires</p>
     <div class="intro-links" data-reveal>
       <a class="btn accent" href="contacto/">Trabajemos juntos</a>
       <a class="bracket" href="trabajos/">Ver trabajos</a>
     </div>
-    <dl class="intro-facts" data-reveal>
-      <div><dt class="mono">Base</dt><dd>Buenos Aires, Argentina</dd></div>
-      <div><dt class="mono">Hacemos</dt><dd>Marcas, contenido y eventos</dd></div>
-      <div><dt class="mono">Trabajamos</dt><dd>En español y en inglés</dd></div>
-    </dl>
   </section>
 
   <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
@@ -297,20 +291,16 @@ def home():
   <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
       <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">De la idea a la calle.</span></h2>
-      <div><p>Trabajamos por proyecto o te acompañamos todo el año.</p><a class="bracket" href="servicios/">Ver servicios</a></div>
+      <a class="bracket" href="servicios/">Ver servicios</a>
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
 
-  <section class="sec pad grid" data-label="Estudio" aria-labelledby="t-valores">
-    <h2 class="values-statement" id="t-valores" data-reveal><span>Nuestros valores.</span><span class="gray">Con optimismo.</span><span class="gray">En equipo.</span><span class="gray">Con oficio.</span></h2>
-  </section>
-
   <section class="pad" data-label="Contacto" aria-label="Más de Eiro">
     <div class="trio">
-      <a class="tcard" href="servicios/" data-reveal><span class="mono">01 — Servicios</span><div><h3>Qué hacemos</h3><p>Estrategia, identidad, digital, contenido, eventos y acompañamiento.</p></div></a>
-      <a class="tcard" href="estudio/" data-reveal><span class="mono">02 — Estudio</span><div><h3>Quiénes somos</h3><p>De dónde sale el nombre, qué valoramos y cómo trabajamos.</p></div></a>
-      <a class="tcard green" href="contacto/" data-reveal><span class="mono">03 — Contacto</span><div><h3>Hablemos</h3><p>Contanos tu idea. El café va por nuestra cuenta.</p></div></a>
+      <a class="tcard" href="servicios/" data-reveal><span class="mono">01 — Servicios</span><div><h3>Qué hacemos</h3><p>Seis áreas, un mismo equipo.</p></div></a>
+      <a class="tcard" href="estudio/" data-reveal><span class="mono">02 — Estudio</span><div><h3>Quiénes somos</h3><p>De dónde sale el nombre.</p></div></a>
+      <a class="tcard green" href="contacto/" data-reveal><span class="mono">03 — Contacto</span><div><h3>Hablemos</h3><p>El café va por nuestra cuenta.</p></div></a>
     </div>
   </section>
 </main>'''
@@ -322,7 +312,7 @@ def trabajos():
     cards = "\n      ".join(work_card(p, pr) for pr in PROJECTS) + "\n      " + free_card(p)
     html = head(p, "Trabajos | Eiro Studio", "Proyectos de Eiro Studio: identidad, contenido y eventos para marcas de Argentina.", "trabajos/") + chrome(p, "trabajos", "Trabajos") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Trabajos</span>', 'Trabajos', 'Marcas que crecen con nosotros.', 'Identidad, contenido y eventos. Cada proyecto, contado desde el problema hasta lo que hicimos.')}
+{page_head(p, '<span>Trabajos</span>', 'Trabajos', 'Marcas que crecen con nosotros.', None)}
   <section class="sec pad" aria-label="Proyectos">
     <div class="wgrid">
       {cards}
@@ -353,11 +343,8 @@ def caso(i, pr):
 {page_head(p, f'<a href="{p}trabajos/">Trabajos</a><span aria-hidden="true">/</span><span>0{i+1}</span>', pr["name"], pr["sub"], None, extra)}
   <section class="pad case-hero" aria-label="Imagen principal">{hero}</section>
 
-  <section class="pad grid case-block" aria-label="Resumen">
-    <span class="mono">El proyecto</span><p data-reveal>{pr["lead"]}</p>
-  </section>
   <section class="pad grid case-block" aria-label="El desafío">
-    <span class="mono">El desafío</span><p data-reveal>{pr["challenge"]}</p>
+    <span class="mono">Desafío</span><p data-reveal>{pr["challenge"]}</p>
   </section>
   <section class="pad grid case-block" aria-label="Qué hicimos">
     <span class="mono">Qué hicimos</span><p data-reveal>{pr["did"]}</p>
@@ -382,19 +369,12 @@ def servicios():
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
     html = head(p, "Servicios | Eiro Studio", "Estrategia, identidad, digital, contenido, eventos y acompañamiento. Por proyecto o todo el año.", "servicios/") + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'De la idea a la calle.', 'Trabajamos por proyecto o te acompañamos todo el año. Podés sumar una sola pieza o armar el equipo completo.')}
+{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'De la idea a la calle.', 'Por proyecto o todo el año.')}
   <section class="sec pad grid table-sec" aria-label="Áreas de trabajo">
     <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
     <div class="rows">
       {rows_services()}
     </div>
-  </section>
-
-  <section class="sec pad grid" aria-labelledby="t-proceso">
-    <h2 class="h2" id="t-proceso" data-reveal style="grid-column:1/-1"><span>Cómo trabajamos</span><span class="gray">Cuatro pasos, cero sorpresas.</span></h2>
-    <ol class="steps">
-      {steps_html()}
-    </ol>
   </section>
 
   <section class="sec pad grid table-sec" aria-labelledby="t-faq">
@@ -423,8 +403,7 @@ def estudio():
       <h2 class="sr" id="t-nombre">El nombre</h2>
       <blockquote><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido y quedó Eiro.”</p></blockquote>
       <figcaption><i style="background-image:url({p}img/estudio-600.webp)" aria-hidden="true"></i><span><b>Matías Gaiteiro</b><span class="mono">Fundador y director creativo</span></span></figcaption>
-      <p class="founder-text">Trabajamos con vos, no para vos. Tu idea, nuestro oficio, un solo equipo. Y si algo te parece menor, contalo igual: muchas veces ahí está lo mejor.</p>
-      <p class="founder-text" style="margin-top:16px">Somos un estudio chico a propósito. Para cada proyecto armamos el equipo justo, con diseñadores, realizadores y creadores en los que confiamos.</p>
+      <p class="founder-text">Trabajamos con vos, no para vos. Tu idea, nuestro oficio, un solo equipo.</p>
     </figure>
   </section>
 
@@ -448,20 +427,16 @@ def estudio():
 
 def contacto():
     p = "../"
-    WA_PRESS = WA + "?text=%C2%A1Hola!%20Les%20escribo%20por%20prensa%3A%20"
-    WA_JOIN = WA + "?text=%C2%A1Hola!%20Quiero%20sumarme%20al%20equipo%3A%20"
     html = head(p, "Contacto | Eiro Studio", "Escribinos por WhatsApp y lo charlamos. Eiro Studio, Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Contacto</span>', 'Contacto', 'Hagamos algo bueno juntos.', 'Contanos qué tenés en mente y lo charlamos. El café va por nuestra cuenta.')}
+{page_head(p, '<span>Contacto</span>', 'Contacto', 'Hagamos algo bueno juntos.', None)}
   <section class="sec pad grid table-sec" aria-label="Formas de contacto">
     <div class="hello" data-reveal>
       <a class="hello-card" href="{WA_PROJ}" target="_blank" rel="noopener">{logo(p)}<span class="mono">Decí hola<br>WhatsApp</span><span class="arrow" aria-hidden="true">→</span>{SR_WA}</a>
     </div>
     <dl class="rows">
-      <div class="row" data-reveal><dt>Proyectos nuevos</dt><dd class="row-body" style="margin:0"><p>Contanos tu idea y armamos una propuesta.</p><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><br><a href="{TEL}">{TEL_TXT}</a></dd></div>
-      <div class="row" data-reveal><dt>Prensa y charlas</dt><dd class="row-body" style="margin:0"><p>Para entrevistas, charlas y colaboraciones.</p><a href="{WA_PRESS}" target="_blank" rel="noopener">Escribinos{SR_WA}</a></dd></div>
-      <div class="row" data-reveal><dt>Sumate</dt><dd class="row-body" style="margin:0"><p>Siempre buscamos gente con ganas.</p><a href="{WA_JOIN}" target="_blank" rel="noopener">Mandanos tu portfolio{SR_WA}</a></dd></div>
-      <div class="row" data-reveal><dt>Estudio</dt><dd class="row-body" style="margin:0"><p>Buenos Aires, Argentina.</p><ul><li>Marcas de todo el país y de afuera</li><li>Respondemos rápido. Salvo que estemos en pleno evento.</li></ul></dd></div>
+      <div class="row" data-reveal><dt>Proyectos nuevos</dt><dd class="row-body" style="margin:0"><p>Contanos tu idea. El café va por nuestra cuenta.</p><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><br><a href="{TEL}">{TEL_TXT}</a></dd></div>
+      <div class="row" data-reveal><dt>Estudio</dt><dd class="row-body" style="margin:0"><p>Buenos Aires, Argentina.</p><ul><li>Respondemos rápido.</li></ul></dd></div>
     </dl>
   </section>
 </main>''' + footer(p)
