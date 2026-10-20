@@ -164,7 +164,7 @@ def head(p, title, desc, path, casos=False):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0E3A31">
+<meta name="theme-color" content="#000000">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
