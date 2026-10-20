@@ -1,8 +1,8 @@
 /* EIRO · comportamiento compartido por todas las páginas.
-   Clave de acceso, hora de Buenos Aires, menú, EIRO grande, revelados y sección actual. */
+   Clave de acceso, hora de Buenos Aires, menú, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
 (function(){
   var root=document.documentElement, RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches, started=false;
-  var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer, body > .intro'));
+  var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer'));
 
   // acceso con clave · cortina de "en construcción", no seguridad: la clave se ve en el código
   var gate=document.getElementById('gate'), form=document.getElementById('gateForm'), key=document.getElementById('gateKey');
@@ -39,15 +39,14 @@
   function start(){
     if(started) return; started=true;
 
-    // EIRO grande: ocupa el ancho de su marco
+    // GAITEIRO: ocupa el ancho de su marco; después se borra GAIT y queda EIRO
     var origin=document.getElementById('origin');
     if(origin){
       var fitOrigin=function(){
-        var probe=document.createElement('span'); probe.textContent=origin.textContent.trim();
+        var probe=document.createElement('span'); probe.textContent='GAITEIRO';
         probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;letter-spacing:-.05em;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
         document.body.appendChild(probe); var ratio=probe.getBoundingClientRect().width/100; probe.remove();
-        var half=innerWidth>600&&origin.parentNode.querySelector('.hero-reel'); // en escritorio, EIRO ocupa la mitad libre (la otra mitad son los mockups)
-        var avail=origin.parentNode.clientWidth/(half?2:1)-2*(parseFloat(getComputedStyle(origin).left)||0);
+        var avail=origin.parentNode.clientWidth-2*parseFloat(getComputedStyle(origin).left);
         if(ratio>0) origin.style.fontSize=Math.min(380,Math.floor(avail/ratio))+'px';
       };
       var go=function(){fitOrigin();setTimeout(function(){origin.classList.add('is-in')},RM?0:500)};
@@ -67,16 +66,6 @@
         pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausar';pb.setAttribute('aria-pressed',paused?'true':'false')})}
       if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(reel);
       setInterval(function(){if(!paused&&vis&&!document.hidden)show(k+1)},750);
-    }
-
-    // testimonios: uno por vez, con flechas y avance solo cada 7 s (se frena con movimiento reducido o al tocar las flechas)
-    var qb=document.querySelector('[data-quotes]');
-    if(qb){
-      var qs=[].slice.call(qb.querySelectorAll('.q-slide')),qd=[].slice.call(qb.querySelectorAll('.q-dash i')),qn=qb.querySelector('[data-q-now]'),qi=0,qauto=!RM;
-      var qshow=function(n){qs[qi].hidden=true;qs[qi].classList.remove('on');qd[qi].classList.remove('on');qi=(n+qs.length)%qs.length;qs[qi].hidden=false;qs[qi].classList.add('on');qd[qi].classList.add('on');qn.textContent=qi+1};
-      qb.querySelector('[data-q-prev]').addEventListener('click',function(){qauto=false;qshow(qi-1)});
-      qb.querySelector('[data-q-next]').addEventListener('click',function(){qauto=false;qshow(qi+1)});
-      setInterval(function(){if(qauto&&!document.hidden)qshow(qi+1)},7000);
     }
 
     // la palabra que rota: recorre los adjetivos una vez y se queda en el último
@@ -144,7 +133,7 @@
   }
 
   // el botón fijo de WhatsApp (celular) aparece recién después de la portada, para no competir con ella
-  var heroEl=document.querySelector('.hero,.intro');
+  var heroEl=document.querySelector('.hero');
   function past(){root.classList.toggle('past-hero',scrollY>(heroEl?heroEl.offsetHeight*.8:400))}
   addEventListener('scroll',past,{passive:true});past();
 

@@ -110,15 +110,14 @@ PROJECTS = [
 
 PUB = [pr for pr in PROJECTS if pr.get("publicado")]  # casos visibles en la web
 
-SERVICES = [  # los cuatro primeros crean la marca; los dos últimos la cuidan todos los meses
+SERVICES = [
     ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Posicionamiento", "Naming", "Tono de voz"]),
     ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Manual de marca", "Packaging"]),
     ("digital", "Digital", "Tu marca, donde está tu público.", ["Diseño web", "E-commerce", "Motion"]),
-    ("eventos", "Branding de eventos", "Identidad y campaña para cada edición.", ["Sistema gráfico por edición", "Campaña y teasers de lanzamiento", "Contenido para pantallas LED"]),
     ("contenido", "Producción de contenido", "Planificación, producción y publicación.", ["Planificación editorial", "Gestión de redes", "Foto, video y UGC"]),
+    ("eventos", "Branding de eventos", "Identidad y campaña para cada edición.", ["Sistema gráfico por edición", "Campaña y teasers de lanzamiento", "Contenido para pantallas LED"]),
     ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual", "Gestión de marketing"]),
 ]
-CREAMOS = 4
 
 # TESTIMONIOS DE EJEMPLO: son simulados para ver el diseño. Reemplazar por testimonios reales
 # (texto, nombre, rol) y poner TESTIMONIOS_REALES = True para que se quite la marca "Ejemplo".
@@ -164,7 +163,7 @@ def head(p, title, desc, path, casos=False):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0A0A0A">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
@@ -184,15 +183,12 @@ def head(p, title, desc, path, casos=False):
 <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}}catch(e){{}}</script>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
 
 
-def chrome(p, page, where, pre=""):
+def chrome(p, page, where):
     items = "".join(
         f'<li><a href="{p}{slug}/"{" aria-current=\"true\"" if slug == page else ""}><span class="mono">0{i+1}</span>{name}</a></li>'
         for i, (slug, name) in enumerate(NAV))
@@ -243,7 +239,7 @@ def footer(p):
     return f'''
 <footer>
   <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Creamos y cuidamos marcas. Desde Buenos Aires.</p></div>
+    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
@@ -288,11 +284,9 @@ def free_line(p):
     return f'<a class="next-line" href="{p}contacto/" data-reveal><span>¿Tu marca es la próxima?</span><span class="mono">Hablemos →</span></a>'
 
 
-def rows_services(with_ids=True, part=None):
+def rows_services(with_ids=True):
     out = []
     for i, (sid, name, line, items) in enumerate(SERVICES):
-        if part == "creamos" and i >= CREAMOS or part == "cuidamos" and i < CREAMOS:
-            continue
         lis = "".join(f"<li>{x}</li>" for x in items)
         idattr = f' id="{sid}"' if with_ids else ""
         out.append(f'<article class="row"{idattr} data-reveal><h3><span class="num mono">0{i+1}</span>{name}</h3><div class="row-body"><p>{line}</p><ul>{lis}</ul></div></article>')
@@ -321,17 +315,12 @@ def cta_band(p, title="¿Tenés un proyecto? Hablemos."):
 
 def testimonials_html():
     tag = "" if TESTIMONIOS_REALES else '<span class="t-tag mono">Ejemplo</span>'
-    n = len(TESTIMONIALS)
-    slides = "".join(f'<figure class="q-slide{" on" if i == 0 else ""}" data-i="{i}"{"" if i == 0 else " hidden"}><blockquote><p>“{q}”</p></blockquote><figcaption class="mono">{nm} · {r}</figcaption></figure>' for i, (q, nm, r) in enumerate(TESTIMONIALS))
-    dashes = "".join(f'<i{" class=\"on\"" if i == 0 else ""}></i>' for i in range(n))
+    note = "" if TESTIMONIOS_REALES else '<p class="t-note mono">Testimonios de ejemplo. Se reemplazan por los reales.</p>'
+    cards = "".join(f'<figure class="tcard-q">{tag}<blockquote><p>“{q}”</p></blockquote><figcaption><b>{n}</b><span class="mono">{r}</span></figcaption></figure>' for q, n, r in TESTIMONIALS)
     return f'''
-  <section class="quote pad" aria-roledescription="carrusel" aria-label="Testimonios">
-    <div class="q-box" data-quotes>
-      {tag}
-      <div class="q-slides" aria-live="polite">{slides}</div>
-      <div class="q-ctl"><span class="mono q-count"><span data-q-now>1</span>/{n}</span><span class="q-dash" aria-hidden="true">{dashes}</span>
-        <button type="button" class="q-btn" data-q-prev aria-label="Testimonio anterior">←</button><button type="button" class="q-btn" data-q-next aria-label="Testimonio siguiente">→</button></div>
-    </div>
+  <section class="sec pad" data-label="Clientes" aria-labelledby="t-clientes">
+    <div class="sec-row" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span><span class="gray">Lo que dicen de trabajar con nosotros.</span></h2>{note}</div>
+    <div class="tq-row" tabindex="0" role="region" aria-label="Testimonios, se desplazan de costado">{cards}</div>
   </section>'''
 
 
@@ -363,20 +352,12 @@ def hero_reel(p):
 # ---------- páginas ----------
 def home():
     p = ""
+    cards = "\n      ".join(work_card(p, pr) for pr in PUB)
+    svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
     ld = head(p, "Eiro Studio | Estudio creativo de branding en Buenos Aires",
               "Eiro es un estudio creativo de Buenos Aires. Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer.", "")
     org = open(os.path.join(ROOT, "tools", "org-ld.json"), encoding="utf-8").read().strip()  # datos del estudio para buscadores
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
-    big, small = (PUB + PUB)[0], (PUB + PUB)[1]
-    def feat(pr, cls, sizes):
-        zn, zalt = pr["zoom"]
-        return (f'<a class="feat {cls}" href="{p}trabajos/{pr["slug"]}/" data-reveal>{gen_pic(p, zn, zalt, sizes)}'
-                f'<span class="feat-name">{pr["name"]}</span><span class="feat-tags mono">{pr["tags"]}</span></a>')
-    soon = ('<div class="feat c" data-reveal><figure class="media"><img src="img/mockups/06-web-1200.webp" srcset="img/mockups/06-web-600.webp 600w, img/mockups/06-web-1200.webp 1200w" sizes="(max-width:820px) 100vw, 50vw" alt="Sitio web de Crisger" loading="lazy" decoding="async" width="1200" height="900"></figure>'
-            '<span class="feat-name gray">Crisger (Próximamente)</span><span class="feat-tags mono">Branding · Manual de marca · Web</span></div>')
-    _steps = "".join(f'<li class="proc-row" data-reveal><div class="proc-name"><span class="mono">Paso 0{i+1}</span><h3>{t}</h3></div><p>{d}</p></li>' for i, (t, d) in enumerate(STEPS))
-    clients = '<span>El Calentón</span><span>Crisger</span><span>Extracto Importado</span><span>CER Entrenamientos</span>'
-    svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
     body = f'''
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-label="Portada">
@@ -386,25 +367,19 @@ def home():
         <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
         <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
       </div>
-      <p class="origin" id="origin" aria-hidden="true">EIRO</p>
+      <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
       <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
     </div>
   </section>
 
-  <!-- 2 · titular escalonado en las columnas, con una imagen chica entre las palabras -->
-  <section class="lead pad" aria-labelledby="t-lead">
-    <h2 class="lead-title" id="t-lead"><span class="l1">Creamos y</span><span class="l2">cuidamos</span><span class="l-img" aria-hidden="true"><img src="img/mockups/04-bolsas-600.webp" alt="" width="600" height="450"></span><span class="l3">marcas</span></h2>
-    <p class="lead-sub">Estudio de branding y contenido<br>para marcas y eventos.</p>
-    <div class="trusted"><span class="mono">Confían en nosotros</span><div class="trusted-row">{clients}</div></div>
+  <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
+    <div class="sec-row" data-reveal><h2 class="h2" id="t-trabajos"><span>Trabajos</span><span class="gray">Lo último que hicimos.</span></h2><a class="bracket" href="trabajos/">Ver todos</a></div>
+    <div class="wgrid">
+      {cards}
+    </div>
+    {free_line(p)}
   </section>
-
-  <!-- 3 · trabajos en grilla escalonada -->
-  <section class="feats pad" aria-label="Trabajos destacados">
-    {feat(big, "a", "(max-width:820px) 100vw, 75vw")}
-    {feat(small, "b", "(max-width:820px) 100vw, 25vw")}
-    {soon}
-    <a class="see-all" href="trabajos/">Ver todos los trabajos</a>
-  </section>
+{testimonials_html()}
 
   <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
@@ -413,7 +388,7 @@ def home():
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
-{testimonials_html()}
+
 {cta_band(p)}
 </main>'''
     write("index.html", ld + chrome(p, "", "Inicio") + body + footer(p))
@@ -620,18 +595,11 @@ def servicios():
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
     html = head(p, "Servicios | Eiro Studio", "Estrategia, identidad, digital, contenido, eventos y acompañamiento. Por proyecto o todo el año.", "servicios/") + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'Creamos y cuidamos marcas.', 'Por proyecto o todo el año.')}
+{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'De la idea a la calle.', 'Por proyecto o todo el año.')}
   <section class="sec pad grid table-sec" aria-label="Áreas de trabajo">
-    <div class="table-head" data-reveal><h2 class="h2"><span>Creamos</span><span class="gray">Proyectos con principio y fin.</span></h2></div>
+    <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
     <div class="rows">
-      {rows_services(part="creamos")}
-    </div>
-  </section>
-
-  <section class="sec pad grid table-sec" aria-label="Acompañamiento mensual">
-    <div class="table-head" data-reveal><h2 class="h2"><span>Cuidamos</span><span class="gray">Todos los meses.</span></h2></div>
-    <div class="rows">
-      {rows_services(part="cuidamos")}
+      {rows_services()}
     </div>
   </section>
 
@@ -653,11 +621,13 @@ def matias_photo(p):
 
 def estudio():
     p = "../"
-    html = head(p, "Estudio | Eiro Studio", "Eiro es un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
+    html = head(p, "Estudio | Eiro Studio", "Eiro viene de Gaiteiro. Un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Estudio</span>', 'Estudio', 'Creamos y cuidamos marcas.')}
-  <section class="pad manifesto" aria-label="Manifiesto">
-    <p class="statement" data-reveal>Detrás de cada marca hay gente con una historia por contar. <span class="gray">Nosotros la creamos y la cuidamos.</span></p>
+{page_head(p, '<span>Estudio</span>', 'Estudio', 'Eiro viene de Gaiteiro.')}
+  <section class="pad" aria-label="El nombre">
+    <div class="name-frame" data-reveal>
+      <p class="origin" id="origin" data-wait aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
+    </div>
   </section>
 
   <section class="sec pad grid table-sec" aria-labelledby="t-quien" style="padding-top:var(--sec)">
@@ -666,6 +636,7 @@ def estudio():
       <h2 class="h2" id="t-quien"><span>Quién está detrás</span><span class="gray">Matías Gaiteiro.</span></h2>
       <p class="founder-bio">Soy diseñador multimedial. Hace más de diez años que diseño marcas, coordino equipos de redes y llevo áreas de marketing.</p>
       <p class="founder-text">Estudié relaciones públicas y se nota: casi todos mis clientes llegaron por vínculos de años, y se quedaron. Cada proyecto lo encaro de cerca, con un equipo armado a medida.</p>
+      <blockquote class="founder-quote"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido y quedó Eiro.”</p></blockquote>
       <dl class="founder-facts">
         <div><dt class="mono">Oficio</dt><dd>Más de 10 años</dd></div>
         <div><dt class="mono">Hace</dt><dd>Diseño, marketing y redes</dd></div>
