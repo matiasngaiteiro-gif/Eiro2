@@ -107,7 +107,10 @@
       var btn=r.parentNode.querySelector('[data-pause]');
       if(btn) btn.addEventListener('click',function(){var p=r.classList.toggle('paused');btn.textContent=p?'Reproducir':'Pausar';btn.setAttribute('aria-pressed',p?'true':'false')});
       if(RM){r.classList.add('paused');return}
-      if('IntersectionObserver' in window){new IntersectionObserver(function(es){r.classList.toggle('play',es[0].isIntersecting)},{threshold:.1}).observe(r)}else{r.classList.add('play')}
+      // cada pieza arranca cuando entra en pantalla: así no se mueven todas a la vez
+      [].slice.call(r.querySelectorAll('.reel')).forEach(function(el){
+        if('IntersectionObserver' in window){new IntersectionObserver(function(es){el.classList.toggle('play',es[0].isIntersecting)},{threshold:.5}).observe(el)}else{el.classList.add('play')}
+      });
     });
 
     // la cápsula dice en qué sección estás (solo en el inicio, que tiene varias)

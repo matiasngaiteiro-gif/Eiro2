@@ -250,6 +250,7 @@ def footer(p):
     <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
+<a class="wa-fab" href="{WA_PROJ}" target="_blank" rel="noopener"><span aria-hidden="true">●</span> WhatsApp{SR_WA}</a>
 <script src="{p}assets/eiro.js?v={VER}" defer></script>
 </body>
 </html>
@@ -344,18 +345,13 @@ def home():
   <section class="hero" data-label="Inicio" aria-label="Portada">
     <div class="hero-frame">
       {pic(p, "estudio", "(max-width:600px) 100vw, 50vw", "Matías Gaiteiro trabajando en un escritorio con dos monitores, en medio de un campo al atardecer", 928, 1152, eager=True)}
-      <p class="hero-kicker mono" aria-hidden="true">Estudio creativo<br>Marcas · Contenido · Eventos</p>
+      <div class="hero-copy">
+        <p class="hero-kicker mono">Estudio creativo en Buenos Aires</p>
+        <h1 class="hero-title">Branding y contenido para marcas y eventos.</h1>
+        <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
+      </div>
       <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
       <div class="hero-meta mono" aria-hidden="true"><span>Eiro Studio™ — Estudio creativo</span><span>34°36′S 58°22′O</span></div>
-    </div>
-  </section>
-
-  <section class="intro grid pad" data-label="Inicio">
-    <h1 class="statement short" data-reveal aria-label="Hacemos marcas inolvidables, inconfundibles, deseadas, auténticas y rentables."><span aria-hidden="true">Hacemos marcas <span class="rot"><em id="rot">inolvidables.</em></span></span></h1>
-    <p class="intro-sub mono" data-reveal>Estudio creativo en Buenos Aires</p>
-    <div class="intro-links" data-reveal>
-      <a class="btn accent" href="contacto/">Trabajemos juntos</a>
-      <a class="bracket" href="trabajos/">Ver trabajos</a>
     </div>
   </section>
 
@@ -366,6 +362,7 @@ def home():
     </div>
     {free_line(p)}
   </section>
+{testimonials_html()}
 
   <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
@@ -374,15 +371,8 @@ def home():
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
-{testimonials_html()}
 
-  <section class="pad" data-label="Contacto" aria-label="Más de Eiro">
-    <div class="trio">
-      <a class="tcard" href="servicios/" data-reveal><span class="mono">01 — Servicios</span><div><h3>Qué hacemos</h3><p>Seis áreas, un mismo equipo.</p></div></a>
-      <a class="tcard" href="estudio/" data-reveal><span class="mono">02 — Estudio</span><div><h3>Quiénes somos</h3><p>De dónde sale el nombre.</p></div></a>
-      <a class="tcard green" href="contacto/" data-reveal><span class="mono">03 — Contacto</span><div><h3>Hablemos</h3><p>El café va por nuestra cuenta.</p></div></a>
-    </div>
-  </section>
+{cta_band(p)}
 </main>'''
     write("index.html", ld + chrome(p, "", "Inicio") + body + footer(p))
 
