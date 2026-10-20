@@ -11,6 +11,21 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://eirostudio.com/"
 KIT = "oqj6tze"  # kit de Adobe Fonts: Neue Haas Grotesk, Roboto Mono, Neulis Cursive
+KIT_CASOS = "shv5hcu"  # tipografías de los clientes, solo en las páginas de casos: New Spirit, Gotham, Shuttleblock Narrow
+
+# tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
+BRAND_FONT = {
+    "el-calenton": ('"new-spirit",serif', 600, "-.02em", None),
+    "extracto-importado": ('"gotham",sans-serif', 700, "-.02em", '400 11px/1.3 "gotham",sans-serif'),
+}
+
+
+def font_vars(slug):
+    f = BRAND_FONT.get(slug)
+    if not f:
+        return ""
+    v = f";--c-font:{f[0]};--c-w:{f[1]};--c-tr:{f[2]}"
+    return v + (f";--c-lab:{f[3]}" if f[3] else "")
 WA = "https://wa.me/5491134850669"
 WA_PROJ = WA + "?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20"
 TEL = "tel:+5491134850669"
@@ -103,7 +118,7 @@ FAQ = [("¿Cuánto tarda un proyecto?", "Depende del alcance. Antes de arrancar 
 
 
 # ---------- piezas comunes ----------
-def head(p, title, desc, path):
+def head(p, title, desc, path, casos=False):
     url = SITE + path
     ld = {"@context": "https://schema.org", "@type": "WebPage", "name": title, "url": url, "inLanguage": "es-AR",
           "isPartOf": {"@type": "WebSite", "name": "Eiro Studio", "url": SITE}}
@@ -136,7 +151,7 @@ def head(p, title, desc, path):
 <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}}catch(e){{}}</script>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
-<link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">
+<link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
 
@@ -257,7 +272,7 @@ def values_html():
 
 def cta_band(p, title="¿Tenés un proyecto? Hablemos."):
     return f'''
-  <section class="pad sec" aria-label="Contacto">
+  <section class="pad sec cta-sec" aria-label="Contacto">
     <div class="cta-band" data-reveal><h2>{title}</h2><a class="btn" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a></div>
   </section>'''
 
@@ -404,7 +419,7 @@ def motion_html(pr):
     if not m:
         return ""
     items = "\n      ".join(
-        f'<figure class="reel {cls}" style="{m["vars"]}">{body}<figcaption>{cap}</figcaption></figure>' for cls, cap, body in m["pieces"])
+        f'<figure class="reel {cls}" style="{m["vars"]}{font_vars(pr["slug"])}">{body}<figcaption>{cap}</figcaption></figure>' for cls, cap, body in m["pieces"])
     return f'''
   <!-- placa 04 · la marca en movimiento -->
   <section class="pad reels-wrap" aria-labelledby="t-motion">
@@ -429,7 +444,7 @@ def caso(i, pr):
     mq = "".join(f'<span class="mq" aria-hidden="true">{mq_items}  ·  {mq_items}  ·  {mq_items}</span>' for _ in range(2))
     gal = "\n    ".join(gen_pic(p, n, alt, "(max-width:820px) 100vw, 33vw", attrs=' data-scrub="free"') for n, alt in pr["gallery"])
     lis = "".join(f"<li>{x}</li>" for x in pr["deliver"])
-    html = head(p, f'{pr["name"]} | Trabajos | Eiro Studio', f'{pr["name"]}: {pr["sub"]} Un proyecto de Eiro Studio.', f'trabajos/{pr["slug"]}/') + chrome(p, "trabajos", "Trabajos") + f'''
+    html = head(p, f'{pr["name"]} | Trabajos | Eiro Studio', f'{pr["name"]}: {pr["sub"]} Un proyecto de Eiro Studio.', f'trabajos/{pr["slug"]}/', casos=True) + chrome(p, "trabajos", "Trabajos") + f'''
 <main id="top" tabindex="-1">
   <!-- placa 00 · título -->
   <section class="plate-title" aria-labelledby="t-page">
@@ -456,7 +471,7 @@ def caso(i, pr):
   </section>
 
   <!-- placa 03 · una placa blanca sube con lo que hicimos -->
-  <section class="scrub wipe" data-scrub data-from=".5" aria-labelledby="t-hicimos">
+  <section class="scrub wipe" data-scrub aria-labelledby="t-hicimos">
     <div class="stick">
       <div class="panel">
         <h2 class="plate-label mono" id="t-hicimos">03 — Qué hicimos</h2>
@@ -478,7 +493,7 @@ def caso(i, pr):
   </section>
 
   <!-- placa 06 · la marca en palabras: la lista sube centrada y se enciende la del medio -->
-  <section class="scrub rise" data-scrub data-rise style="--len:calc(100svh + {len(ws)} * 32svh);--n:{len(ws)}" aria-labelledby="t-palabras">
+  <section class="scrub rise" data-scrub data-rise style="--len:calc(100svh + {len(ws)} * 32svh);--n:{len(ws)}{font_vars(pr["slug"])}" aria-labelledby="t-palabras">
     <div class="stick">
       <h2 class="plate-label mono" id="t-palabras">06 — En palabras</h2>
       <div class="rise-win"><ul class="rise-list">{rise}</ul></div>
