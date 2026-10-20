@@ -15,11 +15,11 @@
   --accent:#FFFFFF;    /* blanco, negro y gris: el "acento" es blanco pleno sobre negro (botones y un bloque por página) */
   --on-accent:#0A0A0A;
 
-  /* tipografía · Basic Sans (kit Adobe Fonts lbz8xpp) con pesos y jerarquías a la manera de Chittco:
+  /* tipografía · Neulis Neue (kit Adobe Fonts kzg6cxm) con pesos y jerarquías a la manera de Chittco:
      Light 300 para títulos y lectura, Regular 400 solo para énfasis y nombres; cuanto más grande, más cerrado el interletrado.
-     Azeret Mono va en el mismo kit (lbz8xpp); Neulis Cursive sigue en oqj6tze. */
-  --display:"basic-sans","Helvetica Neue",Helvetica,Arial,sans-serif; /* 300 */
-  --sans:"basic-sans","Helvetica Neue",Helvetica,Arial,sans-serif;    /* 300 lectura · 400 énfasis */
+     Azeret Mono va en el mismo kit (kzg6cxm); Neulis Cursive sigue en oqj6tze. */
+  --display:"neulis-neue","Helvetica Neue",Helvetica,Arial,sans-serif; /* 300 */
+  --sans:"neulis-neue","Helvetica Neue",Helvetica,Arial,sans-serif;    /* 300 lectura · 400 énfasis */
   --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
   --mono:"azeret-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;      /* Azeret Mono, como Chittco: Light 300 en etiquetas, Regular 400 en botones */
   --fs-statement:clamp(30px,3.6vw,67px);
