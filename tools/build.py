@@ -109,8 +109,8 @@ SERVICES = [
     ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Posicionamiento", "Naming", "Tono de voz"]),
     ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Manual de marca", "Packaging"]),
     ("digital", "Digital", "Tu marca, donde está tu público.", ["Diseño web", "E-commerce", "Motion"]),
-    ("contenido", "Contenido", "Qué decir, cuándo y cómo.", ["Estrategia de contenido", "Gestión de redes", "Foto y video"]),
-    ("eventos", "Eventos", "Para que se hable antes, durante y después.", ["Identidad de eventos", "Teasers de line up", "Visuales para pantallas"]),
+    ("contenido", "Producción de contenido", "Planificación, producción y publicación.", ["Planificación editorial", "Gestión de redes", "Foto, video y UGC"]),
+    ("eventos", "Branding de eventos", "Identidad y campaña para cada edición.", ["Sistema gráfico por edición", "Campaña y teasers de lanzamiento", "Contenido para pantallas LED"]),
     ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual", "Gestión de marketing"]),
 ]
 
@@ -454,6 +454,43 @@ def motion_html(pr):
 '''
 
 
+def words_piece(pr):
+    """Pieza 1080×1350 (4:5): las palabras de la marca suben solas, en mayúscula, con sus colores y su tipografía."""
+    ws = pr["words"]
+    n = len(ws)
+    items = "".join(f'<li><span style="--w:{len(w)}">{w}</span></li>' for w in ws + ws[:1])
+    # cada palabra queda quieta en el centro el 70% de su tiempo y después sube a la siguiente
+    frames = []
+    for k in range(n):
+        a, b = k / n * 100, (k + .7) / n * 100
+        frames.append(f"{a:.2f}%,{b:.2f}%{{transform:translateY({-k * 1.25:.2f}em)}}")
+    frames.append(f"100%{{transform:translateY({-n * 1.25:.2f}em)}}")
+    kf = f"kw-{pr['slug']}"
+    m = MOTION.get(pr["slug"], {"vars": ""})
+    col = f'<ul class="col rt" style="animation-name:{kf};animation-duration:{n * 1.5:.1f}s">{items}</ul>'
+    return f'''
+  <!-- placa 05 · la marca en palabras: pieza 1080×1350 que sube sola -->
+  <section class="pad words-wrap" aria-labelledby="t-palabras">
+    <div class="reels-head"><h2 class="mono" id="t-palabras">05 — En palabras</h2><button type="button" data-pause aria-pressed="false">Pausar</button></div>
+    <style>@keyframes {kf}{{{"".join(frames)}}}</style>
+    <div class="reels solo">
+      <figure class="reel k-words" style="{m["vars"]}{font_vars(pr["slug"])}">
+        <p class="sr">{", ".join(ws)}.</p>
+        <div aria-hidden="true">{col}<div class="hi">{col}</div></div>
+        <figcaption>Pieza 1080 × 1350</figcaption>
+      </figure>
+    </div>
+  </section>'''
+
+
+def inter_pic(p, item, label):
+    n, alt = item
+    return f'''
+  <section class="pad inter" aria-label="{label}">
+    {gen_pic(p, n, alt, "100vw", attrs=' data-scrub="free"')}
+  </section>'''
+
+
 def caso(i, pr):
     p = "../../"
     nxt = PROJECTS[(i + 1) % len(PROJECTS)]
@@ -461,14 +498,9 @@ def caso(i, pr):
     sub = " ".join(f'<span class="wi" style="--i:{k}">{w}</span>' for k, w in enumerate(pr["sub"].split()))
     zn, zalt = pr["zoom"]
     zoom = gen_pic(p, zn, zalt, "100vw", cls="media-f")
-    ws = pr["words"]
-    rise = "".join(f'<li><span style="--w:{len(w)}">{w}</span></li>' for w in ws)
-    mq_items = "  ·  ".join(pr["deliver"])
-    mq = "".join(f'<span class="mq" aria-hidden="true">{mq_items}  ·  {mq_items}  ·  {mq_items}</span>' for _ in range(2))
-    gal = "\n    ".join(gen_pic(p, n, alt, "(max-width:820px) 100vw, 33vw", attrs=' data-scrub="free"') for n, alt in pr["gallery"])
-    lis = "".join(f"<li>{x}</li>" for x in pr["deliver"])
+    g = pr["gallery"]
     html = head(p, f'{pr["name"]} | Trabajos | Eiro Studio', f'{pr["name"]}: {pr["sub"]} Un proyecto de Eiro Studio.', f'trabajos/{pr["slug"]}/', casos=True) + chrome(p, "trabajos", "Trabajos") + f'''
-<main id="top" class="case" tabindex="-1" style="{font_vars(pr["slug"]).lstrip(";")}">
+<main id="top" tabindex="-1">
   <!-- placa 00 · título -->
   <section class="plate-title" aria-labelledby="t-page">
     <p class="crumb mono"><a href="{p or './'}">Eiro</a><span aria-hidden="true">/</span><a href="{p}trabajos/">Trabajos</a><span aria-hidden="true">/</span><span>0{i+1}</span></p>
@@ -492,6 +524,7 @@ def caso(i, pr):
       <p class="wtext">{split_words(pr["challenge"])}</p>
     </div>
   </section>
+{inter_pic(p, g[0], "Imagen del proyecto")}
 
   <!-- placa 03 · una placa blanca sube con lo que hicimos -->
   <section class="scrub wipe" data-scrub aria-labelledby="t-hicimos">
@@ -502,28 +535,12 @@ def caso(i, pr):
       </div>
     </div>
   </section>
-
 {motion_html(pr)}
-  <!-- placa 05 · entregables en movimiento -->
-  <section class="marquee" data-scrub="free" aria-labelledby="t-entregables">
-    <h2 class="plate-label mono" id="t-entregables">05 — Entregables</h2>
-    <ul class="sr">{lis}</ul>
-    {mq}
-  </section>
+{inter_pic(p, g[1], "Imagen del proyecto")}
+{words_piece(pr)}
+{inter_pic(p, g[2], "Imagen del proyecto")}
 
-  <section class="pad gallery" aria-label="Galería">
-    {gal}
-  </section>
-
-  <!-- placa 06 · la marca en palabras: la lista sube centrada y se enciende la del medio -->
-  <section class="scrub rise" data-scrub data-rise style="--len:calc(100svh + {len(ws)} * 32svh);--n:{len(ws)}{font_vars(pr["slug"])}" aria-labelledby="t-palabras">
-    <div class="stick">
-      <h2 class="plate-label mono" id="t-palabras">06 — En palabras</h2>
-      <div class="rise-win"><ul class="rise-list">{rise}</ul></div>
-    </div>
-  </section>
-
-  <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b style="--w:{max(len(x) for x in nxt["name"].split())}{font_vars(nxt["slug"])}">{nxt["name"]}</b></a>
+  <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b style="--w:{max(len(x) for x in nxt["name"].split())}">{nxt["name"]}</b></a>
 </main>''' + footer(p)
     write(f'trabajos/{pr["slug"]}/index.html', html)
 

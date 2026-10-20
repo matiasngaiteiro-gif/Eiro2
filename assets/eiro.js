@@ -86,7 +86,6 @@
       var paint=function(el,p){
         el.style.setProperty('--p',p.toFixed(4));
         var ws=el.__w||(el.__w=[].slice.call(el.querySelectorAll('.wd')));
-        if(el.hasAttribute('data-rise')){var li=el.__l||(el.__l=[].slice.call(el.querySelectorAll('.rise-list li'))),k=Math.round(p*(li.length-1));for(var m=0;m<li.length;m++)li[m].classList.toggle('cur',m===k)}
         if(ws.length){var from=parseFloat(el.getAttribute('data-from')||'0'),q=Math.max(0,(p-from)/(1-from)),n=Math.ceil(q*1.15*ws.length);for(var i=0;i<ws.length;i++)ws[i].classList.toggle('on',i<n)}
       };
       if(RM){scr.forEach(function(el){paint(el,el.getAttribute('data-scrub')==='free'?.5:1)})}
