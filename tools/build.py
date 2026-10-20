@@ -54,7 +54,8 @@ PROJECTS = [
          challenge='Cada fin de semana hay decenas de fiestas peleando por la misma atención.',
          did='Armamos una identidad con calor propio: color, tipografía y ritmo.',
          deliver=["Identidad visual", "Teasers de line up", "Piezas para redes", "Gráfica del evento"],
-         gallery=["Teaser de line up (video)", "Flyer de la edición", "Piezas para historias", "Fotos del evento"]),
+         zoom=("calenton-pantalla", "Pantalla LED detrás del DJ con gráfica en movimiento, al atardecer"),
+         gallery=[("calenton-afiches", "Afiches del evento pegados en una pared de la ciudad"), ("calenton-historias", "Celular con una historia que anuncia el line up"), ("calenton-fiesta", "Gente bailando al atardecer con papel picado")]),
     dict(slug="crisger", name="Crisger", sub="Una marca, igual en todos lados.", tags="Industria · Manual de marca",
          img=("crisger", "Operario con casco y chaleco en una planta industrial", 928, 1152, "object-position:center 28%"),
          meta=[("Cliente", "Crisger"), ("Rubro", "Seguridad industrial"), ("Servicios", "Branding y manual de marca")],
@@ -62,7 +63,8 @@ PROJECTS = [
          challenge='La marca se usaba distinto en la planta, en la oficina y en la web.',
          did='Ordenamos el sistema y lo llevamos a un manual interactivo.',
          deliver=["Manual de marca interactivo", "Sistema de color y tipografía", "Aplicaciones en planta y oficina", "Plantillas"],
-         gallery=["Portada del manual", "Sistema de color y tipografía", "Aplicaciones en planta", "Versión web del manual"]),
+         zoom=("crisger-manual", "Manual de marca impreso abierto sobre un escritorio, con muestras de color"),
+         gallery=[("crisger-color", "Muestras de color y especimen tipográfico"), ("crisger-planta", "Casco y chaleco con el emblema en una planta"), ("crisger-web", "Laptop con la versión web del manual")]),
     dict(slug="extracto-importado", name="Extracto Importado", sub="Cada fragancia, su historia.", tags="Perfumería · Contenido",
          img=None,
          meta=[("Cliente", "Extracto Importado"), ("Rubro", "Perfumería"), ("Servicios", "Contenido con creadoras")],
@@ -70,7 +72,8 @@ PROJECTS = [
          challenge='En perfumería no se puede oler a través de la pantalla.',
          did='Escribimos guiones y produjimos videos con creadoras para cada lanzamiento.',
          deliver=["Videos con creadoras", "Guiones", "Piezas para redes", "Calendario de lanzamientos"],
-         gallery=["Video con creadora", "Guion y storyboard", "Piezas para historias", "Detalle de producto"]),
+         zoom=("extracto-creadora", "Creadora de contenido grabándose con un perfume en la mano"),
+         gallery=[("extracto-producto", "Frasco de perfume sobre piedra con luz de atardecer"), ("extracto-guion", "Storyboard y guion impresos sobre el escritorio"), ("extracto-historias", "Tres celulares con historias del lanzamiento")]),
 ]
 
 SERVICES = [
@@ -334,43 +337,78 @@ def trabajos():
     write("trabajos/index.html", html)
 
 
+def gen_pic(p, name, alt, sizes, cls="media", attrs=""):
+    """Imagen generada (img/gen): JPG de respaldo + WebP en dos anchos."""
+    return (f'<figure class="{cls}"{attrs}><picture><source type="image/webp" srcset="{p}img/gen/{name}-900.webp 900w, {p}img/gen/{name}-1800.webp 1800w" sizes="{sizes}">'
+            f'<img src="{p}img/gen/{name}.jpg" alt="{alt}" loading="lazy" decoding="async"></picture></figure>')
+
+
+def split_words(text, cls="wd"):
+    """Separa una frase en palabras para animarlas una por una (el texto sigue siendo legible para lectores de pantalla)."""
+    return " ".join(f'<span class="{cls}">{w}</span>' for w in text.split())
+
+
 def caso(i, pr):
     p = "../../"
     nxt = PROJECTS[(i + 1) % len(PROJECTS)]
     meta = "".join(f'<div><dt class="mono">{k}</dt><dd>{v}</dd></div>' for k, v in pr["meta"])
-    if pr["img"]:
-        n, alt, w, h, st = pr["img"]
-        hero = f'<figure class="media" data-reveal>{pic(p, n, "100vw", alt, w, h, st)}</figure>'
-    else:
-        hero = f'<div class="media type-block green" data-reveal aria-hidden="true" style="aspect-ratio:16/9"><span style="font-size:clamp(48px,9vw,180px)">{pr["name"]}</span></div>'
-    gal = []
-    for j, g in enumerate(pr["gallery"]):
-        cls = "ph wide" if j == 0 else "ph"
-        gal.append(f'<div class="{cls}" data-reveal><span class="mono">Imagen pendiente<br>{g}</span></div>')
+    sub = " ".join(f'<span class="wi" style="--i:{k}">{w}</span>' for k, w in enumerate(pr["sub"].split()))
+    zn, zalt = pr["zoom"]
+    zoom = gen_pic(p, zn, zalt, "100vw", cls="media-z")
+    mq_items = "  ·  ".join(pr["deliver"])
+    mq = "".join(f'<span class="mq" aria-hidden="true">{mq_items}  ·  {mq_items}  ·  {mq_items}</span>' for _ in range(2))
+    gal = "\n    ".join(gen_pic(p, n, alt, "(max-width:820px) 100vw, 33vw", attrs=' data-scrub="free"') for n, alt in pr["gallery"])
     lis = "".join(f"<li>{x}</li>" for x in pr["deliver"])
-    extra = f'<dl class="case-meta" data-reveal>{meta}</dl>'
     html = head(p, f'{pr["name"]} | Trabajos | Eiro Studio', f'{pr["name"]}: {pr["sub"]} Un proyecto de Eiro Studio.', f'trabajos/{pr["slug"]}/') + chrome(p, "trabajos", "Trabajos") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, f'<a href="{p}trabajos/">Trabajos</a><span aria-hidden="true">/</span><span>0{i+1}</span>', pr["name"], pr["sub"], None, extra)}
-  <section class="pad case-hero" aria-label="Imagen principal">{hero}</section>
+  <!-- placa 00 · título -->
+  <section class="plate-title" aria-labelledby="t-page">
+    <p class="crumb mono"><a href="{p or './'}">Eiro</a><span aria-hidden="true">/</span><a href="{p}trabajos/">Trabajos</a><span aria-hidden="true">/</span><span>0{i+1}</span></p>
+    <dl class="case-meta">{meta}</dl>
+    <h1 class="kin" id="t-page"><span class="ln"><span>{pr["name"]}</span></span></h1>
+    <p class="kin-sub">{sub}</p>
+    <span class="scroll-hint mono" aria-hidden="true">Scroll ↓</span>
+  </section>
 
-  <section class="pad grid case-block" aria-label="El desafío">
-    <span class="mono">Desafío</span><p data-reveal>{pr["challenge"]}</p>
+  <!-- placa 01 · la imagen se abre -->
+  <section class="scrub zoom" data-scrub aria-label="Imagen principal">
+    <div class="stick">
+      <span class="plate-label mono" aria-hidden="true">01 — {pr["name"]}</span>
+      {zoom}
+      <div class="zoom-cap mono" aria-hidden="true"><span>{pr["tags"]}</span><span>Eiro Studio™</span></div>
+    </div>
   </section>
-  <section class="pad grid case-block" aria-label="Qué hicimos">
-    <span class="mono">Qué hicimos</span><p data-reveal>{pr["did"]}</p>
+
+  <!-- placa 02 · el desafío se enciende palabra por palabra -->
+  <section class="scrub words" data-scrub aria-labelledby="t-desafio">
+    <div class="stick">
+      <h2 class="plate-label mono" id="t-desafio">02 — Desafío</h2>
+      <p class="wtext">{split_words(pr["challenge"])}</p>
+    </div>
   </section>
-  <section class="pad grid case-block" aria-label="Entregables">
-    <span class="mono">Entregables</span><ul class="case-list" data-reveal>{lis}</ul>
+
+  <!-- placa 03 · una placa blanca sube con lo que hicimos -->
+  <section class="scrub wipe" data-scrub data-from=".5" aria-labelledby="t-hicimos">
+    <div class="stick">
+      <div class="panel">
+        <h2 class="plate-label mono" id="t-hicimos">03 — Qué hicimos</h2>
+        <p class="wtext">{split_words(pr["did"])}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- placa 04 · entregables en movimiento -->
+  <section class="marquee" data-scrub="free" aria-labelledby="t-entregables">
+    <h2 class="plate-label mono" id="t-entregables">04 — Entregables</h2>
+    <ul class="sr">{lis}</ul>
+    {mq}
   </section>
 
   <section class="pad gallery" aria-label="Galería">
-    {"".join(gal)}
+    {gal}
   </section>
 
-  <section class="pad">
-    <a class="next" href="{p}trabajos/{nxt["slug"]}/"><span class="h2"><span>Siguiente proyecto</span><span class="gray">{nxt["name"]}</span></span><span class="bracket">Ver proyecto</span></a>
-  </section>
+  <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b>{nxt["name"]}</b></a>
 </main>''' + footer(p)
     write(f'trabajos/{pr["slug"]}/index.html', html)
 

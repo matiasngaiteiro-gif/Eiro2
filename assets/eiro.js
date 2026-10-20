@@ -79,6 +79,29 @@
       rev.forEach(function(el){var t=el.classList.contains('media')?el.parentElement:el; t.__rev=el; ro.observe(t)});
     }
 
+    // placas con scroll: cada [data-scrub] recibe --p de 0 a 1 según cuánto se recorrió;
+    // las altas (con .stick) cuentan desde que llegan arriba, las "free" desde que entran hasta que salen
+    var scr=[].slice.call(document.querySelectorAll('[data-scrub]'));
+    if(scr.length){
+      var paint=function(el,p){
+        el.style.setProperty('--p',p.toFixed(4));
+        var ws=el.__w||(el.__w=[].slice.call(el.querySelectorAll('.wd')));
+        if(ws.length){var from=parseFloat(el.getAttribute('data-from')||'0'),q=Math.max(0,(p-from)/(1-from)),n=Math.ceil(q*1.15*ws.length);for(var i=0;i<ws.length;i++)ws[i].classList.toggle('on',i<n)}
+      };
+      if(RM){scr.forEach(function(el){paint(el,el.getAttribute('data-scrub')==='free'?.5:1)})}
+      else{
+        var ticking=false;
+        var upd=function(){ticking=false;var vh=innerHeight;scr.forEach(function(el){
+          var r=el.getBoundingClientRect(),p;
+          if(el.getAttribute('data-scrub')==='free'){p=(vh-r.top)/(vh+r.height)}
+          else{var t=el.offsetHeight-vh;p=t>0?-r.top/t:1}
+          paint(el,Math.min(1,Math.max(0,p)));
+        })};
+        var req=function(){if(!ticking){ticking=true;requestAnimationFrame(upd)}};
+        window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
+      }
+    }
+
     // la cápsula dice en qué sección estás (solo en el inicio, que tiene varias)
     var where=document.getElementById('where'), secs=[].slice.call(document.querySelectorAll('main [data-label]'));
     if(where && secs.length && 'IntersectionObserver' in window){
