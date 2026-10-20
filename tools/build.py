@@ -331,6 +331,24 @@ def write(path, html):
         f.write(html)
 
 
+# Portada: los mockups pasan como un GIF (cortes secos). Se generan desde tools/mockups (ver README ahí).
+MOCKUPS = [
+    ("01-tarjetas", "Crisger — Tarjetas personales"), ("02-papeleria", "Crisger — Papelería"),
+    ("03-credencial", "Crisger — Credencial"), ("04-bolsas", "Crisger — Bolsas"),
+    ("05-redes", "Crisger — Redes sociales"), ("06-web", "Crisger — Sitio web"),
+    ("07-via-publica", "Crisger — Vía pública"), ("08-etiquetas", "Crisger — Etiquetas"),
+    ("09-carpeta", "Crisger — Carpeta y presupuesto"), ("10-puerta", "Crisger — Vinilo en puerta"),
+]
+
+
+def hero_reel(p):
+    imgs = "".join(
+        f'<img src="{p}img/mockups/{n}-1200.webp" srcset="{p}img/mockups/{n}-600.webp 600w, {p}img/mockups/{n}-1200.webp 1200w" '
+        f'sizes="(max-width:600px) 100vw, 50vw" width="1200" height="900" alt="{cap}" data-cap="{cap}" decoding="async"'
+        f'{" class=\"on\" fetchpriority=\"high\"" if i == 0 else ""}>' for i, (n, cap) in enumerate(MOCKUPS))
+    return f'<div class="hero-reel" data-reel>{imgs}</div>'
+
+
 # ---------- páginas ----------
 def home():
     p = ""
@@ -344,13 +362,13 @@ def home():
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-label="Portada">
     <div class="hero-frame">
-      {pic(p, "estudio", "(max-width:600px) 100vw, 50vw", "Matías Gaiteiro trabajando en un escritorio con dos monitores, en medio de un campo al atardecer", 928, 1152, eager=True)}
+      {hero_reel(p)}
       <div class="hero-copy">
         <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
         <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
       </div>
       <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-      <div class="hero-meta mono" aria-hidden="true"><span>Buenos Aires, Argentina</span><span>34°36′S 58°22′O</span></div>
+      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
     </div>
   </section>
 

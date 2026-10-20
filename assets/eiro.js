@@ -57,6 +57,17 @@
       window.addEventListener('resize',fitOrigin);
     }
 
+    // portada: los mockups pasan como un GIF; se pausa con el botón, fuera de pantalla o con movimiento reducido
+    var reel=document.querySelector('[data-reel]');
+    if(reel){
+      var fr=[].slice.call(reel.querySelectorAll('img')),cap=document.getElementById('reelCap'),pb=document.querySelector('[data-reel-pause]'),k=0,paused=RM,vis=true;
+      var show=function(n){fr[k].classList.remove('on');k=(n+fr.length)%fr.length;fr[k].classList.add('on');if(cap)cap.textContent=fr[k].getAttribute('data-cap')};
+      if(pb){if(RM){pb.textContent='Reproducir';pb.setAttribute('aria-pressed','true')}
+        pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausar';pb.setAttribute('aria-pressed',paused?'true':'false')})}
+      if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(reel);
+      setInterval(function(){if(!paused&&vis&&!document.hidden)show(k+1)},750);
+    }
+
     // la palabra que rota: recorre los adjetivos una vez y se queda en el último
     var rot=document.getElementById('rot');
     if(rot && !RM){
