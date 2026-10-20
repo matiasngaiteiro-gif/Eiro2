@@ -102,15 +102,42 @@
       }
     }
 
-    // portada: los mockups pasan como un GIF; se pausa con el botón, fuera de pantalla o con movimiento reducido
-    var reel=document.querySelector('[data-reel]');
-    if(reel){
-      var fr=[].slice.call(reel.querySelectorAll('img')),pb=document.querySelector('[data-reel-pause]'),k=0,paused=RM,vis=true;
-      var show=function(n){fr[k].classList.remove('on');k=(n+fr.length)%fr.length;fr[k].classList.add('on')};
-      if(pb){if(RM){pb.textContent='Reproducir';pb.setAttribute('aria-pressed','true')}
-        pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausar';pb.setAttribute('aria-pressed',paused?'true':'false')})}
-      if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(reel);
-      setInterval(function(){if(!paused&&vis&&!document.hidden)show(k+1)},750);
+    // portada: la última palabra del título cambia letra por letra (las letras salen por arriba y entran desde abajo)
+    var sw=document.querySelector('[data-swap]');
+    if(sw&&!RM){
+      var vis=sw.querySelector('.swap-vis'),words=sw.getAttribute('data-swap').split('|'),wi=0;
+      var paintW=function(w,cls){vis.innerHTML='';w.split('').forEach(function(c,n){var s=document.createElement('span');s.className='ch '+(cls||'');s.textContent=c;s.style.animationDelay=(n*.035)+'s';vis.appendChild(s)})};
+      var measure=function(w){var m=document.createElement('span');m.style.cssText='position:absolute;visibility:hidden;white-space:pre';m.textContent=w;sw.appendChild(m);var x=m.getBoundingClientRect().width;m.remove();return x};
+      paintW(words[0]);vis.style.width=measure(words[0])+'px';
+      setInterval(function(){
+        if(document.hidden)return;
+        [].forEach.call(vis.children,function(c){c.classList.add('out')});
+        var next=words[wi=(wi+1)%words.length];
+        setTimeout(function(){vis.style.width=measure(next)+'px';paintW(next,'in')},450+vis.children.length*35);
+      },2800);
+      addEventListener('resize',function(){vis.style.width=measure(vis.textContent)+'px'});
+    }
+
+    // reel: el círculo "Ver reel" sigue al cursor dentro del video; al tocarlo se abre a pantalla completa con sonido
+    var frame=document.querySelector('[data-player]'),player=document.getElementById('player');
+    if(frame&&player){
+      var orbP=frame.querySelector('[data-play]'),pv=player.querySelector('video'),closeB=player.querySelector('[data-close]'),prev=frame.querySelector('video');
+      if(RM&&prev){prev.removeAttribute('autoplay');prev.pause()}
+      var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if(fine){
+        frame.classList.add('idle');
+        frame.addEventListener('pointermove',function(e){var r=frame.getBoundingClientRect();frame.classList.remove('idle');orbP.style.setProperty('--ox',(e.clientX-r.left)+'px');orbP.style.setProperty('--oy',(e.clientY-r.top)+'px')});
+        frame.addEventListener('pointerleave',function(){frame.classList.add('idle');orbP.style.removeProperty('--ox');orbP.style.removeProperty('--oy')});
+      }
+      var lastF=null;
+      var openP=function(){lastF=document.activeElement;player.hidden=false;void player.offsetWidth;player.classList.add('open');root.classList.add('player-open');behind.forEach(function(el){el.setAttribute('inert','')});if(prev)prev.pause();pv.currentTime=0;var pr=pv.play();if(pr&&pr.catch)pr.catch(function(){});closeB.focus()};
+      var closeP=function(){pv.pause();player.classList.remove('open');root.classList.remove('player-open');behind.forEach(function(el){el.removeAttribute('inert')});setTimeout(function(){player.hidden=true},RM?0:350);if(prev&&!RM){var q=prev.play();if(q&&q.catch)q.catch(function(){})}if(lastF)lastF.focus()};
+      frame.addEventListener('click',openP);
+      closeB.addEventListener('click',closeP);
+      pv.addEventListener('ended',closeP);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!player.hidden)closeP()});
+      player.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=[pv,closeB];var a=f.indexOf(document.activeElement);if(e.shiftKey&&a<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&a===f.length-1){e.preventDefault();f[0].focus()}});
+      if('IntersectionObserver' in window&&prev)new IntersectionObserver(function(es){if(RM||!player.hidden)return;if(es[0].isIntersecting){var q=prev.play();if(q&&q.catch)q.catch(function(){})}else prev.pause()}).observe(frame);
     }
 
     // la palabra que rota: recorre los adjetivos una vez y se queda en el último

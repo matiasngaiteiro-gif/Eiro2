@@ -356,27 +356,29 @@ def write(path, html):
         f.write(html)
 
 
-# Portada: los mockups pasan como un GIF (cortes secos). Se generan desde tools/mockups (ver README ahí).
-MOCKUPS = [
-    ("01-tarjetas", "Crisger — Tarjetas personales"), ("02-papeleria", "Crisger — Papelería"),
-    ("03-credencial", "Crisger — Credencial"), ("04-bolsas", "Crisger — Bolsas"),
-    ("05-redes", "Crisger — Redes sociales"), ("06-web", "Crisger — Sitio web"),
-    ("07-via-publica", "Crisger — Vía pública"), ("08-etiquetas", "Crisger — Etiquetas"),
-    ("09-carpeta", "Crisger — Carpeta y presupuesto"), ("10-puerta", "Crisger — Vinilo en puerta"),
-]
-
-
-def hero_reel(p):
-    imgs = "".join(
-        f'<img src="{p}img/mockups/{n}-1200.webp" srcset="{p}img/mockups/{n}-600.webp 600w, {p}img/mockups/{n}-1200.webp 1200w" '
-        f'sizes="(max-width:600px) 100vw, 50vw" width="1200" height="900" alt="{cap}" data-cap="{cap}" decoding="async"'
-        f'{" class=\"on\" fetchpriority=\"high\"" if i == 0 else ""}>' for i, (n, cap) in enumerate(MOCKUPS))
-    return f'<div class="hero-reel" data-reel>{imgs}</div>'
-
-
 # El telón de entrada se salta con movimiento reducido o si ya se vio en esta visita (se decide antes de pintar).
 INTRO_HEAD = """<script>try{if(sessionStorage.getItem('eiro-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('no-intro')}catch(e){}</script>
 <noscript><style>.curtain{display:none}</style></noscript>"""
+
+
+# Portada: título con la última palabra que cambia y, abajo, el reel.
+# El reel es un video provisorio armado con los mockups; se reemplaza por img/reel/reel.mp4 (el video de Matías) sin tocar nada más.
+HERO_WORDS = ["inolvidables", "auténticas", "deseadas", "con historia", "que crecen"]
+
+
+def reel_frame(p):
+    return f'''<div class="reel-frame" data-player>
+      <video class="reel-preview" src="{p}img/reel/reel.mp4" poster="{p}img/reel/poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
+      <button type="button" class="play-orb" data-play aria-haspopup="dialog"><span>Ver reel</span></button>
+    </div>'''
+
+
+def reel_player(p):
+    return f'''
+<div class="player" id="player" role="dialog" aria-modal="true" aria-label="Reel de Eiro Studio" hidden>
+      <video class="player-video" src="{p}img/reel/reel.mp4" poster="{p}img/reel/poster.jpg" controls playsinline preload="none"></video>
+      <button type="button" class="player-close" data-close aria-label="Cerrar el reel"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4"/></svg></button>
+</div>'''
 
 
 # ---------- páginas ----------
@@ -390,12 +392,9 @@ def home():
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
     body = f'''
 <main id="top" tabindex="-1">
-  <section class="hero" data-label="Inicio" aria-label="Portada">
-    <div class="hero-frame">
-      <h1 class="hero-title"><span class="ht ht1">Estudio de branding</span> <span class="ht ht2">y contenido</span> <span class="ht ht3">para marcas</span> <span class="ht ht4">y eventos.</span></h1>
-      {hero_reel(p)}
-      <div class="hero-meta mono"><span>Buenos Aires, Argentina</span><a class="bracket" href="trabajos/">Ver trabajos</a><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></div>
-    </div>
+  <section class="hero" data-label="Inicio" aria-labelledby="t-hero">
+    <h1 class="hero-title" id="t-hero"><span class="hl">Estudio de branding</span> <span class="hl">para marcas <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
+    {reel_frame(p)}
   </section>
 
   <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
@@ -419,7 +418,7 @@ def home():
     curtain = f'''
 <div class="curtain" id="curtain" aria-hidden="true"><div class="ic"><div class="ic-in">{logo(p)}</div></div></div>'''
     ld = ld.replace("</head>", INTRO_HEAD + "\n</head>")
-    write("index.html", ld + chrome(p, "", "Inicio") + curtain + body + footer(p))
+    write("index.html", ld + chrome(p, "", "Inicio") + curtain + body + reel_player(p) + footer(p))
 
 
 def trabajos():
