@@ -66,7 +66,7 @@ def pic(p, name, sizes, alt, w, h, style="", eager=False):
 
 # ---------- proyectos ----------
 PROJECTS = [
-    dict(slug="el-calenton", publicado=False, name="El Calentón", sub="Cada line up, un estreno.", tags="Eventos · Identidad y video",
+    dict(slug="el-calenton", publicado=True, name="El Calentón", sub="Cada line up, un estreno.", tags="Eventos · Identidad y video",
          img=("el-calenton", "Fiesta al aire libre con DJ al atardecer en El Calentón", 1800, 1013, ""),
          meta=[("Cliente", "El Calentón"), ("Rubro", "Eventos · Música latina"), ("Servicios", "Identidad, video y gráfica")],
          lead='Una fiesta que se anuncia como un estreno. <span class="gray">Identidad y teasers de video para cada edición de El Calentón, una fiesta de música latina.</span>',
