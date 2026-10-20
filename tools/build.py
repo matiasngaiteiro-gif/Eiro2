@@ -5,7 +5,7 @@ Todas las páginas comparten barra, menú, clave de acceso y pie; por eso se arm
 en lugar de copiarse a mano. Uso: python3 tools/build.py (desde la raíz del repositorio).
 Los estilos están en assets/eiro.css y el comportamiento en assets/eiro.js.
 """
-import json, os
+import hashlib, json, os
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,6 +16,17 @@ WA_PROJ = WA + "?text=%C2%A1Hola!%20Tengo%20un%20proyecto%3A%20"
 TEL = "tel:+5491134850669"
 TEL_TXT = "+54 9 11 3485-0669"
 SR_WA = '<span class="sr"> (se abre WhatsApp)</span>'
+
+def _ver(*names):
+    """Huella del contenido de los estilos y el script: cambia sola cuando cambian, así nadie ve una versión vieja guardada en caché."""
+    h = hashlib.md5()
+    for n in names:
+        with open(os.path.join(ROOT, n), "rb") as fh:
+            h.update(fh.read())
+    return h.hexdigest()[:8]
+
+
+VER = _ver("assets/eiro.css", "assets/eiro.js")
 
 NAV = [("trabajos", "Trabajos"), ("servicios", "Servicios"), ("estudio", "Estudio"), ("contacto", "Contacto")]
 
@@ -120,7 +131,7 @@ def head(p, title, desc, path):
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">
-<link rel="stylesheet" href="{p}assets/eiro.css">
+<link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
 
 
@@ -186,7 +197,7 @@ def footer(p):
     <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
-<script src="{p}assets/eiro.js" defer></script>
+<script src="{p}assets/eiro.js?v={VER}" defer></script>
 </body>
 </html>
 '''
