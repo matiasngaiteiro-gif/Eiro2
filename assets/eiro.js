@@ -121,5 +121,10 @@
     }
   }
 
+  // el botón fijo de WhatsApp (celular) aparece recién después de la portada, para no competir con ella
+  var heroEl=document.querySelector('.hero');
+  function past(){root.classList.toggle('past-hero',scrollY>(heroEl?heroEl.offsetHeight*.8:400))}
+  addEventListener('scroll',past,{passive:true});past();
+
   if(root.classList.contains('unlocked')||!gate){open()}else{root.classList.add('locked');setInert(true);setTimeout(function(){key.focus()},100)}
 })();
