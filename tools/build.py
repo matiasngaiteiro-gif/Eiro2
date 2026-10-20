@@ -54,6 +54,7 @@ PROJECTS = [
          challenge='Cada fin de semana hay decenas de fiestas peleando por la misma atención.',
          did='Armamos una identidad con calor propio: color, tipografía y ritmo.',
          deliver=["Identidad visual", "Teasers de line up", "Piezas para redes", "Gráfica del evento"],
+         words=["Calor", "Ritmo", "Noche", "Comunidad", "Estreno", "El Calentón"],
          zoom=("calenton-pantalla", "Pantalla LED detrás del DJ con gráfica en movimiento, al atardecer"),
          gallery=[("calenton-afiches", "Afiches del evento pegados en una pared de la ciudad"), ("calenton-historias", "Celular con una historia que anuncia el line up"), ("calenton-fiesta", "Gente bailando al atardecer con papel picado")]),
     dict(slug="crisger", name="Crisger", sub="Una marca, igual en todos lados.", tags="Industria · Manual de marca",
@@ -63,6 +64,7 @@ PROJECTS = [
          challenge='La marca se usaba distinto en la planta, en la oficina y en la web.',
          did='Ordenamos el sistema y lo llevamos a un manual interactivo.',
          deliver=["Manual de marca interactivo", "Sistema de color y tipografía", "Aplicaciones en planta y oficina", "Plantillas"],
+         words=["Seguridad", "Orden", "Precisión", "Confianza", "Sistema", "Crisger"],
          zoom=("crisger-manual", "Manual de marca impreso abierto sobre un escritorio, con muestras de color"),
          gallery=[("crisger-color", "Muestras de color y especimen tipográfico"), ("crisger-planta", "Casco y chaleco con el emblema en una planta"), ("crisger-web", "Laptop con la versión web del manual")]),
     dict(slug="extracto-importado", name="Extracto Importado", sub="Cada fragancia, su historia.", tags="Perfumería · Contenido",
@@ -72,6 +74,7 @@ PROJECTS = [
          challenge='En perfumería no se puede oler a través de la pantalla.',
          did='Escribimos guiones y produjimos videos con creadoras para cada lanzamiento.',
          deliver=["Videos con creadoras", "Guiones", "Piezas para redes", "Calendario de lanzamientos"],
+         words=["Deseo", "Aroma", "Piel", "Cercanía", "Historia", "Extracto Importado"],
          zoom=("extracto-creadora", "Creadora de contenido grabándose con un perfume en la mano"),
          gallery=[("extracto-producto", "Frasco de perfume sobre piedra con luz de atardecer"), ("extracto-guion", "Storyboard y guion impresos sobre el escritorio"), ("extracto-historias", "Tres celulares con historias del lanzamiento")]),
 ]
@@ -419,7 +422,9 @@ def caso(i, pr):
     meta = "".join(f'<div><dt class="mono">{k}</dt><dd>{v}</dd></div>' for k, v in pr["meta"])
     sub = " ".join(f'<span class="wi" style="--i:{k}">{w}</span>' for k, w in enumerate(pr["sub"].split()))
     zn, zalt = pr["zoom"]
-    zoom = gen_pic(p, zn, zalt, "100vw", cls="media-z")
+    zoom = gen_pic(p, zn, zalt, "100vw", cls="media-f")
+    ws = pr["words"]
+    rise = "".join(f'<li><span style="--w:{len(w)}">{w}</span></li>' for w in ws)
     mq_items = "  ·  ".join(pr["deliver"])
     mq = "".join(f'<span class="mq" aria-hidden="true">{mq_items}  ·  {mq_items}  ·  {mq_items}</span>' for _ in range(2))
     gal = "\n    ".join(gen_pic(p, n, alt, "(max-width:820px) 100vw, 33vw", attrs=' data-scrub="free"') for n, alt in pr["gallery"])
@@ -435,13 +440,11 @@ def caso(i, pr):
     <span class="scroll-hint mono" aria-hidden="true">Scroll ↓</span>
   </section>
 
-  <!-- placa 01 · la imagen se abre -->
-  <section class="scrub zoom" data-scrub aria-label="Imagen principal">
-    <div class="stick">
-      <span class="plate-label mono" aria-hidden="true">01 — {pr["name"]}</span>
-      {zoom}
-      <div class="zoom-cap mono" aria-hidden="true"><span>{pr["tags"]}</span><span>Eiro Studio™</span></div>
-    </div>
+  <!-- placa 01 · imagen principal, quieta: invita a bajar al proyecto -->
+  <section class="lead-img" aria-label="Imagen principal">
+    <span class="plate-label mono" aria-hidden="true">01 — {pr["name"]}</span>
+    {zoom}
+    <div class="zoom-cap mono" aria-hidden="true"><span>{pr["tags"]}</span><span>Eiro Studio™</span></div>
   </section>
 
   <!-- placa 02 · el desafío se enciende palabra por palabra -->
@@ -472,6 +475,14 @@ def caso(i, pr):
 
   <section class="pad gallery" aria-label="Galería">
     {gal}
+  </section>
+
+  <!-- placa 06 · la marca en palabras: la lista sube centrada y se enciende la del medio -->
+  <section class="scrub rise" data-scrub data-rise style="--len:calc(100svh + {len(ws)} * 32svh);--n:{len(ws)}" aria-labelledby="t-palabras">
+    <div class="stick">
+      <h2 class="plate-label mono" id="t-palabras">06 — En palabras</h2>
+      <div class="rise-win"><ul class="rise-list">{rise}</ul></div>
+    </div>
   </section>
 
   <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b>{nxt["name"]}</b></a>
