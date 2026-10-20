@@ -22,6 +22,15 @@ BRAND_FONT = {
 }
 
 
+# Íconos de marca: Font Awesome Free 7 (fontawesome.com, licencia CC BY 4.0)
+WA_PATH = "M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"
+IG_PATH = "M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+
+
+def icon(path):
+    return f'<svg class="ico" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path fill="currentColor" d="{path}"/></svg>'
+
+
 def font_vars(slug):
     f = BRAND_FONT.get(slug)
     if not f:
@@ -194,6 +203,8 @@ def chrome(p, page, where):
     items = "".join(
         f'<li><a href="{p}{slug}/"{" aria-current=\"true\"" if slug == page else ""}><span class="mono">0{i+1}</span>{name}</a></li>'
         for i, (slug, name) in enumerate(NAV))
+    links = "".join(
+        f'<li><a href="{p}{slug}/"{" aria-current=\"page\"" if slug == page else ""}>{name}</a></li>' for slug, name in NAV)
     return f'''
 <body>
 <a class="skip" href="#top">Saltar al contenido</a>
@@ -210,14 +221,10 @@ def chrome(p, page, where):
 </div>
 
 <header class="bar" id="barra">
-  <div class="pod">
-    <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
-    <span class="where mono" id="where" aria-hidden="true">{where}</span>
-    <span class="dot" aria-hidden="true"></span>
-  </div>
+  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
+  <nav class="bar-nav" aria-label="Principal"><ul>{links}</ul></nav>
   <div class="bar-right">
-    <a class="btn accent" href="{p}contacto/">Hablemos</a>
-    <span class="clock mono" id="clock" aria-hidden="true">--:-- BUE</span>
+    <a class="btn accent" href="{p}contacto/#formulario">Hablemos</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
   </div>
 </header>
@@ -227,10 +234,10 @@ def chrome(p, page, where):
     <a href="{p or './'}" aria-label="Ir al inicio">{logo(p)}</a>
     <button class="menu-btn" id="menuClose" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6"/></svg></button>
   </div>
-  <nav aria-label="Principal"><ul>{items}</ul></nav>
+  <nav aria-label="Menú"><ul>{items}</ul></nav>
   <div class="menu-foot mono">
     <span>Buenos Aires, Argentina</span>
-    <a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a>
+    {social_btns()}
   </div>
 </div>
 '''
@@ -252,7 +259,7 @@ def footer(p):
     <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
-<a class="wa-fab" href="{WA_PROJ}" target="_blank" rel="noopener"><span aria-hidden="true">●</span> WhatsApp{SR_WA}</a>
+<a class="wa-orb" id="waOrb" href="{WA_PROJ}" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp (se abre WhatsApp)"><span class="wa-in">{icon(WA_PATH)}</span></a>
 <script src="{p}assets/eiro.js?v={VER}" defer></script>
 </body>
 </html>
@@ -264,7 +271,7 @@ def page_head(p, crumb, title_a, title_b, lead=None, extra=""):
     return f'''
   <section class="page-head grid pad" aria-labelledby="t-page">
     <p class="crumb mono" data-reveal><a href="{p or './'}">Eiro</a><span aria-hidden="true">/</span>{crumb}</p>
-    <h1 class="page-title" id="t-page" data-reveal><span>{title_a}</span><span class="gray">{title_b}</span></h1>
+    <h1 class="page-title" id="t-page" data-reveal><span>{title_a}</span>{f'<span class="gray">{title_b}</span>' if title_b else ""}</h1>
     {lead_html}{extra}
   </section>'''
 
@@ -278,12 +285,9 @@ def work_card(p, pr, sizes="(max-width:820px) 100vw, 50vw"):
         media = gen_pic(p, zn, zalt, sizes, attrs=" data-reveal")
     return f'''<a class="wcard" href="{p}trabajos/{pr["slug"]}/">
         {media}
-        <div><h3 class="wcard-name">{pr["name"]}</h3><p class="wcard-sub">{pr["sub"]}</p><p class="mono">{pr["tags"]}</p></div>
+        <div><h3 class="wcard-name">{pr["name"]}</h3><p class="wcard-sub">{pr["tags"].split(" · ")[-1]}</p></div>
       </a>'''
 
-
-def free_line(p):
-    return f'<a class="next-line" href="{p}contacto/" data-reveal><span>¿Tu marca es la próxima?</span><span class="mono">Hablemos →</span></a>'
 
 
 def rows_services(with_ids=True):
@@ -303,26 +307,45 @@ def values_html():
     return "\n      ".join(f'<article class="value" data-reveal><h3>{t}</h3><p>{d}</p></article>' for t, d in VALUES)
 
 
-def contact_btns(cls="btn"):
-    return (f'<div class="ctas"><a class="{cls}" href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a>'
-            f'<a class="{cls} line" href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a></div>')
+def social_btns():
+    return (f'<div class="socials"><a href="{WA_PROJ}" target="_blank" rel="noopener">{icon(WA_PATH)}<span>WhatsApp</span>{SR_WA}</a>'
+            f'<a href="{IG}" target="_blank" rel="noopener">{icon(IG_PATH)}<span>Instagram</span>{SR_IG}</a></div>')
 
 
-def cta_band(p, title="¿Tenés un proyecto? Hablemos."):
+def cta_band(p, lines=("Si tu marca tiene algo para contar,", "empecemos por acá.")):
+    spans = "".join(f'<span>{l}</span>' for l in lines)
     return f'''
-  <section class="pad sec cta-sec" aria-label="Contacto">
-    <div class="cta-band" data-reveal><h2>{title}</h2>{contact_btns()}</div>
+  <section class="pad sec cta-sec" aria-labelledby="t-cta">
+    <div class="cta" data-reveal>
+      <h2 class="cta-title" id="t-cta">{spans}</h2>
+      <a class="cta-link" href="{p}contacto/#formulario">Contanos tu proyecto <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    {social_btns()}
   </section>'''
 
 
 def testimonials_html():
     tag = "" if TESTIMONIOS_REALES else '<span class="t-tag mono">Ejemplo</span>'
     note = "" if TESTIMONIOS_REALES else '<p class="t-note mono">Testimonios de ejemplo. Se reemplazan por los reales.</p>'
-    cards = "".join(f'<figure class="tcard-q">{tag}<blockquote><p>“{q}”</p></blockquote><figcaption><b>{n}</b><span class="mono">{r}</span></figcaption></figure>' for q, n, r in TESTIMONIALS)
+    n_t = len(TESTIMONIALS)
+    slides = "".join(
+        f'<figure class="tq-slide" role="group" aria-roledescription="testimonio" aria-label="{i+1} de {n_t}"{"" if i == 0 else " hidden"}>'
+        f'<blockquote><p>“{q}”</p></blockquote>'
+        f'<figcaption><span class="tq-org">{r.split(" · ")[-1]}</span><span class="tq-who"><b>{n}</b> {r.split(" · ")[0]}</span></figcaption></figure>'
+        for i, (q, n, r) in enumerate(TESTIMONIALS))
+    bars = "".join(f'<i{" class=\"on\"" if i == 0 else ""}></i>' for i in range(n_t))
     return f'''
   <section class="sec pad" data-label="Clientes" aria-labelledby="t-clientes">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span><span class="gray">Lo que dicen de trabajar con nosotros.</span></h2>{note}</div>
-    <div class="tq-row" tabindex="0" role="region" aria-label="Testimonios, se desplazan de costado">{cards}</div>
+    <div class="sec-row" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span></h2>{note}</div>
+    <div class="tq" data-tq data-reveal aria-roledescription="carrusel" aria-label="Testimonios">
+      {slides}
+      <div class="tq-nav">
+        <span class="tq-count" aria-live="polite"><span data-tq-n>1</span>/{n_t}</span>
+        <span class="tq-bars" aria-hidden="true">{bars}</span>
+        <button type="button" data-tq-prev aria-label="Testimonio anterior">←</button>
+        <button type="button" data-tq-next aria-label="Testimonio siguiente">→</button>
+      </div>
+    </div>
   </section>'''
 
 
@@ -367,25 +390,24 @@ def home():
       {hero_reel(p)}
       <div class="hero-copy">
         <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
-        <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
+        <div class="hero-ctas"><a class="bracket" href="trabajos/">Ver trabajos</a></div>
       </div>
       <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
+      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
     </div>
   </section>
 
   <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-trabajos"><span>Trabajos</span><span class="gray">Lo último que hicimos.</span></h2><a class="bracket" href="trabajos/">Ver todos</a></div>
+    <div class="sec-row" data-reveal><h2 class="h2" id="t-trabajos"><span>Trabajos</span></h2><a class="bracket" href="trabajos/">Ver todos</a></div>
     <div class="wgrid">
       {cards}
     </div>
-    {free_line(p)}
   </section>
 {testimonials_html()}
 
   <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
-      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">De la idea a la calle.</span></h2>
+      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span></h2>
       <a class="bracket" href="servicios/">Ver servicios</a>
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
@@ -406,7 +428,6 @@ def trabajos():
     <div class="wgrid">
       {cards}
     </div>
-    {free_line(p)}
     <p class="cap mono" style="margin-top:32px;color:var(--soft)">Hay más proyectos. Te los mostramos cuando hablemos.</p>
   </section>
 </main>''' + footer(p)
@@ -541,7 +562,7 @@ def inter_pic(p, item, label):
 def next_link(p, nxt):
     if nxt:
         return f'<a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b style="--w:{max(len(x) for x in nxt["name"].split())}">{nxt["name"]}</b></a>'
-    return f'<a class="next-plate" href="{p}contacto/"><span class="mono">¿Tu marca es la próxima? →</span><b style="--w:8">Hablemos</b></a>'
+    return f'<a class="next-plate" href="{p}contacto/#formulario"><span class="mono">Contanos tu proyecto →</span><b style="--w:8">Hablemos</b></a>'
 
 
 def caso(i, pr):
@@ -597,7 +618,7 @@ def servicios():
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
     html = head(p, "Servicios | Eiro Studio", "Estrategia, identidad, digital, contenido, eventos y acompañamiento. Por proyecto o todo el año.", "servicios/") + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Servicios</span>', 'Qué hacemos', 'De la idea a la calle.', 'Por proyecto o todo el año.')}
+{page_head(p, '<span>Servicios</span>', 'Qué hacemos', '', 'Por proyecto o todo el año.')}
   <section class="sec pad grid table-sec" aria-label="Áreas de trabajo">
     <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
     <div class="rows">
@@ -644,7 +665,7 @@ def estudio():
         <div><dt class="mono">Hace</dt><dd>Diseño, marketing y redes</dd></div>
         <div><dt class="mono">Base</dt><dd>Buenos Aires</dd></div>
       </dl>
-      {contact_btns()}
+      {social_btns()}
     </div>
   </section>
 
@@ -661,9 +682,41 @@ def estudio():
       {steps_html()}
     </ol>
   </section>
-{cta_band(p, "Contanos tu idea.")}
+{cta_band(p)}
 </main>''' + footer(p)
     write("estudio/index.html", html)
+
+
+# Formulario breve: casi todo se elige tocando; al enviar arma el mensaje y abre WhatsApp con el estudio.
+BRIEF_NEEDS = ["Identidad de marca", "Redes y contenido", "Branding de un evento", "Web o app", "Fotos y video", "Todavía no sé"]
+BRIEF_WHEN = ["Lo antes posible", "En uno o dos meses", "Sin apuro"]
+BRIEF_FILL = ["Estoy por lanzar una marca nueva.", "Quiero renovar la imagen de mi marca.", "Tengo un evento en camino.", "Necesito contenido todos los meses."]
+
+
+def brief_form():
+    needs = "".join(f'<label class="chip"><input type="checkbox" name="necesito" value="{x}"><span>{x}</span></label>' for x in BRIEF_NEEDS)
+    when = "".join(f'<label class="chip"><input type="radio" name="cuando" value="{x}"><span>{x}</span></label>' for x in BRIEF_WHEN)
+    fill = "".join(f'<button type="button" class="chip fill" data-fill="{x}">{x}</button>' for x in BRIEF_FILL)
+    return f'''
+  <section class="sec pad brief-sec" id="formulario" aria-labelledby="t-brief">
+    <form class="brief" id="brief" data-wa="{WA.split("/")[-1]}" novalidate data-reveal>
+      <h2 class="h2" id="t-brief"><span>Contanos tu proyecto</span><span class="gray">Toma un minuto. Te respondemos por WhatsApp.</span></h2>
+      <fieldset><legend><span class="n">01</span>¿Qué necesitás? <span class="opt">Podés elegir varias</span></legend><div class="chips">{needs}</div></fieldset>
+      <fieldset><legend><span class="n">02</span>¿Para cuándo?</legend><div class="chips">{when}</div></fieldset>
+      <fieldset><legend><span class="n">03</span>¿Quién sos?</legend>
+        <div class="fields">
+          <label class="field"><span>Tu nombre</span><input type="text" name="nombre" autocomplete="given-name" required aria-describedby="brief-err" enterkeyhint="next"></label>
+          <label class="field"><span>Tu marca o proyecto <span class="opt">Opcional</span></span><input type="text" name="marca" autocomplete="organization" enterkeyhint="next"></label>
+        </div>
+      </fieldset>
+      <fieldset><legend><span class="n">04</span>Contanos un poco más <span class="opt">Opcional · tocá una idea para empezar</span></legend>
+        <div class="chips">{fill}</div>
+        <label class="field"><span class="sr">Mensaje</span><textarea name="mensaje" rows="3" placeholder="Lo que quieras sumar"></textarea></label>
+      </fieldset>
+      <p class="brief-err" id="brief-err" role="alert"></p>
+      <div class="brief-send"><button type="submit" class="cta-link">Enviar por WhatsApp <span class="arr" aria-hidden="true">→</span></button><span class="mono">Se abre WhatsApp con tu mensaje listo</span></div>
+    </form>
+  </section>'''
 
 
 def contacto():
@@ -671,10 +724,11 @@ def contacto():
     html = head(p, "Contacto | Eiro Studio", "Escribinos por WhatsApp y lo charlamos. Eiro Studio, Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Contacto</span>', 'Contacto', 'Hagamos algo bueno juntos.', None)}
-  <section class="sec pad grid table-sec" aria-label="Formas de contacto">
+{brief_form()}
+  <section class="sec pad grid table-sec" aria-label="Otras formas de contacto">
     <div class="hello" data-reveal>
-      <a class="hello-card" href="{WA_PROJ}" target="_blank" rel="noopener">{logo(p)}<span class="mono">Decí hola<br>WhatsApp</span><span class="arrow" aria-hidden="true">→</span>{SR_WA}</a>
-      {contact_btns()}
+      <h2 class="h2"><span>Otras formas</span><span class="gray">Si preferís escribir directo.</span></h2>
+      {social_btns()}
     </div>
     <dl class="rows">
       <div class="row" data-reveal><dt>Proyectos nuevos</dt><dd class="row-body" style="margin:0"><p>Contanos tu idea. El café va por nuestra cuenta.</p><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><br><a href="{TEL}">{TEL_TXT}</a></dd></div>

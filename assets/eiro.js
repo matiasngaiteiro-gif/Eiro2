@@ -1,5 +1,5 @@
 /* EIRO · comportamiento compartido por todas las páginas.
-   Clave de acceso, hora de Buenos Aires, menú, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
+   Clave de acceso, barra, menú, WhatsApp magnético, testimonios, formulario, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
 (function(){
   var root=document.documentElement, RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches, started=false;
   var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer'));
@@ -17,10 +17,62 @@
     key.addEventListener('input',function(){if(key.value.length===4)form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event('submit',{cancelable:true}))});
   }
 
-  // hora de Buenos Aires
-  var clock=document.getElementById('clock');
-  function tick(){try{clock.textContent=new Intl.DateTimeFormat('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'America/Argentina/Buenos_Aires'}).format(new Date())+' BUE'}catch(e){}}
-  if(clock){tick(); setInterval(tick,15000)}
+  // barra: una línea fina debajo cuando la página ya bajó
+  function scrolled(){root.classList.toggle('scrolled',scrollY>8)}
+  addEventListener('scroll',scrolled,{passive:true});scrolled();
+
+  // WhatsApp: el círculo se acerca al cursor cuando pasa cerca (solo con mouse y sin movimiento reducido)
+  var orb=document.getElementById('waOrb');
+  if(orb&&!RM&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var R=140,PULL=.4,raf=0,mx=0,my=0;
+    addEventListener('pointermove',function(e){
+      mx=e.clientX;my=e.clientY;
+      if(raf)return; raf=requestAnimationFrame(function(){raf=0;
+        var r=orb.getBoundingClientRect(),cx=r.left+r.width/2-(parseFloat(orb.style.getPropertyValue('--mx'))||0),cy=r.top+r.height/2-(parseFloat(orb.style.getPropertyValue('--my'))||0);
+        var dx=mx-cx,dy=my-cy,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<R){orb.classList.add('near');orb.style.setProperty('--mx',(dx*PULL).toFixed(1)+'px');orb.style.setProperty('--my',(dy*PULL).toFixed(1)+'px')}
+        else if(orb.classList.contains('near')){orb.classList.remove('near');orb.style.setProperty('--mx','0px');orb.style.setProperty('--my','0px')}
+      });
+    },{passive:true});
+    document.addEventListener('pointerleave',function(){orb.classList.remove('near');orb.style.setProperty('--mx','0px');orb.style.setProperty('--my','0px')});
+  }
+
+  // testimonios: uno por vez, con flechas, teclado y deslizando el dedo
+  [].slice.call(document.querySelectorAll('[data-tq]')).forEach(function(tq){
+    var sl=[].slice.call(tq.querySelectorAll('.tq-slide')),bars=[].slice.call(tq.querySelectorAll('.tq-bars i')),num=tq.querySelector('[data-tq-n]'),i=0;
+    function go(n){sl[i].hidden=true;sl[i].classList.remove('in');i=(n+sl.length)%sl.length;sl[i].hidden=false;if(!RM)sl[i].classList.add('in');bars.forEach(function(b,k){b.classList.toggle('on',k<=i)});num.textContent=i+1}
+    tq.querySelector('[data-tq-prev]').addEventListener('click',function(){go(i-1)});
+    tq.querySelector('[data-tq-next]').addEventListener('click',function(){go(i+1)});
+    tq.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')go(i-1);if(e.key==='ArrowRight')go(i+1)});
+    var x0=null;
+    tq.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    tq.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(dx<0?i+1:i-1);x0=null},{passive:true});
+  });
+
+  // formulario breve: arma el mensaje con lo elegido y abre WhatsApp con el estudio
+  var brief=document.getElementById('brief');
+  if(brief){
+    var msg=brief.querySelector('textarea'),nameIn=brief.querySelector('[name=nombre]'),err=document.getElementById('brief-err');
+    [].slice.call(brief.querySelectorAll('[data-fill]')).forEach(function(b){
+      b.addEventListener('click',function(){var t=b.getAttribute('data-fill');if(msg.value.indexOf(t)<0)msg.value=(msg.value.trim()?msg.value.trim()+' ':'')+t;msg.focus()});
+    });
+    nameIn.addEventListener('input',function(){if(nameIn.value.trim()){nameIn.removeAttribute('aria-invalid');err.textContent=''}});
+    brief.addEventListener('submit',function(e){
+      e.preventDefault();
+      var nombre=nameIn.value.trim();
+      if(!nombre){nameIn.setAttribute('aria-invalid','true');err.textContent='Contanos tu nombre así sabemos con quién hablamos.';nameIn.focus();return}
+      var marca=brief.querySelector('[name=marca]').value.trim();
+      var nec=[].slice.call(brief.querySelectorAll('[name=necesito]:checked')).map(function(x){return x.value});
+      var cu=brief.querySelector('[name=cuando]:checked');
+      var lines=['¡Hola, Eiro! Soy '+nombre+(marca?', de '+marca:'')+'.'];
+      if(nec.length)lines.push('Necesito: '+nec.join(', ').toLowerCase()+'.');
+      if(cu)lines.push('Para cuándo: '+cu.value.toLowerCase()+'.');
+      if(msg.value.trim())lines.push(msg.value.trim());
+      var url='https://wa.me/'+brief.getAttribute('data-wa')+'?text='+encodeURIComponent(lines.join('\n'));
+      var w=window.open(url,'_blank');
+      if(w){try{w.opener=null}catch(x){}}else{location.href=url}
+    });
+  }
 
   // menú a pantalla completa
   var menu=document.getElementById('menu'), mBtn=document.getElementById('menuBtn'), mClose=document.getElementById('menuClose');
@@ -60,8 +112,8 @@
     // portada: los mockups pasan como un GIF; se pausa con el botón, fuera de pantalla o con movimiento reducido
     var reel=document.querySelector('[data-reel]');
     if(reel){
-      var fr=[].slice.call(reel.querySelectorAll('img')),cap=document.getElementById('reelCap'),pb=document.querySelector('[data-reel-pause]'),k=0,paused=RM,vis=true;
-      var show=function(n){fr[k].classList.remove('on');k=(n+fr.length)%fr.length;fr[k].classList.add('on');if(cap)cap.textContent=fr[k].getAttribute('data-cap')};
+      var fr=[].slice.call(reel.querySelectorAll('img')),pb=document.querySelector('[data-reel-pause]'),k=0,paused=RM,vis=true;
+      var show=function(n){fr[k].classList.remove('on');k=(n+fr.length)%fr.length;fr[k].classList.add('on')};
       if(pb){if(RM){pb.textContent='Reproducir';pb.setAttribute('aria-pressed','true')}
         pb.addEventListener('click',function(){paused=!paused;pb.textContent=paused?'Reproducir':'Pausar';pb.setAttribute('aria-pressed',paused?'true':'false')})}
       if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(reel);
@@ -124,18 +176,7 @@
       });
     });
 
-    // la cápsula dice en qué sección estás (solo en el inicio, que tiene varias)
-    var where=document.getElementById('where'), secs=[].slice.call(document.querySelectorAll('main [data-label]'));
-    if(where && secs.length && 'IntersectionObserver' in window){
-      var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) where.textContent=e.target.getAttribute('data-label')})},{rootMargin:'-45% 0px -50% 0px'});
-      secs.forEach(function(s){so.observe(s)});
-    }
   }
-
-  // el botón fijo de WhatsApp (celular) aparece recién después de la portada, para no competir con ella
-  var heroEl=document.querySelector('.hero');
-  function past(){root.classList.toggle('past-hero',scrollY>(heroEl?heroEl.offsetHeight*.8:400))}
-  addEventListener('scroll',past,{passive:true});past();
 
   if(root.classList.contains('unlocked')||!gate){open()}else{root.classList.add('locked');setInert(true);setTimeout(function(){key.focus()},100)}
 })();
