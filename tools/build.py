@@ -11,11 +11,11 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://eirostudio.com/"
 KIT = "oqj6tze"  # kit de Adobe Fonts: Neue Haas Grotesk, Roboto Mono, Neulis Cursive
-KIT_CASOS = "shv5hcu"  # tipografías de los clientes, solo en las páginas de casos: New Spirit, Gotham, Shuttleblock Narrow
+KIT_CASOS = "hfs0xvx"  # tipografías de los clientes, solo en las páginas de casos: New Spirit (+ Condensed), Gotham, Shuttleblock Narrow
 
 # tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
 BRAND_FONT = {
-    "el-calenton": ("'new-spirit',serif", 600, "-.02em", None),
+    "el-calenton": ("'new-spirit-condensed',serif", 700, "-.01em", "700 13px/1.2 'new-spirit-condensed',serif"),
     "extracto-importado": ("'gotham',sans-serif", 700, "-.02em", "400 11px/1.3 'gotham',sans-serif"),
     "cer": ("'shuttleblock-narrow',sans-serif", 700, "0em", None),
 }
@@ -73,7 +73,7 @@ PROJECTS = [
          challenge='Cada fin de semana hay decenas de fiestas peleando por la misma atención.',
          did='Armamos una identidad con calor propio: color, tipografía y ritmo.',
          deliver=["Identidad visual", "Teasers de line up", "Piezas para redes", "Gráfica del evento"],
-         words=["Calor", "Ritmo", "Noche", "Comunidad", "Estreno", "El Calentón"],
+         words=["Calor", "Cielo", "Atardecer", "Noche", "Ritmo", "El Calentón"],
          zoom=("calenton-pantalla", "Pantalla LED detrás del DJ con gráfica en movimiento, al atardecer"),
          gallery=[("calenton-afiches", "Afiches del evento pegados en una pared de la ciudad"), ("calenton-historias", "Celular con una historia que anuncia el line up"), ("calenton-fiesta", "Gente bailando al atardecer con papel picado")]),
     dict(slug="crisger", publicado=False, name="Crisger", sub="Una marca, igual en todos lados.", tags="Industria · Manual de marca",
@@ -416,14 +416,24 @@ def _rows(word, n=4):
 
 
 MOTION = {
-    "el-calenton": dict(vars="--c-bg:#1B0B07;--c-ink:#FFE9D6;--c-acc:#FF4A1C", pieces=[
-        ("wide", "Pantalla LED · loop", f'<div class="k-stack" aria-hidden="true">{_rows("EL CALENTÓN")}</div>'),
-        ("", "Flyer · cuenta regresiva", '<div class="k-count rt" aria-hidden="true"><span class="n">3</span><span class="n">2</span><span class="n">1</span>'
-            '<div class="t"><span>El</span><span>Calentón</span><small>Line up · Muy pronto</small></div></div>'),
-        ("", "Historia · teaser", '<div class="k-sun" aria-hidden="true"><span class="sun"></span>'
-            '<span class="band b1 rt">FIESTA LATINA  FIESTA LATINA  FIESTA LATINA  FIESTA LATINA  </span>'
-            '<span class="band b2 rt">EL CALENTÓN  EL CALENTÓN  EL CALENTÓN  EL CALENTÓN  </span>'
-            '<span class="band b3">Line up · Line up · Line up · Line up · Line up · Line up · Line up · Line up · Line up · </span></div>'),
+    # El Calentón: logos y colores del manual de marca v2; el movimiento sigue su guion (día, el dato, barrido, el pico, cierre)
+    "el-calenton": dict(vars="--c-bg:#1C2F5E;--c-ink:#E1E4E7;--c-acc:#E65329;--c-amb:#F2A03D", pieces=[
+        ("wide", "Teaser de line up", '<div class="ec-teaser" aria-hidden="true">'
+            '<span class="day"></span><span class="cloud c1"></span><span class="cloud c2"></span>'
+            '<img class="sec" src="{P}img/clientes/el-calenton/secundaria.webp" alt="">'
+            '<span class="artist rt">Anthony Godfather</span>'
+            '<span class="night"></span><span class="sweep"></span>'
+            '<span class="deg rt"><span class="win"><span class="nums"><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span></span></span><i>°</i></span>'
+            '<img class="main" src="{P}img/clientes/el-calenton/principal.webp" alt=""><span class="date rt">11.10</span></div>'),
+        ("", "Flyer · aniversario", '<div class="ec-flyer" aria-hidden="true"><span class="stars"></span>'
+            '<span class="top"><span>Latin Music Festival</span><span>Primer aniversario</span></span>'
+            '<span class="big rt">11.10</span><span class="name rt">Anthony Godfather</span>'
+            '<img class="sec" src="{P}img/clientes/el-calenton/secundaria.webp" alt=""></div>'),
+        ("", "Historia · temperatura", '<div class="ec-temp" aria-hidden="true"><span class="sky"></span>'
+            '<span class="lab">Sube la temperatura</span>'
+            '<span class="deg rt"><span class="win"><span class="nums"><span>28</span><span>29</span><span>30</span><span>31</span><span>32</span><span>33</span><span>34</span><span>35</span><span>36</span><span>37</span><span>38</span><span>39</span><span>40</span></span></span><i>°</i></span>'
+            '<span class="th"><i></i></span>'
+            '<img class="iso" src="{P}img/clientes/el-calenton/isotipo.webp" alt=""></div>'),
     ]),
     "crisger": dict(vars="--c-bg:#1E2124;--c-ink:#F2F2F2;--c-acc:#FF6A13;--c-line:rgba(242,242,242,.3)", pieces=[
         ("wide", "Construcción de marca", '<div class="k-build" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">'
@@ -470,7 +480,7 @@ def motion_html(pr):
     if not m:
         return ""
     items = "\n      ".join(
-        f'<figure class="reel {cls}" style="{m["vars"]}{font_vars(pr["slug"])}">{body}<figcaption>{cap}</figcaption></figure>' for cls, cap, body in m["pieces"])
+        f'<figure class="reel {cls}" style="{m["vars"]}{font_vars(pr["slug"])}">{body.replace("{P}", "../../")}<figcaption>{cap}</figcaption></figure>' for cls, cap, body in m["pieces"])
     return f'''
   <!-- placa 04 · la marca en movimiento -->
   <section class="pad reels-wrap" aria-labelledby="t-motion">

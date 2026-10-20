@@ -566,6 +566,62 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 .k-check .done{position:absolute;left:8%;right:8%;bottom:16%;font-size:clamp(30px,4.6vw,68px);color:var(--c-acc,#fff);clip-path:inset(0 100% 0 0);animation:kDone 8s var(--ease-out) infinite}
 @keyframes kDone{0%,58%{clip-path:inset(0 100% 0 0)}66%,88%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 0 0 100%)}}
 
+/* El Calentón · teaser: día, el artista sube, barrido de atardecer, noche con estrellas, grados de 28 a 40 y cierre con el logo (10 s) */
+.ec-teaser>*{position:absolute}
+.ec-teaser .day{inset:0;background:linear-gradient(180deg,#3D69A4,#6E9CC6)}
+.ec-teaser .cloud{width:40%;height:14%;border-radius:50%;background:rgba(255,255,255,.45);filter:blur(18px);animation:ecCloud 10s linear infinite}
+.ec-teaser .c1{left:-10%;top:58%}.ec-teaser .c2{left:40%;top:70%;width:30%;animation-duration:14s}
+@keyframes ecCloud{to{transform:translateX(60%)}}
+.ec-teaser .sec{left:50%;top:8%;width:30%;transform:translateX(-50%);animation:ecDayOut 10s infinite}
+.ec-teaser .artist{left:6%;right:6%;top:36%;font-size:clamp(34px,7.6cqw,150px);line-height:.88;text-transform:uppercase;color:#fff;clip-path:inset(0 0 0 0);animation:ecArtist 10s cubic-bezier(.2,.9,.1,1) infinite}
+@keyframes ecArtist{0%,8%{transform:translateY(60%);opacity:0}11%,44%{transform:none;opacity:1}46%,100%{opacity:0}}
+@keyframes ecDayOut{0%,44%{opacity:1}46%,100%{opacity:0}}
+.ec-teaser .night{inset:0;background-color:#1C2F5E;background-image:radial-gradient(circle,rgba(225,228,231,.7) 1px,transparent 1.6px),radial-gradient(circle,rgba(225,228,231,.35) 1px,transparent 1.6px);background-size:60px 55px,40px 45px;background-position:8px 12px,28px 30px;clip-path:inset(100% 0 0 0);animation:ecNight 10s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes ecNight{0%,46%{clip-path:inset(100% 0 0 0);opacity:1}52%,97%{clip-path:inset(0 0 0 0);opacity:1}100%{clip-path:inset(0 0 0 0);opacity:0}}
+.ec-teaser .sweep{left:0;right:0;top:100%;height:26%;background:linear-gradient(180deg,#F2A03D,#E65329);animation:ecSweep 10s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes ecSweep{0%,46%{transform:translateY(0)}52%,100%{transform:translateY(-485%)}}
+.ec-teaser{container-type:size}
+.deg{display:flex;align-items:flex-start;line-height:.85;color:var(--c-acc,#fff)}
+.deg .win{display:block;height:.85em;overflow:hidden}
+.deg .nums{display:flex;flex-direction:column}
+.deg .nums span{height:.85em}
+.deg i{font-style:normal;color:var(--c-amb,#fff)}
+.ec-teaser .deg{left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(70px,22cqw,300px);opacity:0;animation:ecDegShow 10s infinite}
+.ec-teaser .deg .nums{animation:ecCount 10s steps(1) infinite}
+@keyframes ecDegShow{0%,52%{opacity:0}53%,70%{opacity:1}72%,100%{opacity:0}}
+@keyframes ecCount{0%,54%{transform:translateY(0)}55%{transform:translateY(-.85em)}56%{transform:translateY(-1.7em)}57%{transform:translateY(-2.55em)}58%{transform:translateY(-3.4em)}59%{transform:translateY(-4.25em)}60%{transform:translateY(-5.1em)}61%{transform:translateY(-5.95em)}62%{transform:translateY(-6.8em)}63%{transform:translateY(-7.65em)}64%{transform:translateY(-8.5em)}65%{transform:translateY(-9.35em)}66%,100%{transform:translateY(-10.2em)}}
+.ec-teaser .main{left:50%;top:44%;width:48%;transform:translate(-50%,-50%) scale(.9);opacity:0;animation:ecMain 10s cubic-bezier(.2,.9,.1,1) infinite}
+@keyframes ecMain{0%,72%{opacity:0;transform:translate(-50%,-50%) scale(.9)}75%,96%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+.ec-teaser .date{left:0;right:0;bottom:12%;text-align:center;font-size:clamp(18px,3cqw,44px);color:var(--c-amb,#fff);opacity:0;animation:ecDate 10s infinite}
+@keyframes ecDate{0%,76%{opacity:0}79%,96%{opacity:1}100%{opacity:0}}
+
+/* El Calentón · flyer del aniversario: cielo de noche, la fecha y el artista suben y frenan seco */
+.ec-flyer{container-type:size}
+.ec-flyer>*{position:absolute}
+.ec-flyer .stars{inset:0;background-image:radial-gradient(circle,rgba(225,228,231,.55) 1px,transparent 1.6px),radial-gradient(circle,rgba(225,228,231,.28) 1px,transparent 1.6px);background-size:120px 100px,80px 70px;background-position:15px 20px,55px 50px;animation:ecTwinkle 3s ease-in-out infinite alternate}
+@keyframes ecTwinkle{to{opacity:.45}}
+.ec-flyer .top{left:7%;right:7%;top:7%;display:flex;justify-content:space-between;gap:8px;font:var(--c-lab);text-transform:uppercase;letter-spacing:.04em;color:var(--c-amb,#fff)}
+.ec-flyer .big{left:7%;top:24%;font-size:34cqw;line-height:.82;color:var(--c-acc,#fff);animation:ecUp 8s cubic-bezier(.2,.9,.1,1) infinite}
+.ec-flyer .name{left:7%;right:7%;top:50%;font-size:12cqw;line-height:.9;text-transform:uppercase;color:var(--c-ink,#fff);animation:ecUp 8s cubic-bezier(.2,.9,.1,1) .25s infinite both}
+@keyframes ecUp{0%{transform:translateY(40%);opacity:0}6%,88%{transform:none;opacity:1}96%,100%{opacity:0}}
+.ec-flyer .sec{left:50%;bottom:6%;width:46%;transform:translateX(-50%)}
+
+/* El Calentón · historia: el cielo pasa de día a atardecer, el termómetro sube y los grados cuentan */
+.ec-temp{container-type:size}
+.ec-temp>*{position:absolute}
+.ec-temp .sky{inset:0;background:linear-gradient(180deg,#3D69A4,#6E9CC6 40%,#F2A03D 75%,#E65329);background-size:100% 260%;animation:ecSky 8s ease-in-out infinite}
+@keyframes ecSky{0%,10%{background-position:0 0}70%,92%{background-position:0 100%}100%{background-position:0 0}}
+.ec-temp .lab{left:8%;right:8%;top:8%;font:600 7cqw/1.05 'new-spirit',serif;color:#fff}
+.ec-temp .deg{left:8%;top:34%;font-size:40cqw;color:#fff}
+.ec-temp .deg i{color:#130821}
+.ec-temp .deg .nums{animation:ecCount2 8s steps(1) infinite}
+@keyframes ecCount2{0%,12%{transform:translateY(0)}17%{transform:translateY(-.85em)}22%{transform:translateY(-1.7em)}27%{transform:translateY(-2.55em)}32%{transform:translateY(-3.4em)}37%{transform:translateY(-4.25em)}42%{transform:translateY(-5.1em)}47%{transform:translateY(-5.95em)}52%{transform:translateY(-6.8em)}57%{transform:translateY(-7.65em)}62%{transform:translateY(-8.5em)}67%{transform:translateY(-9.35em)}72%,100%{transform:translateY(-10.2em)}}
+.ec-temp .th{right:9%;top:30%;width:5cqw;height:52%;border:3px solid #130821;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.35)}
+.ec-temp .th i{position:absolute;left:0;right:0;bottom:0;height:100%;background:linear-gradient(0deg,#F2A03D,#E65329);transform-origin:bottom;transform:scaleY(.15);animation:ecTh 8s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes ecTh{0%,12%{transform:scaleY(.15)}72%,92%{transform:scaleY(1)}100%{transform:scaleY(.15)}}
+.ec-temp .iso{left:8%;bottom:7%;width:26%;opacity:0;animation:ecIso 8s cubic-bezier(.2,.9,.1,1) infinite}
+@keyframes ecIso{0%,72%{opacity:0;transform:translateY(20%)}76%,92%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+
 /* K · palabras de la marca: pieza 1080×1350 que sube sola; la del centro va en el color de acento */
 .words-wrap{padding-top:clamp(48px,6vw,96px)}
 .reels.solo{grid-template-columns:1fr;justify-items:center}
@@ -586,6 +642,8 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
   .k-swatch .sw{transform:none}
   .k-pages .pg:first-child,.k-bottle .notes span:first-child,.k-story .fr:nth-child(2){opacity:1}
   .k-bottle .liq{height:78%}
+  .ec-teaser .night,.ec-teaser .sec,.ec-teaser .artist,.ec-teaser .deg,.ec-teaser .date{display:none}.ec-teaser .main{opacity:1;transform:translate(-50%,-50%)}.ec-teaser .day{background:#1C2F5E}
+  .ec-flyer .big,.ec-flyer .name{opacity:1}.ec-temp .deg .nums{transform:translateY(-10.2em)}.ec-temp .th i{transform:none}.ec-temp .iso{opacity:1}
   .k-timer .clk span:first-child{opacity:1}.k-check li i::after{transform:scale(1)}.k-check .done{clip-path:none}
 }
 
