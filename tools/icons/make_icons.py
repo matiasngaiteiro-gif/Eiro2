@@ -1,15 +1,15 @@
 # A partir de tools/icons/g-big.png arma favicon.ico, apple-touch-icon.png, img/icon-192/512.png
-# y el avatar para redes (img/avatar-eiro.png, 1080×1080): G blanca centrada sobre #0A0A0A.
+# y el avatar para redes (img/avatar-eiro.png, 1080×1080): G color papel (#F5F6F1) centrada sobre verde bosque (#0E3A31).
 import os
 from PIL import Image, ImageOps
 root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 g = Image.open(os.path.join(root, "tools/icons/g-big.png")).convert("L")
 g = g.crop(g.point(lambda v: 255 if v > 40 else 0).getbbox())  # recorta a la letra
 def icon(size, frac):
-    im = Image.new("RGB", (size, size), "#0A0A0A")
+    im = Image.new("RGB", (size, size), "#0E3A31")
     s = frac * size / max(g.size)
     gl = g.resize((max(1, round(g.width * s)), max(1, round(g.height * s))), Image.LANCZOS)
-    white = Image.new("RGB", gl.size, "#FFFFFF")
+    white = Image.new("RGB", gl.size, "#F5F6F1")
     im.paste(white, ((size - gl.width) // 2, (size - gl.height) // 2), gl)
     return im
 icon(512, .64).save(os.path.join(root, "img/icon-512.png"))

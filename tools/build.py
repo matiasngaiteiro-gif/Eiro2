@@ -164,7 +164,7 @@ def head(p, title, desc, path, casos=False):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#0E3A31">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
@@ -184,6 +184,9 @@ def head(p, title, desc, path, casos=False):
 <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}}catch(e){{}}</script>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
