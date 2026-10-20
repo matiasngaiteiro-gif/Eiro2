@@ -15,8 +15,9 @@ KIT_CASOS = "shv5hcu"  # tipografías de los clientes, solo en las páginas de c
 
 # tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
 BRAND_FONT = {
-    "el-calenton": ('"new-spirit",serif', 600, "-.02em", None),
-    "extracto-importado": ('"gotham",sans-serif', 700, "-.02em", '400 11px/1.3 "gotham",sans-serif'),
+    "el-calenton": ("'new-spirit',serif", 600, "-.02em", None),
+    "extracto-importado": ("'gotham',sans-serif", 700, "-.02em", "400 11px/1.3 'gotham',sans-serif"),
+    "cer": ("'shuttleblock-narrow',sans-serif", 700, "0em", None),
 }
 
 
@@ -92,6 +93,16 @@ PROJECTS = [
          words=["Deseo", "Aroma", "Piel", "Cercanía", "Historia", "Extracto Importado"],
          zoom=("extracto-creadora", "Creadora de contenido grabándose con un perfume en la mano"),
          gallery=[("extracto-producto", "Frasco de perfume sobre piedra con luz de atardecer"), ("extracto-guion", "Storyboard y guion impresos sobre el escritorio"), ("extracto-historias", "Tres celulares con historias del lanzamiento")]),
+    dict(slug="cer", name="CER Entrenamientos", sub="El plan, en el bolsillo.", tags="Entrenamiento · Producto digital",
+         img=None,
+         meta=[("Cliente", "CER Entrenamientos"), ("Rubro", "Entrenamiento personalizado"), ("Servicios", "App web, interfaz y marca")],
+         lead='El plan de entrenamiento, en el bolsillo. <span class="gray">Una app web para que los alumnos de CER sigan su rutina a distancia.</span>',
+         challenge='Un profesor, decenas de alumnos a distancia y las rutinas perdidas en planillas.',
+         did='Diseñamos una app simple: la próxima rutina arriba, cada ejercicio para tildar y el descanso con reloj.',
+         deliver=["App web de seguimiento", "Diseño de interfaz", "Temporizador de descanso", "Registro de progreso"],
+         words=["Constancia", "Fuerza", "Progreso", "Disciplina", "Plan", "CER"],
+         zoom=("cer-descanso", "Alumno descansando entre series con el celular en la mano, en un gimnasio al atardecer"),
+         gallery=[("cer-checklist", "Manos con un celular que muestra la rutina con ejercicios tildados"), ("cer-coach", "Profesor corrigiendo una sentadilla con barra"), ("cer-plan", "Plan de entrenamiento impreso, celular y tiza sobre un banco")]),
 ]
 
 SERVICES = [
@@ -239,7 +250,8 @@ def work_card(p, pr, sizes="(max-width:820px) 100vw, 50vw"):
         n, alt, w, h, st = pr["img"]
         media = f'<figure class="media" data-reveal>{pic(p, n, sizes, alt, w, h, st)}</figure>'
     else:
-        media = f'<div class="media type-block green" data-reveal aria-hidden="true"><span>{pr["name"]}</span></div>'
+        zn, zalt = pr["zoom"]
+        media = gen_pic(p, zn, zalt, sizes, attrs=" data-reveal")
     return f'''<a class="wcard" href="{p}trabajos/{pr["slug"]}/">
         {media}
         <div><h3 class="wcard-name">{pr["name"]}</h3><p class="wcard-sub">{pr["sub"]}</p><p class="mono">{pr["tags"]}</p></div>
@@ -247,7 +259,8 @@ def work_card(p, pr, sizes="(max-width:820px) 100vw, 50vw"):
 
 
 def free_card(p):
-    return f'''<a class="wcard" href="{p}contacto/">
+    wide = " wfree" if len(PROJECTS) % 2 == 0 else ""
+    return f'''<a class="wcard{wide}" href="{p}contacto/">
         <div class="media type-block dark" data-reveal aria-hidden="true"><span>Tu marca</span></div>
         <div><h3 class="wcard-name">Tu marca</h3><p class="wcard-sub">Este lugar está libre.</p><p class="mono">Hablemos →</p></div>
       </a>'''
@@ -411,6 +424,16 @@ MOTION = {
             '<div class="fr" style="background:#C98A2E;color:#1A120A"><b>Me encantó</b><span>Notas de salida, corazón y fondo</span></div>'
             '<div class="fr" style="background:#F5E9D8;color:#1A120A"><b>Link en bio</b><span>Lanzamiento</span></div></div>'),
     ]),
+    "cer": dict(vars="--c-bg:#0B0B0C;--c-ink:#F2F2F0;--c-acc:#FF6A13", pieces=[
+        ("wide", "App · loop", f'<div class="k-stack" aria-hidden="true">{_rows("CER ENTRENAMIENTOS")}</div>'),
+        ("", "Temporizador de descanso", '<div class="k-timer" aria-hidden="true" style="position:absolute;inset:0"><span class="lab">Descanso</span>'
+            '<div class="clk rt"><span>1:30</span><span>1:00</span><span>0:30</span><span>0:00</span></div><span class="tbar"><i></i></span>'
+            '<span class="fl"></span><b class="go rt">A la próxima serie</b></div>'),
+        ("", "Rutina · ejercicios", '<div class="k-check" aria-hidden="true" style="position:absolute;inset:0"><span class="lab">Semana 2 · Estímulo A</span><ul>'
+            '<li><i></i><b class="rt">Press de banca</b><em>4 × 3</em></li><li><i></i><b class="rt">Dominadas</b><em>3 × 4</em></li>'
+            '<li><i></i><b class="rt">Press de hombros</b><em>3 × 7</em></li><li><i></i><b class="rt">Vuelo lateral</b><em>3 × 7</em></li></ul>'
+            '<span class="done rt">Rutina completada</span></div>'),
+    ]),
 }
 
 
@@ -445,12 +468,12 @@ def caso(i, pr):
     gal = "\n    ".join(gen_pic(p, n, alt, "(max-width:820px) 100vw, 33vw", attrs=' data-scrub="free"') for n, alt in pr["gallery"])
     lis = "".join(f"<li>{x}</li>" for x in pr["deliver"])
     html = head(p, f'{pr["name"]} | Trabajos | Eiro Studio', f'{pr["name"]}: {pr["sub"]} Un proyecto de Eiro Studio.', f'trabajos/{pr["slug"]}/', casos=True) + chrome(p, "trabajos", "Trabajos") + f'''
-<main id="top" tabindex="-1">
+<main id="top" class="case" tabindex="-1" style="{font_vars(pr["slug"]).lstrip(";")}">
   <!-- placa 00 · título -->
   <section class="plate-title" aria-labelledby="t-page">
     <p class="crumb mono"><a href="{p or './'}">Eiro</a><span aria-hidden="true">/</span><a href="{p}trabajos/">Trabajos</a><span aria-hidden="true">/</span><span>0{i+1}</span></p>
     <dl class="case-meta">{meta}</dl>
-    <h1 class="kin" id="t-page"><span class="ln"><span>{pr["name"]}</span></span></h1>
+    <h1 class="kin" id="t-page" style="--w:{max(len(x) for x in pr["name"].split())}"><span class="ln"><span>{pr["name"]}</span></span></h1>
     <p class="kin-sub">{sub}</p>
     <span class="scroll-hint mono" aria-hidden="true">Scroll ↓</span>
   </section>
@@ -500,7 +523,7 @@ def caso(i, pr):
     </div>
   </section>
 
-  <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b>{nxt["name"]}</b></a>
+  <a class="next-plate" href="{p}trabajos/{nxt["slug"]}/"><span class="mono">Siguiente proyecto →</span><b style="--w:{max(len(x) for x in nxt["name"].split())}{font_vars(nxt["slug"])}">{nxt["name"]}</b></a>
 </main>''' + footer(p)
     write(f'trabajos/{pr["slug"]}/index.html', html)
 
