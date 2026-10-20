@@ -102,6 +102,14 @@
       }
     }
 
+    // piezas en movimiento: solo se animan cuando están en pantalla; el botón las pausa (WCAG 2.2.2)
+    [].slice.call(document.querySelectorAll('.reels')).forEach(function(r){
+      var btn=r.parentNode.querySelector('[data-pause]');
+      if(btn) btn.addEventListener('click',function(){var p=r.classList.toggle('paused');btn.textContent=p?'Reproducir':'Pausar';btn.setAttribute('aria-pressed',p?'true':'false')});
+      if(RM){r.classList.add('paused');return}
+      if('IntersectionObserver' in window){new IntersectionObserver(function(es){r.classList.toggle('play',es[0].isIntersecting)},{threshold:.1}).observe(r)}else{r.classList.add('play')}
+    });
+
     // la cápsula dice en qué sección estás (solo en el inicio, que tiene varias)
     var where=document.getElementById('where'), secs=[].slice.call(document.querySelectorAll('main [data-label]'));
     if(where && secs.length && 'IntersectionObserver' in window){

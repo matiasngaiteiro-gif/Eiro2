@@ -348,6 +348,71 @@ def split_words(text, cls="wd"):
     return " ".join(f'<span class="{cls}">{w}</span>' for w in text.split())
 
 
+# ---------- piezas de marca en movimiento (por caso) ----------
+# Son composiciones animadas con HTML y CSS, no videos: pesan casi nada y se ven nítidas en cualquier pantalla.
+# Los colores salen del mundo visual de cada proyecto; cuando haya logos y paletas reales, se reemplazan acá.
+def _rows(word, n=4):
+    rep = ("  " + word) * 6
+    return "".join(f'<span class="row rt">{rep}{rep}</span>' for _ in range(n))
+
+
+MOTION = {
+    "el-calenton": dict(vars="--c-bg:#1B0B07;--c-ink:#FFE9D6;--c-acc:#FF4A1C", pieces=[
+        ("wide", "Pantalla LED · loop", f'<div class="k-stack" aria-hidden="true">{_rows("EL CALENTÓN")}</div>'),
+        ("", "Flyer · cuenta regresiva", '<div class="k-count rt" aria-hidden="true"><span class="n">3</span><span class="n">2</span><span class="n">1</span>'
+            '<div class="t"><span>El</span><span>Calentón</span><small>Line up · Muy pronto</small></div></div>'),
+        ("", "Historia · teaser", '<div class="k-sun" aria-hidden="true"><span class="sun"></span>'
+            '<span class="band b1 rt">FIESTA LATINA  FIESTA LATINA  FIESTA LATINA  FIESTA LATINA  </span>'
+            '<span class="band b2 rt">EL CALENTÓN  EL CALENTÓN  EL CALENTÓN  EL CALENTÓN  </span>'
+            '<span class="band b3">Line up · Line up · Line up · Line up · Line up · Line up · Line up · Line up · Line up · </span></div>'),
+    ]),
+    "crisger": dict(vars="--c-bg:#1E2124;--c-ink:#F2F2F2;--c-acc:#FF6A13;--c-line:rgba(242,242,242,.3)", pieces=[
+        ("wide", "Construcción de marca", '<div class="k-build" aria-hidden="true"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">'
+            '<line x1="0" y1="300" x2="1600" y2="300"/><line x1="0" y1="600" x2="1600" y2="600"/><line x1="560" y1="0" x2="560" y2="900"/><line x1="1040" y1="0" x2="1040" y2="900"/>'
+            '<circle cx="800" cy="390" r="190"/><rect x="610" y="200" width="380" height="380"/>'
+            '<rect class="shape" x="650" y="240" width="150" height="300"/><circle class="shape" cx="900" cy="390" r="110"/></svg>'
+            '<span class="word rt">CRISGER</span></div>'),
+        ("", "Sistema de color", '<div class="k-swatch" aria-hidden="true" style="position:absolute;inset:0">'
+            '<span class="sw" style="background:#FF6A13;color:#1E2124">Naranja seguridad<b>01</b></span>'
+            '<span class="sw" style="background:#2B2F33">Carbón<b>02</b></span>'
+            '<span class="sw" style="background:#B9BDC1;color:#1E2124">Acero<b>03</b></span>'
+            '<span class="sw" style="background:#F2F2F2;color:#1E2124">Blanco<b>04</b></span></div>'),
+        ("", "Manual · páginas", '<div class="k-pages" aria-hidden="true" style="position:absolute;inset:0">'
+            '<div class="pg" style="background:#F2F2F2;color:#1E2124"><span>Manual de marca · 01</span><b>Logo</b></div>'
+            '<div class="pg" style="background:#FF6A13;color:#1E2124"><span>Manual de marca · 02</span><b>Color</b></div>'
+            '<div class="pg" style="background:#2B2F33;color:#F2F2F2"><span>Manual de marca · 03</span><b>Tipografía</b></div>'
+            '<div class="pg" style="background:#B9BDC1;color:#1E2124"><span>Manual de marca · 04</span><b>Aplicaciones</b></div></div>'),
+    ]),
+    "extracto-importado": dict(vars="--c-bg:#1A120A;--c-ink:#F5E9D8;--c-acc:#C98A2E", pieces=[
+        ("wide", "Campaña · loop", f'<div class="k-stack" aria-hidden="true">{_rows("EXTRACTO IMPORTADO")}</div>'),
+        ("", "Lanzamiento · notas", '<div class="k-bottle" aria-hidden="true" style="position:absolute;inset:0"><span class="lab">Nueva fragancia</span>'
+            '<span class="bt"><span class="liq"></span></span>'
+            '<span class="notes rt"><span>Salida</span><span>Corazón</span><span>Fondo</span></span></div>'),
+        ("", "Historia con creadora", '<div class="k-story rt" aria-hidden="true" style="position:absolute;inset:0"><div class="bars"><i></i><i></i><i></i></div>'
+            '<div class="fr" style="background:#2A1C10"><b>Lo probé</b><span>Contenido con creadoras</span></div>'
+            '<div class="fr" style="background:#C98A2E;color:#1A120A"><b>Me encantó</b><span>Notas de salida, corazón y fondo</span></div>'
+            '<div class="fr" style="background:#F5E9D8;color:#1A120A"><b>Link en bio</b><span>Lanzamiento</span></div></div>'),
+    ]),
+}
+
+
+def motion_html(pr):
+    m = MOTION.get(pr["slug"])
+    if not m:
+        return ""
+    items = "\n      ".join(
+        f'<figure class="reel {cls}" style="{m["vars"]}">{body}<figcaption>{cap}</figcaption></figure>' for cls, cap, body in m["pieces"])
+    return f'''
+  <!-- placa 04 · la marca en movimiento -->
+  <section class="pad reels-wrap" aria-labelledby="t-motion">
+    <div class="reels-head"><h2 class="mono" id="t-motion">04 — En movimiento</h2><button type="button" data-pause aria-pressed="false">Pausar</button></div>
+    <div class="reels">
+      {items}
+    </div>
+  </section>
+'''
+
+
 def caso(i, pr):
     p = "../../"
     nxt = PROJECTS[(i + 1) % len(PROJECTS)]
@@ -397,9 +462,10 @@ def caso(i, pr):
     </div>
   </section>
 
-  <!-- placa 04 · entregables en movimiento -->
+{motion_html(pr)}
+  <!-- placa 05 · entregables en movimiento -->
   <section class="marquee" data-scrub="free" aria-labelledby="t-entregables">
-    <h2 class="plate-label mono" id="t-entregables">04 — Entregables</h2>
+    <h2 class="plate-label mono" id="t-entregables">05 — Entregables</h2>
     <ul class="sr">{lis}</ul>
     {mq}
   </section>
