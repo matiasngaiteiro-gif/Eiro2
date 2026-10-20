@@ -346,12 +346,11 @@ def home():
     <div class="hero-frame">
       {pic(p, "estudio", "(max-width:600px) 100vw, 50vw", "Matías Gaiteiro trabajando en un escritorio con dos monitores, en medio de un campo al atardecer", 928, 1152, eager=True)}
       <div class="hero-copy">
-        <p class="hero-kicker mono">Estudio creativo en Buenos Aires</p>
-        <h1 class="hero-title">Eiro es un estudio de branding y contenido para marcas y eventos.</h1>
+        <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
         <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
       </div>
       <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-      <div class="hero-meta mono" aria-hidden="true"><span>Eiro Studio™ — Estudio creativo</span><span>34°36′S 58°22′O</span></div>
+      <div class="hero-meta mono" aria-hidden="true"><span>Buenos Aires, Argentina</span><span>34°36′S 58°22′O</span></div>
     </div>
   </section>
 
