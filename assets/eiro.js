@@ -1,5 +1,5 @@
 /* EIRO · comportamiento compartido por todas las páginas.
-   Clave de acceso, barra, menú, WhatsApp magnético, testimonios, formulario, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
+   Clave de acceso, barra, menú, WhatsApp magnético, testimonios, formulario, palabra que rota, revelados y sección actual. */
 (function(){
   var root=document.documentElement, RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches, started=false;
   var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer'));
@@ -91,22 +91,15 @@
   function start(){
     if(started) return; started=true;
 
-    // GAITEIRO: ocupa el ancho de su marco; después se borra GAIT y queda EIRO
-    var origin=document.getElementById('origin');
-    if(origin){
-      var fitOrigin=function(){
-        var probe=document.createElement('span'); probe.textContent='GAITEIRO';
-        probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;letter-spacing:-.05em;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
-        document.body.appendChild(probe); var ratio=probe.getBoundingClientRect().width/100; probe.remove();
-        var avail=origin.parentNode.clientWidth-2*parseFloat(getComputedStyle(origin).left);
-        if(ratio>0) origin.style.fontSize=Math.min(380,Math.floor(avail/ratio))+'px';
-      };
-      var go=function(){fitOrigin();setTimeout(function(){origin.classList.add('is-in')},RM?0:500)};
-      if(origin.hasAttribute('data-wait')){ // en páginas internas espera a estar en pantalla
-        fitOrigin();
-        if('IntersectionObserver' in window&&!RM){var oo=new IntersectionObserver(function(es){if(es[0].isIntersecting){oo.disconnect();(document.fonts?document.fonts.ready:Promise.resolve()).then(go)}},{threshold:.5});oo.observe(origin.parentNode)}else{go()}
-      }else{(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go)}
-      window.addEventListener('resize',fitOrigin);
+    // telón de entrada (inicio): EIRO sobre negro, se va por arriba y sube la web. Una vez por visita.
+    var curtain=document.getElementById('curtain');
+    if(curtain){
+      if(root.classList.contains('no-intro')){curtain.classList.add('gone')}
+      else{
+        try{sessionStorage.setItem('eiro-intro','1')}catch(e){}
+        root.classList.add('intro');
+        setTimeout(function(){curtain.classList.add('gone');root.classList.remove('intro')},3400);
+      }
     }
 
     // portada: los mockups pasan como un GIF; se pausa con el botón, fuera de pantalla o con movimiento reducido

@@ -374,6 +374,11 @@ def hero_reel(p):
     return f'<div class="hero-reel" data-reel>{imgs}</div>'
 
 
+# El telón de entrada se salta con movimiento reducido o si ya se vio en esta visita (se decide antes de pintar).
+INTRO_HEAD = """<script>try{if(sessionStorage.getItem('eiro-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('no-intro')}catch(e){}</script>
+<noscript><style>.curtain{display:none}</style></noscript>"""
+
+
 # ---------- páginas ----------
 def home():
     p = ""
@@ -387,13 +392,9 @@ def home():
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-label="Portada">
     <div class="hero-frame">
+      <h1 class="hero-title"><span class="ht ht1">Estudio de branding</span> <span class="ht ht2">y contenido</span> <span class="ht ht3">para marcas</span> <span class="ht ht4">y eventos.</span></h1>
       {hero_reel(p)}
-      <div class="hero-copy">
-        <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
-        <div class="hero-ctas"><a class="bracket" href="trabajos/">Ver trabajos</a></div>
-      </div>
-      <p class="origin" id="origin" aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
+      <div class="hero-meta mono"><span>Buenos Aires, Argentina</span><a class="bracket" href="trabajos/">Ver trabajos</a><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></div>
     </div>
   </section>
 
@@ -415,7 +416,10 @@ def home():
 
 {cta_band(p)}
 </main>'''
-    write("index.html", ld + chrome(p, "", "Inicio") + body + footer(p))
+    curtain = f'''
+<div class="curtain" id="curtain" aria-hidden="true"><div class="ic"><div class="ic-in">{logo(p)}</div></div></div>'''
+    ld = ld.replace("</head>", INTRO_HEAD + "\n</head>")
+    write("index.html", ld + chrome(p, "", "Inicio") + curtain + body + footer(p))
 
 
 def trabajos():
@@ -647,13 +651,8 @@ def estudio():
     html = head(p, "Estudio | Eiro Studio", "Eiro viene de Gaiteiro. Un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Estudio</span>', 'Estudio', 'Eiro viene de Gaiteiro.')}
-  <section class="pad" aria-label="El nombre">
-    <div class="name-frame" data-reveal>
-      <p class="origin" id="origin" data-wait aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-    </div>
-  </section>
 
-  <section class="sec pad grid table-sec" aria-labelledby="t-quien" style="padding-top:var(--sec)">
+  <section class="sec pad grid table-sec" aria-labelledby="t-quien">
     <div class="studio-photo">{matias_photo(p)}</div>
     <div class="founder" data-reveal>
       <h2 class="h2" id="t-quien"><span>Quién está detrás</span><span class="gray">Matías Gaiteiro.</span></h2>
