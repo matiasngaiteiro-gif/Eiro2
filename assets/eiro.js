@@ -1,5 +1,5 @@
 /* EIRO · comportamiento compartido por todas las páginas.
-   Clave de acceso, hora de Buenos Aires, menú, GAITEIRO → EIRO, palabra que rota, revelados y sección actual. */
+   Clave de acceso, hora de Buenos Aires, menú, EIRO grande, revelados y sección actual. */
 (function(){
   var root=document.documentElement, RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches, started=false;
   var behind=[].slice.call(document.querySelectorAll('body > header, body > main, body > footer, body > .intro'));
@@ -39,14 +39,15 @@
   function start(){
     if(started) return; started=true;
 
-    // GAITEIRO: ocupa el ancho de su marco; después se borra GAIT y queda EIRO
+    // EIRO grande: ocupa el ancho de su marco
     var origin=document.getElementById('origin');
     if(origin){
       var fitOrigin=function(){
-        var probe=document.createElement('span'); probe.textContent='GAITEIRO';
+        var probe=document.createElement('span'); probe.textContent=origin.textContent.trim();
         probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;letter-spacing:-.05em;font:700 100px/1 '+getComputedStyle(origin).fontFamily;
         document.body.appendChild(probe); var ratio=probe.getBoundingClientRect().width/100; probe.remove();
-        var avail=origin.parentNode.clientWidth-2*parseFloat(getComputedStyle(origin).left);
+        var half=innerWidth>600&&origin.parentNode.querySelector('.hero-reel'); // en escritorio, EIRO ocupa la mitad libre (la otra mitad son los mockups)
+        var avail=origin.parentNode.clientWidth/(half?2:1)-2*(parseFloat(getComputedStyle(origin).left)||0);
         if(ratio>0) origin.style.fontSize=Math.min(380,Math.floor(avail/ratio))+'px';
       };
       var go=function(){fitOrigin();setTimeout(function(){origin.classList.add('is-in')},RM?0:500)};

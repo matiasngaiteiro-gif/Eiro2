@@ -193,7 +193,6 @@ def head(p, title, desc, path, casos=False):
 
 
 def chrome(p, page, where, pre=""):
-    links = "".join(f'<a href="{p}{slug}/"{" aria-current=\"page\"" if slug == page else ""}>{name}</a>' for slug, name in NAV if slug != "contacto")
     items = "".join(
         f'<li><a href="{p}{slug}/"{" aria-current=\"true\"" if slug == page else ""}><span class="mono">0{i+1}</span>{name}</a></li>'
         for i, (slug, name) in enumerate(NAV))
@@ -212,11 +211,17 @@ def chrome(p, page, where, pre=""):
   </div>
 </div>
 
-{pre}<header class="nav" id="barra">
-  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
-  <nav class="nav-links" aria-label="Secciones">{links}</nav>
-  <a class="btn accent nav-cta" href="{p}contacto/">Empezar un proyecto</a>
-  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
+<header class="bar" id="barra">
+  <div class="pod">
+    <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
+    <span class="where mono" id="where" aria-hidden="true">{where}</span>
+    <span class="dot" aria-hidden="true"></span>
+  </div>
+  <div class="bar-right">
+    <a class="btn accent" href="{p}contacto/">Hablemos</a>
+    <span class="clock mono" id="clock" aria-hidden="true">--:-- BUE</span>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
+  </div>
 </header>
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
@@ -237,19 +242,16 @@ def footer(p):
     pages = "".join(f'<a href="{p}{s}/">{n}</a>' for s, n in NAV)
     return f'''
 <footer>
-  <div class="close">
-    <h2 class="close-title">Tu marca está lista cuando vos lo estés.</h2>
-    <a class="close-cta" href="{p}contacto/">Empezar un proyecto <span aria-hidden="true">→</span></a>
+  <div class="foot-nav">
+    <div><span class="mono">Eiro Studio™</span><p>Creamos y cuidamos marcas. Desde Buenos Aires.</p></div>
+    <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
+    <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
-  <div class="foot-grid">
-    <div class="foot-talk"><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a></div>
-    <nav class="foot-links" aria-label="Pie"><a href="{p or './'}">Inicio</a>{pages}</nav>
-    <p class="foot-social mono"><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a> · <a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a></p>
-  </div>
+  <div class="foot-logo" aria-hidden="true">{logo(p)}</div>
   <div class="foot-bottom mono">
-    <a class="foot-mark" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
-    <span>Creamos y cuidamos marcas. Buenos Aires.</span>
     <span>© {date.today().year} Eiro Studio™</span>
+    <span>Hecho en Buenos Aires</span>
+    <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
 <a class="wa-fab" href="{WA_PROJ}" target="_blank" rel="noopener"><span aria-hidden="true">●</span> WhatsApp{SR_WA}</a>
@@ -365,15 +367,6 @@ def home():
               "Eiro es un estudio creativo de Buenos Aires. Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer.", "")
     org = open(os.path.join(ROOT, "tools", "org-ld.json"), encoding="utf-8").read().strip()  # datos del estudio para buscadores
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
-    # 1 · portada verde: pila de mockups en el centro (pasan como GIF) y una línea mono abajo
-    peeks = "".join(f'<span class="peek k{i}" style="background-image:url(img/mockups/{MOCKUPS[i][0]}-600.webp)"></span>' for i in (3, 2, 1))
-    intro = f'''
-<section class="intro" aria-label="Portada">
-  <div class="stack">{peeks}{hero_reel(p)}</div>
-  <p class="intro-tag mono">Estudio de branding<br>y contenido</p>
-  <p class="intro-meta mono"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></p>
-</section>
-'''
     big, small = (PUB + PUB)[0], (PUB + PUB)[1]
     def feat(pr, cls, sizes):
         zn, zalt = pr["zoom"]
@@ -381,13 +374,26 @@ def home():
                 f'<span class="feat-name">{pr["name"]}</span><span class="feat-tags mono">{pr["tags"]}</span></a>')
     soon = ('<div class="feat c" data-reveal><figure class="media"><img src="img/mockups/06-web-1200.webp" srcset="img/mockups/06-web-600.webp 600w, img/mockups/06-web-1200.webp 1200w" sizes="(max-width:820px) 100vw, 50vw" alt="Sitio web de Crisger" loading="lazy" decoding="async" width="1200" height="900"></figure>'
             '<span class="feat-name gray">Crisger (Próximamente)</span><span class="feat-tags mono">Branding · Manual de marca · Web</span></div>')
-    steps = "".join(f'<li class="proc-row" data-reveal><div class="proc-name"><span class="mono">Paso 0{i+1}</span><h3>{t}</h3></div><p>{d}</p></li>' for i, (t, d) in enumerate(STEPS))
+    _steps = "".join(f'<li class="proc-row" data-reveal><div class="proc-name"><span class="mono">Paso 0{i+1}</span><h3>{t}</h3></div><p>{d}</p></li>' for i, (t, d) in enumerate(STEPS))
     clients = '<span>El Calentón</span><span>Crisger</span><span>Extracto Importado</span><span>CER Entrenamientos</span>'
+    svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
     body = f'''
 <main id="top" tabindex="-1">
+  <section class="hero" data-label="Inicio" aria-label="Portada">
+    <div class="hero-frame">
+      {hero_reel(p)}
+      <div class="hero-copy">
+        <h1 class="hero-title">Estudio de branding y contenido para marcas y eventos.</h1>
+        <div class="hero-ctas"><a class="btn accent" href="{WA_PROJ}" target="_blank" rel="noopener">Escribinos por WhatsApp{SR_WA}</a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
+      </div>
+      <p class="origin" id="origin" aria-hidden="true">EIRO</p>
+      <div class="hero-meta mono"><span aria-hidden="true">Buenos Aires, Argentina</span><span class="reel-cap"><span id="reelCap" aria-hidden="true">{MOCKUPS[0][1]}</span><button type="button" class="reel-pause" data-reel-pause aria-pressed="false">Pausar</button></span></div>
+    </div>
+  </section>
+
   <!-- 2 · titular escalonado en las columnas, con una imagen chica entre las palabras -->
   <section class="lead pad" aria-labelledby="t-lead">
-    <h1 class="lead-title" id="t-lead"><span class="l1">Creamos y</span><span class="l2">cuidamos</span><span class="l-img" aria-hidden="true"><img src="img/mockups/04-bolsas-600.webp" alt="" width="600" height="450"></span><span class="l3">marcas</span></h1>
+    <h2 class="lead-title" id="t-lead"><span class="l1">Creamos y</span><span class="l2">cuidamos</span><span class="l-img" aria-hidden="true"><img src="img/mockups/04-bolsas-600.webp" alt="" width="600" height="450"></span><span class="l3">marcas</span></h2>
     <p class="lead-sub">Estudio de branding y contenido<br>para marcas y eventos.</p>
     <div class="trusted"><span class="mono">Confían en nosotros</span><div class="trusted-row">{clients}</div></div>
   </section>
@@ -400,24 +406,17 @@ def home():
     <a class="see-all" href="trabajos/">Ver todos los trabajos</a>
   </section>
 
-  <!-- 4 · filosofía -->
-  <section class="philo pad" aria-labelledby="t-philo">
-    <h2 class="philo-title" id="t-philo">Las marcas son historias</h2>
-    <div class="philo-text">
-      <p>Detrás de cada marca hay gente con una historia por contar. Nadie elige una marca por lógica: elige la que lo hace sentir algo.</p>
-      <p>Nosotros encontramos esa historia, la contamos bien y la cuidamos todos los meses.</p>
-      <a class="btn accent" href="contacto/">Empezar un proyecto</a>
+  <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
+    <div class="svc-side" data-reveal>
+      <h2 class="h2" id="t-servicios"><span>Qué hacemos</span><span class="gray">De la idea a la calle.</span></h2>
+      <a class="bracket" href="servicios/">Ver servicios</a>
     </div>
-  </section>
-
-  <!-- 5 · proceso en filas -->
-  <section class="proc pad" aria-labelledby="t-proc">
-    <h2 class="proc-label" id="t-proc">Proceso</h2>
-    <ol class="proc-list">{steps}</ol>
+    <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
 {testimonials_html()}
+{cta_band(p)}
 </main>'''
-    write("index.html", ld + chrome(p, "", "Inicio", pre=intro) + body + footer(p))
+    write("index.html", ld + chrome(p, "", "Inicio") + body + footer(p))
 
 
 def trabajos():
@@ -640,6 +639,7 @@ def servicios():
     <div class="table-head" data-reveal><h2 class="h2" id="t-faq"><span>Preguntas</span><span class="gray">Las que nos hacen siempre.</span></h2></div>
     <div class="faq" data-reveal>{faq}</div>
   </section>
+{cta_band(p)}
 </main>''' + footer(p)
     write("servicios/index.html", html)
 
@@ -653,16 +653,11 @@ def matias_photo(p):
 
 def estudio():
     p = "../"
-    html = head(p, "Estudio | Eiro Studio", "Eiro viene de Gaiteiro. Un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
+    html = head(p, "Estudio | Eiro Studio", "Eiro es un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Estudio</span>', 'Estudio', 'Eiro viene de Gaiteiro.')}
+{page_head(p, '<span>Estudio</span>', 'Estudio', 'Creamos y cuidamos marcas.')}
   <section class="pad manifesto" aria-label="Manifiesto">
     <p class="statement" data-reveal>Detrás de cada marca hay gente con una historia por contar. <span class="gray">Nosotros la creamos y la cuidamos.</span></p>
-  </section>
-  <section class="pad" aria-label="El nombre">
-    <div class="name-frame" data-reveal>
-      <p class="origin" id="origin" data-wait aria-hidden="true"><span class="cut"><span>G</span><span>A</span><span>I</span><span>T</span></span>EIRO</p>
-    </div>
   </section>
 
   <section class="sec pad grid table-sec" aria-labelledby="t-quien" style="padding-top:var(--sec)">
@@ -671,7 +666,6 @@ def estudio():
       <h2 class="h2" id="t-quien"><span>Quién está detrás</span><span class="gray">Matías Gaiteiro.</span></h2>
       <p class="founder-bio">Soy diseñador multimedial. Hace más de diez años que diseño marcas, coordino equipos de redes y llevo áreas de marketing.</p>
       <p class="founder-text">Estudié relaciones públicas y se nota: casi todos mis clientes llegaron por vínculos de años, y se quedaron. Cada proyecto lo encaro de cerca, con un equipo armado a medida.</p>
-      <blockquote class="founder-quote"><p>“No se me ocurría ningún nombre. Al final le borré una parte a mi apellido y quedó Eiro.”</p></blockquote>
       <dl class="founder-facts">
         <div><dt class="mono">Oficio</dt><dd>Más de 10 años</dd></div>
         <div><dt class="mono">Hace</dt><dd>Diseño, marketing y redes</dd></div>
@@ -694,6 +688,7 @@ def estudio():
       {steps_html()}
     </ol>
   </section>
+{cta_band(p, "Contanos tu idea.")}
 </main>''' + footer(p)
     write("estudio/index.html", html)
 
