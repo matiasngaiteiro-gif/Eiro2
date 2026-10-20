@@ -1,1 +1,4 @@
-ok crisger-web (2304, 1728)
+ok cer-descanso (2560, 1440)
+ok cer-checklist (2304, 1728)
+ok cer-coach (2304, 1728)
+ok cer-plan (2304, 1728)
