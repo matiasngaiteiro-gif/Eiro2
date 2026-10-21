@@ -143,6 +143,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero-title .hl{display:block}
 /* mayúsculas solo en los títulos que nombran una sección; las frases siguen en minúscula */
 .sec-row .h2>span:first-child,.svc-side .h2>span:first-child,.page-title>span:first-child{text-transform:uppercase;letter-spacing:-.01em}
+.svc-list a{text-transform:uppercase;letter-spacing:-.015em} /* la lista grande de servicios del inicio, también en mayúscula */
 .swap{position:relative;display:inline-block;vertical-align:top;white-space:nowrap}
 .swap-vis{display:inline-block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em;transition:width .6s var(--ease-out)}
 .swap-vis .ch{display:inline-block;white-space:pre}
@@ -749,3 +750,5 @@ html.intro .hero .reel-frame{animation-delay:1.95s;animation-duration:1.3s}html.
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 html.locked,html.locked body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media (max-width:360px){.svc-list a{font-size:27px}} /* en pantallas muy angostas, ACOMPAÑAMIENTO entra en una línea */
