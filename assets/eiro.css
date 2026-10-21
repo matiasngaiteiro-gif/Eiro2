@@ -30,8 +30,8 @@
   --fs-body:16px;
   --fs-small:14px;
   --fs-mono:12px;
-  --tr-xl:-.03em;     /* 64 px o más */
-  --tr-display:-.02em; /* 30 a 60 px */
+  --tr-xl:-.012em;     /* 64 px o más */
+  --tr-display:-.008em; /* 30 a 60 px */
   --tr-s:0em;        /* subtítulos de 20 a 24 px */
 
   /* espacio */
@@ -149,7 +149,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gutter);height:calc(100svh - var(--bar-h) - var(--gutter));min-height:560px;max-height:980px}
 .hero-copy{display:flex;flex-direction:column;justify-content:center;gap:clamp(20px,2.4vw,32px);padding:clamp(24px,3vw,48px) clamp(8px,2vw,40px) clamp(24px,3vw,48px) 0}
 .hero-kicker{color:var(--soft)}
-.hero-title{margin:0;font:300 clamp(36px,4.6vw,84px)/1.02 var(--display);letter-spacing:-.025em}
+.hero-title{margin:0;font:300 clamp(36px,4.6vw,84px)/1.02 var(--display);letter-spacing:-.012em}
 .hero-sub{max-width:34ch;color:var(--mute);font:300 clamp(17px,1.3vw,20px)/1.5 var(--sans)}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:10px}
 .hero-media{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--bg-2);cursor:pointer}
@@ -164,8 +164,8 @@ html.menu-open,html.menu-open body{overflow:hidden}
   .hero-ctas .btn{flex:1 1 auto;justify-content:center}
 }
 /* mayúsculas solo en los títulos que nombran una sección; las frases siguen en minúscula */
-.h2>span:first-child,.page-title>span:first-child,.values-statement>span:first-child{text-transform:uppercase;font-weight:600;letter-spacing:-.02em}
-.svc-list a{text-transform:uppercase;letter-spacing:-.015em} /* la lista grande de servicios del inicio, también en mayúscula */
+.h2>span:first-child,.page-title>span:first-child,.values-statement>span:first-child{text-transform:uppercase;font-weight:600;letter-spacing:-.005em}
+.svc-list a{text-transform:uppercase;letter-spacing:-.005em} /* la lista grande de servicios del inicio, también en mayúscula */
 .swap{position:relative;display:inline-block;vertical-align:top;white-space:nowrap}
 .swap-vis{display:inline-block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em;transition:width .6s var(--ease-out)}
 .swap-vis .ch{display:inline-block;white-space:pre}
@@ -419,14 +419,15 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 /* llamado a la acción a la manera de Chittco: frase grande, liviana, subrayada línea por línea; enlace con flecha */
 .cta{display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(18px,2.4vw,28px);max-width:1000px;margin:0 auto;padding-block:clamp(24px,5vw,80px)}
 .cta-kicker{color:var(--soft)}
-.cta-sub{max-width:44ch;color:var(--mute);font:300 clamp(17px,1.3vw,20px)/1.5 var(--sans)}
-.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:8px}
-.cta-title{font:300 var(--fs-statement)/1.18 var(--display);letter-spacing:var(--tr-display)}
-.cta-title span{display:table;margin:0 auto .08em;padding-bottom:.04em;border-bottom:2px solid currentColor}
+.cta-sub{max-width:36ch;text-wrap:balance;color:var(--mute);font:300 clamp(17px,1.3vw,20px)/1.5 var(--sans)}
+.cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px}
+.cta-actions .btn{padding-inline:22px}
+.cta-title{max-width:18ch;font:300 var(--fs-statement)/1.08 var(--display);letter-spacing:-.005em;text-wrap:balance}
+.cta-title span{display:block}
+.cta-title span+span{color:var(--mute)}
 .cta-link{display:inline-flex;align-items:center;gap:.6em;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:500 clamp(20px,1.8vw,28.43px)/1.2 var(--sans);letter-spacing:.01em;cursor:pointer;align-self:flex-end}
 .cta-link .arr{display:inline-block;color:var(--mute);transition:transform var(--dur-2) var(--ease-out),color var(--dur-1) var(--ease-out)}
 @media (hover:hover){.cta-link:hover .arr{transform:translateX(6px);color:var(--ink)}}
-@media (max-width:600px){.cta-actions .btn{flex:1 1 100%;justify-content:center}}
 /* llamado a la acción dentro de una página larga */
 .cta-inline{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin-top:clamp(40px,5vw,72px);padding:clamp(20px,2.6vw,32px);border-radius:10px;background:var(--bg-2)}
 .cta-inline p{max-width:46ch;font:300 clamp(19px,1.6vw,24px)/1.35 var(--sans)}
@@ -802,7 +803,7 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 /* servicios: para quién y cómo pedirlo */
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);margin-top:clamp(24px,4vw,48px)}
 .mode{display:flex;flex-direction:column;gap:12px;padding:clamp(20px,2.4vw,32px);border:1px solid var(--line);border-radius:12px;background:var(--bg-2)}
-.mode h3{font:600 clamp(22px,2vw,28px)/1.1 var(--display);letter-spacing:-.02em;text-transform:uppercase}
+.mode h3{font:600 clamp(22px,2vw,28px)/1.1 var(--display);letter-spacing:0;text-transform:uppercase}
 .mode p{color:var(--mute)}
 .mode ul{flex:1;margin:4px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
 .mode li{padding:3px 0;font:400 14px/1.4 var(--mono)}
@@ -815,7 +816,7 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 .svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--col-gap)}
 .svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px var(--col-gap);padding:28px 0 clamp(40px,5vw,72px);border-top:1px solid var(--line)}
 .svc>.mono{grid-column:1/-1;color:var(--soft)}
-.svc h3{grid-column:1/-1;font:600 clamp(36px,4.4vw,72px)/1 var(--display);letter-spacing:-.03em;text-transform:uppercase}
+.svc h3{grid-column:1/-1;font:600 clamp(36px,4.4vw,72px)/1 var(--display);letter-spacing:-.01em;text-transform:uppercase}
 .svc p{font:500 var(--fs-body)/1.45 var(--sans);max-width:34ch}
 .svc ul{grid-column:2;margin-top:4px;color:var(--mute);font:400 14px/1.4 var(--mono)}
 .svc li{padding:5px 0;border-top:1px solid var(--line)}
@@ -826,3 +827,4 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 .founder.solo{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--col-gap)}
 .founder.solo>.h2{grid-row:span 4}
 @media (max-width:820px){.founder.solo{grid-template-columns:1fr}}
+@media (max-width:600px){.cta-actions{flex-direction:column;align-items:center}.cta-actions .btn{min-width:250px;justify-content:center}}
