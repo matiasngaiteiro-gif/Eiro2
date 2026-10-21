@@ -216,8 +216,7 @@ def chrome(p, page, where):
 <a class="skip" href="#top">Saltar al contenido</a>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
-    {iso(p, "iso gate-iso")}
-    {logo(p, label="Eiro")}
+    <svg class="iso gate-iso" viewBox="0 0 680 407" role="img" aria-label="Eiro"><use href="{p}img/sprite.svg#i-iso"/></svg>
     <form id="gateForm" autocomplete="off">
       <label for="gateKey" class="sr">Clave</label>
       <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
@@ -255,7 +254,7 @@ def footer(p):
     return f'''
 <footer>
   <div class="foot-nav">
-    <div>{iso(p, "iso foot-iso")}<span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
+    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>

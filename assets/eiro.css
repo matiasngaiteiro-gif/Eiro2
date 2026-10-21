@@ -275,7 +275,6 @@ html.player-open .wa-orb{display:none}
 /* pie */
 footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + var(--gutter)) max(var(--gutter),env(safe-area-inset-left,0px))}
 .foot-logo{color:var(--ink)}
-.foot-iso{width:76px;margin-bottom:20px;color:var(--ink)}
 .foot-logo .logo{width:100%}
 .foot-bottom{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap);row-gap:8px;margin-top:var(--gutter);color:var(--soft)}
 .foot-bottom>*:nth-child(1){grid-column:1/5}
@@ -735,7 +734,7 @@ html.intro .hero .reel-frame{animation-delay:1.95s;animation-duration:1.3s}html.
 .gate[hidden],html.unlocked .gate{display:none!important}
 .gate-box{display:flex;flex-direction:column;align-items:center;gap:40px;width:100%}
 .gate-box .logo{width:clamp(140px,22vw,280px);color:var(--accent)}
-.gate-box .gate-iso{width:clamp(64px,7vw,96px);margin-bottom:-16px;color:var(--accent)}
+.gate-box .gate-iso{width:clamp(150px,20vw,240px);color:var(--accent)} /* el isologo va solo: nunca junto a EIRO */
 .gate form{display:flex;align-items:center;width:min(300px,100%);background:var(--bg-2);border-radius:4px;padding:4px;transition:box-shadow var(--dur-2) var(--ease-out)}
 .gate form:focus-within{box-shadow:0 0 0 1px var(--mute)}
 .gate form.err{box-shadow:0 0 0 1px #E5483B;animation:shake var(--dur-2) var(--ease-out)}
