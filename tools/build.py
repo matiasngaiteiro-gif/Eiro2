@@ -241,8 +241,8 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 
 
 def brand(p):
-    """isologo y EIRO STUDIO: van juntos en la barra, cada uno en su espacio (con una línea en el medio)"""
-    return f'{iso(p)}<span class="brand-rule" aria-hidden="true"></span><span class="brand-word">{logo(p)}<span class="mono">Studio</span></span>'
+    """logo completo: isologo en menta + EIROSTUDIO (img/sprite.svg#i-lockup, vectorizado del archivo de Matías)"""
+    return f'<svg class="lockup" viewBox="0 0 492.9 62.3" aria-hidden="true" focusable="false"><use href="{p}img/sprite.svg#i-lockup"/></svg>'
 
 
 def chrome(p, page, where):
