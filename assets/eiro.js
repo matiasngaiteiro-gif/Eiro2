@@ -61,6 +61,7 @@
   var brief=document.getElementById('brief');
   if(brief){
     var msg=brief.querySelector('textarea'),nameIn=brief.querySelector('[name=nombre]'),err=document.getElementById('brief-err');
+    try{var pre=new URLSearchParams(location.search).get('necesito');if(pre)[].slice.call(brief.querySelectorAll('[name=necesito]')).forEach(function(x){if(x.value===pre)x.checked=true})}catch(e){}
     [].slice.call(brief.querySelectorAll('[data-fill]')).forEach(function(b){
       b.addEventListener('click',function(){var t=b.getAttribute('data-fill');if(msg.value.indexOf(t)<0)msg.value=(msg.value.trim()?msg.value.trim()+' ':'')+t;msg.focus()});
     });
@@ -220,4 +221,13 @@
   }
 
   if(root.classList.contains('unlocked')||!gate){open()}else{root.classList.add('locked');setInert(true);setTimeout(function(){key.focus()},100)}
+})();
+
+// el botón de WhatsApp se esconde sobre el inicio y sobre el cierre, donde ya hay botones
+(function(){
+  var orb=document.getElementById('waOrb');if(!orb||!('IntersectionObserver' in window))return;
+  var zones=[].slice.call(document.querySelectorAll('.hero,.cta,#brief'));if(!zones.length)return;
+  var on=new Set();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?on.add(e.target):on.delete(e.target)});document.documentElement.classList.toggle('wa-hide',on.size>0)},{threshold:.25});
+  zones.forEach(function(z){io.observe(z)});
 })();
