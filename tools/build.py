@@ -65,7 +65,7 @@ def logo(p, cls="logo", label=None):
     return f'<svg class="{cls}" viewBox="0 0 3850 1351" {a}><use href="{p}img/sprite.svg#i-logo"/></svg>'
 
 
-def iso(p, cls="iso"):
+def iso(p, cls="isologo"):
     """isologo: el globo con la e (img/sprite.svg#i-iso, calcado del original en tools/isologo-original.png)"""
     return f'<svg class="{cls}" viewBox="0 0 680 407" aria-hidden="true" focusable="false"><use href="{p}img/sprite.svg#i-iso"/></svg>'
 
@@ -216,7 +216,7 @@ def chrome(p, page, where):
 <a class="skip" href="#top">Saltar al contenido</a>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
-    <svg class="iso gate-iso" viewBox="0 0 680 407" role="img" aria-label="Eiro"><use href="{p}img/sprite.svg#i-iso"/></svg>
+    {logo(p, label="Eiro")}
     <form id="gateForm" autocomplete="off">
       <label for="gateKey" class="sr">Clave</label>
       <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
@@ -227,7 +227,7 @@ def chrome(p, page, where):
 </div>
 
 <header class="bar" id="barra">
-  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{logo(p)}</a>
+  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{iso(p)}</a>
   <nav class="bar-nav" aria-label="Principal"><ul>{links}</ul></nav>
   <div class="bar-right">
     <a class="btn accent" href="{p}contacto/#formulario">Hablemos</a>
@@ -237,7 +237,7 @@ def chrome(p, page, where):
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
   <div class="menu-top">
-    <a href="{p or './'}" aria-label="Ir al inicio">{logo(p)}</a>
+    <a href="{p or './'}" aria-label="Ir al inicio">{iso(p)}</a>
     <button class="menu-btn" id="menuClose" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6"/></svg></button>
   </div>
   <nav aria-label="Menú"><ul>{items}</ul></nav>
