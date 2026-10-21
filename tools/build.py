@@ -65,6 +65,11 @@ def logo(p, cls="logo", label=None):
     return f'<svg class="{cls}" viewBox="0 0 3850 1351" {a}><use href="{p}img/sprite.svg#i-logo"/></svg>'
 
 
+def iso(p, cls="iso"):
+    """isologo: el globo con la e (img/sprite.svg#i-iso, calcado del original en tools/isologo-original.png)"""
+    return f'<svg class="{cls}" viewBox="0 0 680 407" aria-hidden="true" focusable="false"><use href="{p}img/sprite.svg#i-iso"/></svg>'
+
+
 def pic(p, name, sizes, alt, w, h, style="", eager=False):
     srcs = {"el-calenton": (800, 1400), "crisger": (600, 928), "estudio": (600, 928)}[name]
     srcset = ", ".join(f"{p}img/{name}-{s}.webp {s}w" for s in srcs)
@@ -186,6 +191,7 @@ def head(p, title, desc, path, casos=False):
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{p}favicon.ico" sizes="32x32">
+<link rel="icon" type="image/svg+xml" href="{p}favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="{p}img/icon-192.png">
 <link rel="apple-touch-icon" href="{p}apple-touch-icon.png">
 <link rel="manifest" href="{p}site.webmanifest">
@@ -210,6 +216,7 @@ def chrome(p, page, where):
 <a class="skip" href="#top">Saltar al contenido</a>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
+    {iso(p, "iso gate-iso")}
     {logo(p, label="Eiro")}
     <form id="gateForm" autocomplete="off">
       <label for="gateKey" class="sr">Clave</label>
@@ -248,7 +255,7 @@ def footer(p):
     return f'''
 <footer>
   <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
+    <div>{iso(p, "iso foot-iso")}<span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
