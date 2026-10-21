@@ -116,6 +116,8 @@
         setTimeout(function(){vis.style.width=measure(next)+'px';paintW(next,'in')},450+vis.children.length*35);
       },2800);
       addEventListener('resize',function(){vis.style.width=measure(vis.textContent)+'px'});
+      // la tipografía llega después: se vuelve a medir para que la palabra no quede cortada
+      if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){vis.style.width=measure(vis.textContent)+'px'});
     }
 
     // reel: el círculo "Ver reel" sigue al cursor dentro del video; al tocarlo se abre a pantalla completa con sonido

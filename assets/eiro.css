@@ -140,7 +140,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 
 /* portada: título grande con la última palabra que cambia letra por letra y, abajo, el reel */
 .hero{padding:calc(env(safe-area-inset-top,0px) + var(--bar-h) + clamp(56px,9vw,150px)) max(var(--gutter),env(safe-area-inset-right,0px)) var(--sec) max(var(--gutter),env(safe-area-inset-left,0px))}
-.hero-title{margin:0 0 clamp(40px,5vw,80px);font:300 clamp(36px,7.4vw,140px)/.98 var(--display);letter-spacing:-.035em}
+.hero-title{margin:0 0 clamp(40px,5vw,80px);font:300 clamp(36px,7.4vw,140px)/.98 var(--display);letter-spacing:-.025em}
 .hero-title .hl{display:block}
 /* mayúsculas solo en los títulos que nombran una sección; las frases siguen en minúscula */
 .sec-row .h2>span:first-child,.svc-side .h2>span:first-child,.page-title>span:first-child{text-transform:uppercase;font-weight:600;letter-spacing:-.02em}
