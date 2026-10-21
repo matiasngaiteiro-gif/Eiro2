@@ -56,7 +56,7 @@ def _ver(*names):
     return h.hexdigest()[:8]
 
 
-VER = _ver("assets/eiro.css", "assets/eiro.js", "assets/eiro-bn.css")
+VER = _ver("assets/eiro.css", "assets/eiro.js", "assets/eiro-bn.css", "assets/eiro-claude.css")
 
 NAV = [("trabajos", "Trabajos"), ("servicios", "Servicios"), ("estudio", "Estudio"), ("contacto", "Contacto")]
 
@@ -869,17 +869,24 @@ def _bn_attr(m):
     return f'{name}="{val}"'
 
 
-def variant_bn():
+def variant(out_dir, css, logo_iso=False):
+    """copia la web en otra carpeta con una hoja de estilos encima (solo cambia la identidad visual, no la estructura)"""
     import re
     for path in WRITTEN:
-        if path.startswith(BN_DIR + "/"):
+        if path.startswith(("pruebacolor/", "pruebaclaude/")):
             continue
         html = open(os.path.join(ROOT, path), encoding="utf-8").read()
         html = re.sub(r'\b(href|src|srcset|imagesrcset|poster)="([^"]*)"', _bn_attr, html)
-        depth = path.count("/") + 1
-        up = "../" * depth
-        html = html.replace("</head>", f'<meta name="robots" content="noindex">\n<link rel="stylesheet" href="{up}assets/eiro-bn.css?v={VER}">\n</head>', 1)
-        write(f"{BN_DIR}/{path}", html)
+        if logo_iso:  # en la barra va solo el isologo
+            html = re.sub(r'<svg class="lockup".*?</svg>', lambda m: iso("", "isologo brand-iso"), html)
+        up = "../" * (path.count("/") + 1)
+        html = html.replace("</head>", f'<meta name="robots" content="noindex">\n<link rel="stylesheet" href="{up}assets/{css}?v={VER}">\n</head>', 1)
+        write(f"{out_dir}/{path}", html)
+
+
+def variant_bn():
+    variant(BN_DIR, "eiro-bn.css")
+    variant("pruebaclaude", "eiro-claude.css", logo_iso=True)  # identidad cálida: crema, casi negro y un naranja arcilla
 
 
 if __name__ == "__main__":
@@ -888,6 +895,4 @@ if __name__ == "__main__":
         caso(i, pr)
     sitemap()
     variant_bn()
-    import sys; sys.path.insert(0, os.path.dirname(__file__))
-    import build_claude; build_claude.run()  # /pruebaclaude
     print("ok")
