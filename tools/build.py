@@ -171,10 +171,26 @@ FAQ = [("¿Cuánto tarda un proyecto?", "Depende del alcance. Antes de arrancar 
 
 
 # ---------- piezas comunes ----------
-def head(p, title, desc, path, casos=False):
+CRUMB_NAMES = {"trabajos": "Trabajos", "servicios": "Servicios", "estudio": "Estudio", "contacto": "Contacto"}
+
+
+def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
     url = SITE + path
-    ld = {"@context": "https://schema.org", "@type": "WebPage", "name": title, "url": url, "inLanguage": "es-AR",
-          "isPartOf": {"@type": "WebSite", "name": "Eiro Studio", "url": SITE}}
+    page = {"@type": "WebPage", "name": title, "url": url, "inLanguage": "es-AR", "description": desc,
+            "isPartOf": {"@type": "WebSite", "name": "Eiro Studio", "url": SITE}}
+    graph = [page]
+    parts = [x for x in path.strip("/").split("/") if x]
+    if parts:   # migas de pan para buscadores
+        items = [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": SITE}]
+        acc = ""
+        for k, part in enumerate(parts):
+            acc += part + "/"
+            name = CRUMB_NAMES.get(part) or next((pr["name"] for pr in PROJECTS if pr["slug"] == part), part)
+            items.append({"@type": "ListItem", "position": k + 2, "name": name, "item": SITE + acc})
+        graph.append({"@type": "BreadcrumbList", "itemListElement": items})
+    graph += extra_ld or []
+    ld = {"@context": "https://schema.org", "@graph": graph}
+    pre = f'\n<link rel="preload" as="image" href="{preload[0]}" imagesrcset="{preload[1]}" imagesizes="{preload[2]}" fetchpriority="high">' if preload else ""
     return f'''<!doctype html>
 <html lang="es-AR">
 <head>
@@ -195,7 +211,11 @@ def head(p, title, desc, path, casos=False):
 <meta property="og:image" content="{SITE}img/og-eiro.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Eiro Studio, estudio de branding en Buenos Aires">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{SITE}img/og-eiro.jpg">
 <link rel="icon" href="{p}favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="{p}favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="{p}img/icon-192.png">
@@ -203,12 +223,10 @@ def head(p, title, desc, path, casos=False):
 <link rel="manifest" href="{p}site.webmanifest">
 {{LD}}
 <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}}catch(e){{}}</script>
-<link rel="preconnect" href="https://use.typekit.net" crossorigin>
-<link rel="preconnect" href="https://p.typekit.net" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+{"<link rel=\"preconnect\" href=\"https://use.typekit.net\" crossorigin>" if casos else ""}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&family=Roboto+Mono:wght@300;400&display=swap">
-<link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}
+{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT}.css"><link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}{pre}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
 
@@ -331,11 +349,21 @@ def cta_band(p, lines=("Si tu marca tiene algo para contar,", "empecemos por ac�
     return f'''
   <section class="pad sec cta-sec" aria-labelledby="t-cta">
     <div class="cta" data-reveal>
+      <p class="mono cta-kicker">Hablemos</p>
       <h2 class="cta-title" id="t-cta">{spans}</h2>
-      <a class="cta-link" href="{p}contacto/#formulario">Contanos tu proyecto <span class="arr" aria-hidden="true">→</span></a>
+      <p class="cta-sub">Contanos qué necesitás en un minuto. Respondemos rápido y sin compromiso.</p>
+      <div class="cta-actions">
+        <a class="btn accent big" href="{p}contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a>
+        <a class="btn ghost big" href="{WA_PROJ}" target="_blank" rel="noopener">{icon(WA_PATH)}WhatsApp{SR_WA}</a>
+      </div>
     </div>
-    {social_btns()}
   </section>'''
+
+
+def cta_inline(p, text, btn="Pedí tu propuesta"):
+    """llamado a la acción en medio de una página larga"""
+    return (f'<div class="cta-inline" data-reveal><p>{text}</p>'
+            f'<a class="btn accent big" href="{p}contacto/#formulario">{btn} <span aria-hidden="true">→</span></a></div>')
 
 
 def testimonials_html():
@@ -343,20 +371,20 @@ def testimonials_html():
     note = "" if TESTIMONIOS_REALES else '<p class="t-note mono">Testimonios de ejemplo. Se reemplazan por los reales.</p>'
     n_t = len(TESTIMONIALS)
     slides = "".join(
-        f'<figure class="tq-slide" role="group" aria-roledescription="testimonio" aria-label="{i+1} de {n_t}"{"" if i == 0 else " hidden"}>'
+        f'<figure class="tq-slide" role="group" aria-roledescription="testimonio" aria-label="{i+1} de {n_t}">'
         f'<blockquote><p>“{q}”</p></blockquote>'
-        f'<figcaption><span class="tq-org">{r.split(" · ")[-1]}</span><span class="tq-who"><b>{n}</b> {r.split(" · ")[0]}</span></figcaption></figure>'
+        f'<figcaption><span class="tq-who"><b>{n}</b> {r.split(" · ")[0]}</span><span class="tq-org">{r.split(" · ")[-1]}</span></figcaption></figure>'
         for i, (q, n, r) in enumerate(TESTIMONIALS))
     bars = "".join(f'<i{" class=\"on\"" if i == 0 else ""}></i>' for i in range(n_t))
     return f'''
-  <section class="sec pad" data-label="Clientes" aria-labelledby="t-clientes">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span></h2>{note}</div>
-    <div class="tq" data-tq data-reveal aria-roledescription="carrusel" aria-label="Testimonios">
-      {slides}
+  <section class="sec pad tq-sec" data-label="Clientes" aria-labelledby="t-clientes">
+    <div class="sec-row centered" data-reveal><h2 class="h2" id="t-clientes"><span>Clientes</span></h2>{note}</div>
+    <div class="tq-box" data-tq data-reveal aria-roledescription="carrusel" aria-label="Testimonios">
+      <div class="tq-track" tabindex="0" aria-label="Testimonios: deslizá o usá las flechas">{slides}</div>
       <div class="tq-nav">
+        <button type="button" data-tq-prev aria-label="Testimonio anterior">←</button>
         <span class="tq-count" aria-live="polite"><span data-tq-n>1</span>/{n_t}</span>
         <span class="tq-bars" aria-hidden="true">{bars}</span>
-        <button type="button" data-tq-prev aria-label="Testimonio anterior">←</button>
         <button type="button" data-tq-next aria-label="Testimonio siguiente">→</button>
       </div>
     </div>
@@ -375,16 +403,32 @@ INTRO_HEAD = """<script>try{if(sessionStorage.getItem('eiro-intro')||matchMedia(
 <noscript><style>.curtain{display:none}</style></noscript>"""
 
 
-# Portada: título con la última palabra que cambia y, abajo, el reel.
+# Portada: a la izquierda la frase (con la última palabra que cambia) y los botones; a la derecha los mockups en modo GIF.
+# Tocar los mockups abre el reel a pantalla completa con sonido.
+MOCKUPS = [
+    ("01-tarjetas", "Crisger: tarjetas personales"), ("02-papeleria", "Crisger: papelería"),
+    ("03-credencial", "Crisger: credencial"), ("04-bolsas", "Crisger: bolsas"),
+    ("05-redes", "Crisger: redes sociales"), ("06-web", "Crisger: sitio web"),
+    ("07-via-publica", "Crisger: vía pública"), ("08-etiquetas", "Crisger: etiquetas"),
+    ("09-carpeta", "Crisger: carpeta y presupuesto"), ("10-puerta", "Crisger: vinilo en puerta"),
+]
+
+
+def hero_media(p):
+    imgs = "".join(
+        f'<img src="{p}img/mockups/{n}-1200.webp" srcset="{p}img/mockups/{n}-600.webp 600w, {p}img/mockups/{n}-1200.webp 1200w" '
+        f'sizes="(max-width:820px) 100vw, 50vw" width="1200" height="900" alt="{cap}" decoding="async"'
+        f'{" class=\"on\" fetchpriority=\"high\"" if i == 0 else " loading=\"lazy\""}>' for i, (n, cap) in enumerate(MOCKUPS))
+    return f'''<div class="hero-media" data-player data-reel>
+        {imgs}
+        <button type="button" class="play-orb" data-play aria-haspopup="dialog"><span>Ver reel</span></button>
+        <button type="button" class="reel-pause mono" data-reel-pause aria-pressed="false">Pausar</button>
+      </div>'''
+
+
+# Reel a pantalla completa (provisorio, armado con los mockups; se reemplaza por img/reel/reel.mp4).
 # El reel es un video provisorio armado con los mockups; se reemplaza por img/reel/reel.mp4 (el video de Matías) sin tocar nada más.
 HERO_WORDS = ["inolvidables", "auténticas", "deseadas", "con historia", "que crecen"]
-
-
-def reel_frame(p):
-    return f'''<div class="reel-frame" data-player>
-      <video class="reel-preview" src="{p}img/reel/reel.mp4" poster="{p}img/reel/poster.jpg" muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video>
-      <button type="button" class="play-orb" data-play aria-haspopup="dialog"><span>Ver reel</span></button>
-    </div>'''
 
 
 def reel_player(p):
@@ -400,15 +444,24 @@ def home():
     p = ""
     cards = "\n      ".join(work_card(p, pr) for pr in PUB)
     svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
-    ld = head(p, "Eiro Studio | Estudio creativo de branding en Buenos Aires",
-              "Eiro es un estudio creativo de Buenos Aires. Estrategia, identidad, digital, contenido y eventos para marcas con ganas de crecer.", "")
+    m0 = MOCKUPS[0][0]
+    ld = head(p, "Eiro Studio | Estudio de branding y contenido en Buenos Aires",
+              "Estudio de branding en Buenos Aires: identidad visual, manual de marca, redes, web y branding de eventos para marcas que quieren crecer. Pedí tu propuesta.", "",
+              preload=(f"img/mockups/{m0}-1200.webp", f"img/mockups/{m0}-600.webp 600w, img/mockups/{m0}-1200.webp 1200w", "(max-width:820px) 100vw, 50vw"))
     org = open(os.path.join(ROOT, "tools", "org-ld.json"), encoding="utf-8").read().strip()  # datos del estudio para buscadores
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
     body = f'''
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-labelledby="t-hero">
-    <h1 class="hero-title" id="t-hero"><span class="hl">Estudio de branding</span> <span class="hl">para marcas <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
-    {reel_frame(p)}
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-kicker mono">Estudio creativo · Buenos Aires</p>
+        <h1 class="hero-title" id="t-hero"><span class="hl">Estudio de branding</span> <span class="hl">para marcas <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
+        <p class="hero-sub">Identidad, contenido y eventos para marcas que quieren crecer.</p>
+        <div class="hero-ctas"><a class="btn accent big" href="contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a><a class="btn ghost big" href="trabajos/">Ver trabajos</a></div>
+      </div>
+      {hero_media(p)}
+    </div>
   </section>
 
   <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
@@ -419,10 +472,11 @@ def home():
   </section>
 {testimonials_html()}
 
-  <section class="sec pad grid" data-label="Servicios" aria-labelledby="t-servicios">
+  <section class="sec pad grid tone-paper" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
       <h2 class="h2" id="t-servicios"><span>Qué hacemos</span></h2>
-      <a class="bracket" href="servicios/">Ver servicios</a>
+      <p>Por proyecto o todo el año. Armamos el equipo justo para lo que necesita tu marca.</p>
+      <a class="btn accent" href="servicios/">Ver servicios</a>
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
@@ -438,7 +492,7 @@ def home():
 def trabajos():
     p = "../"
     cards = "\n      ".join(work_card(p, pr) for pr in PUB)
-    html = head(p, "Trabajos | Eiro Studio", "Proyectos de Eiro Studio: identidad, contenido y eventos para marcas de Argentina.", "trabajos/") + chrome(p, "trabajos", "Trabajos") + f'''
+    html = head(p, "Trabajos de branding y contenido | Eiro Studio", "Casos de Eiro Studio: identidad visual, contenido para redes y branding de eventos para marcas de Argentina.", "trabajos/") + chrome(p, "trabajos", "Trabajos") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Trabajos</span>', 'Trabajos', 'Marcas que crecen con nosotros.', None)}
   <section class="sec pad" aria-label="Proyectos">
@@ -447,6 +501,7 @@ def trabajos():
     </div>
     <p class="cap mono" style="margin-top:32px;color:var(--soft)">Hay más proyectos. Te los mostramos cuando hablemos.</p>
   </section>
+{cta_band(p)}
 </main>''' + footer(p)
     write("trabajos/index.html", html)
 
@@ -633,14 +688,17 @@ def caso(i, pr):
 def servicios():
     p = "../"
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
-    html = head(p, "Servicios | Eiro Studio", "Estrategia, identidad, digital, contenido, eventos y acompañamiento. Por proyecto o todo el año.", "servicios/") + chrome(p, "servicios", "Servicios") + f'''
+    html = head(p, "Servicios de branding, identidad y contenido | Eiro Studio", "Estrategia, identidad visual, manual de marca, diseño web, contenido para redes y branding de eventos en Buenos Aires. Por proyecto o todo el año.", "servicios/",
+                extra_ld=[{"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
+                          {"@type": "ItemList", "name": "Servicios de Eiro Studio", "itemListElement": [{"@type": "ListItem", "position": i + 1, "item": {"@type": "Service", "name": n, "description": l, "provider": {"@id": SITE + "#estudio"}, "areaServed": "AR"}} for i, (_, n, l, _) in enumerate(SERVICES)]}]) + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Servicios</span>', 'Qué hacemos', '', 'Por proyecto o todo el año.')}
-  <section class="sec pad grid table-sec" aria-label="Áreas de trabajo">
+  <section class="sec pad grid table-sec tone-paper" aria-label="Áreas de trabajo">
     <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
     <div class="rows">
       {rows_services()}
     </div>
+    {cta_inline(p, "¿No sabés cuál necesitás? Contanos tu idea y te armamos una propuesta a medida.")}
   </section>
 
   <section class="sec pad grid table-sec" aria-labelledby="t-faq">
@@ -681,18 +739,19 @@ def estudio():
     </div>
   </section>
 
-  <section class="sec pad grid" aria-labelledby="t-valores">
+  <section class="sec pad grid tone-paper" aria-labelledby="t-valores">
     <h2 class="values-statement" id="t-valores" data-reveal><span>Nuestros valores.</span><span class="gray">Con optimismo.</span><span class="gray">En equipo.</span><span class="gray">Con oficio.</span></h2>
     <div class="values">
       {values_html()}
     </div>
   </section>
 
-  <section class="sec pad grid" aria-labelledby="t-proceso">
+  <section class="sec pad grid tone-monte" aria-labelledby="t-proceso">
     <h2 class="h2" id="t-proceso" data-reveal style="grid-column:1/-1"><span>Cómo trabajamos</span><span class="gray">Cuatro pasos, cero sorpresas.</span></h2>
     <ol class="steps">
       {steps_html()}
     </ol>
+    {cta_inline(p, "Primer paso: un café y tu idea. Sin compromiso.", "Agendemos un café")}
   </section>
 {cta_band(p)}
 </main>''' + footer(p)
@@ -733,11 +792,11 @@ def brief_form():
 
 def contacto():
     p = "../"
-    html = head(p, "Contacto | Eiro Studio", "Escribinos por WhatsApp y lo charlamos. Eiro Studio, Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
+    html = head(p, "Contacto: pedí tu propuesta | Eiro Studio", "Contanos tu proyecto en un minuto y te respondemos por WhatsApp. Eiro Studio, estudio de branding en Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Contacto</span>', 'Contacto', 'Hagamos algo bueno juntos.', None)}
 {brief_form()}
-  <section class="sec pad grid table-sec" aria-label="Otras formas de contacto">
+  <section class="sec pad grid table-sec tone-monte" aria-label="Otras formas de contacto">
     <div class="hello" data-reveal>
       <h2 class="h2"><span>Otras formas</span><span class="gray">Si preferís escribir directo.</span></h2>
       {social_btns()}
