@@ -133,28 +133,20 @@ PROJECTS = [
 PUB = [pr for pr in PROJECTS if pr.get("publicado")]  # casos visibles en la web
 
 SERVICES = [
-    ("estrategia", "Estrategia", "Entendemos antes de diseñar.", ["Posicionamiento", "Naming", "Tono de voz"]),
-    ("identidad", "Identidad", "Marcas que se reconocen a una cuadra.", ["Identidad visual", "Manual de marca", "Packaging"]),
-    ("digital", "Digital", "Tu marca, donde está tu público.", ["Diseño web", "E-commerce", "Motion"]),
-    ("contenido", "Producción de contenido", "Planificación, producción y publicación.", ["Planificación editorial", "Gestión de redes", "Foto, video y UGC"]),
-    ("eventos", "Branding de eventos", "Identidad y campaña para cada edición.", ["Sistema gráfico por edición", "Campaña y teasers de lanzamiento", "Contenido para pantallas LED"]),
-    ("acompanamiento", "Acompañamiento", "Un equipo creativo, sin armarlo adentro.", ["Dirección creativa externa", "Diseño mensual", "Gestión de marketing"]),
+    ("marca", "Marca", "Para arrancar o renovarse: definimos quién sos y cómo te ves en todos lados.",
+     ["Estrategia y naming", "Identidad visual", "Manual de marca", "Packaging y papelería"]),
+    ("contenido", "Contenido", "Para estar presentes todas las semanas, sin improvisar.",
+     ["Planificación editorial", "Gestión de redes", "Foto, video y UGC", "Campañas"]),
+    ("eventos", "Eventos", "Para fiestas, festivales y productoras: una identidad para cada edición.",
+     ["Sistema gráfico por edición", "Teasers de line up", "Pantallas LED", "Vía pública y redes"]),
+    ("web", "Web", "Para vender o recibir consultas desde tu sitio.",
+     ["Sitios y landings", "E-commerce", "Apps web", "Motion"]),
 ]
 
-# para quién es cada servicio y qué opción del formulario queda marcada al pedirlo
-SERVICE_FIT = {
-    "estrategia": ("Marcas que arrancan, o que no saben bien cómo contarse.", "Identidad de marca"),
-    "identidad": ("Negocios que necesitan verse profesionales y parejos en todos lados.", "Identidad de marca"),
-    "digital": ("Marcas que quieren vender o recibir consultas desde la web.", "Web o app"),
-    "contenido": ("Marcas que tienen que estar presentes en redes todas las semanas.", "Redes y contenido"),
-    "eventos": ("Fiestas, festivales y productoras con una edición en camino.", "Branding de un evento"),
-    "acompanamiento": ("Empresas que necesitan un área creativa sin sumar gente.", "Redes y contenido"),
-}
-
 # formas de trabajar (sin precios: se cotiza cada caso)
-MODES = [("Proyecto", "Para lanzar o renovar una marca.", ["Presupuesto cerrado", "Calendario por escrito", "Entrega de archivos y manual"]),
-         ("Abono mensual", "Para tener un equipo creativo todo el año.", ["Fee mensual fijo", "Planificación mes a mes", "Prioridad en los tiempos"]),
-         ("Pieza suelta", "Para algo puntual que no puede esperar.", ["Una pieza o una campaña", "Presupuesto en el día", "Sin compromiso de continuidad"])]
+MODES = [("Proyecto", "Para lanzar o renovar una marca.", ["Presupuesto cerrado", "Calendario por escrito", "Archivos y manual de uso"]),
+         ("Abono mensual", "Un equipo creativo todo el año, sin sumar gente.", ["Monto fijo por mes", "Planificación mes a mes", "Prioridad en los tiempos"]),
+         ("Pieza suelta", "Para algo puntual que no puede esperar.", ["Una pieza o una campaña", "Presupuesto en el día", "Sin compromiso"])]
 
 # TESTIMONIOS DE EJEMPLO: son simulados para ver el diseño. Reemplazar por testimonios reales
 # (texto, nombre, rol) y poner TESTIMONIOS_REALES = True para que se quite la marca "Ejemplo".
@@ -181,9 +173,8 @@ VALUES = [("Optimismo", "Creemos en tu marca antes de que el mundo la conozca.")
           ("Equipo", "Tu ritmo, tus prioridades, nuestro proceso."),
           ("Oficio", "Cuidamos el detalle donde nadie mira.")]
 
-FAQ = [("¿Cuánto tarda un proyecto?", "Depende del alcance. Antes de arrancar te pasamos un calendario."),
-       ("¿Cómo se cobra?", "Por proyecto, con presupuesto cerrado, o con un fee mensual si te acompañamos todo el año."),
-       ("¿Puedo pedir una sola pieza?", "Sí. Podés sumar una sola pieza o armar el equipo completo."),
+FAQ = [("¿Cuánto tarda un proyecto?", "Depende del alcance. Antes de arrancar te pasamos un calendario por escrito."),
+       ("¿Cómo se cobra?", "Por proyecto, por abono mensual o por pieza. Siempre sabés el número antes de empezar: nada de costos que aparecen en el camino."),
        ("¿Qué necesitan para arrancar?", "Una charla corta: qué hacés, a quién le hablás y qué querés lograr. Con eso armamos la propuesta."),
        ("¿De quién son los archivos?", "Tuyos. Al cerrar el proyecto te entregamos los archivos editables y el manual de uso.")]
 
@@ -229,7 +220,7 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 <meta property="og:image" content="{SITE}img/og-eiro.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Eiro Studio, estudio de branding en Buenos Aires">
+<meta property="og:image:alt" content="Eiro Studio, estudio creativo en Buenos Aires">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
@@ -247,6 +238,11 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 {f'<link rel="stylesheet" href="https://use.typekit.net/{KIT}.css"><link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}{pre}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')
+
+
+def brand(p):
+    """isologo y EIRO STUDIO: van juntos en la barra, cada uno en su espacio (con una línea en el medio)"""
+    return f'{iso(p)}<span class="brand-rule" aria-hidden="true"></span><span class="brand-word">{logo(p)}<span class="mono">Studio</span></span>'
 
 
 def chrome(p, page, where):
@@ -271,17 +267,16 @@ def chrome(p, page, where):
 </div>
 
 <header class="bar" id="barra">
-  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{iso(p)}</a>
+  <a class="brand" href="{p or './'}" aria-label="Eiro Studio, ir al inicio">{brand(p)}</a>
   <nav class="bar-nav" aria-label="Principal"><ul>{links}</ul></nav>
   <div class="bar-right">
-    <a class="btn accent" href="{p}contacto/#formulario">Hablemos</a>
     <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="3" cy="3" r="1.6" fill="currentColor"/><circle cx="11" cy="3" r="1.6" fill="currentColor"/><circle cx="3" cy="11" r="1.6" fill="currentColor"/><circle cx="11" cy="11" r="1.6" fill="currentColor"/></svg></button>
   </div>
 </header>
 
 <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
   <div class="menu-top">
-    <a href="{p or './'}" aria-label="Ir al inicio">{iso(p)}</a>
+    <a class="brand" href="{p or './'}" aria-label="Ir al inicio">{brand(p)}</a>
     <button class="menu-btn" id="menuClose" type="button" aria-label="Cerrar menú"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6"/></svg></button>
   </div>
   <nav aria-label="Menú"><ul>{items}</ul></nav>
@@ -334,30 +329,26 @@ def work_card(p, pr, sizes="(max-width:820px) 100vw, 50vw"):
         media = gen_pic(p, zn, zalt, sizes, attrs=" data-reveal")
     return f'''<a class="wcard" href="{p}trabajos/{pr["slug"]}/">
         {media}
-        <div><h3 class="wcard-name">{pr["name"]}</h3><p class="wcard-sub">{pr["tags"].split(" · ")[-1]}</p></div>
+        <div class="wcard-cap"><h3 class="wcard-name">{pr["name"]}</h3><p class="wcard-sub mono">{pr["tags"]}</p></div>
       </a>'''
 
 
 
-def rows_services(with_ids=True, p="../"):
+def services_grid():
     out = []
     for i, (sid, name, line, items) in enumerate(SERVICES):
         lis = "".join(f"<li>{x}</li>" for x in items)
-        idattr = f' id="{sid}"' if with_ids else ""
-        fit, need = SERVICE_FIT[sid]
-        out.append(f'<article class="row"{idattr} data-reveal><h3><span class="num mono">0{i+1}</span>{name}</h3>'
-                   f'<div class="row-body"><p>{line}</p><p class="fit"><span class="mono">Ideal para</span>{fit}</p><ul>{lis}</ul>'
-                   f'<a class="row-cta" href="{p}contacto/?necesito={quote(need)}#formulario">Pedí este servicio <span aria-hidden="true">→</span></a></div></article>')
+        out.append(f'<article class="svc" id="{sid}" data-reveal><span class="mono">0{i+1}</span><h3>{name}</h3><p>{line}</p><ul>{lis}</ul></article>')
     return "\n      ".join(out)
 
 
 def modes_html(p):
     cards = "".join(
         f'<article class="mode" data-reveal><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in li)}</ul>'
-        f'<a class="btn accent" href="{p}contacto/#formulario">Pedí tu propuesta <span aria-hidden="true">→</span></a></article>' for t, d, li in MODES)
+        f'<a class="bracket" href="{p}contacto/#formulario">Pedir propuesta</a></article>' for t, d, li in MODES)
     return f'''
   <section class="sec pad tone-monte" aria-labelledby="t-modos">
-    <div class="sec-row" data-reveal><h2 class="h2" id="t-modos"><span>Cómo trabajamos con vos</span><span class="gray">Tres formas, un mismo equipo.</span></h2></div>
+    <div class="sec-row" data-reveal><h2 class="h2" id="t-modos"><span>Cómo trabajamos</span><span class="gray">Tres formas, un mismo equipo.</span></h2></div>
     <div class="modes">{cards}</div>
   </section>'''
 
@@ -398,6 +389,8 @@ def cta_inline(p, text, btn="Pedí tu propuesta"):
 
 
 def testimonials_html():
+    if not TESTIMONIOS_REALES:  # sin testimonios reales, la sección no se muestra
+        return ""
     tag = "" if TESTIMONIOS_REALES else '<span class="t-tag mono">Ejemplo</span>'
     note = "" if TESTIMONIOS_REALES else '<p class="t-note mono">Testimonios de ejemplo. Se reemplazan por los reales.</p>'
     n_t = len(TESTIMONIALS)
@@ -436,13 +429,12 @@ INTRO_HEAD = """<script>try{if(sessionStorage.getItem('eiro-intro')||matchMedia(
 
 # Portada: a la izquierda la frase (con la última palabra que cambia) y los botones; a la derecha los mockups en modo GIF.
 # Tocar los mockups abre el reel a pantalla completa con sonido.
-MOCKUPS = [
-    ("01-tarjetas", "Crisger: tarjetas personales"), ("02-papeleria", "Crisger: papelería"),
-    ("03-credencial", "Crisger: credencial"), ("04-bolsas", "Crisger: bolsas"),
+MOCKUPS = [  # solo los que están completos (sin textos de relleno)
+    ("07-via-publica", "Crisger: vía pública"), ("04-bolsas", "Crisger: bolsas"),
     ("05-redes", "Crisger: redes sociales"), ("06-web", "Crisger: sitio web"),
-    ("07-via-publica", "Crisger: vía pública"), ("08-etiquetas", "Crisger: etiquetas"),
-    ("09-carpeta", "Crisger: carpeta y presupuesto"), ("10-puerta", "Crisger: vinilo en puerta"),
+    ("08-etiquetas", "Crisger: etiquetas"),
 ]
+REEL_REAL = False  # True cuando img/reel/reel.mp4 sea el reel de verdad: el botón pasa a decir "Ver reel"
 
 
 def hero_media(p):
@@ -452,7 +444,7 @@ def hero_media(p):
         f'{" class=\"on\" fetchpriority=\"high\"" if i == 0 else " loading=\"lazy\""}>' for i, (n, cap) in enumerate(MOCKUPS))
     return f'''<div class="hero-media" data-player data-reel>
         {imgs}
-        <button type="button" class="play-orb" data-play aria-haspopup="dialog"><svg class="orb-globe" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><line x1="3" y1="50" x2="97" y2="50"/><g class="m1"><ellipse cx="50" cy="50" rx="24" ry="47"/></g><g class="m2"><ellipse cx="50" cy="50" rx="24" ry="47"/></g></svg><span>Ver reel</span></button>
+        <button type="button" class="play-orb" data-play aria-haspopup="dialog"><svg class="orb-globe" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/><line x1="3" y1="50" x2="97" y2="50"/><g class="m1"><ellipse cx="50" cy="50" rx="24" ry="47"/></g><g class="m2"><ellipse cx="50" cy="50" rx="24" ry="47"/></g></svg><span>{"Ver reel" if REEL_REAL else "Ver en grande"}</span></button>
         <button type="button" class="reel-pause mono" data-reel-pause aria-pressed="false">Pausar</button>
       </div>'''
 
@@ -476,8 +468,8 @@ def home():
     cards = "\n      ".join(work_card(p, pr) for pr in PUB)
     svc = "".join(f'<a href="servicios/#{sid}" data-reveal>{name}<span class="mono">0{i+1}</span></a>' for i, (sid, name, _, _) in enumerate(SERVICES))
     m0 = MOCKUPS[0][0]
-    ld = head(p, "Eiro Studio | Estudio de branding y contenido en Buenos Aires",
-              "Estudio de branding en Buenos Aires: identidad visual, manual de marca, redes, web y branding de eventos para marcas que quieren crecer. Pedí tu propuesta.", "",
+    ld = head(p, "Eiro Studio | Estudio creativo en Buenos Aires",
+              "Estudio creativo en Buenos Aires: identidad de marca, contenido para redes, branding de eventos y web, para marcas con algo para contar.", "",
               preload=(f"img/mockups/{m0}-1200.webp", f"img/mockups/{m0}-600.webp 600w, img/mockups/{m0}-1200.webp 1200w", "(max-width:820px) 100vw, 50vw"))
     org = open(os.path.join(ROOT, "tools", "org-ld.json"), encoding="utf-8").read().strip()  # datos del estudio para buscadores
     ld = ld.replace("</head>", '<script type="application/ld+json">' + org + '</script>\n</head>')
@@ -486,9 +478,9 @@ def home():
   <section class="hero" data-label="Inicio" aria-labelledby="t-hero">
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="hero-kicker mono">Estudio de branding · Buenos Aires</p>
+        <p class="hero-kicker mono">Estudio creativo · Buenos Aires</p>
         <h1 class="hero-title" id="t-hero"><span class="hl">Contamos tu marca</span> <span class="hl">en <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
-        <p class="hero-sub">Branding, contenido y eventos para marcas con una historia por contar.</p>
+        <p class="hero-sub">Marca, contenido y eventos para marcas con algo para contar.</p>
         <div class="hero-ctas"><a class="btn accent big" href="contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
       </div>
       {hero_media(p)}
@@ -506,8 +498,8 @@ def home():
   <section class="sec pad grid tone-paper" data-label="Servicios" aria-labelledby="t-servicios">
     <div class="svc-side" data-reveal>
       <h2 class="h2" id="t-servicios"><span>Qué hacemos</span></h2>
-      <p>Por proyecto o todo el año. Armamos el equipo justo para lo que necesita tu marca.</p>
-      <a class="btn accent" href="servicios/">Ver servicios</a>
+      <p>Por proyecto, por mes o por pieza, con un equipo armado a medida.</p>
+      <a class="bracket" href="servicios/">Ver servicios</a>
     </div>
     <nav class="svc-list" aria-label="Servicios">{svc}</nav>
   </section>
@@ -719,17 +711,15 @@ def caso(i, pr):
 def servicios():
     p = "../"
     faq = "".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
-    html = head(p, "Servicios de branding, identidad y contenido | Eiro Studio", "Estrategia, identidad visual, manual de marca, diseño web, contenido para redes y branding de eventos en Buenos Aires. Por proyecto o todo el año.", "servicios/",
+    html = head(p, "Servicios: marca, contenido, eventos y web | Eiro Studio", "Identidad de marca, contenido para redes, branding de eventos y web en Buenos Aires. Por proyecto, por abono mensual o por pieza.", "servicios/",
                 extra_ld=[{"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
                           {"@type": "ItemList", "name": "Servicios de Eiro Studio", "itemListElement": [{"@type": "ListItem", "position": i + 1, "item": {"@type": "Service", "name": n, "description": l, "provider": {"@id": SITE + "#estudio"}, "areaServed": "AR"}} for i, (_, n, l, _) in enumerate(SERVICES)]}]) + chrome(p, "servicios", "Servicios") + f'''
 <main id="top" tabindex="-1">
-{page_head(p, '<span>Servicios</span>', 'Qué hacemos', '', 'Por proyecto o todo el año.')}
-  <section class="sec pad grid table-sec tone-paper" aria-label="Áreas de trabajo">
-    <div class="table-head" data-reveal><h2 class="h2"><span>Seis áreas</span><span class="gray">Un mismo equipo.</span></h2></div>
-    <div class="rows">
-      {rows_services()}
+{page_head(p, '<span>Servicios</span>', 'Servicios', 'Cuatro áreas, un mismo equipo.')}
+  <section class="sec pad tone-paper" aria-label="Áreas de trabajo">
+    <div class="svc-grid">
+      {services_grid()}
     </div>
-    {cta_inline(p, "¿No sabés cuál necesitás? Contanos tu idea y te armamos una propuesta a medida.")}
   </section>
 {modes_html(p)}
 
@@ -746,18 +736,18 @@ def matias_photo(p):
     """Foto real de Matías: subir img/matias.jpg (vertical 4:5) y aparece sola. Mientras tanto, un marco vacío."""
     if os.path.exists(os.path.join(ROOT, "img", "matias.jpg")):
         return f'<figure class="media" data-reveal><img src="{p}img/matias.jpg" alt="Matías Gaiteiro, fundador de Eiro Studio" loading="lazy" decoding="async"></figure>'
-    return '<div class="media photo-slot" data-reveal><span class="mono">Foto de Matías<br>Pendiente</span></div>'
+    return ""
 
 
 def estudio():
     p = "../"
-    html = head(p, "Estudio | Eiro Studio, branding en Buenos Aires", "Eiro es un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio. Contamos marcas en la calle, en redes y en eventos.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
+    html = head(p, "Estudio | Eiro Studio, estudio creativo en Buenos Aires", "Eiro es un estudio creativo de Buenos Aires movido por el optimismo, el trabajo en equipo y el oficio. Contamos marcas en la calle, en redes y en eventos.", "estudio/") + chrome(p, "estudio", "Estudio") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Estudio</span>', 'Estudio', 'Chico a propósito, cerca siempre.')}
 
   <section class="sec pad grid table-sec" aria-labelledby="t-quien">
-    <div class="studio-photo">{matias_photo(p)}</div>
-    <div class="founder" data-reveal>
+    {f'<div class="studio-photo">{matias_photo(p)}</div>' if matias_photo(p) else ""}
+    <div class="founder{"" if matias_photo(p) else " solo"}" data-reveal>
       <h2 class="h2" id="t-quien"><span>Quién está detrás</span><span class="gray">Matías Gaiteiro.</span></h2>
       <p class="founder-bio">Lo dirige Matías Gaiteiro, diseñador multimedial. Hace más de diez años que diseñamos marcas, coordinamos equipos de redes y llevamos áreas de marketing.</p>
       <p class="founder-text">Venimos de las relaciones públicas y se nota: casi todos nuestros clientes llegaron por vínculos de años, y se quedaron. Cada proyecto lo encaramos de cerca, con un equipo armado a medida.</p>
@@ -822,7 +812,7 @@ def brief_form():
 
 def contacto():
     p = "../"
-    html = head(p, "Contacto: pedí tu propuesta | Eiro Studio", "Contanos tu proyecto en un minuto y te respondemos por WhatsApp. Eiro Studio, estudio de branding en Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
+    html = head(p, "Contacto: pedí tu propuesta | Eiro Studio", "Contanos tu proyecto en un minuto y te respondemos por WhatsApp. Eiro Studio, estudio creativo en Buenos Aires.", "contacto/") + chrome(p, "contacto", "Contacto") + f'''
 <main id="top" tabindex="-1">
 {page_head(p, '<span>Contacto</span>', 'Contacto', 'Hagamos algo bueno juntos.', None)}
 {brief_form()}
