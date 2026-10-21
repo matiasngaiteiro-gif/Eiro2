@@ -11,7 +11,6 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://eirostudio.com/"
 KIT = "oqj6tze"  # kit de Adobe Fonts: Neulis Cursive (y Neue Haas, solo para la marca Crisger)
-KIT_SANS = "kzg6cxm"  # Neulis Neue (300, 400, 600) y Azeret Mono (300, 400): la tipografía de todos los textos
 KIT_CASOS = "hfs0xvx"  # tipografías de los clientes, solo en las páginas de casos: New Spirit (+ Condensed), Gotham, Shuttleblock Narrow
 
 # tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
@@ -65,9 +64,16 @@ def logo(p, cls="logo", label=None):
     return f'<svg class="{cls}" viewBox="0 0 3850 1351" {a}><use href="{p}img/sprite.svg#i-logo"/></svg>'
 
 
-def iso(p, cls="isologo"):
-    """isologo: el globo con la e (img/sprite.svg#i-iso, calcado del original en tools/isologo-original.png)"""
-    return f'<svg class="{cls}" viewBox="0 0 680 407" aria-hidden="true" focusable="false"><use href="{p}img/sprite.svg#i-iso"/></svg>'
+ISO_N = [0]
+
+
+def iso(p, cls="isologo", label=None):
+    """isologo de línea: dos círculos que se cruzan, la barra y el remate de la e
+    (geometría en tools/isologo-linea.txt; va en línea con su propio recorte)"""
+    ISO_N[0] += 1
+    inner = open(os.path.join(ROOT, "tools", "isologo-linea.txt"), encoding="utf-8").read().replace('id="ap"', f'id="ap{ISO_N[0]}"').replace("url(#ap)", f"url(#ap{ISO_N[0]})")
+    a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true" focusable="false"'
+    return f'<svg class="{cls}" viewBox="0 0 606 478" {a}>{inner}</svg>'
 
 
 def pic(p, name, sizes, alt, w, h, style="", eager=False):
@@ -178,7 +184,7 @@ def head(p, title, desc, path, casos=False):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#021719">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
@@ -199,7 +205,9 @@ def head(p, title, desc, path, casos=False):
 <script>document.documentElement.classList.add('js');try{{if(localStorage.getItem('eiro-acceso')==='1')document.documentElement.classList.add('unlocked')}}catch(e){{}}</script>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="preconnect" href="https://p.typekit.net" crossorigin>
-<link rel="stylesheet" href="https://use.typekit.net/{KIT_SANS}.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&family=Roboto+Mono:wght@300;400&display=swap">
 <link rel="stylesheet" href="https://use.typekit.net/{KIT}.css">{f'<link rel="stylesheet" href="https://use.typekit.net/{KIT_CASOS}.css">' if casos else ""}
 <link rel="stylesheet" href="{p}assets/eiro.css?v={VER}">
 </head>'''.replace("{LD}", '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>')

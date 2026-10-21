@@ -5,23 +5,24 @@
 :root{
   --bar-h:64px;
   /* color */
-  --bg:#0A0A0A;        /* fondo */
-  --bg-2:#141414;      /* cápsulas, cajas */
-  --bg-3:#1E1E1E;      /* cajas sobre cajas, hover */
-  --ink:#FFFFFF;
-  --mute:#989898;      /* segundo tono de los textos (6,9:1) */
-  --soft:#8A8A8A;      /* etiquetas mono (5,6:1) */
-  --line:#262626;
-  --accent:#FFFFFF;    /* blanco, negro y gris: el "acento" es blanco pleno sobre negro (botones y un bloque por página) */
-  --on-accent:#0A0A0A;
+  /* paleta del sistema de piezas: Noche, Monte, Menta, Brote, Papel, Arena, Niebla */
+  --bg:#021719;        /* Noche · fondo */
+  --bg-2:#0F2C2F;      /* Monte · cajas, superficies */
+  --bg-3:#16383B;      /* Monte un punto más claro · hover */
+  --ink:#F2F2F0;       /* Papel · texto */
+  --mute:#9AACAD;      /* segundo tono de los textos sobre Noche */
+  --soft:#7F9596;      /* Niebla un punto más clara · rótulos mono */
+  --line:#1C3D40;
+  --accent:#1AFF87;    /* Menta · solo sobre oscuro y en dosis chicas: Hablemos, WhatsApp, selección */
+  --on-accent:#021719; /* Noche sobre Menta */
+  --brote:#C9F2D8;
 
-  /* tipografía · Neulis Neue (kit Adobe Fonts kzg6cxm) con pesos y jerarquías a la manera de Chittco:
-     Light 300 para títulos y lectura, Regular 400 solo para énfasis y nombres; cuanto más grande, más cerrado el interletrado.
-     Azeret Mono va en el mismo kit (kzg6cxm); Neulis Cursive sigue en oqj6tze. */
-  --display:"neulis-neue","Helvetica Neue",Helvetica,Arial,sans-serif; /* 300 */
-  --sans:"neulis-neue","Helvetica Neue",Helvetica,Arial,sans-serif;    /* 300 lectura · 400 énfasis */
-  --script:"neulis-cursive","Brush Script MT",cursive; /* solo GAITEIRO → EIRO, peso 700 */
-  --mono:"azeret-mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;      /* Azeret Mono, como Chittco: Light 300 en etiquetas, Regular 400 en botones */
+  /* tipografía del sistema de piezas (Google Fonts): Plus Jakarta Sans para títulos, frases y textos
+     (Light 300 lectura, Regular 400 énfasis, SemiBold 600 en títulos en mayúscula) y Roboto Mono para rótulos y detalles.
+     Neulis queda solo en el logotipo, que va dibujado en SVG. */
+  --display:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --sans:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"Roboto Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;   /* Light 300 en rótulos, Regular 400 en botones */
   --fs-statement:clamp(30px,3.6vw,67px);
   --fs-h2:clamp(30px,2.9vw,50px);
   --fs-h3:clamp(20px,1.5vw,21.33px);
@@ -68,7 +69,7 @@ main:focus{outline:none}
 .skip{position:absolute;left:12px;top:-60px;z-index:400;background:var(--ink);color:var(--bg);padding:10px 16px;font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase}
 .skip:focus{top:12px}
 .logo{display:block;fill:currentColor;height:auto}
-.isologo{display:block;fill:currentColor;height:auto;aspect-ratio:680/407}
+.isologo{display:block;height:auto;aspect-ratio:606/478;overflow:visible}
 
 /* componentes */
 .mono{font:300 var(--fs-mono)/1.35 var(--mono);text-transform:uppercase;letter-spacing:.08em}
@@ -84,7 +85,7 @@ main:focus{outline:none}
 @media (hover:hover){.bracket:hover{color:var(--ink)}}
 .btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;background:var(--bg-3);color:var(--ink);font:400 var(--fs-mono)/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;border-radius:2px;transition:background-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out)}
 .btn.accent{background:var(--accent);color:var(--on-accent)}
-@media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}.btn.accent:hover{background:#C8C8C8}}
+@media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}.btn.accent:hover{background:var(--brote)}}
 .media{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--bg-2)}
 .media picture,.media img{width:100%;height:100%}
 .media img{object-fit:cover}
@@ -102,10 +103,10 @@ main:focus{outline:none}
 .intro-sub{grid-column:1/-1;margin-top:20px;color:var(--soft)}
 
 /* barra tradicional: logo a la izquierda, secciones y Hablemos a la derecha; sin hora */
-.bar{position:fixed;z-index:50;top:0;left:0;right:0;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(var(--gutter),env(safe-area-inset-right,0px)) 0 max(var(--gutter),env(safe-area-inset-left,0px));display:flex;align-items:center;gap:32px;background:rgba(10,10,10,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color var(--dur-2) var(--ease-out)}
+.bar{position:fixed;z-index:50;top:0;left:0;right:0;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(var(--gutter),env(safe-area-inset-right,0px)) 0 max(var(--gutter),env(safe-area-inset-left,0px));display:flex;align-items:center;gap:32px;background:rgba(2,23,25,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color var(--dur-2) var(--ease-out)}
 html.scrolled .bar{border-bottom-color:var(--line)}
-.bar .brand{display:flex;align-items:center;min-height:44px;color:var(--accent)}
-.bar .brand .isologo{width:58px} /* arriba a la izquierda va el isologo: EIRO ya aparece en el telón, la clave y el pie */
+.bar .brand{display:flex;align-items:center;min-height:44px;color:var(--ink)}
+.bar .brand .isologo{width:52px} /* arriba a la izquierda va el isologo: EIRO ya aparece en el telón, la clave y el pie */
 .bar-nav{margin-left:auto}
 .bar-nav ul{display:flex;gap:clamp(20px,2.4vw,40px)}
 .bar-nav a{display:flex;align-items:center;min-height:44px;font:400 15px/1 var(--sans);letter-spacing:.02em;color:var(--mute);transition:color var(--dur-1) var(--ease-out)}
@@ -122,7 +123,7 @@ html.scrolled .bar{border-bottom-color:var(--line)}
 .menu{position:fixed;inset:0;z-index:60;background:var(--bg);display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + var(--gutter)) max(var(--gutter),env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + var(--gutter)) max(var(--gutter),env(safe-area-inset-left,0px));opacity:0;visibility:hidden;transition:opacity var(--dur-2) var(--ease-out),visibility 0s linear var(--dur-2)}
 .menu.open{opacity:1;visibility:visible;transition:opacity var(--dur-2) var(--ease-out)}
 .menu-top{display:flex;justify-content:space-between;align-items:center}
-.menu-top .isologo{width:58px;color:var(--accent)}
+.menu-top .isologo{width:52px;color:var(--ink)}
 .menu nav{align-self:center}
 .menu nav a{display:flex;align-items:baseline;gap:16px;padding:6px 0;font:300 var(--fs-big)/1 var(--display);letter-spacing:var(--tr-xl);color:var(--mute);transition:color var(--dur-1) var(--ease-out),transform var(--dur-2) var(--ease-out)}
 .menu nav a .mono{color:var(--soft);min-width:2.4em}
@@ -142,7 +143,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero-title{margin:0 0 clamp(40px,5vw,80px);font:300 clamp(36px,7.4vw,140px)/.98 var(--display);letter-spacing:-.035em}
 .hero-title .hl{display:block}
 /* mayúsculas solo en los títulos que nombran una sección; las frases siguen en minúscula */
-.sec-row .h2>span:first-child,.svc-side .h2>span:first-child,.page-title>span:first-child{text-transform:uppercase;letter-spacing:-.01em}
+.sec-row .h2>span:first-child,.svc-side .h2>span:first-child,.page-title>span:first-child{text-transform:uppercase;font-weight:600;letter-spacing:-.02em}
 .svc-list a{text-transform:uppercase;letter-spacing:-.015em} /* la lista grande de servicios del inicio, también en mayúscula */
 .swap{position:relative;display:inline-block;vertical-align:top;white-space:nowrap}
 .swap-vis{display:inline-block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em;transition:width .6s var(--ease-out)}
@@ -721,10 +722,10 @@ html.locked .wa-orb,html.menu-open .wa-orb{display:none}
 footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 
 /* telón de entrada (solo inicio): EIRO sobre negro, el logo se va por arriba, el telón sube y la portada sube detrás */
-.curtain{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:#000}
+.curtain{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:var(--bg)}
 html.no-intro .curtain,.curtain.gone{display:none}
 .curtain .ic{overflow:hidden;padding:.1em 0}
-.curtain .logo{display:block;width:min(52vw,560px);color:#fff}
+.curtain .logo{display:block;width:min(52vw,560px);color:var(--ink)}
 html.intro .curtain .ic-in{animation:icIn .7s var(--ease-out) both,icOut .55s cubic-bezier(.7,0,.84,0) 1.15s forwards}
 html.intro .curtain{animation:curtainUp .95s cubic-bezier(.76,0,.24,1) 1.45s forwards}
 html.intro .hero .hl,html.intro .hero .reel-frame,html.intro .bar{animation:riseIn 1.1s var(--ease-out) both}
@@ -739,7 +740,7 @@ html.intro .hero .reel-frame{animation-delay:1.95s;animation-duration:1.3s}html.
 .gate{position:fixed;inset:0;z-index:500;background:var(--bg);display:grid;place-items:center;padding:24px max(var(--gutter),env(safe-area-inset-right,0px)) 24px max(var(--gutter),env(safe-area-inset-left,0px))}
 .gate[hidden],html.unlocked .gate{display:none!important}
 .gate-box{display:flex;flex-direction:column;align-items:center;gap:40px;width:100%}
-.gate-box .logo{width:clamp(140px,22vw,280px);color:var(--accent)}
+.gate-box .logo{width:clamp(140px,22vw,280px);color:var(--ink)}
 .gate form{display:flex;align-items:center;width:min(300px,100%);background:var(--bg-2);border-radius:4px;padding:4px;transition:box-shadow var(--dur-2) var(--ease-out)}
 .gate form:focus-within{box-shadow:0 0 0 1px var(--mute)}
 .gate form.err{box-shadow:0 0 0 1px #E5483B;animation:shake var(--dur-2) var(--ease-out)}
