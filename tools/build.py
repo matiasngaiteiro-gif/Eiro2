@@ -888,4 +888,6 @@ if __name__ == "__main__":
         caso(i, pr)
     sitemap()
     variant_bn()
+    import sys; sys.path.insert(0, os.path.dirname(__file__))
+    import build_claude; build_claude.run()  # /pruebaclaude
     print("ok")
