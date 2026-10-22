@@ -56,7 +56,7 @@ def _ver(*names):
     return h.hexdigest()[:8]
 
 
-VER = _ver("assets/eiro.css", "assets/eiro.js", "assets/eiro-bn.css", "assets/eiro-claude.css")
+VER = _ver("assets/eiro.css", "assets/eiro.js")
 
 NAV = [("trabajos", "Trabajos"), ("servicios", "Servicios"), ("estudio", "Estudio"), ("contacto", "Contacto")]
 
@@ -443,12 +443,7 @@ def testimonials_html():
   </section>'''
 
 
-WRITTEN = []
-
-
 def write(path, html):
-    if path.endswith(".html"):
-        WRITTEN.append(path)
     full = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
@@ -871,52 +866,9 @@ def sitemap():
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
 
 
-# ---------- /pruebacolor: la misma web en blanco y negro, con las fotos y los trabajos en color ----------
-BN_DIR = "pruebacolor"
-ASSET_PREFIX = ("img/", "assets/", "favicon", "apple-touch-icon", "site.webmanifest")
-
-
-def _bn_url(u):
-    """la copia vive una carpeta más adentro: los archivos compartidos (img, assets, íconos) suben un nivel; los links entre páginas quedan dentro de la copia"""
-    if not u or u.startswith(("http", "#", "/", "mailto:", "tel:", "data:", "javascript:")):
-        return u
-    rest = u
-    while rest.startswith("../"):
-        rest = rest[3:]
-    return "../" + u if rest.startswith(ASSET_PREFIX) else u
-
-
-def _bn_attr(m):
-    name, val = m.group(1), m.group(2)
-    if name in ("srcset", "imagesrcset"):
-        val = ", ".join(" ".join([_bn_url(part.split()[0])] + part.split()[1:]) for part in val.split(",") if part.strip())
-    else:
-        val = _bn_url(val)
-    return f'{name}="{val}"'
-
-
-def variant(out_dir, css, logo_iso=False):
-    """copia la web en otra carpeta con una hoja de estilos encima (solo cambia la identidad visual, no la estructura)"""
-    import re
-    for path in WRITTEN:
-        if path.startswith(("pruebacolor/", "pruebaclaude/")):
-            continue
-        html = open(os.path.join(ROOT, path), encoding="utf-8").read()
-        html = re.sub(r'\b(href|src|srcset|imagesrcset|poster)="([^"]*)"', _bn_attr, html)
-        up = "../" * (path.count("/") + 1)
-        html = html.replace("</head>", f'<meta name="robots" content="noindex">\n<link rel="stylesheet" href="{up}assets/{css}?v={VER}">\n</head>', 1)
-        write(f"{out_dir}/{path}", html)
-
-
-def variant_bn():
-    variant(BN_DIR, "eiro-bn.css")
-    variant("pruebaclaude", "eiro-claude.css")  # identidad cálida: crema, casi negro y un naranja arcilla
-
-
 if __name__ == "__main__":
     home(); trabajos(); servicios(); estudio(); contacto()
     for i, pr in enumerate(PUB):
         caso(i, pr)
     sitemap()
-    variant_bn()
     print("ok")
