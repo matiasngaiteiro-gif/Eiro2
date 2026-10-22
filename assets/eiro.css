@@ -6,15 +6,16 @@
   --bar-h:64px;
   /* color */
   /* paleta del sistema de piezas: Noche, Monte, Menta, Brote, Papel, Arena, Niebla */
-  --bg:#021719;        /* Noche · fondo */
-  --bg-2:#0F2C2F;      /* Monte · cajas, superficies */
-  --bg-3:#16383B;      /* Monte un punto más claro · hover */
+  --bg:#0A0A0A;        /* Noche · fondo */
+  --bg-2:#161616;      /* Monte · cajas, superficies */
+  --bg-3:#212121;      /* Monte un punto más claro · hover */
   --ink:#F2F2F0;       /* Papel · texto */
-  --mute:#9AACAD;      /* segundo tono de los textos sobre Noche */
-  --soft:#7F9596;      /* Niebla un punto más clara · rótulos mono */
-  --line:#1C3D40;
+  --mute:#A6A6A3;      /* segundo tono de los textos sobre Noche */
+  --soft:#858582;      /* Niebla un punto más clara · rótulos mono */
+  --line:#262626;
+  --niebla:#8C8C89;    /* gris del isologo y del óvalo */
   --accent:#1AFF87;    /* Menta · solo sobre oscuro y en dosis chicas: Hablemos, WhatsApp, selección */
-  --on-accent:#021719; /* Noche sobre Menta */
+  --on-accent:#0A0A0A; /* Noche sobre Menta */
   --brote:#C9F2D8;
 
   /* tipografía del sistema de piezas (Google Fonts): Plus Jakarta Sans para títulos, frases y textos
@@ -107,7 +108,7 @@ main:focus{outline:none}
 .intro-sub{grid-column:1/-1;margin-top:20px;color:var(--soft)}
 
 /* barra tradicional: logo a la izquierda, secciones y Hablemos a la derecha; sin hora */
-.bar{position:fixed;z-index:50;top:0;left:0;right:0;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(var(--gutter),env(safe-area-inset-right,0px)) 0 max(var(--gutter),env(safe-area-inset-left,0px));display:flex;align-items:center;gap:32px;background:rgba(2,23,25,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color var(--dur-2) var(--ease-out)}
+.bar{position:fixed;z-index:50;top:0;left:0;right:0;height:calc(var(--bar-h) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) max(var(--gutter),env(safe-area-inset-right,0px)) 0 max(var(--gutter),env(safe-area-inset-left,0px));display:flex;align-items:center;gap:32px;background:rgba(10,10,10,.88);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color var(--dur-2) var(--ease-out)}
 html.scrolled .bar{border-bottom-color:var(--line)}
 .bar .brand{display:flex;align-items:center;min-height:44px;color:var(--ink)}
 .brand{display:flex;align-items:center;color:var(--ink)}
@@ -155,7 +156,7 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero-media{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--bg-2);cursor:pointer}
 .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
 .hero-media img.on{opacity:1}
-.hero-media .reel-pause{position:absolute;z-index:3;left:14px;bottom:12px;min-height:32px;padding:0 10px;border:0;border-radius:2px;background:rgba(2,23,25,.6);color:var(--ink);cursor:pointer}
+.hero-media .reel-pause{position:absolute;z-index:3;left:14px;bottom:12px;min-height:32px;padding:0 10px;border:0;border-radius:2px;background:rgba(10,10,10,.6);color:var(--ink);cursor:pointer}
 @media (hover:hover) and (pointer:fine){.hero-media,.hero-media .play-orb{cursor:none}.hero-media .reel-pause{cursor:pointer}}
 @media (max-width:820px){
   .hero-grid{grid-template-columns:1fr;height:auto;min-height:0;max-height:none}
@@ -314,11 +315,11 @@ footer{padding:clamp(32px,4vw,64px) max(var(--gutter),env(safe-area-inset-right,
 .cta-sec{padding-bottom:0}
 /* tonos: rompen las páginas largas. Papel con textos Monte (la hoja blanca) y banda Monte */
 .tone-paper,.tone-monte{padding-top:var(--sec)}
-.tone-paper{--bg:#F2F2F0;--bg-2:#E6E3DB;--bg-3:#DCD8CD;--ink:#0F2C2F;--mute:#3F5A5C;--soft:#516A6C;--line:rgba(15,44,47,.16);background:var(--bg);color:var(--ink)}
-.tone-paper .btn.accent{background:#0F2C2F;color:#F2F2F0}
-@media (hover:hover){.tone-paper .btn.accent:hover{background:#021719}}
-.tone-paper ::selection{background:#0F2C2F;color:#F2F2F0}
-.tone-monte{--bg:#0F2C2F;--bg-2:#16383B;--bg-3:#1D4246;--line:#24494C;background:var(--bg)}
+.tone-paper{--bg:#141414;--bg-2:#1C1C1C;--bg-3:#262626;--line:#2A2A2A;background:var(--bg);color:var(--ink)}
+.tone-paper .btn.accent{background:var(--accent);color:var(--on-accent)}
+@media (hover:hover){.tone-paper .btn.accent:hover{filter:brightness(1.08)}}
+
+.tone-monte{--bg:#1A1A1A;--bg-2:#222;--bg-3:#2B2B2B;--line:#2F2F2F;background:var(--bg)}
 .tone-paper+.sec,.tone-monte+.sec,.tone-paper+.cta-sec,.tone-monte+.cta-sec{padding-top:var(--sec)}
 
 /* tablet */
@@ -843,3 +844,14 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 .seal-big{width:min(64vw,560px);margin:0}
 .seal-gate{width:min(56vw,260px);margin:0}
 .foot-brand{display:flex;flex-direction:column;gap:6px}
+
+/* portada centrada: el óvalo de la marca, la frase y los botones; el reel debajo */
+.hero{display:flex;align-items:center;justify-content:center;min-height:100svh;padding-bottom:clamp(40px,6vw,80px)}
+.hero .hero-copy{align-items:center;text-align:center;padding:clamp(24px,4vh,48px) 0 0;gap:clamp(18px,2.6vh,28px)}
+.seal-hero{width:min(64vw,340px);margin:0 0 clamp(4px,1vh,12px)}
+.hero .hero-title{font-size:clamp(34px,4.4vw,72px)}
+.hero .hero-sub{max-width:38ch;text-wrap:balance}
+.hero .hero-ctas{justify-content:center;align-items:center}
+.reel-sec{padding-bottom:var(--sec)}
+.reel-sec .hero-media{aspect-ratio:16/9}
+@media (max-width:820px){.reel-sec .hero-media{aspect-ratio:4/3}.hero .hero-ctas .btn{flex:0 1 auto}}

@@ -217,7 +217,7 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#021719">
+<meta name="theme-color" content="#0A0A0A">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
@@ -251,7 +251,7 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 
 def brand(p):
     """arriba a la izquierda: el isologo y EIROSTUDIO, cada uno con su aire"""
-    return f'<span class="lockup">{isotipo(p)}{logo(p, "lockup-word")}</span>'
+    return f'<span class="lockup">{logo(p, "lockup-word")}</span>'
 
 
 def chrome(p, page, where):
@@ -504,15 +504,16 @@ def home():
     body = f'''
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-labelledby="t-hero">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="hero-kicker mono">Estudio creativo · Buenos Aires</p>
-        <h1 class="hero-title" id="t-hero"><span class="hl">Contamos tu marca</span> <span class="hl">en <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
-        <p class="hero-sub">Marca, contenido y eventos para marcas con algo para contar.</p>
-        <div class="hero-ctas"><a class="btn accent big" href="contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
-      </div>
-      {hero_media(p)}
+    <div class="hero-copy">
+      {seal(p, "seal seal-hero", "Eiro Studio · Buenos Aires, Argentina")}
+      <h1 class="hero-title" id="t-hero"><span class="hl">Contamos tu marca</span> <span class="hl">en <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
+      <p class="hero-sub">Marca, contenido y eventos para marcas con algo para contar.</p>
+      <div class="hero-ctas"><a class="btn accent big" href="contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a><a class="bracket" href="trabajos/">Ver trabajos</a></div>
     </div>
+  </section>
+
+  <section class="pad reel-sec" aria-label="Reel">
+    {hero_media(p)}
   </section>
 
   <section class="sec pad" data-label="Trabajos" aria-labelledby="t-trabajos">
