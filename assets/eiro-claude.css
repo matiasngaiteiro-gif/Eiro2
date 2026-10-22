@@ -18,7 +18,8 @@ body::after{opacity:.09}
 
 /* barra y logo */
 .bar{background:rgba(244,242,236,.9)}
-.isotipo,.seal{color:var(--accent)}
+.isotipo{color:var(--accent)}
+.seal{--seal-bg:#1F1E1C;--seal-ink:var(--accent)}
 
 /* portada */
 .hero-title .swap{color:var(--accent)}

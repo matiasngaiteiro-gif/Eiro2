@@ -265,7 +265,7 @@ def chrome(p, page, where):
 <a class="skip" href="#top">Saltar al contenido</a>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Acceso a Eiro">
   <div class="gate-box">
-    {logo(p, label="Eiro")}
+    {seal(p, "seal seal-gate", "Eiro Studio")}
     <form id="gateForm" autocomplete="off">
       <label for="gateKey" class="sr">Clave</label>
       <input id="gateKey" name="gateKey" type="password" inputmode="numeric" maxlength="4" placeholder="Clave" enterkeyhint="go">
@@ -297,12 +297,23 @@ def chrome(p, page, where):
 '''
 
 
-def seal(p):
-    """sello de la lámina de marca: EIRO STUDIO · BUENOS AIRES · ARGENTINA alrededor del isologo; gira despacio"""
-    return (f'<svg class="seal" viewBox="0 0 200 200" aria-hidden="true" focusable="false">'
-            f'<defs><path id="seal-c" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs>'
-            f'<g class="seal-ring"><text><textPath href="#seal-c" textLength="488" lengthAdjust="spacing">EIRO STUDIO · BUENOS AIRES · ARGENTINA ·</textPath></text></g>'
-            f'<use href="{p}img/sprite.svg#i-eiro" x="58" y="65" width="84" height="70"/></svg>')
+SEAL_N = [0]
+SEAL_P = 1668.9  # largo del óvalo por donde corre el texto (elipse de 295 × 234.5)
+
+
+def seal(p, cls="seal", label=None):
+    """el óvalo de la lámina de marca: EIRO STUDIO · BUENOS AIRES · ARGENTINA corre alrededor del isologo.
+    Respeta la forma original (elipse de 829 × 665 con el texto sobre una elipse de 590 × 469); el texto gira siguiendo el óvalo."""
+    SEAL_N[0] += 1
+    i = f"seal-{SEAL_N[0]}"
+    a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true" focusable="false"'
+    txt = "EIRO STUDIO · BUENOS AIRES · ARGENTINA · "
+    return (f'<svg class="{cls}" viewBox="0 0 829.4 665.28" {a}>'
+            f'<defs><path id="{i}" d="M{414.7-295} 332.64a295 234.5 0 1 1 {2*295:g} 0a295 234.5 0 1 1 -{2*295:g} 0"/></defs>'
+            f'<ellipse class="seal-bg" cx="414.7" cy="332.64" rx="414.7" ry="332.64"/>'
+            f'<text class="seal-txt"><textPath href="#{i}" textLength="{2*SEAL_P:.1f}" lengthAdjust="spacing">{txt * 2}'
+            f'<animate attributeName="startOffset" from="-{SEAL_P:.1f}" to="0" dur="36s" repeatCount="indefinite"/></textPath></text>'
+            f'<use class="seal-iso" href="{p}img/sprite.svg#i-eiro" x="186.24" y="142.85" width="456.94" height="379.61"/></svg>')
 
 
 def footer(p):
@@ -529,7 +540,7 @@ def home():
 {cta_band(p)}
 </main>'''
     curtain = f'''
-<div class="curtain" id="curtain" aria-hidden="true"><div class="ic"><div class="ic-in">{logo(p)}</div></div></div>'''
+<div class="curtain" id="curtain" aria-hidden="true"><div class="ic"><div class="ic-in">{seal(p, "seal seal-big")}</div></div></div>'''
     ld = ld.replace("</head>", INTRO_HEAD + "\n</head>")
     write("index.html", ld + chrome(p, "", "Inicio") + curtain + body + reel_player(p) + footer(p))
 

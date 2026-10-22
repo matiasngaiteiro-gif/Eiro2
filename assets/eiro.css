@@ -835,10 +835,11 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 .isotipo{display:block;width:auto;height:30px;color:var(--niebla,#6E8384)}
 .lockup-word{font-size:22px;color:var(--ink)}
 @media (max-width:420px){.isotipo{height:26px}.lockup-word{font-size:19px}.lockup{gap:11px}}
-/* sello del pie */
+/* el óvalo de la marca: texto que corre alrededor del isologo */
+.seal{display:block;width:180px;height:auto;margin-top:20px;overflow:visible}
+.seal-bg{fill:var(--seal-bg,var(--bg-2))}
+.seal-txt{font:700 83.75px var(--sans);fill:var(--seal-ink,var(--niebla,#6E8384));text-transform:uppercase}
+.seal-iso{color:var(--seal-ink,var(--niebla,#6E8384))}
+.seal-big{width:min(64vw,560px);margin:0}
+.seal-gate{width:min(56vw,260px);margin:0}
 .foot-brand{display:flex;flex-direction:column;gap:6px}
-.seal{width:132px;height:132px;margin-top:20px;color:var(--niebla,#6E8384);overflow:visible}
-.seal text{font:700 13px var(--sans);fill:currentColor;text-transform:uppercase}
-.seal-ring{transform-origin:100px 100px;animation:sealSpin 40s linear infinite}
-@keyframes sealSpin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.seal-ring{animation:none}}

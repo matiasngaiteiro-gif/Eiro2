@@ -231,3 +231,9 @@
   var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?on.add(e.target):on.delete(e.target)});document.documentElement.classList.toggle('wa-hide',on.size>0)},{threshold:.25});
   zones.forEach(function(z){io.observe(z)});
 })();
+
+// el óvalo de la marca: con movimiento reducido el texto queda quieto
+(function(){
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  [].forEach.call(document.querySelectorAll('svg.seal'),function(s){if(s.pauseAnimations)s.pauseAnimations()});
+})();
