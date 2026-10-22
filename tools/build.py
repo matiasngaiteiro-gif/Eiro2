@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://eirostudio.com/"
 KIT = "oqj6tze"  # kit de Adobe Fonts: Neulis Cursive (y Neue Haas, solo para la marca Crisger)
 KIT_CASOS = "hfs0xvx"
-KIT_WEB = "wee8atq"  # Neue Haas Grotesk Display (Light, Roman, Medium) y Text (Roman, Medium): la tipografía de la web  # tipografías de los clientes, solo en las páginas de casos: New Spirit (+ Condensed), Gotham, Shuttleblock Narrow
+KIT_WEB = "wfo6ver"  # Neue Haas Grotesk Text (Roman, Medium y Bold): la tipografía principal de la web  # tipografías de los clientes, solo en las páginas de casos: New Spirit (+ Condensed), Gotham, Shuttleblock Narrow
 
 # tipografía real de cada marca (familia CSS del kit, peso, interletrado, tipografía para textos chicos)
 BRAND_FONT = {
@@ -62,8 +62,15 @@ NAV = [("trabajos", "Trabajos"), ("servicios", "Servicios"), ("estudio", "Estudi
 
 
 def logo(p, cls="logo", label=None):
+    """EIROSTUDIO en Neue Haas Grotesk Text Bold, como en la lámina de marca (EIRO y TUDIO a −0,02 em; la S a −0,05 em)"""
+    a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true"'
+    return f'<span class="{cls} wordmark" {a}>EIRO<span class="wm-s">S</span>TUDIO</span>'
+
+
+def isotipo(p, cls="isotipo", label=None):
+    """isologo de la marca: la e con forma de globo (img/sprite.svg#i-eiro)"""
     a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true" focusable="false"'
-    return f'<svg class="{cls}" viewBox="0 0 3850 1351" {a}><use href="{p}img/sprite.svg#i-logo"/></svg>'
+    return f'<svg class="{cls}" viewBox="0 0 765.98 636.35" {a}><use href="{p}img/sprite.svg#i-eiro"/></svg>'
 
 
 ISO_N = [0]
@@ -243,8 +250,8 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 
 
 def brand(p):
-    """logo completo: isologo en menta + EIROSTUDIO (img/sprite.svg#i-lockup, vectorizado del archivo de Matías)"""
-    return f'<svg class="lockup" viewBox="0 0 492.9 62.3" aria-hidden="true" focusable="false"><use href="{p}img/sprite.svg#i-lockup"/></svg>'
+    """arriba a la izquierda: el isologo y EIROSTUDIO, cada uno con su aire"""
+    return f'<span class="lockup">{isotipo(p)}{logo(p, "lockup-word")}</span>'
 
 
 def chrome(p, page, where):
@@ -290,12 +297,20 @@ def chrome(p, page, where):
 '''
 
 
+def seal(p):
+    """sello de la lámina de marca: EIRO STUDIO · BUENOS AIRES · ARGENTINA alrededor del isologo; gira despacio"""
+    return (f'<svg class="seal" viewBox="0 0 200 200" aria-hidden="true" focusable="false">'
+            f'<defs><path id="seal-c" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs>'
+            f'<g class="seal-ring"><text><textPath href="#seal-c" textLength="488" lengthAdjust="spacing">EIRO STUDIO · BUENOS AIRES · ARGENTINA ·</textPath></text></g>'
+            f'<use href="{p}img/sprite.svg#i-eiro" x="58" y="65" width="84" height="70"/></svg>')
+
+
 def footer(p):
     pages = "".join(f'<a href="{p}{s}/">{n}</a>' for s, n in NAV)
     return f'''
 <footer>
   <div class="foot-nav">
-    <div><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p></div>
+    <div class="foot-brand"><span class="mono">Eiro Studio™</span><p>Estudio creativo en Buenos Aires.</p>{seal(p)}</div>
     <div><span class="mono">Páginas</span><a href="{p or './'}">Inicio</a>{pages}</div>
     <div><span class="mono">Hablemos</span><a href="{WA_PROJ}" target="_blank" rel="noopener">WhatsApp{SR_WA}</a><a href="{IG}" target="_blank" rel="noopener">Instagram{SR_IG}</a><a href="{TEL}">{TEL_TXT}</a><span class="gray" style="min-height:32px;display:flex;align-items:center">Buenos Aires, Argentina</span></div>
   </div>
@@ -877,8 +892,6 @@ def variant(out_dir, css, logo_iso=False):
             continue
         html = open(os.path.join(ROOT, path), encoding="utf-8").read()
         html = re.sub(r'\b(href|src|srcset|imagesrcset|poster)="([^"]*)"', _bn_attr, html)
-        if logo_iso:  # en la barra va solo el isologo
-            html = re.sub(r'<svg class="lockup".*?</svg>', lambda m: iso("", "isologo brand-iso"), html)
         up = "../" * (path.count("/") + 1)
         html = html.replace("</head>", f'<meta name="robots" content="noindex">\n<link rel="stylesheet" href="{up}assets/{css}?v={VER}">\n</head>', 1)
         write(f"{out_dir}/{path}", html)
@@ -886,7 +899,7 @@ def variant(out_dir, css, logo_iso=False):
 
 def variant_bn():
     variant(BN_DIR, "eiro-bn.css")
-    variant("pruebaclaude", "eiro-claude.css", logo_iso=True)  # identidad cálida: crema, casi negro y un naranja arcilla
+    variant("pruebaclaude", "eiro-claude.css")  # identidad cálida: crema, casi negro y un naranja arcilla
 
 
 if __name__ == "__main__":
