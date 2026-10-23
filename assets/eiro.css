@@ -1,26 +1,32 @@
 /* EIRO · hoja de estilos compartida por todas las páginas (assets/eiro.css).
-   Sistema: casi negro, texto grande y liviano en dos tonos (blanco y gris), etiquetas en monoespaciada,
-   un solo acento verde, imágenes con esquinas apenas redondeadas. Orden: tokens, base, componentes,
+   Sistema según el manual de marca Rev. 03: carbón y hueso como base, piedra y noche en planos, rosa solo como acento;
+   títulos en Neue Haas 65 Medium en mayúscula, textos en 55 Roman, rótulos en Roboto Mono.
+   La sección "Manual Rev. 03" al final ajusta los componentes a ese sistema. Orden: tokens, base, componentes,
    barra y menú, secciones en orden de aparición, responsive, acceso con clave. */
 :root{
   --bar-h:64px;
-  /* color */
-  /* paleta del sistema de piezas: Noche, Monte, Menta, Brote, Papel, Arena, Niebla */
-  --bg:#0A0A0A;        /* Noche · fondo */
-  --bg-2:#161616;      /* Monte · cajas, superficies */
-  --bg-3:#212121;      /* Monte un punto más claro · hover */
-  --ink:#F2F2F0;       /* Papel · texto */
-  --mute:#A6A6A3;      /* segundo tono de los textos sobre Noche */
-  --soft:#858582;      /* Niebla un punto más clara · rótulos mono */
-  --line:#262626;
-  --niebla:#8C8C89;    /* gris del isologo y del óvalo */
-  --accent:#1AFF87;    /* Menta · solo sobre oscuro y en dosis chicas: Hablemos, WhatsApp, selección */
-  --on-accent:#0A0A0A; /* Noche sobre Menta */
-  --brote:#C9F2D8;
+  /* color · manual de marca Rev. 03: carbón, noche, hueso y piedra; rosa solo como acento (60 / 30 / 10) */
+  --carbon:#141517;    /* base oscura */
+  --noche:#0B0C0D;     /* planos profundos */
+  --hueso:#DAD8D2;     /* base clara y texto sobre oscuro */
+  --piedra:#B3B1AD;    /* planos de apoyo */
+  --rosa:#FF46B1;      /* acento: palabras, botones, pieza ancla */
+  --gris:#8D8F92;      /* rótulos y datos sobre oscuro */
+  --tinta:#4E4D4A;     /* rótulos y datos sobre claro */
+  --bg:var(--carbon);  /* fondo */
+  --bg-2:#1C1D20;      /* cajas, superficies */
+  --bg-3:#26272B;      /* hover */
+  --ink:var(--hueso);  /* texto */
+  --mute:#9C9D9F;      /* segundo tono de los textos sobre carbón */
+  --soft:var(--gris);  /* rótulos mono */
+  --line:#2C2D31;
+  --niebla:var(--hueso); /* color del isologo y del óvalo */
+  --accent:var(--rosa);  /* solo en dosis chicas: acciones, selección, detalles */
+  --on-accent:var(--carbon);
+  --brote:#FF7CC7;       /* rosa en hover */
 
-  /* tipografía del sistema de piezas (Google Fonts): Plus Jakarta Sans para títulos, frases y textos
-     (Light 300 lectura, Regular 400 énfasis, SemiBold 600 en títulos en mayúscula) y Roboto Mono para rótulos y detalles.
-     Neulis queda solo en el logotipo, que va dibujado en SVG. */
+  /* tipografía · manual 2.1: Neue Haas Grotesk Text (55 Roman textos, 65 Medium títulos, siempre en mayúscula)
+     y Roboto Mono para rótulos y datos. El logotipo y el sello van en vector, no se escriben con estas fuentes. */
   --display:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;
   --sans:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;
   --mono:"Roboto Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;   /* Light 300 en rótulos, Regular 400 en botones */
@@ -855,3 +861,93 @@ html.wa-hide .wa-orb{opacity:0;pointer-events:none;transform:translate(0,12px) s
 .reel-sec{padding-bottom:var(--sec)}
 .reel-sec .hero-media{aspect-ratio:16/9}
 @media (max-width:820px){.reel-sec .hero-media{aspect-ratio:4/3}.hero .hero-ctas .btn{flex:0 1 auto}}
+
+
+/* ======================================================================
+   Manual de marca Rev. 03
+   · marco fijo: grilla tenue, rótulos en mono, etiqueta numerada de sección
+   · momentos clave (portada y cierre): marcas de corte y código de barras
+   · títulos en mayúscula, 65 Medium, interletrado negativo; textos en 55 Roman
+   · secciones en hueso para dar ritmo; rosa solo en acciones y detalles
+   ====================================================================== */
+body{font-weight:400}
+h1,h2,h3{font-weight:500}
+/* grilla tenue del sistema: dos líneas verticales que acompañan toda la página */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,transparent calc(35% - .5px),rgba(218,216,210,.045) calc(35% - .5px),rgba(218,216,210,.045) calc(35% + .5px),transparent calc(35% + .5px),transparent calc(66% - .5px),rgba(218,216,210,.045) calc(66% - .5px),rgba(218,216,210,.045) calc(66% + .5px),transparent calc(66% + .5px))}
+main,footer{position:relative;z-index:1}
+
+/* títulos: mayúscula, 65 Medium, apretados; la segunda línea pasa a bajada en 55 Roman */
+.hero-title,.page-title,.h2,.cta-title,.values-statement,.svc h3,.mode h3,.svc-list a{font-weight:500;text-transform:uppercase;letter-spacing:-.045em}
+.hero-title{line-height:.95}
+.page-title{line-height:.92}
+.h2>span:first-child,.page-title>span:first-child,.values-statement>span:first-child{letter-spacing:-.045em}
+.h2>span.gray,.page-title>span.gray,.values-statement>span.gray{margin-top:.45em;font-size:.48em;line-height:1.2;font-weight:400;text-transform:none;letter-spacing:-.015em;color:var(--mute)}
+.values-statement>span.gray{margin-top:.15em}
+.cta-title{line-height:.98}
+.cta-title span+span{color:var(--rosa)}
+.svc-list a{font-size:clamp(30px,4vw,68px);line-height:1}
+.svc h3{letter-spacing:-.045em}
+
+/* etiqueta numerada de sección: el camino de migas va en una caja de línea fina */
+.crumb{display:inline-flex;align-items:center;gap:.6em;width:max-content;padding:6px 10px;border:1px solid currentColor;color:var(--ink);letter-spacing:.04em}
+.crumb span[aria-hidden]{opacity:.5}
+/* regla del manual: cuadradito rosa antes del rótulo */
+.cta-kicker,.reels-head h2,.plate-label{display:inline-flex;align-items:center;gap:8px}
+.cta-kicker::before,.reels-head h2::before{content:"";width:8px;height:8px;background:var(--rosa);flex:none}
+.cta-kicker{color:var(--soft)}
+
+/* botones: píldora; en oscuro, rosa con texto carbón; en claro, carbón con texto rosa (el "llamado" del manual) */
+.btn{border-radius:999px;padding:0 20px;letter-spacing:.04em}
+.btn.big{padding:0 26px}
+.btn.accent{background:var(--rosa);color:var(--carbon)}
+@media (hover:hover){.btn:hover{background:var(--ink);color:var(--bg)}.btn.accent:hover{background:var(--brote);color:var(--carbon)}}
+.wa-orb{background:var(--rosa);color:var(--carbon)}
+::selection{background:var(--rosa);color:var(--carbon)}
+
+/* logotipo en vector */
+svg.wordmark{display:block;height:1em;width:auto;aspect-ratio:1415.86/193.46;fill:currentColor;font:inherit}
+.lockup-word{font-size:19px}
+@media (max-width:420px){.lockup-word{font-size:16px}}
+.gate-box .logo{height:clamp(22px,3vw,34px)}
+
+/* sello: hueso sobre noche; en la portada y la clave, el isologo y el texto en rosa (pieza protagonista) */
+.seal{--seal-bg:var(--noche);--seal-ink:var(--hueso)}
+.seal-txt{font-weight:500}
+.seal-hero,.seal-gate,.seal-big{--seal-bg:transparent;--seal-ink:var(--rosa)}
+
+/* portada: marcas de corte alrededor del óvalo (solo en este momento clave) */
+.hero-mark{position:relative;padding:clamp(18px,3vw,34px) clamp(28px,4vw,48px)}
+.hero-mark .crop{position:absolute;width:18px;height:18px;border:0 solid var(--ink);opacity:.9}
+.hero-mark .tl{left:0;top:0;border-left-width:1.5px;border-top-width:1.5px}
+.hero-mark .tr{right:0;top:0;border-right-width:1.5px;border-top-width:1.5px}
+.hero-mark .bl{left:0;bottom:0;border-left-width:1.5px;border-bottom-width:1.5px}
+.hero-mark .br{right:0;bottom:0;border-right-width:1.5px;border-bottom-width:1.5px}
+.hero .seal-hero{margin:0}
+.hero .hero-title{font-size:clamp(34px,5vw,84px);max-width:16ch}
+.hero .hero-sub{color:var(--mute)}
+
+/* secciones en hueso: dan ritmo (carbón · hueso · noche) */
+.tone-paper{--bg:var(--hueso);--bg-2:#CFCDC6;--bg-3:#C4C2BB;--ink:var(--carbon);--mute:var(--tinta);--soft:var(--tinta);--line:rgba(20,21,23,.16);background:var(--bg);color:var(--ink);color-scheme:light}
+.tone-paper .btn.accent,.tone-paper .btn{background:var(--carbon);color:var(--rosa)}
+@media (hover:hover){.tone-paper .btn:hover,.tone-paper .btn.accent:hover{background:#000;color:var(--rosa);filter:none}}
+.tone-paper .bracket{color:var(--tinta)}
+@media (hover:hover){.tone-paper .bracket:hover{color:var(--carbon)}.tone-paper .svc-list a:hover{color:var(--tinta)}}
+.tone-paper a:focus-visible,.tone-paper button:focus-visible{outline-color:var(--carbon)}
+.tone-monte{--bg:var(--noche);--bg-2:#151619;--bg-3:#1E1F22;--line:#26272B;background:var(--bg)}
+
+/* tarjetas y fotos: esquinas casi rectas, como las piezas del manual */
+:root{--radius:3px}
+.mode{border-radius:3px}
+
+/* pie: cierre con código de barras */
+.foot-code{display:inline-flex;align-items:center;gap:12px}
+.barcode{display:inline-block;width:78px;height:16px;background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px,currentColor 8px 11px,transparent 11px 13px);opacity:.75}
+.gate{background:var(--carbon)}
+
+/* títulos de tarjetas, pasos, valores y casos: también en mayúscula y 65 Medium */
+.value h3,.step h3,.wcard-name{font-weight:500;text-transform:uppercase;letter-spacing:-.02em}
+.step h3{letter-spacing:-.04em}
+.kin,.next-plate b{font-weight:500;text-transform:uppercase;letter-spacing:-.05em}
+.kin{font-size:min(clamp(56px,11vw,220px),calc((100vw - 2 * var(--gutter)) / (var(--w,6) * .7)))}
+.next-plate b{font-size:min(clamp(48px,10vw,200px),calc((100vw - 2 * var(--gutter)) / (var(--w,6) * .7)));color:#34363A}
+.wtext{font-weight:400;letter-spacing:-.02em}

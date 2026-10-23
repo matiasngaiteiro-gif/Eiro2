@@ -62,9 +62,9 @@ NAV = [("trabajos", "Trabajos"), ("servicios", "Servicios"), ("estudio", "Estudi
 
 
 def logo(p, cls="logo", label=None):
-    """EIROSTUDIO en Neue Haas Grotesk Text Bold, como en la lámina de marca (EIRO y TUDIO a −0,02 em; la S a −0,05 em)"""
-    a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true"'
-    return f'<span class="{cls} wordmark" {a}>EIRO<span class="wm-s">S</span>TUDIO</span>'
+    """EIROSTUDIO: el logotipo original en vector (img/sprite.svg#i-word), nunca reescrito con texto (manual 1.3)"""
+    a = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true" focusable="false"'
+    return f'<svg class="{cls} wordmark" viewBox="0 0 1415.86 193.46" {a}><use href="{p}img/sprite.svg#i-word"/></svg>'
 
 
 def isotipo(p, cls="isotipo", label=None):
@@ -217,7 +217,7 @@ def head(p, title, desc, path, casos=False, extra_ld=None, preload=None):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#141517">
 <meta name="format-detection" content="telephone=no">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Eiro Studio">
@@ -327,7 +327,7 @@ def footer(p):
   </div>
   <div class="foot-bottom mono">
     <span>© {date.today().year} Eiro Studio™</span>
-    <span>Hecho en Buenos Aires</span>
+    <span class="foot-code"><i class="barcode" aria-hidden="true"></i>Hecho en Buenos Aires</span>
     <a href="#top">Volver arriba ↑</a>
   </div>
 </footer>
@@ -505,7 +505,7 @@ def home():
 <main id="top" tabindex="-1">
   <section class="hero" data-label="Inicio" aria-labelledby="t-hero">
     <div class="hero-copy">
-      {seal(p, "seal seal-hero", "Eiro Studio · Buenos Aires, Argentina")}
+      <div class="hero-mark"><i class="crop tl" aria-hidden="true"></i><i class="crop tr" aria-hidden="true"></i><i class="crop bl" aria-hidden="true"></i><i class="crop br" aria-hidden="true"></i>{seal(p, "seal seal-hero", "Eiro Studio · Buenos Aires, Argentina")}</div>
       <h1 class="hero-title" id="t-hero"><span class="hl">Contamos tu marca</span> <span class="hl">en <span class="swap" data-swap="{"|".join(HERO_WORDS)}"><span class="sr">{HERO_WORDS[0]}</span><span class="swap-vis" aria-hidden="true">{HERO_WORDS[0]}</span></span>.</span></h1>
       <p class="hero-sub">Marca, contenido y eventos para marcas con algo para contar.</p>
       <div class="hero-ctas"><a class="btn accent big" href="contacto/#formulario">Contanos tu proyecto <span aria-hidden="true">→</span></a><a class="bracket" href="trabajos/">Ver trabajos</a></div>

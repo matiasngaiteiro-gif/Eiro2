@@ -6,23 +6,24 @@
 <title>EIROSTUDIO | Estudio de branding en Buenos Aires</title>
 <meta name="description" content="EIROSTUDIO es un estudio de branding de Buenos Aires. Hacemos identidad para pymes, locales y eventos, y la acompañamos en redes, lanzamientos y noches.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#131313">
+<meta name="theme-color" content="#141517">
 <link rel="icon" href="https://eirostudio.com/favicon.ico" sizes="32x32">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://use.typekit.net/wfo6ver.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap">
 <style>
-/* Propuesta Eiro: editorial, casi negro dominante, gris como bloque, verde solo para acciones */
+/* Propuesta Eiro · manual de marca Rev. 03: carbón y hueso de base, piedra en bloques, rosa solo para acciones */
 :root{
-  --bg:#131313;
-  --text:#ECECEC;
-  --mute:#A3A3A3;
-  --soft:#767676;
-  --line:#2A2A2A;
-  --gray:#C7C7C7;
-  --dark:#131313;
-  --green:#00EB5B;
-  --sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#141517;
+  --text:#DAD8D2;
+  --mute:#9C9D9F;
+  --soft:#8D8F92;
+  --line:#2C2D31;
+  --gray:#B3B1AD;
+  --dark:#141517;
+  --green:#FF46B1; /* acento rosa (se mantiene el nombre de la variable) */
+  --sans:"neue-haas-grotesk-text","Helvetica Neue",Helvetica,Arial,sans-serif;
   --gut:max(20px,env(safe-area-inset-left,0px));
   --sec:clamp(88px,12vw,168px);
   color-scheme:dark;
@@ -32,20 +33,20 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 h1,h2,h3,p{margin:0}
-h1,h2,h3{font-weight:800;letter-spacing:-.04em;line-height:1.02}
+h1,h2,h3{font-weight:500;letter-spacing:-.045em;line-height:.98;text-transform:uppercase}
 img{max-width:100%;display:block}
 .wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gut)}
 :focus-visible{outline:2px solid var(--green);outline-offset:4px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* logo: EIROSTUDIO con TM chico */
-.logo{display:inline-flex;align-items:baseline;font-weight:800;letter-spacing:-.04em;text-decoration:none;line-height:1}
+.logo{display:inline-flex;align-items:baseline;font-weight:500;letter-spacing:-.04em;text-decoration:none;line-height:1}
 .logo .tm{font-size:.32em;font-weight:600;letter-spacing:0;align-self:flex-start;margin-left:.1em;margin-top:.05em}
 .nav .logo .tm{font-size:.45em}
 
 /* etiquetas y botones */
 .tag{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
-.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 24px;background:var(--green);color:var(--dark);font-weight:700;font-size:16px;text-decoration:none;transition:background-color .2s}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--green);color:var(--dark);font-weight:500;font-size:16px;text-decoration:none;transition:background-color .2s}
 .btn::after{content:"→";transition:transform .2s}
 .link{display:inline-flex;align-items:center;gap:10px;min-height:52px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
 .link::after{content:"→";transition:transform .2s}
@@ -75,7 +76,7 @@ header.scrolled{border-color:var(--line)}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:clamp(64px,8vw,112px)}
 .facts div{padding:24px 24px 0 0}
 .facts div+div{padding-left:24px;border-left:1px solid var(--line)}
-.facts b{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.facts b{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:500;letter-spacing:-.03em;line-height:1.1}
 .facts span{display:block;margin-top:6px;font-size:15px;color:var(--soft)}
 
 /* encabezado de sección */
@@ -89,7 +90,7 @@ section{padding-top:var(--sec)}
 .case{display:grid;grid-template-columns:64px minmax(0,1.1fr) minmax(0,1fr) minmax(0,.8fr);gap:16px 32px;padding-block:clamp(28px,3.4vw,44px);border-bottom:1px solid var(--line);align-items:baseline}
 .case .n{font-size:15px;font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums}
 .case h3{font-size:clamp(28px,3.4vw,46px)}
-.case .what{font-weight:700}
+.case .what{font-weight:500}
 .case .what span{display:block;margin-top:6px;font-weight:400;color:var(--mute)}
 .case .rubro{justify-self:end;font-size:15px;color:var(--soft)}
 .note{margin-top:24px;font-size:15px;color:var(--soft)}
@@ -119,7 +120,7 @@ section{padding-top:var(--sec)}
 .story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,7vw,96px);margin-top:clamp(56px,7vw,96px);padding-top:40px;border-top:1px solid rgba(19,19,19,.2)}
 .story p{font-size:clamp(17px,1.5vw,19px);color:#2E2E2E}
 .story blockquote{margin:0;font-size:clamp(20px,1.9vw,25px);font-weight:600;letter-spacing:-.015em;line-height:1.45}
-.story cite{display:block;margin-top:18px;font-style:normal;font-size:15px;font-weight:700}
+.story cite{display:block;margin-top:18px;font-style:normal;font-size:15px;font-weight:500}
 .story cite span{font-weight:500;color:#4A4A4A}
 
 /* contacto */
